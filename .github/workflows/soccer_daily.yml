@@ -40,6 +40,11 @@ jobs:
         run: |
           python -m kalshi_intl.cli evaluate
           python -m kalshi_intl.cli predict
+      - name: Bajas de fútbol (API-Football; si falla no detiene el resto)
+        continue-on-error: true
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: python -m kalshi_intl.lesiones
       - name: Guardar registro (append-only, queda auditado en el historial de git)
         run: |
           git config user.name  "soccer-bot"

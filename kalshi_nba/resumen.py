@@ -59,6 +59,17 @@ def liga_us(lg: str, now) -> str:
     return _table(pd.DataFrame(rows))
 
 
+def _bajas_fut(x, lat):
+    from kalshi_intl.lesiones import count_out
+    a, b = count_out(lat, x.home, x.kickoff_utc), count_out(lat, x.away, x.kickoff_utc)
+    return "—" if a is None and b is None else f"{'—' if a is None else a} / {'—' if b is None else b}"
+
+
+def _lat():
+    from kalshi_intl.lesiones import load_latest
+    return load_latest(P / "futbol_lesiones.csv")
+
+
 def futbol(now) -> str:
     reg = P / "registry.csv"
     if not reg.exists():
@@ -67,6 +78,7 @@ def futbol(now) -> str:
     r["t"] = _when(r["kickoff_utc"])
     r = r[r["t"] > now].sort_values("t")
     num = lambda x, c: pd.to_numeric(pd.Series([getattr(x, c, np.nan)]), errors="coerce").iloc[0]
+    lat = _lat()
     rows = []
     for x in r.itertuples():
         kal = []
@@ -78,7 +90,8 @@ def futbol(now) -> str:
                      "Kalshi: local / empate / visita": " / ".join(pct(v) for v in kal),
                      "Goles: +1.5 / +2.5 / +3.5": " / ".join(pct(getattr(x, f"p_over_{k}_cal", np.nan)) for k in ("1_5", "2_5", "3_5")),
                      "Ambos anotan": pct(getattr(x, "p_btts_cal", np.nan)),
-                     "Gana por 2+: local / visita": f"{pct(getattr(x, 'p_home_m1_5_cal', np.nan))} / {pct(getattr(x, 'p_away_m1_5_cal', np.nan))}"})
+                     "Gana por 2+: local / visita": f"{pct(getattr(x, 'p_home_m1_5_cal', np.nan))} / {pct(getattr(x, 'p_away_m1_5_cal', np.nan))}",
+                     "Bajas: local / visita": _bajas_fut(x, lat)})
     return _table(pd.DataFrame(rows))
 
 
@@ -95,6 +108,7 @@ def internacional(now, grupo: str) -> str:
             r[c] = r["event_id"].map(s[c]).combine_first(r[c] if c in r else pd.Series(np.nan, index=r.index))
     r["t"] = _when(r["kickoff_utc"])
     r = r[r["t"] > now].sort_values("t")
+    lat = _lat()
     tri = lambda x, cols: " / ".join(pct(pd.to_numeric(pd.Series([getattr(x, c, np.nan)]), errors="coerce").iloc[0]) for c in cols)
     rows = [{"Fecha (hora Chicago)": x.t.strftime("%a %d %b %H:%M"), "Competición": x.competicion,
              "Partido": f"{x.home} vs {x.away}" + (" (sede neutral)" if x.neutral else ""),
@@ -102,7 +116,8 @@ def internacional(now, grupo: str) -> str:
              "Kalshi": tri(x, ["k_mid_H", "k_mid_D", "k_mid_A"]), "Casas": tri(x, ["mkt_H", "mkt_D", "mkt_A"]),
              "Goles: +1.5 / +2.5 / +3.5": " / ".join(pct(getattr(x, c, np.nan)) for c in ("p_over_1_5", "p_over_2_5", "p_over_3_5")),
              "Ambos anotan": pct(getattr(x, "p_btts", np.nan)),
-             "Gana por 2+: local / visita": f"{pct(getattr(x, 'p_home_m1_5', np.nan))} / {pct(getattr(x, 'p_away_m1_5', np.nan))}"} for x in r.itertuples()]
+             "Gana por 2+: local / visita": f"{pct(getattr(x, 'p_home_m1_5', np.nan))} / {pct(getattr(x, 'p_away_m1_5', np.nan))}",
+             "Bajas: local / visita": _bajas_fut(x, lat)} for x in r.itertuples()]
     return _table(pd.DataFrame(rows))
 
 

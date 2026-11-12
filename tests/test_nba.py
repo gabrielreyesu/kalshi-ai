@@ -173,7 +173,7 @@ class TestResumen(unittest.TestCase):
             finally:
                 resumen.P = old
         self.assertIn("| Orlando Magic en Utah Jazz | Orlando Magic | 70% | 75% | — | 72% | 5.2 pts | 228 pts | — |", txt)
-        self.assertIn("50% / 25% / 25% | 50% / — / 22% | — / 55% / — | — | — / — |", txt)
+        self.assertIn("50% / 25% / 25% | 50% / — / 22% | — / 55% / — | — | — / — | — |", txt)
         self.assertIn("## NFL\n_Aún no hay registro._", txt)
 
 

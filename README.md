@@ -137,3 +137,6 @@ No requiere clave. Corre dentro de `soccer-daily`; el registro queda en `predict
   victoria por 2+ goles (columnas nuevas en `intl_registry.csv` y en PREDICCIONES.md).
 - Bajas de NBA y NFL: `python -m kalshi_nba.injuries nba|nfl` guarda una foto diaria en `predictions/{liga}_injuries.csv`
   (fuente: ESPN). Aún no entran al modelo; el historial acumulado servirá para probar si ayudan.
+- Bajas de fútbol: `python -m kalshi_intl.lesiones` (API-Football, secreto `API_FOOTBALL_KEY`). Guarda una foto diaria en
+  `predictions/futbol_lesiones.csv` y la página muestra las bajas confirmadas por equipo. NO probado con una clave real:
+  revisa el paso "Bajas de fútbol" en Actions; si el plan gratuito limita algo, el aviso de la API aparece ahí.

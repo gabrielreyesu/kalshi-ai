@@ -75,3 +75,19 @@ class TestIntl(unittest.TestCase):
         self.assertEqual(m["k_event"], "E1"); self.assertAlmostEqual(m["k_mid_H"], 0.32)
         self.assertEqual(match_kalshi("Arsenal", "Real Madrid", k, ev), {})
         self.assertEqual(match_kalshi("Arsenal", "Borussia Dortmund", k + pd.Timedelta(days=5), ev), {})
+
+
+class TestLesionesFutbol(unittest.TestCase):
+    def test_parse_and_count(self):
+        from kalshi_intl.lesiones import parse, count_out
+        payload = {"errors": [], "response": [
+            {"player": {"name": "A", "type": "Missing Fixture", "reason": "Knee Injury"}, "team": {"name": "Arsenal"}, "fixture": {"id": 1, "date": "2026-11-25T20:00:00+00:00"}, "league": {"name": "UEFA Champions League"}},
+            {"player": {"name": "B", "type": "Missing Fixture", "reason": "Suspended"}, "team": {"name": "Arsenal"}, "fixture": {"id": 1, "date": "2026-11-25T20:00:00+00:00"}, "league": {"name": "UEFA Champions League"}},
+            {"player": {"name": "C", "type": "Questionable", "reason": "Knock"}, "team": {"name": "Borussia Dortmund"}, "fixture": {"id": 1, "date": "2026-11-25T20:00:00+00:00"}, "league": {"name": "UEFA Champions League"}}]}
+        d = pd.DataFrame(parse(payload)).assign(day="2026-11-24")
+        self.assertEqual(len(d), 3); self.assertEqual(d.match_date.iloc[0], "2026-11-25")
+        miss = d[d.tipo.str.lower().str.contains("missing")]
+        self.assertEqual(count_out(miss, "Arsenal", "2026-11-25T20:00:00+00:00"), 2)
+        self.assertIsNone(count_out(miss, "Real Madrid", "2026-11-25T20:00:00+00:00"))
+        self.assertIsNone(count_out(miss, "Arsenal", "2026-12-05T20:00:00+00:00"))
+        self.assertEqual(parse({"response": None}), [])
