@@ -18,7 +18,7 @@ jobs:
           python-version: "3.11"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest discover -s tests
+      - run: python -m pytest -q tests
       - name: Backtest con datos reales
         run: python -m kalshi_soccer.cli backtest --first-test "${{ inputs.first_test }}"
       - name: Mostrar el reporte en el resumen de la corrida

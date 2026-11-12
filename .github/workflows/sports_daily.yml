@@ -30,7 +30,7 @@ jobs:
           key: espn-data-${{ github.run_id }}
           restore-keys: espn-data-
       - run: pip install -r requirements.txt
-      - run: python -m unittest discover -s tests
+      - run: python -m pytest -q tests
       - name: Modelo vs Kalshi en mercados ya resueltos, y nuevas predicciones + precios
         run: |
           for lg in nba nfl; do

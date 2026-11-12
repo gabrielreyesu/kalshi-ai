@@ -24,7 +24,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Tests (si fallan, no se publica nada)
-        run: python -m unittest discover -s tests
+        run: python -m pytest -q tests
       - name: Evaluar partidos ya jugados
         run: python -m kalshi_soccer.cli evaluate
       - name: Predecir próximos 14 días
