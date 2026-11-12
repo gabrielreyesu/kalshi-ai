@@ -38,19 +38,46 @@ HEADERS = {"User-Agent": "KalshiAI-weather-research (https://github.com/gabrielr
            "Accept": "application/geo+json, application/json"}
 
 
-def _get(session, url, *, params=None):
+def _allowed_url(url):
+    """Limit NWS/ESPN requests AND their redirects to known first-party routes."""
     p = urlparse(url)
-    if p.scheme != "https" or p.hostname not in {"api.weather.gov", "site.api.espn.com"}:
+    if p.scheme != "https" or p.username or p.password:
         raise ValueError("Untrusted forecast endpoint")
-    if p.hostname == "api.weather.gov" and not (p.path.startswith("/points/") or p.path.startswith("/gridpoints/")):
+    if p.hostname == "api.weather.gov":
+        if p.path.startswith(("/points/", "/gridpoints/")):
+            return
         raise ValueError("Unexpected NOAA forecast path")
-    if p.hostname == "site.api.espn.com" and p.path not in {urlparse(ESPN_SUMMARY).path, urlparse(ESPN_SCOREBOARD).path}:
+    if p.hostname in ("site.api.espn.com", "site.web.api.espn.com"):
+        if p.path.rstrip("/") in (urlparse(ESPN_SUMMARY).path, urlparse(ESPN_SCOREBOARD).path):
+            return
         raise ValueError("Unexpected ESPN forecast venue path")
-    response = session.get(url, params=params, headers=HEADERS, timeout=15, allow_redirects=False)
-    if response.status_code != 200 or len(response.content) > 2_000_000:
-        raise ValueError(f"Forecast source returned HTTP {response.status_code} or oversized data")
-    return response.json()
+    raise ValueError("Untrusted forecast endpoint")
 
+
+def _get(session, url, *, params=None):
+    from urllib.parse import urljoin
+    for hop in range(3):
+        _allowed_url(url)
+        response = session.get(url, params=params, headers=HEADERS,
+                               timeout=15, allow_redirects=False)
+        if response.status_code in (301, 302, 303, 307, 308):
+            if hop >= 2:
+                raise ValueError("Too many provider redirects")
+            loc = (getattr(response, "headers", {}) or {}).get("Location")
+            if not loc:
+                raise ValueError(f"HTTP {response.status_code} without redirect target")
+            target = urljoin(url, loc)
+            _allowed_url(target)
+            # ESPN may canonicalize hosts or trailing slashes. Retain
+            # event/date params only if the new URL does not include them.
+            if urlparse(target).query:
+                params = None
+            url = target
+            continue
+        if response.status_code != 200 or len(response.content) > 2_000_000:
+            raise ValueError(f"Forecast source returned HTTP {response.status_code} or oversized data")
+        return response.json()
+    raise ValueError("Provider redirect resolution failed")
 
 def _venue_name(competition):
     venue = (competition or {}).get("venue") or {}
