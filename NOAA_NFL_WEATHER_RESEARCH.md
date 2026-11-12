@@ -30,3 +30,9 @@ All forecasts are collected prospectively and stored as environmental observatio
 First real NOAA workflow found 3 eligible games and 0 matched forecasts without warning. The event summary may omit venue metadata. The adapter now checks the ESPN scoreboard for the same event id as a fallback, while still requiring the actual venue name to match a curated open-air stadium. No location is guessed.
 
 Every omitted candidate now reports whether it lacked a verified venue, had the wrong stadium, had no hourly link, or lacked a forecast period covering kickoff. This is an instrumentation improvement, not an accuracy improvement.
+
+## Safe provider redirect handling
+
+A real GitHub Actions run on 2026-11-12 detected HTTP 301 at all 3 candidate NFL outdoor fixtures, meaning the weather source was not reached. The adapter now follows at most two provider redirects, and validates both original and redirected URLs against a strict list of ESPN and NOAA first-party hosts/paths. Unknown redirects are rejected before network access.
+
+This does not authorize arbitrary web scraping, new API payments, or use of weather in production. Redirects and missing coverage remain explicit in GitHub Actions reports.
