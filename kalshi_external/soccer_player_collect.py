@@ -21,6 +21,7 @@ from .soccer_player_intel import (
     FINAL, canonical_name, parse_api_football_injuries,
     parse_espn_summary, player_opponent_context,
 )
+from .soccer_confirmed_lineups import parse_confirmed_lineups
 
 ROOT="https://site.api.espn.com/apis/site/v2/sports/soccer"
 FOOTBALL_ROOT="https://v3.football.api-sports.io"
@@ -44,7 +45,7 @@ def _get(session, url, params=None, api_key=None):
         limit=5_000_000
         headers=HEADERS
     elif p.hostname=="v3.football.api-sports.io" and api_key:
-        if p.path not in ("/injuries","/fixtures"):
+        if p.path not in ("/injuries","/fixtures","/fixtures/lineups"):
             raise ValueError("Unapproved API-Football path")
         limit=5_000_000
         headers={**HEADERS,"x-apisports-key":api_key}
@@ -159,6 +160,9 @@ def join_vendor_injuries(espn_fixtures, api_fixtures, reports):
         if len(matched)!=1:
             continue
         vendor=matched[0]
+        event=next((e for e in espn_fixtures if str(e["event_id"])==event_id),None)
+        if event is None:
+            continue
         injuries=[]
         for report in reports:
             for player in report.get("players") or []:
@@ -172,7 +176,13 @@ def join_vendor_injuries(espn_fixtures, api_fixtures, reports):
                     continue
                 if canonical_name(player["team"])!=canonical_name(allowed[player["provider_team_id"]]):
                     continue
+                # Verified fixture side identifies TEAM only. Athlete ID
+                # remains provider-specific and must never be equated to ESPN.
+                espn_team_id=(str(event["home_id"]) if
+                              player["provider_team_id"]==vendor["home_provider_id"]
+                              else str(event["away_id"]))
                 injuries.append({
+                    "espn_team_id":espn_team_id,
                     "player":player["player"],
                     "provider_player_id":player["provider_player_id"],
                     "provider_team_id":player["provider_team_id"],
@@ -311,6 +321,34 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
         for provider_fixture in report.get("provider_fixtures") or []:
             fixture_map[provider_fixture["fixture_id"]]=provider_fixture
     matched=join_vendor_injuries(fixtures,list(fixture_map.values()),current_reports)
+
+    # Official XI observations typically appear shortly before kickoff.
+    # Budget <=4 optional requests, no extra schedule and no postgame lineup
+    # retrieval disguised as a pregame observation.
+    new_confirmed=[]
+    if key:
+        future=[g for g in fixtures if g["event_id"] in matched and
+                now+pd.Timedelta(minutes=15)<utc(g["kickoff_utc"])<=
+                    now+pd.Timedelta(hours=2)]
+        for game in sorted(future,key=lambda g:utc(g["kickoff_utc"]))[:4]:
+            matches=[
+                v for v in fixture_map.values()
+                if abs(utc(v["kickoff_utc"])-utc(game["kickoff_utc"]))<=pd.Timedelta(minutes=60)
+                and canonical_name(v["home"])==canonical_name(game["home"])
+                and canonical_name(v["away"])==canonical_name(game["away"])
+            ]
+            if len(matches)!=1:
+                continue
+            try:
+                response=_get(s,FOOTBALL_ROOT+"/fixtures/lineups",
+                              {"fixture":matches[0]["fixture_id"]},api_key=key)
+                lineup=parse_confirmed_lineups(response,game,matches[0],now)
+                if lineup:
+                    new_confirmed.append(lineup)
+            except (ValueError,RuntimeError,requests.RequestException) as error:
+                issues.append(f"XI {game['event_id']}: {type(error).__name__}")
+    _,n_confirmed=append_history(cache/"soccer_confirmed_lineups.jsonl",
+                                  new_confirmed,max_bytes=50_000_000)
     previews=[]
     for game in sorted(fixtures,key=lambda g:utc(g["kickoff_utc"])):
         kickoff=utc(game["kickoff_utc"])
@@ -318,6 +356,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             continue
         try:
             context=player_opponent_context(game,all_stats,matched.get(game["event_id"],[]),now)
+            context["api_injury_coverage_confirmed"]=bool(
+                key and game["event_id"] in matched)
             # Summary coverage only; unverified lineups not treated as starters
             roster=[r for r in all_lineups if r["event_id"]==game["event_id"]
                     and r.get("competition_code")==game["competition_code"]
@@ -347,6 +387,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
         "ESPN_match_summaries_queried":summaries,
         "new_completed_match_player_stats":n_stats,
         "new_pregame_roster_snapshots_unconfirmed":n_lineups,
+        "new_verified_pregame_starting_XI_snapshots":n_confirmed,
         "new_api_football_injury_day_snapshots":n_injuries,
         "new_future_match_player_contexts":n_previews,
         "future_contexts_with_history":sum(bool(p["players"]) for p in previews),
