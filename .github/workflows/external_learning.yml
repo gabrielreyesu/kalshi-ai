@@ -43,6 +43,9 @@ jobs:
           mkdir -p data/external_signals _archive/external_signals
           python -m kalshi_external.archive merge data/external_signals/history.jsonl _archive/external_signals/history.jsonl data/external_signals/history.jsonl
           python -m kalshi_external.archive merge data/external_signals/weather.jsonl _archive/external_signals/weather.jsonl data/external_signals/weather.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_injuries.jsonl _archive/external_signals/player_injuries.jsonl data/external_signals/player_injuries.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_boxscores.jsonl _archive/external_signals/player_boxscores.jsonl data/external_signals/player_boxscores.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_previews.jsonl _archive/external_signals/player_previews.jsonl data/external_signals/player_previews.jsonl
       - name: Snapshot time-stamped external forecasts
         env:
           KALSHI_RESOLVE_LIVE: "1"
@@ -53,11 +56,17 @@ jobs:
         run: python -m kalshi_external.cli --output reports/external_learning
       - name: Capture NOAA weather at verified outdoor NFL venues (no API key)
         run: python -m kalshi_external.nws_weather --output reports/external_learning/weather_status.json
+      - name: Capture NBA NFL player injuries and completed player boxscores
+        run: python -m kalshi_external.player_collect --output reports/external_learning/player_context
+      - name: Generate pregame player availability and opponent context
+        run: python -m kalshi_external.player_previews --output reports/external_learning/player_context/preview_coverage.json
       - name: Summarize trusted reference links and API coverage
         if: always()
         run: python -m kalshi_external.reference_report --output reports/external_learning/REFERENCIAS.md
       - name: Check research archive integrity before archival
         run: python -m kalshi_external.archive_audit --output reports/external_learning/archive_health.json
+      - name: Verify private player archives (IDs, timestamps and boxscores)
+        run: python -m kalshi_external.player_audit --output reports/external_learning/player_context/audit.json
       - name: Save durable private archive (optional)
         if: success()
         env:
@@ -66,9 +75,12 @@ jobs:
           if [ -z "$DATA_REPO_TOKEN" ] || [ ! -d _archive ]; then exit 0; fi
           python -m kalshi_external.archive merge data/external_signals/history.jsonl _archive/external_signals/history.jsonl _archive/external_signals/history.jsonl
           python -m kalshi_external.archive merge data/external_signals/weather.jsonl _archive/external_signals/weather.jsonl _archive/external_signals/weather.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_injuries.jsonl _archive/external_signals/player_injuries.jsonl _archive/external_signals/player_injuries.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_boxscores.jsonl _archive/external_signals/player_boxscores.jsonl _archive/external_signals/player_boxscores.jsonl
+          python -m kalshi_external.archive merge data/external_signals/player_previews.jsonl _archive/external_signals/player_previews.jsonl _archive/external_signals/player_previews.jsonl
           cd _archive
           git config user.name "kalshi-archive-bot"; git config user.email "kalshi-archive-bot@users.noreply.github.com"
-          git add external_signals/history.jsonl external_signals/weather.jsonl
+          git add external_signals/history.jsonl external_signals/weather.jsonl external_signals/player_injuries.jsonl external_signals/player_boxscores.jsonl external_signals/player_previews.jsonl
           git diff --cached --quiet || git commit -q -m "external signals $(date -u +%FT%H:%MZ)"
           git push -q
       - name: Archive aggregate summaries only
