@@ -58,6 +58,22 @@ jobs:
         run: python -m kalshi_intl.experiments --input reports/intl_real_validation/oos_raw.csv --output reports/intl_experiments
       - name: Retrain a JSON candidate only with completed prior-UTC-day matches
         run: python -m kalshi_intl.auto_train --input reports/intl_real_validation/oos_raw.csv --output reports/intl_training/calibrator_candidate.json
+      - name: Restore rolling external research archive
+        uses: actions/cache@v4
+        with:
+          path: data/external_signals
+          key: external-signals-v1-${{ github.run_id }}
+          restore-keys: |
+            external-signals-v1-
+      - name: Measure externally sourced forecast skill on completed international matches
+        env:
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
+          LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
+        run: python -m kalshi_external.cli --output reports/external_learning
+      - name: Evaluate research-only external-source blend weights on later matches
+        run: python -m kalshi_external.learn --output reports/external_learning/candidate_weights.json
       - name: Archive validation and training artifacts
         uses: actions/upload-artifact@v4
         if: always()
