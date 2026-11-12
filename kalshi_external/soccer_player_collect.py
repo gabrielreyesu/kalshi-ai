@@ -273,7 +273,15 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
                 injuries=parse_api_football_injuries(j,now,day)
                 try:
                     f=_get(s,FOOTBALL_ROOT+"/fixtures",{"date":day},api_key=key)
-                    injuries["provider_fixtures"]=parse_api_fixtures(f)
+                    # API-Football's date endpoint also returns matches that
+                    # have already started or ended. Never archive those as
+                    # pre-match fixture mappings or let them enter future
+                    # availability context.
+                    injuries["provider_fixtures"]=[
+                        v for v in parse_api_fixtures(f)
+                        if utc(v["kickoff_utc"])>now+pd.Timedelta(minutes=5)
+                        and utc(v["kickoff_utc"]).strftime("%Y-%m-%d")==day
+                    ]
                 except (ValueError,RuntimeError,requests.RequestException) as error:
                     issues.append(f"API-Football fixture index {day}: {type(error).__name__}")
                     injuries["provider_fixtures"]=[]
