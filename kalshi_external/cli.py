@@ -31,12 +31,13 @@ def append_history(path, records, max_bytes=25_000_000):
                     if not isinstance(obj,dict):
                         raise ValueError("Invalid historical forecast JSON")
                     history.append(obj)
-    # One archived snapshot per source/event/UTC calendar day; avoids double counting.
+    # Keep every distinct captured snapshot (for pre-match line movement).
+    # A repeated workflow run with the same timestamp is idempotent.
     signatures={(r.get("source_id"),r.get("sport"),str(r.get("event_id")),
-                 str(r.get("captured_utc",""))[:10]) for r in history}
+                 str(r.get("captured_utc",""))) for r in history}
     added=0
     for r in records:
-        key=(r["source_id"],r["sport"],r["event_id"],r["captured_utc"][:10])
+        key=(r["source_id"],r["sport"],str(r["event_id"]),str(r["captured_utc"]))
         if key not in signatures:
             history.append(r)
             signatures.add(key)
@@ -109,8 +110,12 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
         warn.extend(errors)
         outcomes=pd.concat([outcomes,live],ignore_index=True).drop_duplicates(["sport","event_id"])
     scored=historical_scores(history,outcomes,min_cases=30)
+    from .source_diagnostics import diagnostics
+    source_metrics, market_movements = diagnostics(history, outcomes, min_resolved=100, bootstrap=300)
     dest=Path(reports_dir);dest.mkdir(parents=True,exist_ok=True)
     scored.to_csv(dest/"source_performance.csv",index=False)
+    source_metrics.to_csv(dest/"paired_source_metrics.csv",index=False)
+    market_movements.to_csv(dest/"market_movement.csv",index=False)
     sport_counts={}
     for row in fetched:
         key=row["source_id"]
@@ -120,13 +125,16 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
         "sources_checked":4,
         "new_records":added,
         "observations_in_private_cache":len(history),
+        "events_with_multiple_snapshots":int(market_movements["events_with_multiple_snapshots"].sum()),
+        "paired_outcome_groups":len(source_metrics),
+        "research_only_sources_with_100_plus_settled":int(source_metrics["sufficient_history"].sum()),
         "new_by_source":sport_counts,
         "resolved_outcomes_available":int(len(outcomes)),
         "resolved_cases_by_source":{f"{r.source_id}|{r.sport}":int(r.n) for r in scored.itertuples()} if len(scored) else {},
         "sources_with_30_plus_resolved_cases":int(scored.eligible_for_review.sum()) if len(scored) else 0,
         "status":"RESEARCH_ONLY_NOT_USED_TO_MODIFY_PRODUCTION",
         "notes":[
-            "Historical source data are kept in Actions cache only; cache is not durable storage.",
+            "Historical snapshots are archived privately when DATA_REPO_TOKEN is set; the GitHub Actions cache alone is not durable.",
             "Scored sports: intl/club (regulation 90-minute result only), NBA and NFL (ties excluded).",
             "A source's predictive signal is not promoted without prospective paired validation.",
         ],
