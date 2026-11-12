@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/intl_auto_validation.yml'
       - 'kalshi_intl/**'
+      - 'kalshi_external/**'
       - 'tests/**'
       - 'requirements.txt'
   workflow_dispatch:

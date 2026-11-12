@@ -205,7 +205,9 @@ def run(registry_path="predictions/nfl_registry.csv",
                 if record:
                     records.append(record)
             except (requests.RequestException, ValueError, TypeError, KeyError) as err:
-                issues.append(f"Event {event['event_id']}: {type(err).__name__}")
+                # NOAA/ESPN fetches never use credentials, but still avoid logging raw URLs or response bodies.
+                details = str(err)[:120] if isinstance(err, ValueError) else type(err).__name__
+                issues.append(f"Event {event['event_id']}: {details}")
     _, added = append_history(history_path, records)
     status = {
         "captured_utc": now.isoformat(),
