@@ -1,69 +1,270 @@
-# Predicciones — actualizado 12 Nov 2026 09:31 (hora Chicago)
+# Predicciones — actualizado 12 Nov 2026 12:50 (hora Chicago)
 
-**Cómo leer las tablas**
-- **Modelo**: probabilidad que da tu modelo a que gane el favorito indicado.
-- **Kalshi**: probabilidad que implica el precio de Kalshi para ese mismo equipo (precio 62¢ ≈ 62%).
-- **Polymarket**: lo mismo, con el precio de Polymarket (otro mercado de predicción).
+## Picks de hoy y mañana
+Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
+El pick usa el consenso de las casas de apuestas cuando existe y el modelo propio como respaldo. No es una recomendación de apuesta.
+
+| Hora (Chicago) | Competición | Partido | Pick | Probabilidad | Confianza |
+|---|---|---|---|---|---|
+| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 73% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 46% | Baja |
+| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 73% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | San Marino vs Belarus | Belarus | 97% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | Czechia vs Spain | Spain | 76% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 44% | Baja |
+| Thu 12 Nov 18:00 | NBA | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 70% | Alta |
+| Thu 12 Nov 18:00 | NBA | Detroit Pistons en Washington Wizards | Detroit Pistons | 79% | Alta |
+| Thu 12 Nov 19:00 | NBA | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 66% | Media |
+| Thu 12 Nov 19:15 | NFL | Washington Commanders en New York Giants | New York Giants | 55% | Media |
+| Thu 12 Nov 20:00 | NBA | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 68% | Media |
+| Fri 13 Nov 06:00 | Selecciones | Singapore vs Paraguay | Paraguay | 88% | Alta |
+| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 54% | Baja |
+| Fri 13 Nov 08:30 | Selecciones | Saudi Arabia vs South Korea | South Korea | 52% | Baja |
+| Fri 13 Nov 08:45 | Selecciones | Qatar vs Australia | Australia | 45% | Baja |
+| Fri 13 Nov 09:00 | Selecciones | Iraq vs Lebanon | Iraq | 49% | Baja |
+| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Kuwait | 45% | Baja |
+| Fri 13 Nov 11:00 | Selecciones | Moldova vs Kazakhstan | Moldova | 35% | Baja |
+| Fri 13 Nov 13:45 | Selecciones | Liechtenstein vs Azerbaijan | Azerbaijan | 73% | Alta |
+| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 43% | Baja |
+| Fri 13 Nov 13:45 | Selecciones | Andorra vs Gibraltar | Andorra | 53% | Baja |
+| Fri 13 Nov 13:45 | Selecciones | Slovenia vs Switzerland | Switzerland | 56% | Media |
+| Fri 13 Nov 13:45 | Selecciones | Bulgaria vs Iceland | Iceland | 51% | Baja |
+| Fri 13 Nov 13:45 | Selecciones | Serbia vs Germany | Germany | 73% | Alta |
+| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | Media |
+| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | Media |
+| Fri 13 Nov 13:45 | Selecciones | Scotland vs North Macedonia | Scotland | 79% | Alta |
+| Fri 13 Nov 17:00 | Selecciones | Argentina vs Uruguay | Argentina | 60% | Media |
+| Fri 13 Nov 18:00 | Selecciones | Colombia vs Chile | Colombia | 66% | Media |
+| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | Alta |
+| Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Orlando Magic | 79% | Alta |
+| Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | New York Knicks | 80% | Alta |
+| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | Media |
+| Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 56% | Media |
+| Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | Media |
+| Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 52% | Baja |
+| Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Houston Rockets | 90% | Alta |
+| Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 76% | Alta |
+| Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 74% | Alta |
+| Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 65% | Media |
+| Fri 13 Nov 23:30 | Selecciones | Tahiti vs Cook Islands | Tahiti | 91% | Alta |
+| Sat 14 Nov 00:00 | Selecciones | Bahrain vs Yemen | Bahrain | 53% | Baja |
+
+---
+# Detalle (opcional)
+
+## Todos los próximos partidos (pick final, en prueba)
+| Fecha (hora Chicago) | Deporte | Partido | Pick final | Probabilidad | Origen |
+|---|---|---|---|---|---|
+| Thu 12 Nov 13:45 | Selecciones | Czechia vs Spain | Spain | 76% | casas |
+| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 46% | casas |
+| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 44% | casas |
+| Thu 12 Nov 13:45 | Selecciones | San Marino vs Belarus | Belarus | 97% | modelo (sin cuotas aún) |
+| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 73% | casas |
+| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 73% | casas |
+| Thu 12 Nov 18:00 | NBA | Detroit Pistons en Washington Wizards | Detroit Pistons | 79% | casas |
+| Thu 12 Nov 18:00 | NBA | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 70% | casas |
+| Thu 12 Nov 19:00 | NBA | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 66% | casas |
+| Thu 12 Nov 19:15 | NFL | Washington Commanders en New York Giants | New York Giants | 55% | casas |
+| Thu 12 Nov 20:00 | NBA | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 68% | casas |
+| Fri 13 Nov 06:00 | Selecciones | Singapore vs Paraguay | Paraguay | 88% | casas |
+| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 54% | modelo (sin cuotas aún) |
+| Fri 13 Nov 08:30 | Selecciones | Saudi Arabia vs South Korea | South Korea | 52% | casas |
+| Fri 13 Nov 08:45 | Selecciones | Qatar vs Australia | Australia | 45% | casas |
+| Fri 13 Nov 09:00 | Selecciones | Iraq vs Lebanon | Iraq | 49% | modelo (sin cuotas aún) |
+| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Kuwait | 45% | modelo (sin cuotas aún) |
+| Fri 13 Nov 11:00 | Selecciones | Moldova vs Kazakhstan | Moldova | 35% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 43% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Scotland vs North Macedonia | Scotland | 79% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Liechtenstein vs Azerbaijan | Azerbaijan | 73% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Bulgaria vs Iceland | Iceland | 51% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Slovenia vs Switzerland | Switzerland | 56% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Andorra vs Gibraltar | Andorra | 53% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Serbia vs Germany | Germany | 73% | casas |
+| Fri 13 Nov 17:00 | Selecciones | Argentina vs Uruguay | Argentina | 60% | casas |
+| Fri 13 Nov 18:00 | Selecciones | Colombia vs Chile | Colombia | 66% | casas |
+| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | casas |
+| Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Orlando Magic | 79% | modelo (sin cuotas aún) |
+| Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | New York Knicks | 80% | modelo (sin cuotas aún) |
+| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | casas |
+| Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 56% | modelo (sin cuotas aún) |
+| Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 52% | modelo (sin cuotas aún) |
+| Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | modelo (sin cuotas aún) |
+| Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Houston Rockets | 90% | modelo (sin cuotas aún) |
+| Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 76% | modelo (sin cuotas aún) |
+| Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 74% | modelo (sin cuotas aún) |
+| Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 65% | modelo (sin cuotas aún) |
+| Fri 13 Nov 23:30 | Selecciones | Tahiti vs Cook Islands | Tahiti | 91% | modelo (sin cuotas aún) |
+| Sat 14 Nov 00:00 | Selecciones | Bahrain vs Yemen | Bahrain | 53% | modelo (sin cuotas aún) |
+| Sat 14 Nov 04:15 | Selecciones | Japan vs Brazil | Brazil | 51% | casas |
+| Sat 14 Nov 06:00 | Selecciones | China vs Malaysia | China | 38% | modelo (sin cuotas aún) |
+| Sat 14 Nov 06:00 | Selecciones | Chinese Taipei vs Kyrgyz Republic | Kyrgyz Republic | 62% | modelo (sin cuotas aún) |
+| Sat 14 Nov 08:00 | Selecciones | Kosovo vs Israel | Kosovo | 52% | casas |
+| Sat 14 Nov 09:00 | Selecciones | Palestine vs Iran | Iran | 53% | modelo (sin cuotas aún) |
+| Sat 14 Nov 11:00 | Selecciones | Norway vs Wales | Norway | 77% | casas |
+| Sat 14 Nov 11:00 | Selecciones | Georgia vs Hungary | Hungary | 38% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Romania vs Poland | Poland | 52% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Sweden vs Bosnia-Herzegovina | Sweden | 61% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Austria vs Republic of Ireland | Austria | 59% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Portugal vs Denmark | Portugal | 62% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Northern Ireland vs Ukraine | Northern Ireland | 38% | casas |
+| Sat 14 Nov 18:00 | NBA | Denver Nuggets en New Orleans Pelicans | Denver Nuggets | 70% | modelo (sin cuotas aún) |
+| Sat 14 Nov 18:30 | NBA | Dallas Mavericks en Cleveland Cavaliers | Cleveland Cavaliers | 69% | modelo (sin cuotas aún) |
+| Sat 14 Nov 19:00 | NBA | Detroit Pistons en Miami Heat | Detroit Pistons | 64% | modelo (sin cuotas aún) |
+| Sat 14 Nov 19:00 | NBA | Chicago Bulls en Minnesota Timberwolves | Minnesota Timberwolves | 87% | modelo (sin cuotas aún) |
+| Sat 14 Nov 19:00 | NBA | Brooklyn Nets en Memphis Grizzlies | Memphis Grizzlies | 69% | modelo (sin cuotas aún) |
+| Sat 14 Nov 21:00 | Selecciones | New Zealand vs India | New Zealand | 71% | modelo (sin cuotas aún) |
+| Sun 15 Nov 08:00 | Selecciones | Latvia vs Armenia | Latvia | 40% | modelo (sin cuotas aún) |
+| Sun 15 Nov 08:00 | Selecciones | Cyprus vs Montenegro | Montenegro | 47% | modelo (sin cuotas aún) |
+| Sun 15 Nov 08:30 | NFL | New England Patriots en Detroit Lions | Detroit Lions | 58% | casas |
+| Sun 15 Nov 11:00 | Selecciones | Finland vs San Marino | Finland | 98% | modelo (sin cuotas aún) |
+| Sun 15 Nov 11:00 | Selecciones | Suriname vs Eswatini | Suriname | 71% | modelo (sin cuotas aún) |
+| Sun 15 Nov 11:00 | Selecciones | Belarus vs Albania | Albania | 47% | modelo (sin cuotas aún) |
+| Sun 15 Nov 12:00 | NBA | Indiana Pacers en Philadelphia 76ers | Philadelphia 76ers | 76% | modelo (sin cuotas aún) |
+| Sun 15 Nov 12:00 | NFL | Jacksonville Jaguars en Tennessee Titans | Jacksonville Jaguars | 82% | casas |
+| Sun 15 Nov 12:00 | NFL | Miami Dolphins en Indianapolis Colts | Indianapolis Colts | 64% | casas |
+| Sun 15 Nov 12:00 | NFL | Buffalo Bills en New York Jets | Buffalo Bills | 78% | casas |
+| Sun 15 Nov 12:00 | NFL | Minnesota Vikings en Green Bay Packers | Green Bay Packers | 58% | casas |
+| Sun 15 Nov 12:00 | NFL | Kansas City Chiefs en Atlanta Falcons | Kansas City Chiefs | 62% | casas |
+| Sun 15 Nov 12:00 | NFL | Carolina Panthers en New Orleans Saints | New Orleans Saints | 54% | casas |
+| Sun 15 Nov 12:00 | NFL | Houston Texans en Cleveland Browns | Houston Texans | 66% | casas |
+| Sun 15 Nov 13:45 | Selecciones | Spain vs England | Spain | 54% | modelo (sin cuotas aún) |
+| Sun 15 Nov 13:45 | Selecciones | Belgium vs Italy | Belgium | 46% | modelo (sin cuotas aún) |
+| Sun 15 Nov 13:45 | Selecciones | France vs Türkiye | France | 76% | modelo (sin cuotas aún) |
+| Sun 15 Nov 13:45 | Selecciones | Croatia vs Czechia | Croatia | 64% | modelo (sin cuotas aún) |
+| Sun 15 Nov 15:00 | NBA | Los Angeles Lakers en Phoenix Suns | Los Angeles Lakers | 61% | modelo (sin cuotas aún) |
+| Sun 15 Nov 15:05 | NFL | Seattle Seahawks en Las Vegas Raiders | Seattle Seahawks | 72% | casas |
+| Sun 15 Nov 15:05 | NFL | Los Angeles Rams en Arizona Cardinals | Los Angeles Rams | 80% | casas |
+| Sun 15 Nov 15:25 | NFL | San Francisco 49ers en Dallas Cowboys | San Francisco 49ers | 64% | casas |
+| Sun 15 Nov 15:30 | NBA | Charlotte Hornets en LA Clippers | LA Clippers | 57% | modelo (sin cuotas aún) |
+| Sun 15 Nov 16:00 | NBA | San Antonio Spurs en Utah Jazz | San Antonio Spurs | 91% | modelo (sin cuotas aún) |
+| Sun 15 Nov 17:00 | NBA | Dallas Mavericks en Boston Celtics | Boston Celtics | 80% | modelo (sin cuotas aún) |
+| Sun 15 Nov 17:00 | NBA | New York Knicks en Toronto Raptors | New York Knicks | 66% | modelo (sin cuotas aún) |
+| Sun 15 Nov 18:00 | NBA | Houston Rockets en Washington Wizards | Houston Rockets | 80% | modelo (sin cuotas aún) |
+| Sun 15 Nov 19:00 | NBA | Atlanta Hawks en Milwaukee Bucks | Atlanta Hawks | 74% | modelo (sin cuotas aún) |
+| Sun 15 Nov 19:20 | NFL | Pittsburgh Steelers en Cincinnati Bengals | Cincinnati Bengals | 62% | casas |
+| Sun 15 Nov 20:00 | NBA | Oklahoma City Thunder en Sacramento Kings | Oklahoma City Thunder | 82% | modelo (sin cuotas aún) |
+| Mon 16 Nov 09:00 | Selecciones | Faroe Islands vs Moldova | Faroe Islands | 65% | modelo (sin cuotas aún) |
+| Mon 16 Nov 09:00 | Selecciones | Kazakhstan vs Slovakia | Slovakia | 50% | modelo (sin cuotas aún) |
+| Mon 16 Nov 11:00 | Selecciones | Iceland vs Luxembourg | Iceland | 63% | modelo (sin cuotas aún) |
+| Mon 16 Nov 11:00 | Selecciones | Estonia vs Bulgaria | Bulgaria | 36% | modelo (sin cuotas aún) |
+| Mon 16 Nov 11:00 | Selecciones | Lithuania vs Liechtenstein | Lithuania | 84% | modelo (sin cuotas aún) |
+| Mon 16 Nov 12:00 | Selecciones | Andorra vs Azerbaijan | Azerbaijan | 43% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | Germany vs Netherlands | Germany | 40% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | Greece vs Serbia | Greece | 63% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | North Macedonia vs Slovenia | Slovenia | 47% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | Switzerland vs Scotland | Switzerland | 71% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | Gibraltar vs Malta | Malta | 41% | modelo (sin cuotas aún) |
+| Mon 16 Nov 18:00 | NBA | Orlando Magic en Boston Celtics | Boston Celtics | 79% | modelo (sin cuotas aún) |
+| Mon 16 Nov 19:00 | NBA | Golden State Warriors en New Orleans Pelicans | Golden State Warriors | 69% | modelo (sin cuotas aún) |
+| Mon 16 Nov 19:15 | NFL | Los Angeles Chargers en Baltimore Ravens | Baltimore Ravens | 66% | casas |
+| Mon 16 Nov 23:30 | Selecciones | Tahiti vs Cook Islands | Tahiti | 91% | modelo (sin cuotas aún) |
+| Tue 17 Nov 00:00 | Selecciones | Malaysia vs Yemen | Malaysia | 54% | modelo (sin cuotas aún) |
+| Tue 17 Nov 04:00 | Selecciones | Singapore vs Brazil | Brazil | 93% | modelo (sin cuotas aún) |
+| Tue 17 Nov 06:00 | Selecciones | China vs Bahrain | China | 44% | modelo (sin cuotas aún) |
+| Tue 17 Nov 06:00 | Selecciones | Kyrgyz Republic vs Vietnam | Kyrgyz Republic | 58% | modelo (sin cuotas aún) |
+| Tue 17 Nov 07:00 | Selecciones | Lebanon vs Palestine | Lebanon | 37% | modelo (sin cuotas aún) |
+| Tue 17 Nov 07:10 | Selecciones | Japan vs Paraguay | Japan | 72% | modelo (sin cuotas aún) |
+| Tue 17 Nov 08:00 | Selecciones | Qatar vs South Korea | South Korea | 54% | modelo (sin cuotas aún) |
+| Tue 17 Nov 08:10 | Selecciones | United Arab Emirates vs Syria | United Arab Emirates | 81% | modelo (sin cuotas aún) |
+| Tue 17 Nov 09:30 | Selecciones | Saudi Arabia vs Uzbekistan | Saudi Arabia | 49% | modelo (sin cuotas aún) |
+| Tue 17 Nov 10:00 | Selecciones | Jordan vs Australia | Australia | 49% | modelo (sin cuotas aún) |
+| Tue 17 Nov 10:00 | Selecciones | Russia vs Venezuela | Russia | 68% | modelo (sin cuotas aún) |
+| Tue 17 Nov 10:15 | Selecciones | Iraq vs Iran | Iran | 45% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Hungary vs Northern Ireland | Hungary | 49% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Wales vs Portugal | Portugal | 75% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Ukraine vs Georgia | Ukraine | 48% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Bosnia-Herzegovina vs Romania | Bosnia-Herzegovina | 61% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Israel vs Austria | Austria | 62% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Poland vs Sweden | Poland | 38% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Denmark vs Norway | Denmark | 43% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Republic of Ireland vs Kosovo | Republic of Ireland | 42% | modelo (sin cuotas aún) |
+| Tue 17 Nov 14:00 | Selecciones | Kuwait vs Honduras | Honduras | 50% | modelo (sin cuotas aún) |
+| Tue 17 Nov 17:00 | Selecciones | Argentina vs Costa Rica | Argentina | 91% | modelo (sin cuotas aún) |
+| Tue 17 Nov 17:00 | Selecciones | Chile vs Colombia | Colombia | 61% | modelo (sin cuotas aún) |
+| Tue 17 Nov 17:30 | Selecciones | Ecuador vs Bolivia | Ecuador | 86% | modelo (sin cuotas aún) |
+| Tue 17 Nov 17:30 | Selecciones | Uruguay vs Dominican Republic | Uruguay | 69% | modelo (sin cuotas aún) |
+| Tue 24 Nov 11:45 | Copas europeas | Galatasaray vs Aston Villa | Aston Villa | 38% | casas |
+| Tue 24 Nov 11:45 | Copas europeas | Bodo/Glimt vs LASK Linz | Bodo/Glimt | 62% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | RB Leipzig vs Lens | RB Leipzig | 66% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Feyenoord Rotterdam vs FC Porto | FC Porto | 41% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Como vs AEK Athens | Como | 71% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Arsenal vs Borussia Dortmund | Arsenal | 67% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Slovan Bratislava vs Real Betis | Real Betis | 73% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Manchester City vs Napoli | Manchester City | 76% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Real Madrid vs PSV Eindhoven | Real Madrid | 78% | casas |
+| Wed 25 Nov 11:45 | Copas europeas | Sabah FK vs Barcelona | Barcelona | 86% | casas |
+| Wed 25 Nov 11:45 | Copas europeas | Slavia Prague vs Villarreal | Villarreal | 44% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Shakhtar Donetsk vs Fenerbahce | Fenerbahce | 37% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Sporting CP vs Manchester United | Sporting CP | 37% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Club Brugge vs Liverpool | Liverpool | 56% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Atlético Madrid vs Viking FK | Atlético Madrid | 85% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Paris Saint-Germain vs AS Roma | Paris Saint-Germain | 70% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Internazionale vs VfB Stuttgart | Internazionale | 65% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Lille vs Bayern Munich | Bayern Munich | 70% | casas |
+
+**Cómo leer las tablas de detalle**
+- **Modelo**: probabilidad que da el modelo propio al favorito indicado.
+- **Kalshi** / **Polymarket**: probabilidad que implica el precio en cada mercado (62¢ ≈ 62%).
 - **Casas**: probabilidad según las casas de apuestas, sin su margen. Es la referencia más fiable.
-- Si **Kalshi** y **Polymarket** difieren más de 3 puntos, vale la pena mirar ese partido: uno de los dos está desfasado.
-- Si **Modelo** y **Kalshi** difieren mucho, casi siempre el modelo ignora algo (lesiones, descanso). No es una señal de apuesta.
-- **Bajas**: jugadores fuera o dudosos según ESPN hoy. Es informativo: el modelo todavía NO las usa.
+- **Bajas**: jugadores fuera o dudosos. Es informativo: el modelo todavía NO las usa.
 - En fútbol, **Goles** = probabilidad de más de 1.5, 2.5 y 3.5 goles; **Gana por 2+** = victoria por dos o más goles.
 - Un "—" significa que aún no había precio o dato para ese partido.
 
 ## NBA
 | Fecha (hora Chicago) | Partido | Favorito del modelo | Modelo | Kalshi | Polymarket | Casas | Diferencia esperada | Total esperado | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Thu 12 Nov 18:00 | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 58% | 74% | 74% | 74% | 2.0 pts | 224 pts | 3 / 3 |
+| Thu 12 Nov 18:00 | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 58% | 70% | 70% | 70% | 2.0 pts | 224 pts | 3 / 3 |
 | Thu 12 Nov 18:00 | Detroit Pistons en Washington Wizards | Detroit Pistons | 82% | 80% | 80% | 79% | 11.1 pts | 223 pts | 4 / 2 |
-| Thu 12 Nov 19:00 | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 76% | 68% | 66% | 66% | 8.4 pts | 230 pts | 2 / 3 |
-| Thu 12 Nov 20:00 | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 59% | 68% | 66% | 68% | 2.7 pts | 220 pts | 1 / 4 |
+| Thu 12 Nov 19:00 | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 76% | 66% | 66% | 66% | 8.4 pts | 230 pts | 2 / 3 |
+| Thu 12 Nov 20:00 | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 59% | 66% | 66% | 68% | 2.7 pts | 220 pts | 1 / 4 |
 | Fri 13 Nov 18:00 | New York Knicks en Indiana Pacers | New York Knicks | 83% | 70% | 68% | — | 11.3 pts | 219 pts | 3 / 0 |
 | Fri 13 Nov 18:00 | Milwaukee Bucks en Orlando Magic | Orlando Magic | 78% | 76% | 76% | — | 9.2 pts | 220 pts | 5 / 1 |
 | Fri 13 Nov 19:00 | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | 72% | 72% | — | 5.1 pts | 239 pts | 0 / 4 |
-| Fri 13 Nov 19:00 | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 50% | 48% | 48% | — | 0.2 pts | 236 pts | 0 / 1 |
-| Fri 13 Nov 19:00 | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 51% | 57% | 60% | — | 0.5 pts | 244 pts | 1 / 2 |
+| Fri 13 Nov 19:00 | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 50% | 49% | 50% | — | 0.2 pts | 236 pts | 0 / 1 |
+| Fri 13 Nov 19:00 | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 51% | 59% | 60% | — | 0.5 pts | 244 pts | 1 / 2 |
 | Fri 13 Nov 19:30 | Utah Jazz en Houston Rockets | Houston Rockets | 89% | 90% | 92% | — | 15.7 pts | 225 pts | 2 / 3 |
-| Fri 13 Nov 20:30 | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 75% | 81% | 82% | — | 7.8 pts | 228 pts | 2 / 4 |
-| Fri 13 Nov 21:00 | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 75% | 76% | 78% | — | 8.1 pts | 229 pts | 2 / 4 |
-| Fri 13 Nov 21:30 | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 68% | 82% | 82% | — | 5.4 pts | 223 pts | 4 / 6 |
+| Fri 13 Nov 20:30 | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 75% | 85% | 84% | — | 7.8 pts | 228 pts | 2 / 4 |
+| Fri 13 Nov 21:00 | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 75% | 80% | 80% | — | 8.1 pts | 229 pts | 2 / 4 |
+| Fri 13 Nov 21:30 | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 68% | 78% | 80% | — | 5.4 pts | 223 pts | 4 / 6 |
 | Sat 14 Nov 18:00 | Denver Nuggets en New Orleans Pelicans | Denver Nuggets | 64% | 81% | 80% | — | 3.9 pts | 237 pts | 1 / 1 |
 | Sat 14 Nov 18:30 | Dallas Mavericks en Cleveland Cavaliers | Cleveland Cavaliers | 68% | 62% | 59% | — | 5.1 pts | 231 pts | 1 / 3 |
 | Sat 14 Nov 19:00 | Brooklyn Nets en Memphis Grizzlies | Memphis Grizzlies | 76% | 62% | 62% | — | 8.7 pts | 231 pts | 2 / 0 |
 | Sat 14 Nov 19:00 | Detroit Pistons en Miami Heat | Detroit Pistons | 64% | 62% | 64% | — | 4.0 pts | 232 pts | 0 / 2 |
-| Sat 14 Nov 19:00 | Chicago Bulls en Minnesota Timberwolves | Minnesota Timberwolves | 87% | 84% | 84% | — | 14.2 pts | 236 pts | 2 / 0 |
-| Sun 15 Nov 12:00 | Indiana Pacers en Philadelphia 76ers | Philadelphia 76ers | 77% | 79% | 79% | — | 8.6 pts | 224 pts | 3 / 3 |
+| Sat 14 Nov 19:00 | Chicago Bulls en Minnesota Timberwolves | Minnesota Timberwolves | 87% | 85% | 86% | — | 14.2 pts | 236 pts | 2 / 0 |
+| Sun 15 Nov 12:00 | Indiana Pacers en Philadelphia 76ers | Philadelphia 76ers | 77% | 79% | 78% | — | 8.6 pts | 224 pts | 3 / 3 |
 | Sun 15 Nov 15:00 | Los Angeles Lakers en Phoenix Suns | Los Angeles Lakers | 61% | 60% | 62% | — | 3.6 pts | 235 pts | 1 / 0 |
-| Sun 15 Nov 15:30 | Charlotte Hornets en LA Clippers | LA Clippers | 57% | 62% | 60% | — | 2.4 pts | 222 pts | 4 / 4 |
+| Sun 15 Nov 15:30 | Charlotte Hornets en LA Clippers | LA Clippers | 57% | 60% | 59% | — | 2.4 pts | 222 pts | 4 / 4 |
 | Sun 15 Nov 16:00 | San Antonio Spurs en Utah Jazz | San Antonio Spurs | 90% | 90% | 90% | — | 15.9 pts | 230 pts | 3 / 2 |
 | Sun 15 Nov 17:00 | Dallas Mavericks en Boston Celtics | Boston Celtics | 81% | 84% | 84% | — | 10.3 pts | 225 pts | 0 / 3 |
-| Sun 15 Nov 17:00 | New York Knicks en Toronto Raptors | New York Knicks | 66% | 67% | 68% | — | 4.7 pts | 220 pts | 3 / 0 |
-| Sun 15 Nov 18:00 | Houston Rockets en Washington Wizards | Houston Rockets | 79% | 80% | 79% | — | 9.8 pts | 223 pts | 4 / 2 |
+| Sun 15 Nov 17:00 | New York Knicks en Toronto Raptors | New York Knicks | 66% | 68% | 68% | — | 4.7 pts | 220 pts | 3 / 0 |
+| Sun 15 Nov 18:00 | Houston Rockets en Washington Wizards | Houston Rockets | 79% | 81% | 79% | — | 9.8 pts | 223 pts | 4 / 2 |
 | Sun 15 Nov 19:00 | Atlanta Hawks en Milwaukee Bucks | Atlanta Hawks | 73% | 73% | 72% | — | 7.2 pts | 231 pts | 1 / 4 |
 | Sun 15 Nov 20:00 | Oklahoma City Thunder en Sacramento Kings | Oklahoma City Thunder | 84% | 81% | 81% | — | 12.0 pts | 225 pts | 2 / 6 |
-| Mon 16 Nov 18:00 | Orlando Magic en Boston Celtics | Boston Celtics | 80% | 70% | 72% | — | 10.4 pts | 217 pts | 0 / 5 |
+| Mon 16 Nov 18:00 | Orlando Magic en Boston Celtics | Boston Celtics | 80% | 72% | 69% | — | 10.4 pts | 217 pts | 0 / 5 |
 | Mon 16 Nov 18:00 | Chicago Bulls en Cleveland Cavaliers | Cleveland Cavaliers | 81% | — | 74% | — | 10.7 pts | 237 pts | 1 / 0 |
 | Mon 16 Nov 18:00 | Memphis Grizzlies en Washington Wizards | Memphis Grizzlies | 60% | — | 62% | — | 3.1 pts | 234 pts | 4 / 2 |
 | Mon 16 Nov 18:30 | Philadelphia 76ers en Brooklyn Nets | Philadelphia 76ers | 73% | — | 70% | — | 7.3 pts | 223 pts | 0 / 3 |
-| Mon 16 Nov 18:30 | Houston Rockets en Miami Heat | Houston Rockets | 60% | — | 55% | — | 3.2 pts | 231 pts | 0 / 2 |
-| Mon 16 Nov 19:00 | Portland Trail Blazers en Minnesota Timberwolves | Minnesota Timberwolves | 65% | — | 51% | — | 4.7 pts | 229 pts | 2 / 4 |
-| Mon 16 Nov 19:00 | Golden State Warriors en New Orleans Pelicans | Golden State Warriors | 64% | 59% | 61% | — | 4.4 pts | 243 pts | 1 / 4 |
+| Mon 16 Nov 18:30 | Houston Rockets en Miami Heat | Houston Rockets | 60% | — | 57% | — | 3.2 pts | 231 pts | 0 / 2 |
+| Mon 16 Nov 19:00 | Portland Trail Blazers en Minnesota Timberwolves | Minnesota Timberwolves | 65% | — | 50% | — | 4.7 pts | 229 pts | 2 / 4 |
+| Mon 16 Nov 19:00 | Golden State Warriors en New Orleans Pelicans | Golden State Warriors | 64% | 46% | 43% | — | 4.4 pts | 243 pts | 1 / 4 |
 | Mon 16 Nov 20:00 | Phoenix Suns en Denver Nuggets | Denver Nuggets | 68% | — | 74% | — | 5.5 pts | 228 pts | 1 / 1 |
 | Tue 17 Nov 18:30 | New York Knicks en Toronto Raptors | New York Knicks | 64% | — | 60% | — | 4.0 pts | 221 pts | 3 / 0 |
 | Tue 17 Nov 19:00 | Portland Trail Blazers en Minnesota Timberwolves | Minnesota Timberwolves | 66% | — | 55% | — | 4.9 pts | 229 pts | 2 / 4 |
 | Tue 17 Nov 19:00 | Detroit Pistons en San Antonio Spurs | San Antonio Spurs | 67% | — | 70% | — | 5.3 pts | 222 pts | 2 / 2 |
 | Tue 17 Nov 21:30 | Utah Jazz en LA Clippers | LA Clippers | 76% | — | 68% | — | 8.5 pts | 235 pts | 4 / 3 |
 | Tue 17 Nov 22:00 | Charlotte Hornets en Los Angeles Lakers | Los Angeles Lakers | 77% | — | 76% | — | 9.3 pts | 226 pts | 0 / 4 |
-| Wed 18 Nov 18:00 | Memphis Grizzlies en Cleveland Cavaliers | Cleveland Cavaliers | 73% | — | 69% | — | 6.9 pts | 235 pts | 1 / 2 |
+| Wed 18 Nov 18:00 | Memphis Grizzlies en Cleveland Cavaliers | Cleveland Cavaliers | 73% | — | 66% | — | 6.9 pts | 235 pts | 1 / 2 |
 | Wed 18 Nov 18:00 | Houston Rockets en Indiana Pacers | Houston Rockets | 75% | — | 72% | — | 7.8 pts | 223 pts | 3 / 2 |
 | Wed 18 Nov 18:00 | Milwaukee Bucks en Miami Heat | Miami Heat | 80% | — | 77% | — | 10.3 pts | 239 pts | 0 / 1 |
 | Wed 18 Nov 18:00 | Philadelphia 76ers en Orlando Magic | Philadelphia 76ers | 53% | — | 68% | — | 1.1 pts | 219 pts | 5 / 3 |
 | Wed 18 Nov 18:30 | Chicago Bulls en Brooklyn Nets | Brooklyn Nets | 59% | — | 60% | — | 3.0 pts | 235 pts | 0 / 0 |
 | Wed 18 Nov 18:30 | Washington Wizards en Toronto Raptors | Toronto Raptors | 78% | — | 66% | — | 9.4 pts | 227 pts | 3 / 4 |
-| Wed 18 Nov 19:00 | Detroit Pistons en New Orleans Pelicans | Detroit Pistons | 79% | — | 67% | — | 9.9 pts | 237 pts | 1 / 2 |
+| Wed 18 Nov 19:00 | Detroit Pistons en New Orleans Pelicans | Detroit Pistons | 79% | — | 66% | — | 9.9 pts | 237 pts | 1 / 2 |
 | Wed 18 Nov 19:00 | Atlanta Hawks en Oklahoma City Thunder | Oklahoma City Thunder | 70% | — | 70% | — | 6.1 pts | 228 pts | 6 / 4 |
 | Wed 18 Nov 20:00 | Boston Celtics en Denver Nuggets | Boston Celtics | 59% | — | 54% | — | 2.9 pts | 222 pts | 1 / 0 |
-| Wed 18 Nov 20:30 | Golden State Warriors en Dallas Mavericks | Golden State Warriors | 54% | — | 56% | — | 1.0 pts | 234 pts | 3 / 4 |
+| Wed 18 Nov 20:30 | Golden State Warriors en Dallas Mavericks | Golden State Warriors | 54% | — | 54% | — | 1.0 pts | 234 pts | 3 / 4 |
 | Wed 18 Nov 21:00 | Utah Jazz en Los Angeles Lakers | Los Angeles Lakers | 89% | — | 78% | — | 15.6 pts | 237 pts | 0 / 3 |
 | Wed 18 Nov 21:00 | Phoenix Suns en Sacramento Kings | Phoenix Suns | 65% | — | 70% | — | 4.4 pts | 233 pts | 2 / 1 |
 
@@ -72,13 +273,13 @@
 |---|---|---|---|---|---|---|---|---|---|
 | Thu 12 Nov 19:15 | Washington Commanders en New York Giants | New York Giants | 64% | 56% | 55% | 55% | 4.4 pts | 46 pts | 2 / 6 |
 | Sun 15 Nov 08:30 | New England Patriots en Detroit Lions | Detroit Lions | 55% | 58% | 59% | 58% | 1.8 pts | 49 pts | 5 / 5 |
-| Sun 15 Nov 12:00 | Kansas City Chiefs en Atlanta Falcons | Kansas City Chiefs | 62% | 64% | 64% | 62% | 3.4 pts | 45 pts | 4 / 3 |
-| Sun 15 Nov 12:00 | Houston Texans en Cleveland Browns | Houston Texans | 60% | 66% | 68% | 67% | 2.6 pts | 45 pts | 1 / 3 |
-| Sun 15 Nov 12:00 | Minnesota Vikings en Green Bay Packers | Green Bay Packers | 60% | 60% | 60% | 59% | 3.2 pts | 43 pts | 6 / 2 |
+| Sun 15 Nov 12:00 | Kansas City Chiefs en Atlanta Falcons | Kansas City Chiefs | 62% | 64% | 62% | 62% | 3.4 pts | 45 pts | 4 / 3 |
+| Sun 15 Nov 12:00 | Houston Texans en Cleveland Browns | Houston Texans | 60% | 66% | 68% | 66% | 2.6 pts | 45 pts | 1 / 3 |
+| Sun 15 Nov 12:00 | Minnesota Vikings en Green Bay Packers | Green Bay Packers | 60% | 60% | 60% | 58% | 3.2 pts | 43 pts | 6 / 2 |
 | Sun 15 Nov 12:00 | Miami Dolphins en Indianapolis Colts | Indianapolis Colts | 56% | 66% | 66% | 64% | 2.2 pts | 43 pts | 4 / 4 |
-| Sun 15 Nov 12:00 | Carolina Panthers en New Orleans Saints | New Orleans Saints | 53% | 56% | 56% | 55% | 1.2 pts | 48 pts | 2 / 7 |
-| Sun 15 Nov 12:00 | Buffalo Bills en New York Jets | Buffalo Bills | 84% | 80% | 78% | 78% | 11.4 pts | 48 pts | 2 / 2 |
-| Sun 15 Nov 12:00 | Jacksonville Jaguars en Tennessee Titans | Jacksonville Jaguars | 80% | 84% | 84% | 81% | 10.5 pts | 44 pts | 4 / 2 |
+| Sun 15 Nov 12:00 | Carolina Panthers en New Orleans Saints | New Orleans Saints | 53% | 56% | 56% | 54% | 1.2 pts | 48 pts | 2 / 7 |
+| Sun 15 Nov 12:00 | Buffalo Bills en New York Jets | Buffalo Bills | 84% | 80% | 80% | 78% | 11.4 pts | 48 pts | 2 / 2 |
+| Sun 15 Nov 12:00 | Jacksonville Jaguars en Tennessee Titans | Jacksonville Jaguars | 80% | 84% | 84% | 82% | 10.5 pts | 44 pts | 4 / 2 |
 | Sun 15 Nov 15:05 | Los Angeles Rams en Arizona Cardinals | Los Angeles Rams | 74% | 80% | 80% | 80% | 7.4 pts | 45 pts | 4 / 4 |
 | Sun 15 Nov 15:05 | Seattle Seahawks en Las Vegas Raiders | Seattle Seahawks | 74% | 72% | 72% | 72% | 7.2 pts | 48 pts | 1 / 4 |
 | Sun 15 Nov 15:25 | San Francisco 49ers en Dallas Cowboys | San Francisco 49ers | 65% | 66% | 66% | 64% | 4.2 pts | 50 pts | 7 / 3 |
@@ -164,10 +365,6 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 
 | Fecha (hora Chicago) | Competición | Partido | Modelo: local / empate / visita | Kalshi | Casas | Goles: +1.5 / +2.5 / +3.5 | Ambos anotan | Gana por 2+: local / visita | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Thu 12 Nov 11:00 | Nations League | Türkiye vs Belgium | 14% / 22% / 63% | 26% / 24% / 50% | 27% / 24% / 49% | 79% / 54% / 32% | 50% | 5% / 40% | — |
-| Thu 12 Nov 11:00 | Nations League | Armenia vs Cyprus | 35% / 29% / 36% | 30% / 30% / 40% | 29% / 30% / 40% | 72% / 45% / 23% | 51% | 15% / 16% | — |
-| Thu 12 Nov 11:00 | Amistoso | Lithuania vs Suriname | 12% / 23% / 65% | 32% / 30% / 38% | 33% / 30% / 37% | 74% / 48% / 26% | 43% | 3% / 40% | — |
-| Thu 12 Nov 11:30 | Amistoso | Malta vs Eswatini | 30% / 30% / 40% | 66% / 22% / 12% | 64% / 23% / 14% | 69% / 42% / 21% | 49% | 12% / 18% | — |
 | Thu 12 Nov 13:45 | Nations League | Albania vs Finland | 49% / 28% / 23% | 44% / 32% / 24% | 44% / 31% / 25% | 70% / 43% / 22% | 48% | 25% / 8% | — |
 | Thu 12 Nov 13:45 | Nations League | Czechia vs Spain | 1% / 5% / 93% | 8% / 12% / 80% | 9% / 15% / 76% | 94% / 81% / 64% | 37% | 0% / 83% | — |
 | Thu 12 Nov 13:45 | Nations League | San Marino vs Belarus | 0% / 2% / 97% | 4% / 10% / 86% | — / — / — | 97% / 90% / 78% | 33% | 0% / 92% | — |
@@ -181,11 +378,11 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Fri 13 Nov 09:00 | Amistoso | Iraq vs Lebanon | 49% / 29% / 22% | 52% / 38% / 26% | — / — / — | 68% / 40% / 20% | 45% | 25% / 7% | — |
 | Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | 45% / 27% / 28% | 26% / 30% / 44% | — / — / — | 77% / 51% / 29% | 55% | 23% / 12% | — |
 | Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | 27% / 28% / 45% | 36% / 32% / 32% | 35% / 32% / 33% | 72% / 46% / 24% | 51% | 11% / 22% | — |
-| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 6% | 79% / 14% / 7% | 78% / 54% / 32% | 40% | 52% / 2% | — |
 | Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 68% / 20% / 12% | 78% / 53% / 31% | 47% | 43% / 3% | — |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | 62% / 24% / 14% | 62% / 20% / 16% | 60% / 22% / 18% | 75% / 49% / 27% | 46% | 37% / 4% | — |
-| Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 22% / 27% / 51% | 76% / 51% / 29% | 51% | 6% / 33% | — |
 | Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | 14% / 22% / 64% | 10% / 14% / 78% | 11% / 16% / 73% | 79% / 55% / 33% | 51% | 5% / 40% | — |
+| Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 22% / 27% / 51% | 76% / 51% / 29% | 51% | 6% / 33% | — |
+| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 6% | 79% / 14% / 7% | 78% / 54% / 32% | 40% | 52% / 2% | — |
 | Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | 40% / 31% / 29% | 55% / 30% / 16% | 53% / 29% / 18% | 66% / 39% / 19% | 46% | 18% / 11% | — |
 | Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | 39% / 31% / 30% | 44% / 30% / 26% | 43% / 30% / 27% | 66% / 39% / 19% | 46% | 18% / 12% | — |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | 10% / 20% / 71% | 6% / 18% / 76% | 8% / 18% / 73% | 78% / 54% / 32% | 45% | 3% / 47% | — |
@@ -211,17 +408,17 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Sat 14 Nov 21:00 | Amistoso | New Zealand vs India | 71% / 18% / 10% | — / — / — | — / — / — | 83% / 61% / 38% | 50% | 49% / 3% | — |
 | Sun 15 Nov 08:00 | Nations League | Cyprus vs Montenegro | 26% / 27% / 47% | 30% / 28% / 29% | — / — / — | 75% / 49% / 27% | 53% | 10% / 24% | — |
 | Sun 15 Nov 08:00 | Nations League | Latvia vs Armenia | 40% / 30% / 29% | 32% / 32% / 39% | — / — / — | 68% / 40% / 20% | 47% | 18% / 12% | — |
+| Sun 15 Nov 11:00 | Amistoso | Suriname vs Eswatini | 71% / 20% / 9% | 34% / 28% / 37% | — / — / — | 74% / 48% / 27% | 39% | 46% / 2% | — |
 | Sun 15 Nov 11:00 | Nations League | Belarus vs Albania | 24% / 29% / 47% | 26% / 24% / 40% | — / — / — | 70% / 43% / 22% | 48% | 9% / 24% | — |
 | Sun 15 Nov 11:00 | Nations League | Finland vs San Marino | 98% / 2% / 0% | 92% / 6% / 4% | — / — / — | 97% / 90% / 77% | 24% | 93% / 0% | — |
-| Sun 15 Nov 11:00 | Amistoso | Suriname vs Eswatini | 71% / 20% / 9% | 34% / 28% / 37% | — / — / — | 74% / 48% / 27% | 39% | 46% / 2% | — |
 | Sun 15 Nov 13:45 | Nations League | Spain vs England | 54% / 25% / 21% | 62% / 20% / 20% | — / — / — | 78% / 54% / 32% | 55% | 31% / 8% | — |
 | Sun 15 Nov 13:45 | Nations League | Belgium vs Italy | 46% / 28% / 27% | 44% / 28% / 28% | — / — / — | 75% / 49% / 27% | 53% | 23% / 11% | — |
 | Sun 15 Nov 13:45 | Nations League | France vs Türkiye | 76% / 16% / 8% | 82% / 12% / 8% | — / — / — | 82% / 60% / 37% | 44% | 54% / 2% | — |
 | Sun 15 Nov 13:45 | Nations League | Croatia vs Czechia | 64% / 21% / 14% | 70% / 16% / 8% | — / — / — | 81% / 58% / 36% | 53% | 41% / 5% | — |
 | Mon 16 Nov 09:00 | Nations League | Faroe Islands vs Moldova | 65% / 22% / 13% | 54% / 27% / 18% | — / — / — | 76% / 51% / 29% | 46% | 40% / 4% | — |
 | Mon 16 Nov 09:00 | Nations League | Kazakhstan vs Slovakia | 23% / 27% / 50% | 12% / 28% / 58% | — / — / — | 75% / 49% / 27% | 52% | 9% / 27% | — |
-| Mon 16 Nov 11:00 | Nations League | Lithuania vs Liechtenstein | 84% / 12% / 4% | 86% / 9% / 8% | — / — / — | 83% / 62% / 39% | 36% | 64% / 1% | — |
 | Mon 16 Nov 11:00 | Nations League | Estonia vs Bulgaria | 35% / 29% / 36% | 36% / 30% / 29% | — / — / — | 73% / 46% / 25% | 53% | 16% / 16% | — |
+| Mon 16 Nov 11:00 | Nations League | Lithuania vs Liechtenstein | 84% / 12% / 4% | 86% / 9% / 8% | — / — / — | 83% / 62% / 39% | 36% | 64% / 1% | — |
 | Mon 16 Nov 11:00 | Nations League | Iceland vs Luxembourg | 63% / 24% / 13% | 66% / 26% / 7% | — / — / — | 72% / 46% / 24% | 42% | 38% / 4% | — |
 | Mon 16 Nov 12:00 | Amistoso | Andorra vs Azerbaijan | 27% / 30% / 43% | 30% / 26% / 45% | — / — / — | 68% / 40% / 20% | 47% | 10% / 20% | — |
 | Mon 16 Nov 13:45 | Nations League | Gibraltar vs Malta | 30% / 29% / 41% | 16% / 26% / 60% | — / — / — | 71% / 43% / 22% | 50% | 12% / 19% | — |
@@ -246,8 +443,8 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Tue 17 Nov 13:45 | Nations League | Poland vs Sweden | 38% / 28% / 34% | 40% / 22% / 33% | — / — / — | 77% / 51% / 29% | 56% | 18% / 16% | — |
 | Tue 17 Nov 13:45 | Nations League | Denmark vs Norway | 43% / 26% / 31% | 36% / 21% / 37% | — / — / — | 80% / 56% / 34% | 60% | 23% / 14% | — |
 | Tue 17 Nov 13:45 | Nations League | Israel vs Austria | 16% / 22% / 62% | 14% / 20% / 62% | — / — / — | 81% / 57% / 35% | 54% | 5% / 39% | — |
-| Tue 17 Nov 13:45 | Nations League | Hungary vs Northern Ireland | 49% / 30% / 21% | 49% / 26% / 16% | — / — / — | 65% / 37% / 17% | 42% | 24% / 7% | — |
 | Tue 17 Nov 13:45 | Nations League | Ukraine vs Georgia | 48% / 29% / 23% | 40% / 26% / 30% | — / — / — | 70% / 43% / 22% | 48% | 25% / 8% | — |
+| Tue 17 Nov 13:45 | Nations League | Hungary vs Northern Ireland | 49% / 30% / 21% | 49% / 26% / 16% | — / — / — | 65% / 37% / 17% | 42% | 24% / 7% | — |
 | Tue 17 Nov 13:45 | Nations League | Wales vs Portugal | 8% / 17% / 75% | 9% / 15% / 74% | — / — / — | 81% / 59% / 36% | 45% | 2% / 52% | — |
 | Tue 17 Nov 13:45 | Nations League | Republic of Ireland vs Kosovo | 42% / 30% / 28% | 53% / 25% / 16% | — / — / — | 68% / 41% / 20% | 47% | 20% / 11% | — |
 | Tue 17 Nov 14:00 | Amistoso | Kuwait vs Honduras | 22% / 28% / 50% | — / — / — | — / — / — | 72% / 45% / 24% | 49% | 8% / 26% | — |
