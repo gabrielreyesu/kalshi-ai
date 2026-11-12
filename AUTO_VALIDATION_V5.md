@@ -13,9 +13,13 @@ Esta propuesta añade calibración 1X2 fuera de muestra, comparación por tempor
 - La temporada 2026 se consultó durante el desarrollo: no debe presentarse como holdout prospectivo independiente.
 
 ## Ejecución
-- Pruebas existentes: \`python -m unittest discover -s tests\`
-- Pruebas nuevas: \`python -m pytest -q tests/test_intl_calibration.py tests/test_intl_validation.py tests/test_intl_segment_policy.py tests/test_auto_validate.py\`
-- Backtest real: \`python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/intl_real_validation\`
-- Evaluación automatizada: \`python -m kalshi_intl.auto_validate --input reports/intl_real_validation/oos_paired.csv --output reports/intl_auto_validation\`
+- Pruebas existentes: `python -m unittest discover -s tests`
+- Pruebas nuevas: `python -m pytest -q tests`
+- Backtest real: `python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/intl_real_validation`
+- Evaluación automatizada: `python -m kalshi_intl.auto_validate --input reports/intl_real_validation/oos_paired.csv --output reports/intl_auto_validation`
+- Entrenamiento de candidato: `python -m kalshi_intl.auto_train --input reports/intl_real_validation/oos_raw.csv --output reports/intl_training/calibrator_candidate.json`
 
-Los datos de ESPN necesitan conexión de red y su descarga puede fallar; GitHub Actions guarda los reportes como artefactos. Si se recomienda promoción, requiere validación prospectiva antes de aplicarse. **No hay entrenamiento recurrente de un motor de producción en este cambio.**
+Los datos de ESPN necesitan conexión de red y su descarga puede fallar; GitHub Actions guarda los reportes como artefactos.
+
+## Entrenamiento automático de candidatos
+El workflow de GitHub Actions ahora ejecuta pruebas en cada PR y cada lunes reconstruye datos, realiza backtesting, evalúa políticas y entrena un **calibrador candidato** en JSON. No promueve automáticamente el candidato, no modifica el motor de producción ni apuesta. El entrenamiento excluye todos los resultados del día UTC actual y posteriores. El archivo `reports/intl_training/calibrator_candidate.json` contiene parámetros reproducibles sin pickle. Para activar la recurrencia hay que fusionar el PR a la rama principal.

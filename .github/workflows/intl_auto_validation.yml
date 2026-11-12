@@ -1,12 +1,39 @@
-name: International model automatic validation
+name: International model validation and candidate training
+
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/intl_auto_validation.yml'
+      - 'kalshi_intl/**'
+      - 'tests/**'
+      - 'requirements.txt'
   workflow_dispatch:
   schedule:
     - cron: '15 10 * * 1'
+
 permissions:
   contents: read
+
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install pytest
+      - name: Run full test suite (no external sports data required)
+        run: python -m pytest -q tests
+
   evaluate:
+    if: github.event_name != 'pull_request'
+    needs: tests
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -15,27 +42,25 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-      - run: pip install -r requirements.txt
-      - name: Existing unittest suite
-        run: python -m unittest discover -s tests
-      - name: New validation tests
-        run: |
-          pip install pytest
-          python -m pytest -q tests/test_intl_calibration.py tests/test_intl_validation.py tests/test_intl_segment_policy.py tests/test_auto_validate.py
+      - run: python -m pip install -r requirements.txt
       - name: Restore historical ESPN cache
         uses: actions/cache@v4
         with:
           path: data/intl
-          key: intl-espn-v1-${{ github.run_id }}
+          key: intl-espn-v2-${{ github.run_id }}
           restore-keys: |
-            intl-espn-v1-
-      - name: Rebuild walk-forward predictions with updated historical results
+            intl-espn-v2-
+      - name: Rebuild historical walk-forward evaluations
         run: python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/intl_real_validation
-      - name: Validate challenger on last OOS season
+      - name: Compare original and challenger against historical outcomes
         run: python -m kalshi_intl.auto_validate --input reports/intl_real_validation/oos_paired.csv --output reports/intl_auto_validation
-      - uses: actions/upload-artifact@v4
+      - name: Retrain a JSON candidate only with completed prior-UTC-day matches
+        run: python -m kalshi_intl.auto_train --input reports/intl_real_validation/oos_raw.csv --output reports/intl_training/calibrator_candidate.json
+      - name: Archive validation and training artifacts
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: international-validation-${{ github.run_number }}
+          name: international-model-research-${{ github.run_number }}
           path: reports/intl_*/
+          if-no-files-found: warn
           retention-days: 30
