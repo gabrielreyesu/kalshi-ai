@@ -42,11 +42,19 @@ class MultisourceSession:
         if url.endswith("/fixtures"):
             day=params["date"]
             if day!="2026-11-13":
-                return Response({"response":[]})
+                return Response({"response":[{
+                    "fixture":{"id":770,"date":"2026-11-12T01:00:00Z"},
+                    "teams":{"home":{"id":1,"name":"Expired FC"},
+                             "away":{"id":2,"name":"Old FC"}}
+                }]})
             return Response({"response":[{
                 "fixture":{"id":777,"date":"2026-11-13T19:00:00Z"},
                 "teams":{"home":{"id":55,"name":"Arsenal"},
                          "away":{"id":66,"name":"Barcelona"}}
+            },{
+                "fixture":{"id":778,"date":"2026-11-13T02:00:00Z"},
+                "teams":{"home":{"id":88,"name":"Past Team"},
+                         "away":{"id":99,"name":"Past Rival"}}
             }]})
         raise ValueError("Unexpected provider request")
 
@@ -72,6 +80,8 @@ class SoccerVendorArchiveTests(unittest.TestCase):
             self.assertEqual(entries[1]["provider_injury_context"][0]["player"],"Forward Out")
             reports=read_jsonl(root/"private"/"soccer_injuries.jsonl")
             self.assertEqual(len(reports),2)
+            self.assertEqual(reports[0]["provider_fixtures"],[])
+            self.assertEqual(len(reports[1]["provider_fixtures"]),2)
             self.assertEqual(audit([],[],reports,entries,now="2026-11-12T13:10:00Z")
                              ["record_counts"]["injuries"],2)
 
