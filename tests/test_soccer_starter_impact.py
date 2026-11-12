@@ -137,7 +137,7 @@ class RoleImportanceTests(unittest.TestCase):
         self.assertIsNone(r["home_minus_away_absence_exposure"])
         p=preview()
         p["captured_utc"]="2026-11-14T01:00:00Z"
-        with self.assertRaisesRegex(ValueError,"pre-match"):
+        with self.assertRaisesRegex(ValueError,"after kickoff"):
             research_snapshot(p,past_games())
 
     def test_pre_match_two_complete_starting_XI_may_be_confirmed(self):
