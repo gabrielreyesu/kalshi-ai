@@ -32,6 +32,7 @@ STADIUMS = {
     "Seattle Seahawks": (47.5952, -122.3316, ("lumen", "centurylink")),
 }
 ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary"
+ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
 NWS = "https://api.weather.gov"
 HEADERS = {"User-Agent": "KalshiAI-weather-research (https://github.com/gabrielreyesu/kalshi-ai)",
            "Accept": "application/geo+json, application/json"}
@@ -43,7 +44,7 @@ def _get(session, url, *, params=None):
         raise ValueError("Untrusted forecast endpoint")
     if p.hostname == "api.weather.gov" and not (p.path.startswith("/points/") or p.path.startswith("/gridpoints/")):
         raise ValueError("Unexpected NOAA forecast path")
-    if p.hostname == "site.api.espn.com" and p.path != urlparse(ESPN_SUMMARY).path:
+    if p.hostname == "site.api.espn.com" and p.path not in {urlparse(ESPN_SUMMARY).path, urlparse(ESPN_SCOREBOARD).path}:
         raise ValueError("Unexpected ESPN forecast venue path")
     response = session.get(url, params=params, headers=HEADERS, timeout=15, allow_redirects=False)
     if response.status_code != 200 or len(response.content) > 2_000_000:
@@ -51,16 +52,41 @@ def _get(session, url, *, params=None):
     return response.json()
 
 
-def _venue_for_event(session, event_id):
-    if not str(event_id).isdigit():
-        raise ValueError("Invalid ESPN event id")
-    data = _get(session, ESPN_SUMMARY, params={"event": str(event_id)})
-    contests = (data.get("header", {}).get("competitions") or [])
-    if len(contests) != 1:
-        return None
-    venue = contests[0].get("venue") or {}
+def _venue_name(competition):
+    venue = (competition or {}).get("venue") or {}
     return (venue.get("fullName") or venue.get("name") or "").strip()
 
+
+def _venue_for_event(session, event_id, kickoff):
+    """Find the actual venue, first in summary then in that day's scoreboard.
+
+    Do not infer stadium location from the listed home team's city alone.
+    """
+    if not str(event_id).isdigit():
+        raise ValueError("Invalid ESPN event id")
+    data = {}
+    try:
+        data = _get(session, ESPN_SUMMARY, params={"event": str(event_id)})
+    except (ValueError, requests.RequestException):
+        # ESPN sometimes leaves venue metadata out of the summary payload.
+        pass
+    contests = ((data.get("header") or {}).get("competitions") or [])
+    if len(contests) == 1:
+        venue = _venue_name(contests[0])
+        if venue:
+            return venue
+    venue = _venue_name((data.get("gameInfo") or {}))
+    if venue:
+        return venue
+    date = utc(kickoff).strftime("%Y%m%d")
+    board = _get(session, ESPN_SCOREBOARD, params={"dates": date, "limit": 500})
+    found = [e for e in (board.get("events") or []) if str(e.get("id")) == str(event_id)]
+    if len(found) != 1:
+        return None
+    games = found[0].get("competitions") or []
+    if len(games) != 1:
+        return None
+    return _venue_name(games[0]) or None
 
 def _max_mph(text):
     found = re.findall(r"\d+(?:\.\d+)?", str(text or ""))
@@ -117,7 +143,7 @@ def make_weather(event, venue, period, captured, issued):
     }
 
 
-def forecast_event(session, event, observed_at):
+def forecast_event(session, event, observed_at, diagnostics=None):
     home = event["home"]
     if home not in STADIUMS:
         return None
@@ -125,17 +151,25 @@ def forecast_event(session, event, observed_at):
     if not now < kick - pd.Timedelta(minutes=15) or kick > now + pd.Timedelta(days=7):
         return None
     lat, lon, names = STADIUMS[home]
-    venue = _venue_for_event(session, event["event_id"])
-    if not venue or not any(n in venue.casefold() for n in names):
+    venue = _venue_for_event(session, event["event_id"], kick)
+    if not venue:
+        if diagnostics is not None:
+            diagnostics.append(f"Event {event['event_id']}: ESPN venue metadata unavailable")
+        return None
+    if not any(n in venue.casefold() for n in names):
+        if diagnostics is not None:
+            diagnostics.append(f"Event {event['event_id']}: verified venue differs from expected home stadium")
         return None
     location = _get(session, f"{NWS}/points/{lat},{lon}")
     hourly_url = (location.get("properties") or {}).get("forecastHourly")
     if not isinstance(hourly_url, str):
+        if diagnostics is not None: diagnostics.append(f"Event {event['event_id']}: NWS hourly URL absent")
         return None
     hourly = _get(session, hourly_url)
     prop = hourly.get("properties") or {}
     period = choose_hour(prop.get("periods") or [], kick)
     if period is None:
+        if diagnostics is not None: diagnostics.append(f"Event {event['event_id']}: NWS forecast hour unavailable")
         return None
     return make_weather(event, venue, period, now, prop.get("updated"))
 
@@ -167,7 +201,7 @@ def run(registry_path="predictions/nfl_registry.csv",
         sess = session or requests.Session()
         for event in future.head(max_events).to_dict("records"):
             try:
-                record = forecast_event(sess, event, now)
+                record = forecast_event(sess, event, now, diagnostics=issues)
                 if record:
                     records.append(record)
             except (requests.RequestException, ValueError, TypeError, KeyError) as err:
