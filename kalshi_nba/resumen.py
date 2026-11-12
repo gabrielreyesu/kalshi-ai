@@ -141,26 +141,56 @@ def final_prueba(now) -> str:
     return _table(pd.DataFrame(rows))
 
 
+def picks_hoy(now, horas: int = 36) -> str:
+    """Vista simple: un pick por partido de las próximas horas, con nivel de confianza."""
+    fin = now + pd.Timedelta(hours=horas)
+    nivel = lambda v: "Alta" if v >= 0.70 else ("Media" if v >= 0.55 else "Baja")
+    rows = []
+    f = P / "final_shadow.csv"
+    if f.exists():
+        d = pd.read_csv(f, dtype={"event_id": str})
+        d["t"] = pd.to_datetime(d["kickoff_utc"], utc=True, format="ISO8601").dt.tz_convert(TZ)
+        d = d[(d["t"] > now) & (d["t"] <= fin)].sort_values("snapshot_utc").drop_duplicates(["sport", "event_id"], keep="last")
+        names = {"nba": "NBA", "nfl": "NFL", "club": "Copa europea", "intl": "Selecciones"}
+        for x in d.itertuples():
+            pick, prob = max([(n, v) for n, v in ((x.home, x.final_H), ("Empate", x.final_D), (x.away, x.final_A)) if pd.notna(v)], key=lambda z: z[1])
+            rows.append((x.t, names.get(x.sport, x.sport), f"{x.away} en {x.home}" if x.sport in ("nba", "nfl") else f"{x.home} vs {x.away}", pick, prob))
+    reg = P / "registry.csv"
+    if reg.exists():                                   # ligas domésticas: aún sin cuotas de casas, pick del modelo
+        r = pd.read_csv(reg)
+        r["t"] = _when(r["kickoff_utc"])
+        for x in r[(r["t"] > now) & (r["t"] <= fin)].itertuples():
+            pick, prob = max(((x.home, x.p_H), ("Empate", x.p_D), (x.away, x.p_A)), key=lambda z: z[1])
+            rows.append((x.t, x.competition, f"{x.home} vs {x.away}", pick, prob))
+    if not rows:
+        return "_No hay partidos en las próximas horas._\n"
+    rows.sort(key=lambda z: z[0])
+    return _table(pd.DataFrame([{"Hora (Chicago)": t.strftime("%a %d %b %H:%M"), "Competición": c, "Partido": m, "Pick": k,
+                                 "Probabilidad": pct(v), "Confianza": nivel(v)} for t, c, m, k, v in rows]))
+
+
 def build(now=None) -> str:
     now = now or pd.Timestamp.now(tz=TZ)
     return f"""# Predicciones — actualizado {now.strftime('%d %b %Y %H:%M')} (hora Chicago)
 
-**Cómo leer las tablas**
-- **Modelo**: probabilidad que da tu modelo a que gane el favorito indicado.
-- **Kalshi**: probabilidad que implica el precio de Kalshi para ese mismo equipo (precio 62¢ ≈ 62%).
-- **Polymarket**: lo mismo, con el precio de Polymarket (otro mercado de predicción).
+## Picks de hoy y mañana
+Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
+El pick usa el consenso de las casas de apuestas cuando existe y el modelo propio como respaldo. No es una recomendación de apuesta.
+
+{picks_hoy(now)}
+---
+# Detalle (opcional)
+
+## Todos los próximos partidos (pick final, en prueba)
+{final_prueba(now)}
+**Cómo leer las tablas de detalle**
+- **Modelo**: probabilidad que da el modelo propio al favorito indicado.
+- **Kalshi** / **Polymarket**: probabilidad que implica el precio en cada mercado (62¢ ≈ 62%).
 - **Casas**: probabilidad según las casas de apuestas, sin su margen. Es la referencia más fiable.
-- Si **Kalshi** y **Polymarket** difieren más de 3 puntos, vale la pena mirar ese partido: uno de los dos está desfasado.
-- Si **Modelo** y **Kalshi** difieren mucho, casi siempre el modelo ignora algo (lesiones, descanso). No es una señal de apuesta.
-- **Bajas**: jugadores fuera o dudosos según ESPN hoy. Es informativo: el modelo todavía NO las usa.
+- **Bajas**: jugadores fuera o dudosos. Es informativo: el modelo todavía NO las usa.
 - En fútbol, **Goles** = probabilidad de más de 1.5, 2.5 y 3.5 goles; **Gana por 2+** = victoria por dos o más goles.
 - Un "—" significa que aún no había precio o dato para ese partido.
 
-## Pick final (en prueba)
-Usa el consenso de las casas cuando existe y el modelo como respaldo. En 25 mil partidos históricos, el consenso acertó
-entre 2 y 3.4 puntos más que el modelo. Está en evaluación: no sustituye a las tablas de abajo.
-
-{final_prueba(now)}
 ## NBA
 {liga_us('nba', now)}
 ## NFL
