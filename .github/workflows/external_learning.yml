@@ -50,6 +50,9 @@ jobs:
           LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
           LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
         run: python -m kalshi_external.cli --output reports/external_learning
+      - name: Summarize trusted reference links and API coverage
+        if: always()
+        run: python -m kalshi_external.reference_report --output reports/external_learning/REFERENCIAS.md
       - name: Save durable private archive (optional)
         if: always()
         env:
