@@ -1,0 +1,41 @@
+name: International model automatic validation
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 10 * * 1'
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Existing unittest suite
+        run: python -m unittest discover -s tests
+      - name: New validation tests
+        run: |
+          pip install pytest
+          python -m pytest -q tests/test_intl_calibration.py tests/test_intl_validation.py tests/test_intl_segment_policy.py tests/test_auto_validate.py
+      - name: Restore historical ESPN cache
+        uses: actions/cache@v4
+        with:
+          path: data/intl
+          key: intl-espn-v1-${{ github.run_id }}
+          restore-keys: |
+            intl-espn-v1-
+      - name: Rebuild walk-forward predictions with updated historical results
+        run: python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/intl_real_validation
+      - name: Validate challenger on last OOS season
+        run: python -m kalshi_intl.auto_validate --input reports/intl_real_validation/oos_paired.csv --output reports/intl_auto_validation
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: international-validation-${{ github.run_number }}
+          path: reports/intl_*/
+          retention-days: 30
