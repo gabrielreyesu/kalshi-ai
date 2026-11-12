@@ -9,7 +9,7 @@ permissions:
   contents: write              # para guardar el registro de predicciones en el repo
 
 concurrency:
-  group: soccer-daily
+  group: kalshi-escritura      # las dos corridas nunca escriben a la vez
   cancel-in-progress: false
 
 jobs:
@@ -50,7 +50,10 @@ jobs:
           git config user.name  "soccer-bot"
           git config user.email "soccer-bot@users.noreply.github.com"
           mkdir -p predictions
-          python -m kalshi_nba.resumen
-          git add predictions/ PREDICCIONES.md
+          git add predictions/
           git diff --cached --quiet || git commit -m "predicciones $(date -u +%F)"
-          git pull --rebase -q && git push
+          git pull --rebase -q
+          python -m kalshi_nba.resumen
+          git add PREDICCIONES.md
+          git diff --cached --quiet || git commit -m "tabla $(date -u +%F)"
+          git push

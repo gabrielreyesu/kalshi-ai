@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: nba-nfl-daily
+  group: kalshi-escritura      # las dos corridas nunca escriben a la vez
   cancel-in-progress: false
 
 jobs:
@@ -42,7 +42,10 @@ jobs:
         run: |
           git config user.name  "sports-bot"
           git config user.email "sports-bot@users.noreply.github.com"
-          python -m kalshi_nba.resumen
-          git add predictions/ PREDICCIONES.md
+          git add predictions/
           git diff --cached --quiet || git commit -m "NBA/NFL $(date -u +%F)"
-          git pull --rebase -q && git push
+          git pull --rebase -q
+          python -m kalshi_nba.resumen
+          git add PREDICCIONES.md
+          git diff --cached --quiet || git commit -m "tabla $(date -u +%F)"
+          git push

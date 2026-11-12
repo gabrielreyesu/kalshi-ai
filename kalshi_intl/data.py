@@ -7,6 +7,7 @@ Dos grupos, cada uno con un rating común para que la fuerza "viaje" entre compe
 from __future__ import annotations
 
 import json
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
@@ -20,7 +21,7 @@ GROUPS = {
     "clubes": {
         "target": {"uefa.champions": "Champions League", "uefa.europa": "Europa League", "uefa.europa.conf": "Conference League"},
         "feed": ["eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "por.1", "ned.1", "bel.1", "tur.1", "sco.1", "aut.1", "sui.1",
-                 "gre.1", "den.1", "nor.1", "swe.1", "cze.1", "cro.1", "ukr.1", "srb.1", "pol.1", "rou.1", "isr.1", "cyp.1"],
+                 "gre.1", "den.1", "nor.1", "swe.1", "rou.1", "isr.1", "cyp.1"],     # solo ligas que ESPN realmente publica
     },
     "selecciones": {
         "target": {"fifa.world": "Mundial", "fifa.worldq.uefa": "Eliminatorias UEFA", "fifa.worldq.conmebol": "Eliminatorias CONMEBOL",
@@ -31,6 +32,7 @@ GROUPS = {
     },
 }
 _S = requests.Session()
+FAILED: list = []          # (liga, mes) que ESPN no respondió en esta corrida
 
 
 def months(first_year: int, today: date | None = None):
@@ -63,27 +65,29 @@ def fetch_month(code: str, ym: str, cache: Path, today: date | None = None) -> l
     if p.exists() and closed:
         return json.loads(p.read_text())
     rows = None
-    for _ in range(4):
+    for i in range(5):
         try:
             r = _S.get(SB.format(code=code), params={"dates": ym, "limit": 1000}, timeout=40)
         except requests.RequestException:
-            continue
+            time.sleep(1.5 * (i + 1)); continue
         if r.status_code == 200:
             rows = [x for x in (_parse(e, code) for e in r.json().get("events", [])) if x]
             break
         if r.status_code in (400, 404):          # liga o mes inexistente
             rows = []
             break
+        time.sleep(1.5 * (i + 1))                # 429/5xx: esperar y reintentar
     if rows is None:
         if p.exists():
             return json.loads(p.read_text())
-        raise RuntimeError(f"ESPN no respondió: {code} {ym}")
+        FAILED.append((code, ym))                # no se guarda en caché: se reintenta en la próxima corrida
+        return []
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(rows))
     return rows
 
 
-def load_group(group: str, first_year: int = 2016, cache_dir: str = "data/intl", workers: int = 8, verbose=True) -> pd.DataFrame:
+def load_group(group: str, first_year: int = 2016, cache_dir: str = "data/intl", workers: int = 6, verbose=True) -> pd.DataFrame:
     G = GROUPS[group]
     codes = list(G["target"]) + G["feed"]
     jobs = [(c, ym) for c in codes for ym in months(first_year)]
@@ -93,6 +97,12 @@ def load_group(group: str, first_year: int = 2016, cache_dir: str = "data/intl",
     g = pd.DataFrame([r for rows in res for r in rows])
     if g.empty:
         raise RuntimeError("ESPN no devolvió partidos")
+    if FAILED:
+        print(f"AVISO: ESPN no respondió en {len(FAILED)} consulta(s) (se reintentan mañana): {FAILED[:5]}")
+        recent = {ym for ym in list(months(first_year))[-3:]}
+        if any(c in G["target"] and ym in recent for c, ym in FAILED):
+            raise RuntimeError("Faltan datos recientes de una competición objetivo; se cancela para no predecir con datos incompletos")
+        FAILED.clear()
     dead = {"STATUS_CANCELED", "STATUS_POSTPONED", "STATUS_ABANDONED", "STATUS_SUSPENDED", "STATUS_FORFEIT"}
     g = g[~g["status"].isin(dead) & ~g["home_id"].str.startswith("-") & ~g["away_id"].str.startswith("-")]
     g = g.drop_duplicates("event_id").copy()
