@@ -42,6 +42,8 @@ jobs:
         run: |
           git config user.name  "sports-bot"
           git config user.email "sports-bot@users.noreply.github.com"
+          python -m kalshi_external.final_shadow build
+          python -m kalshi_external.final_shadow evaluate || true
           git add predictions/
           git diff --cached --quiet || git commit -m "NBA/NFL $(date -u +%F)"
           git pull --rebase -q

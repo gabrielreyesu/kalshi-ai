@@ -42,3 +42,10 @@ en este PR: es la propuesta del siguiente, en modo sombra y con evaluación pros
   (secreto `DATA_REPO_TOKEN`). Sin el secreto, el comportamiento es el de antes.
 - `kalshi_nba/cli.py`: `model_version` por liga (`nba_v1`, `nfl_v1`).
 - 3 pruebas nuevas (80 en total).
+
+## V10: probabilidad final en modo sombra
+`kalshi_external/final_shadow.py` registra, en cada corrida, la probabilidad final (consenso de casas si existe; si no,
+el modelo) junto a la del modelo, y `evaluate` las compara en los mismos partidos ya jugados usando la última foto
+anterior al inicio, con IC95% por remuestreo de fechas (`predictions/final_shadow_scoreboard.json`).
+Regla de promoción propuesta, por deporte: al menos 200 partidos resueltos con mercado y IC95% de mejora totalmente
+por encima de 0; la activación sigue requiriendo autorización explícita. La producción no cambia.
