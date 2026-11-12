@@ -59,3 +59,6 @@ Para NFL y NBA, `sport` es `nfl` o `nba` y no se usa `p_D`. La fecha de publicac
 
 ### Fuente abierta Skorbot
 El sistema consulta su API JSON pública de forma moderada con `User-Agent` identificable y atribución **Skorbot (skorbot.live)**. Descarta partidos ya finalizados, resultados presentes, predicciones posteriores al saque inicial y cualquier encuentro sin identificación inequívoca. Su calendario publicado puede estar desactualizado; la ausencia de nuevos pronósticos no se interpreta como error del modelo. En tanto no esté claro el permiso de entrenamiento, se limita al monitoreo y no se utiliza como señal para ajustar nuestros coeficientes.
+
+### Aprendizaje experimental de fuentes autorizadas
+El proceso semanal también ajusta pesos candidatos de mezcla **solo con partidos anteriores** de fuentes autorizadas. Selecciona entre pesos 0%, 10%, 20%, 30% y 40% usando el 70% cronológicamente más antiguo y evalúa el 30% posterior. Requiere mínimo 60 partidos históricos de entrenamiento y 25 de prueba, sin mezclar partidos del mismo día entre entrenamiento y evaluación. Emite `candidate_weights.json`. Es investigación: **ningún peso se aplica a producción y una mejora exploratoria no garantiza rendimiento futuro**. Las fuentes con permiso de entrenamiento no confirmado, incluido Skorbot, quedan excluidas.

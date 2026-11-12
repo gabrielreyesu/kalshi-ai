@@ -72,6 +72,8 @@ jobs:
           LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
           LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
         run: python -m kalshi_external.cli --output reports/external_learning
+      - name: Evaluate research-only external-source blend weights on later matches
+        run: python -m kalshi_external.learn --output reports/external_learning/candidate_weights.json
       - name: Archive validation and training artifacts
         uses: actions/upload-artifact@v4
         if: always()
