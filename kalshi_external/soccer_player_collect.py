@@ -219,7 +219,10 @@ def _select_summary_matches(fixtures, history, now, max_finished=7, max_pregame=
     pregame=[g for g in fixtures if g["status"] not in FINAL
              and now+pd.Timedelta(minutes=6)<utc(g["kickoff_utc"])
                     <=now+pd.Timedelta(hours=3)]
-    finished.sort(key=lambda g:utc(g["kickoff_utc"]))
+    # Most recent completed matches first for predictive role relevance.
+    # Already-archived events are excluded above, so later runs proceed
+    # backwards in time without re-downloading archived scoreboxes.
+    finished.sort(key=lambda g:utc(g["kickoff_utc"]),reverse=True)
     pregame.sort(key=lambda g:utc(g["kickoff_utc"]))
     return finished[:max_finished]+pregame[:max_pregame]
 
@@ -247,6 +250,41 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
                     all_fixtures[(g["competition_code"],g["event_id"])]=g
             except (ValueError,RuntimeError,requests.RequestException) as exc:
                 issues.append(f"ESPN {code} {date}: {type(exc).__name__}")
+    # Targeted historical backfill for teams with UPCOMING games. ESPN's
+    # monthly scoreboard is already used by the international model; cap to
+    # <=4 competition codes and two months = <=8 extra ESPN requests/run.
+    # Completed past games are usable only in FUTURE forecasts, never backdated.
+    fixtures=list(all_fixtures.values())
+    future=[x for x in fixtures if
+            now+pd.Timedelta(minutes=15)<utc(x["kickoff_utc"])<=
+            now+pd.Timedelta(hours=48)]
+    focus={}
+    for g in future:
+        focus.setdefault(g["competition_code"],set()).update([g["home_id"],g["away_id"]])
+    focus_codes=sorted(focus)
+    backfill_queries=0
+    backfill_found=0
+    if focus_codes:
+        shift=(now.day*2+now.hour//12)%len(focus_codes)
+        chosen=(focus_codes[shift:]+focus_codes[:shift])[:4]
+        months=sorted({now.strftime("%Y%m"),
+                      (now-pd.DateOffset(months=1)).strftime("%Y%m")})
+        for code in chosen:
+            for ym in months:
+                try:
+                    response=_get(s,f"{ROOT}/{code}/scoreboard",
+                                  params={"dates":ym,"limit":1000})
+                    backfill_queries+=1
+                    for g in parse_scoreboard(response,code):
+                        if (g["status"] in FINAL
+                            and utc(g["kickoff_utc"])<now-pd.Timedelta(hours=2)
+                            and (g["home_id"] in focus[code] or g["away_id"] in focus[code])):
+                            key=(g["competition_code"],g["event_id"])
+                            if key not in all_fixtures:
+                                all_fixtures[key]=g
+                                backfill_found+=1
+                except (ValueError,RuntimeError,requests.RequestException) as error:
+                    issues.append(f"Historical ESPN {code}/{ym}: {type(error).__name__}")
     fixtures=list(all_fixtures.values())
     prior_stats=_load(cache/"soccer_player_games.jsonl")
     prior_lineups=_load(cache/"soccer_lineups.jsonl")
@@ -384,6 +422,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
         "observed_utc":now.isoformat(),
         "sports":["soccer_clubs","soccer_national_teams"],
         "fixtures_matched_by_espn":len(fixtures),
+        "history_monthly_scoreboards_requested":backfill_queries,
+        "new_prior_fixtures_discovered":backfill_found,
         "ESPN_match_summaries_queried":summaries,
         "new_completed_match_player_stats":n_stats,
         "new_pregame_roster_snapshots_unconfirmed":n_lineups,
