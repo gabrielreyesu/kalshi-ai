@@ -121,6 +121,26 @@ def internacional(now, grupo: str) -> str:
     return _table(pd.DataFrame(rows))
 
 
+def final_prueba(now) -> str:
+    """Pick con la probabilidad FINAL en modo de prueba (consenso de casas si existe; si no, el modelo)."""
+    f = P / "final_shadow.csv"
+    if not f.exists():
+        return "_Aún no hay datos._\n"
+    d = pd.read_csv(f, dtype={"event_id": str})
+    d["t"] = pd.to_datetime(d["kickoff_utc"], utc=True, format="ISO8601").dt.tz_convert(TZ)
+    d = d[d["t"] > now].sort_values("snapshot_utc").drop_duplicates(["sport", "event_id"], keep="last").sort_values("t")
+    names = {"nba": "NBA", "nfl": "NFL", "club": "Copas europeas", "intl": "Selecciones"}
+    rows = []
+    for x in d.itertuples():
+        opts = [(x.home, x.final_H), ("Empate", x.final_D), (x.away, x.final_A)]
+        pick, prob = max([(n, v) for n, v in opts if pd.notna(v)], key=lambda z: z[1])
+        rows.append({"Fecha (hora Chicago)": x.t.strftime("%a %d %b %H:%M"), "Deporte": names.get(x.sport, x.sport),
+                     "Partido": f"{x.away} en {x.home}" if x.sport in ("nba", "nfl") else f"{x.home} vs {x.away}",
+                     "Pick final": pick, "Probabilidad": pct(prob),
+                     "Origen": "casas" if x.final_source == "market_consensus" else "modelo (sin cuotas aún)"})
+    return _table(pd.DataFrame(rows))
+
+
 def build(now=None) -> str:
     now = now or pd.Timestamp.now(tz=TZ)
     return f"""# Predicciones — actualizado {now.strftime('%d %b %Y %H:%M')} (hora Chicago)
@@ -136,6 +156,11 @@ def build(now=None) -> str:
 - En fútbol, **Goles** = probabilidad de más de 1.5, 2.5 y 3.5 goles; **Gana por 2+** = victoria por dos o más goles.
 - Un "—" significa que aún no había precio o dato para ese partido.
 
+## Pick final (en prueba)
+Usa el consenso de las casas cuando existe y el modelo como respaldo. En 25 mil partidos históricos, el consenso acertó
+entre 2 y 3.4 puntos más que el modelo. Está en evaluación: no sustituye a las tablas de abajo.
+
+{final_prueba(now)}
 ## NBA
 {liga_us('nba', now)}
 ## NFL

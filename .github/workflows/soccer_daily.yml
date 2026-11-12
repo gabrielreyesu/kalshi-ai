@@ -50,6 +50,8 @@ jobs:
           git config user.name  "soccer-bot"
           git config user.email "soccer-bot@users.noreply.github.com"
           mkdir -p predictions
+          python -m kalshi_external.final_shadow build
+          python -m kalshi_external.final_shadow evaluate || true
           git add predictions/
           git diff --cached --quiet || git commit -m "predicciones $(date -u +%F)"
           git pull --rebase -q
