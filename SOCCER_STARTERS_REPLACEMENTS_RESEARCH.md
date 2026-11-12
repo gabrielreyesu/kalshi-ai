@@ -29,3 +29,9 @@ On the existing Monday validation run, `soccer_impact_shadow.py` joins private p
 ## Source documentation
 - API-Football lineups: https://www.api-football.com/documentation-v3
 - API-Football fixture-player statistics: https://www.api-football.com/news/post/how-to-get-started-with-api-football-the-complete-beginners-guide
+## Backfill and starter-evidence upgrade
+The first production snapshot found zero teams with four prior same-competition player boxscores. Current ESPN summaries also carried starter flags but often no minute field. Rather than leaving starter relevance permanently unevaluable, the model now uses a clearly labeled **lower bound from explicitly observed previous starts** when four prior team matches and three recorded starts exist, if recorded minutes are unavailable. Missing starter flags still mean unknown, not proof that a player was a substitute. The role index is a historical involvement proxy, NEVER a causal win-probability coefficient.
+
+The collector also backfills completed ESPN player summaries for teams with matches in the next 48 hours. Budget: up to eight additional ESPN monthly-scoreboard requests per run (maximum four competitions across two months), without exceeding the existing 12 match-summary requests/run. Only past games recorded by ESPN and actually fetched before the future prediction can be used. Already-archived matches are skipped. Code coverage rotates among eligible competitions, and the next runs can acquire more prior appearances without user action.
+
+No new paid API, no additional scheduled job. Public ESPN site endpoints are unofficial; failures must not be treated as missing players or false evidence.

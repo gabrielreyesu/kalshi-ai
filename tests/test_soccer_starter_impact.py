@@ -117,9 +117,25 @@ class RoleImportanceTests(unittest.TestCase):
             for t in g["teams"]:
                 for player in t["members"]:
                     player["metrics"].pop("minutes",None)
+                    player["starter_reported"]=False
         r=research_snapshot(preview(),games)
         self.assertIsNone(r["home_minus_away_absence_exposure"])
         self.assertIsNone(r["teams"][0]["missing_starter_replacement_research"][0]["player_role_index"])
+
+    def test_observed_starts_lower_bound_when_espn_omits_minutes(self):
+        games=past_games()
+        for game in games:
+            for team in game["teams"]:
+                for player in team["members"]:
+                    player["metrics"].pop("minutes",None)
+        r=research_snapshot(preview(),games)
+        star=r["teams"][0]["missing_starter_replacement_research"][0]
+        self.assertEqual(star["player_role_index"],100.0)
+        roles=build_role_context(preview(),games,NOW)
+        self.assertEqual(roles["10"]["101"]["role_measure"],
+                         "observed_prior_starts_lower_bound")
+        self.assertEqual(star["replacement_candidates"],[])
+        self.assertEqual(r["home_minus_away_absence_exposure"],-100.0)
 
     def test_other_competition_same_player_ids_never_counted(self):
         games=past_games()

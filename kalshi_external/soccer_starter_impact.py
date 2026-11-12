@@ -65,11 +65,23 @@ def _historical_roster(fixture, games, observed):
                 # ESPN missing starter flags are UNOBSERVED, not "did not start".
                 if player.get("starter_reported") is True:
                     starts_observed.append(True)
-            enough = team_n >= MIN_TEAM_GAMES and len(minute_values) >= MIN_PLAYER_MINUTE_GAMES
+            enough_minutes = team_n >= MIN_TEAM_GAMES and len(minute_values) >= MIN_PLAYER_MINUTE_GAMES
+            enough_starts = team_n >= MIN_TEAM_GAMES and len(starts_observed) >= 3
             minutes_mean = sum(minute_values) / len(minute_values) if minute_values else None
             participation = len(appearances) / team_n if team_n else 0.0
-            # Reliance is a share of possible 90-min exposure, not points/odds.
-            role_index = round(100 * min(1.0, minutes_mean / 90) * participation, 2) if enough else None
+            # A 0-100 historical involvement index, never a causal injury effect:
+            # prefer observed minutes. When ESPN omits all minutes, use ONLY
+            # explicitly reported previous starts as a lower bound.
+            if enough_minutes:
+                role_index = round(100 * min(1.0, minutes_mean / 90) * participation, 2)
+                evidence="observed_prior_minutes"
+            elif enough_starts:
+                role_index=round(100 * len(starts_observed) / team_n, 2)
+                evidence="observed_prior_starts_lower_bound"
+            else:
+                role_index=None
+                evidence="insufficient_historical_role_evidence"
+            enough=role_index is not None
             members[pid] = {
                 "espn_player_id":pid, "player":name, "position":position,
                 "prior_team_games":team_n, "player_appearances":len(appearances),
@@ -78,6 +90,7 @@ def _historical_roster(fixture, games, observed):
                 "participation_fraction":round(participation,3),
                 "known_starts":len(starts_observed),
                 "role_index_0_100":role_index,
+                "role_measure":evidence,
                 "role_evaluable":enough,
             }
         roster[team_id]=members
