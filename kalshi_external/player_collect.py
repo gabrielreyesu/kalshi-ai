@@ -57,8 +57,14 @@ def _get(session, url, *, params=None):
             continue
         if status!=200:
             raise RuntimeError(f"ESPN_HTTP_{status}")
-        if len(response.content)>3_000_000:
-            raise ValueError("ESPN data exceeded size limit")
+        # The league-wide NFL injury report embeds unusually large metadata.
+        # Allow up to 16 MB ONLY for this pinned injury endpoint. Everything
+        # else keeps the stricter 3 MB limit.
+        is_nfl_injuries=(urlparse(request_url).path.rstrip("/") ==
+                         "/apis/site/v2/sports/football/nfl/injuries")
+        cap=16_000_000 if is_nfl_injuries else 3_000_000
+        if len(response.content)>cap:
+            raise ValueError(f"ESPN data exceeded {cap}-byte size limit")
         data=response.json()
         if not isinstance(data,dict):
             raise ValueError("ESPN JSON response is not an object")
