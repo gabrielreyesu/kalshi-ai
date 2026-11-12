@@ -1,0 +1,58 @@
+name: International regulation-time historical regression audit
+
+on:
+  pull_request:
+    paths:
+      - 'kalshi_intl/model.py'
+      - 'kalshi_intl/evaluate_history.py'
+      - 'kalshi_intl/data_quality.py'
+      - 'kalshi_intl/regression_compare.py'
+      - '.github/workflows/intl_regression_delta.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore historical ESPN cache
+        uses: actions/cache@v4
+        with:
+          path: data/intl
+          key: intl-espn-v2-${{ github.run_id }}
+          restore-keys: |
+            intl-espn-v2-
+      - name: Evaluate corrected version on historical results
+        run: python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/regression_candidate --bootstrap 0
+      - name: Check out baseline (main) and evaluate same cache
+        run: |
+          git fetch origin "${{ github.base_ref }}"
+          git worktree add -q ../kalshi-baseline "origin/${{ github.base_ref }}"
+          (
+            cd ../kalshi-baseline
+            python -m kalshi_intl.evaluate_history --cache "$GITHUB_WORKSPACE/data/intl" --first-year 2016 --output "$GITHUB_WORKSPACE/reports/regression_baseline" --bootstrap 0
+          )
+      - name: Paired accuracy, Brier and log loss comparison
+        run: |
+          python -m kalshi_intl.regression_compare \
+            --baseline reports/regression_baseline/oos_raw.csv \
+            --candidate reports/regression_candidate/oos_raw.csv \
+            --output reports/intl_regression_comparison
+      - name: Save historical comparisons
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: international-v7-regression-${{ github.run_number }}
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14
