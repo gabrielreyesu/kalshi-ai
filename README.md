@@ -98,3 +98,13 @@ python -m kalshi_nba.cli evaluate --league nfl
 
 Pendiente: `predict` para NCAA (unir ~360 equipos de ESPN con los nombres de Kalshi). El flujo `nba-nfl-daily` registra
 NBA y NFL cada día con la foto de precios de Kalshi; `evaluate` compara modelo vs Kalshi cuando los mercados se resuelven.
+
+---
+# Casas de apuestas vs Kalshi (NBA y NFL)
+`predict` guarda además `p_book`: la probabilidad "justa" según la línea de consenso actual de las casas (mediana, sin
+margen), que ya incorpora lesiones y noticias. `ventaja_casas_neta` = p_book - ask - comisión supuesta (FEE_RATE en
+`kalshi_nba/cli.py`; verifica la tarifa vigente de Kalshi). `evaluate` compara casas vs Kalshi y simula comprar cuando
+la ventaja neta supera 2 y 5 centavos.
+Aviso: spreads y totales alternos se valoran con una curva normal. En NFL eso falla cerca de los márgenes típicos
+(3 y 7 puntos), así que las "ventajas" en spreads de NFL son en buena parte un artefacto, no dinero gratis.
+Para actualizar el repositorio: `%run kalshi_ai/push_to_github.py` (conserva el historial y la carpeta predictions/).

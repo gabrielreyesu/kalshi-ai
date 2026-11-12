@@ -113,6 +113,13 @@ def fetch_odds(event_id: str, cache: Path, league="nba") -> list:
     return items
 
 
+def fetch_live_line(event_id: str, league="nba") -> dict:
+    """Línea de consenso ACTUAL (mediana entre casas) de un partido próximo. Sin caché: las líneas se mueven."""
+    L = LEAGUES[league]
+    sport, lg = L["path"].split("/")
+    return pick_line(compact_odds(_json(ODDS.format(sport=sport, lg=lg, e=event_id))), L["total_range"], L["max_spread"])
+
+
 def keep_franchises(games: pd.DataFrame, n_teams: int = 30) -> pd.DataFrame:
     """Quita All-Star, exhibiciones y selecciones: solo las franquicias reales (las de más partidos)."""
     cnt = pd.concat([games["home_id"], games["away_id"]]).value_counts()

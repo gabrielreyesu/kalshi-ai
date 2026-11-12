@@ -54,7 +54,7 @@ def cmd_blend(a):
 
 
 def cmd_predict(a):
-    key = os.environ.get("FOOTBALL_DATA_API_KEY")
+    key = (os.environ.get("FOOTBALL_DATA_API_KEY") or "").strip()
     if not key:
         raise SystemExit("Falta la variable de entorno FOOTBALL_DATA_API_KEY")
     hist, eng, feats = _features(a.start)

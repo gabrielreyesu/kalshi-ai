@@ -13,7 +13,7 @@ import pandas as pd
 
 from . import MODEL_VERSION
 from .backtest import blend_report, blend_walk_forward, logloss, paired_bootstrap, report, walk_forward
-from .data import load_league, load_nba
+from .data import fetch_live_line, load_league, load_nba
 from .engine import CONFIGS, NBAEngine
 from .kalshi import LEAGUE_SERIES, attach_games, fetch_open, model_probability, parse_markets, settle
 from .models import NBAModels
@@ -22,10 +22,33 @@ def _paths(lg):
     return Path(f"predictions/{lg}_registry.csv"), Path(f"predictions/{lg}_kalshi_snapshots.csv")
 
 
+# Dispersión del resultado alrededor de la línea de las casas (margen, total), medida en el backtest
+BOOK_SIGMA = {"nba": (13.4, 17.9), "nfl": (12.7, 13.0)}
+FEE_RATE = 0.07      # SUPUESTO: comisión por contrato ~ 0.07 * precio * (1 - precio). Verifica la tarifa vigente de Kalshi.
+
+
+def fee(price):
+    return FEE_RATE * price * (1 - price)
+
+
+class _BookPricer:
+    """Misma interfaz que NBAModels para valorar spreads/totales, pero centrada en la línea de las casas."""
+    def __init__(self, sig_m, sig_t):
+        self.sig_m, self.sig_t = sig_m, sig_t
+    p_home_wins_by_more_than = NBAModels.p_home_wins_by_more_than
+    p_total_over = NBAModels.p_total_over
+
+
 def _append(df: pd.DataFrame, path: Path):
+    """Agrega filas; si llegan columnas nuevas, reescribe el archivo conservando todas las filas anteriores."""
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
-        df = df.reindex(columns=list(pd.read_csv(path, nrows=0).columns))
+        old_cols = list(pd.read_csv(path, nrows=0).columns)
+        if set(df.columns) - set(old_cols):
+            old = pd.read_csv(path, dtype=str)
+            pd.concat([old, df.astype(object)], ignore_index=True).to_csv(path, index=False)
+            return
+        df = df.reindex(columns=old_cols)
     df.to_csv(path, mode="a", header=not path.exists(), index=False)
 
 
@@ -70,12 +93,21 @@ def cmd_predict(a):
     try:
         mk = pd.concat([parse_markets(k, fetch_open(k, lg)) for k in LEAGUE_SERIES[lg]], ignore_index=True)
         mk = model_probability(attach_games(mk, up, lg), preds, models)
+        # valor "justo" según las casas de apuestas (ya incluye lesiones y noticias): línea de consenso actual
+        lines = {e: fetch_live_line(e, lg) for e in mk["event_id"].unique()}
+        bk = pd.DataFrame([{"event_id": e, "p_home": l.get("p_home"), "mu_margin": -l["spread"], "mu_total": l["total"]}
+                           for e, l in lines.items() if l and l.get("p_home") is not None])
+        mk["p_book"] = np.nan
+        if len(bk):
+            b = model_probability(mk.drop(columns=["p_home", "mu_margin", "mu_total", "p_model", "mid", "ventaja_bruta"]), bk, _BookPricer(*BOOK_SIGMA[lg]))
+            mk["p_book"] = mk["ticker"].map(dict(zip(b["ticker"], b["p_model"])))
+        mk["ventaja_casas_neta"] = mk["p_book"] - mk["ask"] - fee(mk["ask"])
         mk["snapshot_utc"] = now.isoformat()
         mk = mk[pd.to_datetime(mk["when"], utc=True) > now]                 # nunca mercados de partidos ya iniciados
-        cols = ["snapshot_utc", "event_id", "ticker", "kind", "side", "strike", "title", "bid", "ask", "last", "vol", "mid", "p_model", "ventaja_bruta"]
+        cols = ["snapshot_utc", "event_id", "ticker", "kind", "side", "strike", "title", "bid", "ask", "last", "vol", "mid", "p_model", "ventaja_bruta", "p_book", "ventaja_casas_neta"]
         if len(mk):
             _append(mk[cols], SNAP)
-            mk[cols].sort_values("ventaja_bruta", ascending=False).to_csv(f"predictions/{lg}_kalshi_edges.csv", index=False)
+            mk[cols].sort_values("ventaja_casas_neta", ascending=False).to_csv(f"predictions/{lg}_kalshi_edges.csv", index=False)
         print(f"Kalshi: {len(mk)} mercados unidos ({mk['kind'].value_counts().to_dict() if len(mk) else {}})")
     except Exception as ex:  # noqa: BLE001
         print("AVISO: no se pudieron obtener precios de Kalshi:", ex)
@@ -90,6 +122,8 @@ def cmd_evaluate(a):
     g = load_league(lg, first_season=current_season(lg), with_odds=False, verbose=False)
     fin = g[g["status"] == "STATUS_FINAL"]
     s = pd.read_csv(SNAP, dtype={"event_id": str}).sort_values("snapshot_utc").drop_duplicates("ticker")   # primera foto de cada mercado
+    for c in ("p_model", "mid", "ask", "bid", "p_book"):
+        s[c] = pd.to_numeric(s[c], errors="coerce") if c in s else np.nan
     d = settle(s, fin).dropna(subset=["p_model", "mid"])
     d = d[(d["mid"] > 0) & (d["mid"] < 1)]
     if d.empty:
@@ -104,6 +138,22 @@ def cmd_evaluate(a):
     d.to_csv(f"predictions/{lg}_evaluation.csv", index=False)
     print(t.to_string(index=False))
     print("boot_mejora > 0 con IC que excluye 0 => el modelo le gana al precio de Kalshi (remuestreo por partido).")
+    b = d.dropna(subset=["p_book", "ask"])
+    b = b[(b["ask"] > 0) & (b["ask"] < 1)]
+    if len(b):
+        print(f"\nCASAS DE APUESTAS vs KALSHI ({len(b)} mercados, {b['event_id'].nunique()} partidos)")
+        rows = []
+        for k, x in b.groupby("kind"):
+            row = {"mercado": k, "n": len(x), "logloss_casas": round(float(logloss(x["p_book"], x["y"]).mean()), 4),
+                   "logloss_kalshi": round(float(logloss(x["mid"], x["y"]).mean()), 4)}
+            for thr in (0.02, 0.05):
+                bet = x[x["p_book"] - x["ask"] - fee(x["ask"]) > thr]
+                pnl = bet["y"] - bet["ask"] - fee(bet["ask"])
+                row[f"apuestas>{thr}"] = len(bet)
+                row[f"ganancia_por_contrato>{thr}"] = round(float(pnl.mean()), 4) if len(bet) else np.nan
+            rows.append(row)
+        print(pd.DataFrame(rows).to_string(index=False))
+        print("Simulación: comprar 'Yes' al ask cuando casas - ask - comisión supuesta > umbral. Con pocos partidos es ruido.")
 
 
 def main():
