@@ -17,3 +17,9 @@ The existing `kalshi_nba.injuries` collects injury lists once per day and record
 
 ## Evaluation plan
 Build enough pre-game snapshots, then test whether adding injury availability and player-strength features to the champion improves independent holdout accuracy, Brier score and log loss, benchmarked to same-game market odds. Prefer partial pooling, explicit uncertainty, no automatic model promotion, and no look-ahead leakage.
+
+## NFL live feed fallback
+
+ESPN's NFL injury endpoint can sometimes fail or respond with an unexpected schema. The system now retries safe HTTP failures and, when the live NFL feed cannot be used, reads the **same-day** `predictions/nfl_injuries.csv` that the existing daily workflow already captured. The fallback is **not up-to-the-minute verified**; it carries `feed_origin=same_day_cached_espn_csv`, canonical ID is explicitly false, and no lineup is presumed confirmed.
+
+When the fallback lacks athlete IDs, player research links by **unique exact team+name** only if a prior player boxscore has one unambiguous ESPN athlete ID. If names are duplicated or mismatched, no join is made and no role-impact claim is inferred. The private audit still runs before archival; the model in production is unchanged.
