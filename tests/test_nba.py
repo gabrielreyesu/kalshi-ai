@@ -157,3 +157,21 @@ class TestLeagueCalendar(unittest.TestCase):
         self.assertEqual(current_season("nfl", date(2026, 11, 11)), 2026)
         self.assertEqual(current_season("nba", date(2026, 11, 11)), 2027)
         self.assertEqual(current_season("nfl", date(2027, 1, 20)), 2026)
+
+
+class TestResumen(unittest.TestCase):
+    def test_builds_tables_from_csv(self):
+        import tempfile
+        from kalshi_nba import resumen
+        with tempfile.TemporaryDirectory() as tmp:
+            old = resumen.P; resumen.P = __import__("pathlib").Path(tmp)
+            try:
+                pd.DataFrame([dict(event_id="1", kickoff_utc="2030-01-02T01:00Z", home="Utah Jazz", away="Orlando Magic", p_home=0.3, mu_margin=-5.2, mu_total=228.4)]).to_csv(f"{tmp}/nba_registry.csv", index=False)
+                pd.DataFrame([dict(snapshot_utc="2030-01-01", event_id="1", kind="winner", side="home", mid=0.25, p_book=0.28)]).to_csv(f"{tmp}/nba_kalshi_snapshots.csv", index=False)
+                pd.DataFrame([dict(match_id="9", kickoff_utc="2030-01-02T15:00Z", competition="La Liga", home="Betis", away="Sevilla", p_H=.5, p_D=.25, p_A=.25, p_over_2_5_cal=.55, k_bid_H=.48, k_ask_H=.52, k_bid_D=None, k_ask_D=None, k_bid_A=.2, k_ask_A=.24)]).to_csv(f"{tmp}/registry.csv", index=False)
+                txt = resumen.build(now=pd.Timestamp("2030-01-01", tz=resumen.TZ))
+            finally:
+                resumen.P = old
+        self.assertIn("| Orlando Magic en Utah Jazz | Orlando Magic | 70% | 75% | 72% | 5.2 pts | 228 pts |", txt)
+        self.assertIn("50% / 25% / 25% | 50% / — / 22% | 55%", txt)
+        self.assertIn("## NFL\n_Aún no hay registro._", txt)

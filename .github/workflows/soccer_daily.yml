@@ -36,6 +36,7 @@ jobs:
           git config user.name  "soccer-bot"
           git config user.email "soccer-bot@users.noreply.github.com"
           mkdir -p predictions
-          git add predictions/
+          python -m kalshi_nba.resumen
+          git add predictions/ PREDICCIONES.md
           git diff --cached --quiet || git commit -m "predicciones $(date -u +%F)"
           git pull --rebase -q && git push

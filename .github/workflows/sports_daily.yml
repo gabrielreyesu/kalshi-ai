@@ -41,6 +41,7 @@ jobs:
         run: |
           git config user.name  "sports-bot"
           git config user.email "sports-bot@users.noreply.github.com"
-          git add predictions/
+          python -m kalshi_nba.resumen
+          git add predictions/ PREDICCIONES.md
           git diff --cached --quiet || git commit -m "NBA/NFL $(date -u +%F)"
           git pull --rebase -q && git push

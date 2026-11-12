@@ -1,0 +1,97 @@
+"""Genera PREDICCIONES.md: una tabla legible de los próximos partidos (se ve directo en GitHub).
+Solo lee los CSV de predictions/; no usa internet.   Uso:  python -m kalshi_nba.resumen
+"""
+from __future__ import annotations
+
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+TZ = "America/Chicago"
+P = Path("predictions")
+pct = lambda x: "—" if x is None or pd.isna(x) else f"{100 * float(x):.0f}%"
+
+
+def _when(s):
+    return pd.to_datetime(s, utc=True).dt.tz_convert(TZ)
+
+
+def _table(df: pd.DataFrame) -> str:
+    if df.empty:
+        return "_No hay partidos próximos registrados._\n"
+    head = "| " + " | ".join(df.columns) + " |\n|" + "---|" * len(df.columns) + "\n"
+    return head + "\n".join("| " + " | ".join(str(v) for v in r) + " |" for r in df.to_numpy()) + "\n"
+
+
+def liga_us(lg: str, now) -> str:
+    reg = P / f"{lg}_registry.csv"
+    if not reg.exists():
+        return "_Aún no hay registro._\n"
+    r = pd.read_csv(reg, dtype={"event_id": str})
+    r["t"] = _when(r["kickoff_utc"])
+    r = r[r["t"] > now].sort_values("t")
+    k = c = pd.Series(dtype=float)
+    snap = P / f"{lg}_kalshi_snapshots.csv"
+    if snap.exists():
+        s = pd.read_csv(snap, dtype={"event_id": str})
+        s = s[(s["kind"] == "winner") & (s["side"] == "home")].sort_values("snapshot_utc").drop_duplicates("event_id", keep="last")
+        k = pd.to_numeric(s.set_index("event_id")["mid"], errors="coerce")
+        if "p_book" in s:
+            c = pd.to_numeric(s.set_index("event_id")["p_book"], errors="coerce")
+    rows = []
+    for x in r.itertuples():
+        fav_home = x.p_home >= 0.5
+        pk, pc = k.get(x.event_id, np.nan), c.get(x.event_id, np.nan)
+        flip = lambda v: v if fav_home or pd.isna(v) else 1 - v
+        rows.append({"Fecha (hora Chicago)": x.t.strftime("%a %d %b %H:%M"), "Partido": f"{x.away} en {x.home}",
+                     "Favorito del modelo": x.home if fav_home else x.away,
+                     "Modelo": pct(flip(x.p_home)), "Kalshi": pct(flip(pk)), "Casas": pct(flip(pc)),
+                     "Diferencia esperada": f"{abs(x.mu_margin):.1f} pts", "Total esperado": f"{x.mu_total:.0f} pts"})
+    return _table(pd.DataFrame(rows))
+
+
+def futbol(now) -> str:
+    reg = P / "registry.csv"
+    if not reg.exists():
+        return "_Aún no hay registro._\n"
+    r = pd.read_csv(reg)
+    r["t"] = _when(r["kickoff_utc"])
+    r = r[r["t"] > now].sort_values("t")
+    num = lambda x, c: pd.to_numeric(pd.Series([getattr(x, c, np.nan)]), errors="coerce").iloc[0]
+    rows = []
+    for x in r.itertuples():
+        kal = []
+        for s in "HDA":
+            b, a = num(x, f"k_bid_{s}"), num(x, f"k_ask_{s}")
+            kal.append((b + a) / 2 if not (pd.isna(b) or pd.isna(a)) else np.nan)
+        rows.append({"Fecha (hora Chicago)": x.t.strftime("%a %d %b %H:%M"), "Liga": x.competition, "Partido": f"{x.home} vs {x.away}",
+                     "Modelo: local / empate / visita": f"{pct(x.p_H)} / {pct(x.p_D)} / {pct(x.p_A)}",
+                     "Kalshi: local / empate / visita": " / ".join(pct(v) for v in kal),
+                     "Más de 2.5 goles": pct(getattr(x, "p_over_2_5_cal", np.nan))})
+    return _table(pd.DataFrame(rows))
+
+
+def build(now=None) -> str:
+    now = now or pd.Timestamp.now(tz=TZ)
+    return f"""# Predicciones — actualizado {now.strftime('%d %b %Y %H:%M')} (hora Chicago)
+
+**Cómo leer las tablas**
+- **Modelo**: probabilidad que da tu modelo a que gane el favorito indicado.
+- **Kalshi**: probabilidad que implica el precio de Kalshi para ese mismo equipo (precio 62¢ ≈ 62%).
+- **Casas**: probabilidad según las casas de apuestas, sin su margen. Es la referencia más fiable de las tres.
+- Si **Modelo** y **Kalshi** difieren mucho, casi siempre el modelo ignora algo (lesiones, descanso). No es una señal de apuesta.
+- Un "—" significa que aún no había precio para ese partido.
+
+## NBA
+{liga_us('nba', now)}
+## NFL
+{liga_us('nfl', now)}
+## Fútbol
+{futbol(now)}
+"""
+
+
+if __name__ == "__main__":
+    Path("PREDICCIONES.md").write_text(build(), encoding="utf-8")
+    print("PREDICCIONES.md generado")
