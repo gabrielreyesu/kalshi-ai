@@ -61,8 +61,12 @@ def audit(games,lineups,injuries,previews,now=None):
                 raise ValueError("Duplicate soccer player snapshot")
             keyset.add(key)
             if category=="injuries":
-                if r.get("observed_day_utc")!=captured.strftime("%Y-%m-%d"):
-                    raise ValueError("Injury day does not match capture date")
+                # observed_day_utc is the *target fixture day*, not the
+                # capture day. Reports for tomorrow are valid today.
+                target_day=pd.Timestamp(str(r.get("observed_day_utc")),tz="UTC")
+                if not (captured.normalize()<=target_day<=
+                        captured.normalize()+pd.Timedelta(days=2)):
+                    raise ValueError("Injury fixture date is not an upcoming day")
                 seen=set()
                 for p in r.get("players") or []:
                     kick=utc(p["fixture_kickoff_utc"])

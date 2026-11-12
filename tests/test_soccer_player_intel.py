@@ -53,7 +53,7 @@ class SoccerPlayerResearchTests(unittest.TestCase):
         self.assertEqual(r["source_id"],"espn_soccer_pregame_roster")
         self.assertFalse(r["lineup_confirmed"])
         self.assertTrue(r["teams"][0]["members"][0]["starter_reported"])
-        self.assertEqual(audit([],[r],[],[])["record_counts"]["lineups"],1)
+        self.assertEqual(audit([],[r],[],[],now="2026-11-14T18:10:00Z")["record_counts"]["lineups"],1)
 
     def test_no_pre_match_reconstruction_with_future_kickoff(self):
         r=parse_espn_summary(summary(),"uefa.champions","1001","2026-11-11T18:00:00Z")
@@ -141,7 +141,7 @@ class SoccerPlayerResearchTests(unittest.TestCase):
                              "uefa.champions","3001","2026-11-14T18:00:00Z")
         r["lineup_confirmed"]=True
         with self.assertRaisesRegex(ValueError,"incorrectly marked confirmed"):
-            audit([],[r],[],[])
+            audit([],[r],[],[],now="2026-11-14T18:10:00Z")
 
     def test_conflicting_capture_utc_never_accepted(self):
         game=parse_espn_summary(summary(),"uefa.champions","1001","2026-11-12T12:00:00Z")
