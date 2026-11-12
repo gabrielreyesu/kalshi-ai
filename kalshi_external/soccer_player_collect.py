@@ -217,6 +217,8 @@ def _select_summary_matches(fixtures, history, now, max_finished=7, max_pregame=
 def run(archive="data/external_signals", output="reports/external_learning/soccer_players",
         observed_at=None, session=None, codes=CODES, api_key=None,
         max_summaries=12):
+    if not 1<=max_summaries<=30:
+        raise ValueError("Invalid soccer summary request budget")
     now=utc(observed_at or pd.Timestamp.now(tz="UTC"))
     s=session or requests.Session()
     cache=Path(archive)
@@ -248,7 +250,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             detail=_get(s,f"{ROOT}/{game['competition_code']}/summary",
                         params={"event":game["event_id"]})
             record=parse_espn_summary(detail,game["competition_code"],game["event_id"],
-                                      now,expected_kickoff=game["kickoff_utc"])
+                                      now,expected_kickoff=game["kickoff_utc"],
+                                      expected_status=game["status"])
             summaries+=1
             if record and record["home_id"]==game["home_id"] and record["away_id"]==game["away_id"]:
                 if record["source_kind"]=="historical_player_stats":
@@ -268,9 +271,13 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             try:
                 j=_get(s,FOOTBALL_ROOT+"/injuries",{"date":day},api_key=key)
                 injuries=parse_api_football_injuries(j,now,day)
+                try:
+                    f=_get(s,FOOTBALL_ROOT+"/fixtures",{"date":day},api_key=key)
+                    injuries["provider_fixtures"]=parse_api_fixtures(f)
+                except (ValueError,RuntimeError,requests.RequestException) as error:
+                    issues.append(f"API-Football fixture index {day}: {type(error).__name__}")
+                    injuries["provider_fixtures"]=[]
                 new_reports.append(injuries)
-                f=_get(s,FOOTBALL_ROOT+"/fixtures",{"date":day},api_key=key)
-                api_fixtures.extend(parse_api_fixtures(f))
             except (ValueError,RuntimeError,requests.RequestException) as exc:
                 issues.append(f"API-Football {day}: {type(exc).__name__}")
         # If a report was already captured today, keep it but matching the
@@ -281,7 +288,21 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     all_stats,n_stats=append_history(cache/"soccer_player_games.jsonl",new_stats,max_bytes=100_000_000)
     all_lineups,n_lineups=append_history(cache/"soccer_lineups.jsonl",new_lineups,max_bytes=100_000_000)
     all_injuries,n_injuries=append_history(cache/"soccer_injuries.jsonl",new_reports,max_bytes=100_000_000)
-    matched=join_vendor_injuries(fixtures,api_fixtures,new_reports)
+    # Retain a reusable same-day fixture mapping rather than losing all
+    # injury context in the second scheduled run of the day.
+    latest_by_day={}
+    for report in sorted(all_injuries,key=lambda x:utc(x["captured_utc"])):
+        day=report.get("observed_day_utc")
+        if day in {(now+pd.Timedelta(days=i)).strftime("%Y-%m-%d") for i in (0,1)} and (
+            pd.Timedelta(0)<=now-utc(report["captured_utc"])<=pd.Timedelta(hours=36)
+        ):
+            latest_by_day[day]=report
+    current_reports=list(latest_by_day.values())
+    fixture_map={}
+    for report in current_reports:
+        for provider_fixture in report.get("provider_fixtures") or []:
+            fixture_map[provider_fixture["fixture_id"]]=provider_fixture
+    matched=join_vendor_injuries(fixtures,list(fixture_map.values()),current_reports)
     previews=[]
     for game in sorted(fixtures,key=lambda g:utc(g["kickoff_utc"])):
         kickoff=utc(game["kickoff_utc"])

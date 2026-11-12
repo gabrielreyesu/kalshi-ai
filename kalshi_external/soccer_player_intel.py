@@ -65,8 +65,12 @@ def _competition(payload):
     date=c.get("date")
     if not (home and away and date):
         return None
-    state=str(((c.get("status") or {}).get("type") or {}).get("name") or
-              ((payload.get("header") or {}).get("status") or {}).get("name") or "")
+    raw_status=c.get("status") or {}
+    status_obj=(raw_status.get("type") or raw_status) if isinstance(raw_status,dict) else {}
+    header_status=(payload.get("header") or {}).get("status") or {}
+    state=str((status_obj.get("name") if isinstance(status_obj,dict) else None) or
+              (header_status.get("name") if isinstance(header_status,dict) else None) or
+              (raw_status if isinstance(raw_status,str) else "") or "")
     return {"home_id":home,"away_id":away,"kickoff_utc":utc(date).isoformat(),"status":state}
 
 
@@ -139,7 +143,8 @@ def _player_rows(block):
     return list(by_id.values())
 
 
-def parse_espn_summary(payload, code, event_id, captured, expected_kickoff=None):
+def parse_espn_summary(payload, code, event_id, captured, expected_kickoff=None,
+                       expected_status=None):
     """Parse ESPN player appearance data; match exact competition, teams and UTC."""
     if not isinstance(payload,dict):
         raise ValueError("Invalid ESPN soccer summary")
@@ -153,12 +158,17 @@ def parse_espn_summary(payload, code, event_id, captured, expected_kickoff=None)
         return None
     if not str(event_id).isdigit() or not code:
         return None
+    if not info["status"] and expected_status in FINAL:
+        # ESPN scoreboard for the SAME event is authoritative for finality.
+        info["status"]=expected_status
     teams=[]
     source=payload.get("rosters") or (payload.get("boxscore") or {}).get("players") or []
     if not isinstance(source,list):
         return None
     valid_teams={info["home_id"],info["away_id"]}
     for block in source:
+        if not isinstance(block,dict):
+            continue
         team_id=str((block.get("team") or {}).get("id") or "")
         if team_id not in valid_teams:
             continue
@@ -258,6 +268,10 @@ def player_opponent_context(fixture, player_games, injury_reports, observed_at, 
     games=defaultdict(list)
     for g in player_games:
         if g.get("source_id")!="espn_soccer_final_player_stats":
+            continue
+        # ESPN numeric team IDs are not established globally unique across
+        # competitions. Restrict to the same code until explicitly reconciled.
+        if str(g.get("competition_code"))!=str(fixture.get("competition_code")):
             continue
         if utc(g["captured_utc"])>now or utc(g["kickoff_utc"])>=kickoff:
             continue

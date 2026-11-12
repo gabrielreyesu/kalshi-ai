@@ -24,3 +24,5 @@ Data collection covers ESPN scoreboard and limited completed match summaries for
 ## Provider documentation
 - https://www.api-football.com/documentation-v3 (injuries, lineups and per-fixture player stats; coverage varies by league and subscription)
 - https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard (public ESPN site feed already used by Kalshi AI; availability and usage terms may change)
+## Data-identity policy
+ESPN team IDs are not assumed globally unique between competitions: player-versus-opponent historical comparisons currently use the **same ESPN competition code** only, even if that reduces coverage. API-Football injury lists and their original fixture metadata are preserved together so an earlier same-day report remains usable in the next snapshot, but only when the entire match uniquely matches ESPN by both names and kickoff. Only the newest report for each fixture date is used and the report must have been captured within 36 hours. Never attach a vendor player ID directly to an ESPN ID.

@@ -79,6 +79,15 @@ def audit(games,lineups,injuries,previews,now=None):
                     seen.add(ids)
                     if p.get("availability") not in ("reported_absent","uncertain","unknown_provider_status"):
                         raise ValueError("Unexpected injury status")
+                for provider_fixture in r.get("provider_fixtures") or []:
+                    if not provider_fixture.get("fixture_id"):
+                        raise ValueError("Missing provider fixture ID")
+                    for field in ("home","away","home_provider_id","away_provider_id"):
+                        if not provider_fixture.get(field):
+                            raise ValueError("Incomplete provider fixture identity")
+                    kickoff=utc(provider_fixture["kickoff_utc"])
+                    if kickoff <= captured or kickoff.strftime("%Y-%m-%d")!=r["observed_day_utc"]:
+                        raise ValueError("Provider fixture date cannot be verified")
                 continue
             kick=utc(r["kickoff_utc"])
             if category=="games" and captured<=kick:

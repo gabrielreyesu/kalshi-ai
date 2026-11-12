@@ -105,7 +105,7 @@ class SoccerPlayerResearchTests(unittest.TestCase):
         for i,goal in enumerate([2,0,1,4]):
             game=parse_espn_summary(summary(
                 event_date=(pd.Timestamp("2026-10-01T19:00Z")+pd.Timedelta(days=i)).isoformat(),
-                goal=goal,opponent="20" if i<2 else "30"),"eng.1",str(1000+i),
+                goal=goal,opponent="20" if i<2 else "30"),"uefa.champions",str(1000+i),
                 "2026-10-08T12:00:00Z")
             past.append(game)
         result=player_opponent_context(upcoming(),past,[],
