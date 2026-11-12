@@ -1,0 +1,49 @@
+name: analistas-seguimiento
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'analysts/mis_picks.csv'
+  schedule:
+    - cron: "20 14 * * *"      # una vez al día: liquida los picks de partidos ya jugados
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kalshi-escritura
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: |
+            data/intl
+            data/nba
+            data/nfl
+          key: analistas-data-${{ github.run_id }}
+          restore-keys: |
+            analistas-data-
+            intl-data-
+            espn-data-
+      - run: pip install -r requirements.txt
+      - name: Registrar picks nuevos, liquidar los jugados y actualizar el estado
+        run: python -m kalshi_external.manual_picks sync
+      - name: Guardar
+        run: |
+          git config user.name  "analistas-bot"
+          git config user.email "analistas-bot@users.noreply.github.com"
+          git add analysts/libro.csv analysts/rechazados.csv analysts/ESTADO.md
+          git diff --cached --quiet || git commit -m "analistas $(date -u +%FT%H:%MZ)"
+          git pull --rebase -q && git push
