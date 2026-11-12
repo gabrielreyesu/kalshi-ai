@@ -45,6 +45,7 @@ def test_simple_picks_table_shows_only_near_games_with_confidence(tmp_path):
         txt = resumen.build(now=pd.Timestamp("2030-01-01T12:00:00", tz="UTC").tz_convert(resumen.TZ))
     finally:
         resumen.P = old
-    top = txt.split("# Detalle")[0]
-    assert "| NBA | Orlando Magic en Utah Jazz | Utah Jazz | 80% | Alta |" in top
-    assert "Lions" not in top and "Lions" in txt            # el partido lejano solo aparece en el detalle
+    resumen_picks = txt.split("## Resumen de picks de hoy y mañana")[1]
+    assert "| NBA | Orlando Magic en Utah Jazz | Utah Jazz | 80% | Alta |" in resumen_picks
+    assert "Lions" not in resumen_picks                     # el partido lejano no entra en el resumen
+    assert txt.index("## NBA") < txt.index("## Resumen de picks")   # las tablas detalladas van primero
