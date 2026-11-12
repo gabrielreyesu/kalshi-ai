@@ -1,0 +1,287 @@
+team_id,team,player,position,status,type,reported,day
+22,Arizona Cardinals,Zachary Carter,DT,Injured Reserve,Knee,2026-11-12T01:19Z,2026-11-12
+22,Arizona Cardinals,Andrew Wingard,S,Questionable,Groin,2026-11-12T00:39Z,2026-11-12
+22,Arizona Cardinals,Dante Stills,DT,Questionable,Shoulder,2026-11-12T00:14Z,2026-11-12
+22,Arizona Cardinals,Max Melton,CB,Questionable,Knee,2026-11-12T00:14Z,2026-11-12
+22,Arizona Cardinals,Bam Knight,RB,Questionable,Concussion,2026-11-11T23:56Z,2026-11-12
+22,Arizona Cardinals,Hunter Long,TE,Injured Reserve,Knee,2026-11-11T22:25Z,2026-11-12
+22,Arizona Cardinals,Gardner Minshew II,QB,Injured Reserve,Elbow,2026-11-11T20:33Z,2026-11-12
+22,Arizona Cardinals,Michael Wilson,WR,Injured Reserve,Neck,2026-11-10T22:53Z,2026-11-12
+22,Arizona Cardinals,Jayden Williams,OT,Questionable,Knee,2026-11-10T15:44Z,2026-11-12
+22,Arizona Cardinals,Jon Gaines II,G,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+22,Arizona Cardinals,Hjalte Froholdt,C,Questionable,Concussion,2026-11-10T02:08Z,2026-11-12
+1,Atlanta Falcons,Cameron Williams,OL,Injured Reserve,,2026-11-12T00:59Z,2026-11-12
+1,Atlanta Falcons,Zachariah Branch,WR,Doubtful,Hamstring,2026-11-11T23:30Z,2026-11-12
+1,Atlanta Falcons,Josh Woods,LB,Questionable,Ankle,2026-11-11T23:19Z,2026-11-12
+1,Atlanta Falcons,James Pearce Jr.,LB,Questionable,Back,2026-11-11T23:19Z,2026-11-12
+1,Atlanta Falcons,Divine Deablo,LB,Questionable,Forearm,2026-11-11T23:19Z,2026-11-12
+1,Atlanta Falcons,Gervon Dexter Sr.,DT,Questionable,Illness,2026-11-11T23:18Z,2026-11-12
+1,Atlanta Falcons,Brian Robinson Jr.,RB,Injured Reserve,Hamstring,2026-11-07T21:13Z,2026-11-12
+1,Atlanta Falcons,Samson Ebukam,DE,Injured Reserve,Hamstring,2026-11-04T00:37Z,2026-11-12
+33,Baltimore Ravens,Kyle Hamilton,S,Questionable,Hip,2026-11-11T00:15Z,2026-11-12
+33,Baltimore Ravens,Nate Wiggins,CB,Questionable,Illness,2026-11-10T15:44Z,2026-11-12
+33,Baltimore Ravens,Jaylinn Hawkins,S,Questionable,Knee,2026-11-10T15:44Z,2026-11-12
+33,Baltimore Ravens,Lamar Jackson,QB,Injured Reserve,Thumb,2026-11-08T12:12Z,2026-11-12
+33,Baltimore Ravens,Adisa Isaac,LB,Questionable,Hamstring,2026-11-06T03:14Z,2026-11-12
+33,Baltimore Ravens,Tyler Huntley,QB,Injured Reserve,Toe,2026-11-05T21:20Z,2026-11-12
+33,Baltimore Ravens,Adam Randall,RB,Injured Reserve,Neck,2026-11-05T01:10Z,2026-11-12
+2,Buffalo Bills,Dion Dawkins,OT,Questionable,Ribs,2026-11-12T01:34Z,2026-11-12
+2,Buffalo Bills,Greg Gaines,DT,Questionable,,2026-11-12T01:32Z,2026-11-12
+2,Buffalo Bills,Christian Benford,CB,Questionable,Wrist,2026-11-11T23:32Z,2026-11-12
+2,Buffalo Bills,Spencer Brown,OT,Questionable,Ankle,2026-11-11T22:01Z,2026-11-12
+2,Buffalo Bills,Connor McGovern,C,Questionable,Neck,2026-11-11T22:00Z,2026-11-12
+2,Buffalo Bills,Dalton Kincaid,TE,Questionable,Ankle,2026-11-11T21:57Z,2026-11-12
+2,Buffalo Bills,Joshua Palmer,WR,Injured Reserve,Hamstring,2026-11-10T01:39Z,2026-11-12
+2,Buffalo Bills,Alec Anderson,OT,Questionable,Ankle,2026-11-10T00:27Z,2026-11-12
+2,Buffalo Bills,Tyrell Shavers,WR,Out,Knee - ACL,2026-11-10T00:13Z,2026-11-12
+29,Carolina Panthers,Damien Lewis,G,Out,,2026-11-12T01:23Z,2026-11-12
+29,Carolina Panthers,Bobby Okereke,LB,Questionable,Foot,2026-11-11T23:01Z,2026-11-12
+29,Carolina Panthers,Will Lee III,CB,Out,,2026-11-11T22:54Z,2026-11-12
+29,Carolina Panthers,Jaelan Phillips,LB,Out,,2026-11-11T22:52Z,2026-11-12
+29,Carolina Panthers,Jonathon Brooks,RB,Injured Reserve,Groin,2026-11-11T19:59Z,2026-11-12
+29,Carolina Panthers,Mike Jackson,CB,Injured Reserve,Groin,2026-11-11T19:54Z,2026-11-12
+29,Carolina Panthers,Xavier Legette,WR,Injured Reserve,Knee,2026-11-11T17:38Z,2026-11-12
+29,Carolina Panthers,Jaycee Horn,CB,Injured Reserve,Quadriceps,2026-11-09T23:18Z,2026-11-12
+3,Chicago Bears,Kyle Monangai,RB,Out,Toe,2026-11-09T20:59Z,2026-11-12
+3,Chicago Bears,Malik Muhammad II,CB,Out,Toe,2026-11-09T20:59Z,2026-11-12
+3,Chicago Bears,Luther Burden III,WR,Questionable,Concussion,2026-11-09T05:13Z,2026-11-12
+3,Chicago Bears,Tyrique Stevenson Sr.,CB,Questionable,Hand,2026-11-09T03:13Z,2026-11-12
+3,Chicago Bears,Case Keenum,QB,Out,,2026-11-09T00:04Z,2026-11-12
+3,Chicago Bears,Zavier Scott,RB,Injured Reserve,Wrist,2026-11-05T21:19Z,2026-11-12
+3,Chicago Bears,Kentavius Street,DT,Injured Reserve,Knee,2026-11-05T04:55Z,2026-11-12
+3,Chicago Bears,Braxton Jones,OT,Injured Reserve,Knee,2026-11-05T03:40Z,2026-11-12
+4,Cincinnati Bengals,Kyle Dugger,S,Questionable,Quadriceps,2026-11-12T02:02Z,2026-11-12
+4,Cincinnati Bengals,DJ Turner II,CB,Questionable,Ankle,2026-11-12T00:34Z,2026-11-12
+4,Cincinnati Bengals,Dylan Fairchild,G,Questionable,Pectoral,2026-11-11T23:28Z,2026-11-12
+4,Cincinnati Bengals,Andrei Iosivas,WR,Injured Reserve,Thumb,2026-11-09T19:43Z,2026-11-12
+4,Cincinnati Bengals,Cashius Howell,DE,Injured Reserve,Wrist,2026-11-04T01:35Z,2026-11-12
+4,Cincinnati Bengals,Erick All Jr.,TE,Injured Reserve,Knee - ACL,2026-10-28T19:05Z,2026-11-12
+5,Cleveland Browns,Carson Schwesinger,LB,Questionable,Wrist,2026-11-12T01:56Z,2026-11-12
+5,Cleveland Browns,Denzel Ward,CB,Questionable,Quadriceps,2026-11-12T01:54Z,2026-11-12
+5,Cleveland Browns,Quincy Williams,LB,Questionable,Hamstring,2026-11-12T01:54Z,2026-11-12
+5,Cleveland Browns,Michael Burton,FB,Questionable,Calf,2026-11-12T01:52Z,2026-11-12
+5,Cleveland Browns,Tytus Howard,OT,Questionable,Knee,2026-11-11T23:36Z,2026-11-12
+5,Cleveland Browns,Elgton Jenkins,C,Questionable,Knee,2026-11-11T23:35Z,2026-11-12
+5,Cleveland Browns,Austin Barber,OT,Questionable,Calf,2026-11-11T23:35Z,2026-11-12
+5,Cleveland Browns,Harold Fannin Jr.,TE,Questionable,Groin,2026-11-11T22:39Z,2026-11-12
+5,Cleveland Browns,Ronnie Hickman,S,Questionable,Concussion,2026-11-11T20:37Z,2026-11-12
+5,Cleveland Browns,Denzel Boston,WR,Questionable,Toe,2026-11-11T17:12Z,2026-11-12
+5,Cleveland Browns,Deshaun Watson,QB,Out,,2026-11-11T14:38Z,2026-11-12
+5,Cleveland Browns,Maliek Collins,DT,Questionable,Elbow,2026-11-10T15:44Z,2026-11-12
+6,Dallas Cowboys,Joey Porter Jr.,CB,Questionable,Ankle,2026-11-12T00:01Z,2026-11-12
+6,Dallas Cowboys,DeMarvion Overshown,LB,Questionable,Hamstring,2026-11-11T23:56Z,2026-11-12
+6,Dallas Cowboys,KaVontae Turpin,WR,Questionable,Ribs,2026-11-11T23:51Z,2026-11-12
+6,Dallas Cowboys,Luke Schoonmaker,TE,Out,,2026-11-11T23:49Z,2026-11-12
+6,Dallas Cowboys,Devin Moore,CB,Injured Reserve,Hip,2026-11-11T22:11Z,2026-11-12
+6,Dallas Cowboys,George Pickens,WR,Questionable,Hamstring,2026-11-11T21:51Z,2026-11-12
+6,Dallas Cowboys,Tyler Goodson,RB,Out,Knee - ACL + MCL,2026-11-10T15:05Z,2026-11-12
+6,Dallas Cowboys,Jake Ferguson,TE,Out,Knee,2026-11-10T01:39Z,2026-11-12
+6,Dallas Cowboys,Donovan Ezeiruaku,LB,Questionable,Ankle,2026-11-10T01:11Z,2026-11-12
+6,Dallas Cowboys,P.J. Locke,S,Out,Concussion,2026-11-10T01:02Z,2026-11-12
+6,Dallas Cowboys,Jonathan Mingo,WR,Questionable,Ankle,2026-11-08T20:48Z,2026-11-12
+6,Dallas Cowboys,Jonathan Bullard,DT,Injured Reserve,Calf,2026-11-08T02:22Z,2026-11-12
+6,Dallas Cowboys,Malachi Lawrence,LB,Injured Reserve,Ankle,2026-11-07T22:30Z,2026-11-12
+7,Denver Broncos,Brandon Jones,S,Out,Hamstring,2026-11-09T21:04Z,2026-11-12
+7,Denver Broncos,Talanoa Hufanga,S,Out,Ankle,2026-11-09T21:04Z,2026-11-12
+7,Denver Broncos,Kris Abrams-Draine,CB,Out,Ankle,2026-11-09T21:04Z,2026-11-12
+7,Denver Broncos,Jaylen Waddle,WR,Questionable,Concussion,2026-11-08T19:52Z,2026-11-12
+7,Denver Broncos,Riley Moss,CB,Questionable,Concussion,2026-11-08T19:46Z,2026-11-12
+7,Denver Broncos,Eyioma Uwazurike,DE,Injured Reserve,Shoulder,2026-11-08T03:38Z,2026-11-12
+8,Detroit Lions,D.J. Reed,CB,Questionable,Hip,2026-11-12T00:29Z,2026-11-12
+8,Detroit Lions,Kerby Joseph,S,Out,Knee,2026-11-12T00:18Z,2026-11-12
+8,Detroit Lions,Brian Branch,S,Questionable,Hip,2026-11-12T00:13Z,2026-11-12
+8,Detroit Lions,Jacob Saylors,RB,Out,,2026-11-12T00:10Z,2026-11-12
+8,Detroit Lions,Sione Vaki,RB,Questionable,Ankle,2026-11-12T00:06Z,2026-11-12
+8,Detroit Lions,Jared Goff,QB,Questionable,Chest,2026-11-11T21:27Z,2026-11-12
+8,Detroit Lions,Amon-Ra St. Brown,WR,Questionable,Ribs,2026-11-11T21:22Z,2026-11-12
+8,Detroit Lions,DJ Wonnum,LB,Questionable,Concussion,2026-11-10T15:44Z,2026-11-12
+8,Detroit Lions,Cade Mays,C,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+8,Detroit Lions,Jack Campbell,LB,Injured Reserve,Neck,2026-11-07T22:18Z,2026-11-12
+8,Detroit Lions,Jimmy Rolder,LB,Injured Reserve,Hamstring,2026-11-04T02:07Z,2026-11-12
+8,Detroit Lions,Isiah Pacheco,RB,Injured Reserve,Back,2026-10-30T17:09Z,2026-11-12
+9,Green Bay Packers,Ty'Ron Hopper,LB,Questionable,Chest,2026-11-12T00:27Z,2026-11-12
+9,Green Bay Packers,Javon Bullard,S,Questionable,Ankle,2026-11-12T00:24Z,2026-11-12
+9,Green Bay Packers,Zaire Franklin,LB,Doubtful,Shin,2026-11-12T00:24Z,2026-11-12
+9,Green Bay Packers,Lukas Van Ness,DE,Questionable,Back,2026-11-12T00:21Z,2026-11-12
+9,Green Bay Packers,Bo Melton,WR,Questionable,Head,2026-11-12T00:17Z,2026-11-12
+9,Green Bay Packers,Skyy Moore,WR,Injured Reserve,Ankle,2026-11-12T00:13Z,2026-11-12
+9,Green Bay Packers,Chris Brooks,RB,Injured Reserve,Ankle,2026-11-12T00:10Z,2026-11-12
+9,Green Bay Packers,Kevin Zeitler,G,Questionable,Ankle,2026-11-11T23:07Z,2026-11-12
+9,Green Bay Packers,Aaron Banks,G,Questionable,Knee,2026-11-11T23:07Z,2026-11-12
+9,Green Bay Packers,Trey Smack,PK,Questionable,Calf,2026-11-11T22:18Z,2026-11-12
+9,Green Bay Packers,Micah Parsons,DE,Out,Knee - ACL,2026-11-11T22:16Z,2026-11-12
+9,Green Bay Packers,Savion Williams,WR,Questionable,Groin,2026-11-11T22:16Z,2026-11-12
+9,Green Bay Packers,MarShawn Lloyd,RB,Out,,2026-11-11T22:13Z,2026-11-12
+9,Green Bay Packers,Josh Jacobs,RB,Out,Finger,2026-11-11T18:44Z,2026-11-12
+9,Green Bay Packers,Josh Whyle,TE,Questionable,Concussion,2026-11-10T15:44Z,2026-11-12
+9,Green Bay Packers,Sean Rhyan,G,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+9,Green Bay Packers,Travis Glover,OT,Questionable,Knee,2026-11-10T15:44Z,2026-11-12
+34,Houston Texans,Jaylin Smith,CB,Injured Reserve,Hamstring,2026-11-12T01:15Z,2026-11-12
+34,Houston Texans,Jake Hummel,LB,Injured Reserve,Groin,2026-11-12T01:09Z,2026-11-12
+34,Houston Texans,David Montgomery,RB,Questionable,Groin,2026-11-12T00:14Z,2026-11-12
+34,Houston Texans,Azeez Al-Shaair,LB,Questionable,Groin,2026-11-12T00:02Z,2026-11-12
+34,Houston Texans,Brevin Jordan,TE,Questionable,Finger,2026-11-12T00:01Z,2026-11-12
+34,Houston Texans,Marvin Harrison Jr.,WR,Questionable,Hamstring,2026-11-11T22:45Z,2026-11-12
+34,Houston Texans,Keylan Rutledge,G,Questionable,Neck,2026-11-11T22:43Z,2026-11-12
+34,Houston Texans,Wyatt Teller,G,Questionable,Illness,2026-11-11T22:43Z,2026-11-12
+34,Houston Texans,Tank Dell,WR,Questionable,Hand,2026-11-11T22:42Z,2026-11-12
+34,Houston Texans,Woody Marks,RB,Questionable,Knee,2026-11-11T22:39Z,2026-11-12
+34,Houston Texans,Cade Stover,TE,Out,,2026-11-11T15:42Z,2026-11-12
+34,Houston Texans,Reed Blankenship,S,Questionable,Concussion,2026-11-10T15:44Z,2026-11-12
+11,Indianapolis Colts,A.J. Haulcy,S,Questionable,Ankle,2026-11-12T02:02Z,2026-11-12
+11,Indianapolis Colts,Akeem Davis-Gaither,LB,Questionable,Knee,2026-11-11T23:28Z,2026-11-12
+11,Indianapolis Colts,Mo Alie-Cox,TE,Questionable,Groin,2026-11-11T23:17Z,2026-11-12
+11,Indianapolis Colts,Justin Walley,CB,Out,,2026-11-11T23:15Z,2026-11-12
+11,Indianapolis Colts,Arden Key,DE,Injured Reserve,Hamstring,2026-11-11T19:36Z,2026-11-12
+11,Indianapolis Colts,Alec Pierce,WR,Injured Reserve,Heel,2026-11-11T17:38Z,2026-11-12
+11,Indianapolis Colts,Luke Rhodes,LS,Questionable,Hamstring,2026-11-11T16:35Z,2026-11-12
+11,Indianapolis Colts,Jalen Travis,OT,Doubtful,Knee,2026-11-10T19:02Z,2026-11-12
+30,Jacksonville Jaguars,B.J. Green II,DE,Injured Reserve,Elbow,2026-11-12T00:57Z,2026-11-12
+30,Jacksonville Jaguars,Travon Walker,DE,Questionable,Ribs,2026-11-11T22:59Z,2026-11-12
+30,Jacksonville Jaguars,Antonio Johnson,S,Questionable,Ankle,2026-11-11T21:25Z,2026-11-12
+30,Jacksonville Jaguars,Branson Combs,LB,Questionable,Shoulder,2026-11-11T21:25Z,2026-11-12
+30,Jacksonville Jaguars,Robert Hainsey,C,Questionable,Concussion,2026-11-11T21:25Z,2026-11-12
+30,Jacksonville Jaguars,Ezra Cleveland,G,Questionable,Knee,2026-11-11T21:24Z,2026-11-12
+30,Jacksonville Jaguars,Chris Rodriguez Jr.,RB,Questionable,Hand,2026-11-11T21:20Z,2026-11-12
+30,Jacksonville Jaguars,Jakobi Meyers,WR,Questionable,Ankle,2026-11-11T21:16Z,2026-11-12
+30,Jacksonville Jaguars,Bhayshul Tuten,RB,Questionable,Ankle,2026-11-11T21:14Z,2026-11-12
+30,Jacksonville Jaguars,Cam'Ron Silmon-Craig,S,Out,Coach's Decision,2026-11-05T23:48Z,2026-11-12
+12,Kansas City Chiefs,Mansoor Delane,CB,Out,,2026-11-11T23:34Z,2026-11-12
+12,Kansas City Chiefs,Patrick Mahomes,QB,Questionable,,2026-11-11T21:46Z,2026-11-12
+12,Kansas City Chiefs,Xavier Worthy,WR,Questionable,,2026-11-11T21:42Z,2026-11-12
+12,Kansas City Chiefs,Peter Woods,DT,Questionable,Neck,2026-11-10T15:44Z,2026-11-12
+12,Kansas City Chiefs,Jaylon Moore,OT,Questionable,Ankle,2026-11-10T01:34Z,2026-11-12
+12,Kansas City Chiefs,L'Jarius Sneed,CB,Injured Reserve,Knee,2026-10-31T23:04Z,2026-11-12
+12,Kansas City Chiefs,Omarr Norman-Lott,DT,Out,Knee - ACL,2026-10-29T01:48Z,2026-11-12
+13,Las Vegas Raiders,Trey Zuhn III,C,Questionable,Concussion,2026-11-12T02:03Z,2026-11-12
+13,Las Vegas Raiders,Folorunso Fatukasi,DT,Questionable,Shoulder,2026-11-11T23:58Z,2026-11-12
+13,Las Vegas Raiders,Aidan O'Connell,QB,Out,,2026-11-11T19:12Z,2026-11-12
+13,Las Vegas Raiders,Thomas Booker IV,DT,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+24,Los Angeles Chargers,Justin Herbert,QB,Questionable,Finger,2026-11-10T16:00Z,2026-11-12
+24,Los Angeles Chargers,Kendall Williamson,S,Questionable,Calf,2026-11-10T15:44Z,2026-11-12
+24,Los Angeles Chargers,Brenen Thompson,WR,Questionable,Quadriceps,2026-11-10T15:44Z,2026-11-12
+24,Los Angeles Chargers,Deane Leonard,CB,Questionable,Concussion,2026-11-10T15:44Z,2026-11-12
+24,Los Angeles Chargers,Kayode Awosika,G,Questionable,Lower Leg,2026-11-10T15:44Z,2026-11-12
+24,Los Angeles Chargers,Ladd McConkey,WR,Questionable,Back,2026-11-10T00:00Z,2026-11-12
+24,Los Angeles Chargers,Isas Waxter,CB,Questionable,Ankle,2026-11-08T23:21Z,2026-11-12
+24,Los Angeles Chargers,Justin Eboigbe,DT,Questionable,Ankle,2026-11-08T21:50Z,2026-11-12
+24,Los Angeles Chargers,Denzel Perryman,LB,Injured Reserve,Undisclosed,2026-11-08T19:05Z,2026-11-12
+24,Los Angeles Chargers,David Njoku,TE,Injured Reserve,Lower Leg,2026-11-08T19:01Z,2026-11-12
+14,Los Angeles Rams,Trent McDuffie,CB,Questionable,Back,2026-11-12T15:01Z,2026-11-12
+14,Los Angeles Rams,Puka Nacua,WR,Out,Knee - MCL,2026-11-12T02:02Z,2026-11-12
+14,Los Angeles Rams,Kam Curl,S,Questionable,Toe,2026-11-12T00:50Z,2026-11-12
+14,Los Angeles Rams,Myles Garrett,DE,Questionable,Knee,2026-11-12T00:32Z,2026-11-12
+14,Los Angeles Rams,Davis Allen,TE,Questionable,Oblique,2026-11-12T00:30Z,2026-11-12
+14,Los Angeles Rams,Colby Parkinson,TE,Questionable,Ribs,2026-11-12T00:08Z,2026-11-12
+14,Los Angeles Rams,Davante Adams,WR,Injured Reserve,Hamstring,2026-11-11T21:05Z,2026-11-12
+14,Los Angeles Rams,Jordan Whittington,WR,Injured Reserve,Back,2026-11-11T00:38Z,2026-11-12
+14,Los Angeles Rams,Joe Cardona,LS,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+14,Los Angeles Rams,Terrance Ferguson,TE,Injured Reserve,Hamstring,2026-11-10T15:34Z,2026-11-12
+14,Los Angeles Rams,Steve Avila,G,Questionable,Hamstring,2026-11-10T02:19Z,2026-11-12
+15,Miami Dolphins,Darrell Baker Jr.,CB,Out,Knee,2026-11-12T01:05Z,2026-11-12
+15,Miami Dolphins,Malik Willis,QB,Injured Reserve,Abdomen,2026-11-12T00:14Z,2026-11-12
+15,Miami Dolphins,Will Kacmarek,TE,Questionable,Quadriceps,2026-11-11T23:37Z,2026-11-12
+15,Miami Dolphins,Jaylen Wright,RB,Out,,2026-11-11T23:26Z,2026-11-12
+15,Miami Dolphins,Chris Bell,WR,Questionable,Knee,2026-11-11T22:01Z,2026-11-12
+15,Miami Dolphins,Malik Herring,DE,Questionable,Neck,2026-11-11T21:38Z,2026-11-12
+15,Miami Dolphins,Tucker Addington,LS,Questionable,Shoulder,2026-11-11T21:38Z,2026-11-12
+15,Miami Dolphins,Aaron Brewer,C,Questionable,Concussion,2026-11-11T21:38Z,2026-11-12
+15,Miami Dolphins,Zach Sieler,DT,Injured Reserve,Biceps,2026-11-11T00:23Z,2026-11-12
+16,Minnesota Vikings,Jauan Jennings,WR,Questionable,Calf,2026-11-12T14:01Z,2026-11-12
+16,Minnesota Vikings,Kyle Van Noy,LB,Questionable,Calf,2026-11-11T23:03Z,2026-11-12
+16,Minnesota Vikings,Jay Ward,S,Questionable,Knee,2026-11-11T23:02Z,2026-11-12
+16,Minnesota Vikings,Blake Cashman,LB,Questionable,Concussion,2026-11-11T22:27Z,2026-11-12
+16,Minnesota Vikings,T.J. Hockenson,TE,Questionable,Wrist,2026-11-11T21:31Z,2026-11-12
+16,Minnesota Vikings,Carson Wentz,QB,Questionable,Ankle,2026-11-11T20:57Z,2026-11-12
+16,Minnesota Vikings,Kyler Murray,QB,Doubtful,Hamstring,2026-11-11T20:01Z,2026-11-12
+16,Minnesota Vikings,Tyrion Ingram-Dawkins,DE,Questionable,Ankle,2026-11-10T04:02Z,2026-11-12
+16,Minnesota Vikings,Demond Claiborne,RB,Injured Reserve,Knee,2026-11-10T01:02Z,2026-11-12
+16,Minnesota Vikings,Theo Jackson,S,Questionable,,2026-11-09T23:54Z,2026-11-12
+17,New England Patriots,TreVeyon Henderson,RB,Out,Illness,2026-11-12T10:01Z,2026-11-12
+17,New England Patriots,A.J. Brown,WR,Questionable,Knee,2026-11-12T10:01Z,2026-11-12
+17,New England Patriots,Charles Woods,CB,Questionable,Hamstring,2026-11-12T02:02Z,2026-11-12
+17,New England Patriots,Ben Brown,C,Out,Knee,2026-11-12T02:02Z,2026-11-12
+17,New England Patriots,Will Campbell,OT,Questionable,,2026-11-12T01:44Z,2026-11-12
+17,New England Patriots,Carlton Davis III,CB,Out,Knee,2026-11-12T00:14Z,2026-11-12
+17,New England Patriots,Kevin Byard,S,Questionable,Chest,2026-11-12T00:07Z,2026-11-12
+17,New England Patriots,Morgan Moses,OT,Questionable,Foot,2026-11-11T23:14Z,2026-11-12
+17,New England Patriots,Walter Rouse,OL,Questionable,Concussion,2026-11-11T23:13Z,2026-11-12
+17,New England Patriots,Cameron Latu,TE,Questionable,Back,2026-11-11T23:13Z,2026-11-12
+17,New England Patriots,Hunter Henry,TE,Questionable,Foot,2026-11-11T22:56Z,2026-11-12
+17,New England Patriots,Reggie Gilliam,FB,Injured Reserve,Ankle,2026-11-11T22:36Z,2026-11-12
+17,New England Patriots,Rhamondre Stevenson,RB,Doubtful,Knee,2026-11-11T21:30Z,2026-11-12
+18,New Orleans Saints,CJ Donaldson,RB,Questionable,Shoulder,2026-11-12T01:01Z,2026-11-12
+18,New Orleans Saints,Noah Fant,TE,Questionable,Back,2026-11-12T00:32Z,2026-11-12
+18,New Orleans Saints,Christen Miller,DT,Questionable,Knee,2026-11-11T23:15Z,2026-11-12
+18,New Orleans Saints,David Edwards,G,Questionable,Knee,2026-11-11T23:14Z,2026-11-12
+18,New Orleans Saints,Martin Emerson Jr.,CB,Questionable,Shin,2026-11-11T23:14Z,2026-11-12
+18,New Orleans Saints,Kelvin Banks Jr.,OT,Questionable,Ankle,2026-11-11T23:14Z,2026-11-12
+18,New Orleans Saints,Alvin Kamara,RB,Questionable,Back,2026-11-11T22:28Z,2026-11-12
+18,New Orleans Saints,Travis Etienne Jr.,RB,Injured Reserve,Hamstring,2026-11-11T22:04Z,2026-11-12
+18,New Orleans Saints,Erik McCoy,C,Doubtful,Biceps,2026-11-10T15:44Z,2026-11-12
+19,New York Giants,Colton Hood,CB,Out,,2026-11-11T01:35Z,2026-11-12
+19,New York Giants,J.J. McCarthy,QB,Questionable,,2026-11-10T21:39Z,2026-11-12
+19,New York Giants,Cam Skattebo,RB,Out,,2026-11-10T21:38Z,2026-11-12
+19,New York Giants,Malik Harrison,LB,Questionable,Groin,2026-11-10T00:09Z,2026-11-12
+20,New York Jets,Nahshon Wright,CB,Questionable,Back,2026-11-12T02:02Z,2026-11-12
+20,New York Jets,Trevin Wallace,LB,Questionable,Groin,2026-11-12T02:02Z,2026-11-12
+20,New York Jets,Joseph Ossai,DE,Questionable,Ankle,2026-11-12T02:02Z,2026-11-12
+20,New York Jets,Harrison Phillips,DT,Questionable,Ankle,2026-11-12T02:01Z,2026-11-12
+20,New York Jets,Garrett Wilson,WR,Questionable,Concussion,2026-11-12T00:14Z,2026-11-12
+20,New York Jets,Omar Cooper Jr.,WR,Questionable,Ankle,2026-11-11T17:30Z,2026-11-12
+20,New York Jets,VJ Payne,S,Injured Reserve,Knee,2026-11-08T01:56Z,2026-11-12
+20,New York Jets,Max Mitchell,OT,Injured Reserve,Concussion,2026-11-04T01:56Z,2026-11-12
+21,Philadelphia Eagles,Dontayvion Wicks,WR,Out,Ankle,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,DeVonta Smith,WR,Out,Hamstring,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,Jonathan Jones,CB,Out,Hamstring,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,Britain Covey,WR,Out,Knee,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,Jihaad Campbell,LB,Out,Hamstring,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,Michael Carter II,CB,Out,Abdomen,2026-11-09T21:32Z,2026-11-12
+21,Philadelphia Eagles,Zack Baun,LB,Questionable,Back,2026-11-08T20:21Z,2026-11-12
+23,Pittsburgh Steelers,Brandin Echols,CB,Out,,2026-11-12T01:50Z,2026-11-12
+23,Pittsburgh Steelers,Doneiko Slaughter,CB,Out,,2026-11-12T01:50Z,2026-11-12
+23,Pittsburgh Steelers,DeShon Elliott,S,Questionable,Ankle,2026-11-12T00:36Z,2026-11-12
+23,Pittsburgh Steelers,Ben Skowronek,WR,Out,,2026-11-12T00:36Z,2026-11-12
+23,Pittsburgh Steelers,Derrick Harmon,DT,Injured Reserve,Foot,2026-11-11T22:34Z,2026-11-12
+23,Pittsburgh Steelers,Michael Pittman Jr.,WR,Injured Reserve,Foot,2026-11-11T20:02Z,2026-11-12
+25,San Francisco 49ers,C.J. West,DT,Injured Reserve,Knee,2026-11-12T00:46Z,2026-11-12
+25,San Francisco 49ers,Deommodore Lenoir,CB,Questionable,Foot,2026-11-12T00:45Z,2026-11-12
+25,San Francisco 49ers,Renardo Green,CB,Questionable,Back,2026-11-12T00:43Z,2026-11-12
+25,San Francisco 49ers,Deebo Samuel Sr.,WR,Questionable,Hamstring,2026-11-12T00:24Z,2026-11-12
+25,San Francisco 49ers,Mike Evans,WR,Questionable,Achilles,2026-11-12T00:24Z,2026-11-12
+25,San Francisco 49ers,Upton Stout,CB,Questionable,Shoulder,2026-11-12T00:19Z,2026-11-12
+25,San Francisco 49ers,Siran Neal,S,Questionable,Knee,2026-11-12T00:19Z,2026-11-12
+25,San Francisco 49ers,Gracen Halton,DT,Injured Reserve,Ankle,2026-11-11T02:01Z,2026-11-12
+25,San Francisco 49ers,Brandon Aiyuk,WR,Out,Personal,2026-11-09T22:31Z,2026-11-12
+26,Seattle Seahawks,Leonard Williams,DT,Questionable,Shoulder,2026-11-12T01:01Z,2026-11-12
+26,Seattle Seahawks,Derick Hall,LB,Questionable,Back,2026-11-12T00:53Z,2026-11-12
+26,Seattle Seahawks,Connor O'Toole,LB,Questionable,Foot,2026-11-12T00:26Z,2026-11-12
+26,Seattle Seahawks,Patrick O'Connell,LB,Questionable,Toe,2026-11-12T00:25Z,2026-11-12
+26,Seattle Seahawks,Anthony Bradford,G,Questionable,Knee,2026-11-12T00:24Z,2026-11-12
+26,Seattle Seahawks,Drew Lock,QB,Questionable,Oblique,2026-11-12T00:10Z,2026-11-12
+26,Seattle Seahawks,Rashid Shaheed,WR,Out,,2026-11-12T00:02Z,2026-11-12
+26,Seattle Seahawks,Brandon Pili,DT,Questionable,Back,2026-11-10T15:44Z,2026-11-12
+26,Seattle Seahawks,Quenton Nelson,G,Doubtful,Knee,2026-11-10T15:44Z,2026-11-12
+26,Seattle Seahawks,Uchenna Nwosu,LB,Questionable,Ankle,2026-11-10T15:44Z,2026-11-12
+26,Seattle Seahawks,Charles Cross,OT,Doubtful,Ankle,2026-11-10T15:44Z,2026-11-12
+26,Seattle Seahawks,Sam Darnold,QB,Out,Quadriceps,2026-11-10T15:44Z,2026-11-12
+27,Tampa Bay Buccaneers,Yaya Diaby,LB,Out,Knee - MCL,2026-11-09T21:35Z,2026-11-12
+27,Tampa Bay Buccaneers,Jalen McMillan,WR,Injured Reserve,Knee - PCL,2026-11-09T19:19Z,2026-11-12
+27,Tampa Bay Buccaneers,Antoine Winfield Jr.,S,Questionable,Ankle,2026-11-09T03:35Z,2026-11-12
+10,Tennessee Titans,JC Latham,OT,Questionable,,2026-11-12T01:30Z,2026-11-12
+10,Tennessee Titans,Tommy Townsend,P,Out,,2026-11-12T01:26Z,2026-11-12
+10,Tennessee Titans,Jaylon Jones,CB,Out,,2026-11-12T01:26Z,2026-11-12
+10,Tennessee Titans,Cody Barton,LB,Questionable,Concussion,2026-11-11T23:12Z,2026-11-12
+10,Tennessee Titans,Anthony Hill Jr.,LB,Questionable,Neck,2026-11-11T23:10Z,2026-11-12
+10,Tennessee Titans,Marcus Harris,CB,Questionable,,2026-11-11T23:07Z,2026-11-12
+10,Tennessee Titans,Tyjae Spears,RB,Questionable,Knee,2026-11-11T22:08Z,2026-11-12
+10,Tennessee Titans,Carnell Tate,WR,Questionable,Shoulder,2026-11-11T18:44Z,2026-11-12
+10,Tennessee Titans,James Williams Sr.,LB,Injured Reserve,Groin,2026-11-10T15:44Z,2026-11-12
+10,Tennessee Titans,Dorian Mausi,LB,Injured Reserve,,2026-11-10T01:54Z,2026-11-12
+10,Tennessee Titans,Peter Skoronski,G,Questionable,Hamstring,2026-11-01T21:14Z,2026-11-12
+28,Washington Commanders,Lucas Patrick,G,Out,Concussion,2026-11-12T02:02Z,2026-11-12
+28,Washington Commanders,Treylon Burks,WR,Out,,2026-11-11T22:06Z,2026-11-12
+28,Washington Commanders,Colson Yankoff,TE,Out,Knee,2026-11-11T20:21Z,2026-11-12
+28,Washington Commanders,Dyami Brown,WR,Injured Reserve,Calf,2026-11-07T23:15Z,2026-11-12
+28,Washington Commanders,Daron Payne,DT,Injured Reserve,Foot,2026-11-04T19:13Z,2026-11-12
+28,Washington Commanders,Jeremy McNichols,RB,Injured Reserve,Foot,2026-11-04T17:09Z,2026-11-12
