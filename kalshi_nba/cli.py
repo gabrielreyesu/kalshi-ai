@@ -84,7 +84,7 @@ def cmd_predict(a):
         print("No hay partidos próximos."); return
     pr = models.predict(up)
     preds = pd.concat([up[["event_id", "kickoff_utc", "home", "away", "home_id", "away_id", "elo_diff", "rest_h", "rest_a"]], pr], axis=1)
-    preds["sig_m"], preds["sig_t"], preds["model_version"], preds["created_utc"] = models.sig_m, models.sig_t, MODEL_VERSION, now.isoformat()
+    preds["sig_m"], preds["sig_t"], preds["model_version"], preds["created_utc"] = models.sig_m, models.sig_t, f"{lg}_v1", now.isoformat()
     seen = set(pd.read_csv(REG, dtype={"event_id": str})["event_id"]) if REG.exists() else set()
     new = preds[~preds["event_id"].isin(seen)]
     if len(new):

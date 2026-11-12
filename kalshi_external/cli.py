@@ -70,10 +70,11 @@ def load_completed_intl(path):
 
 def run(registry_dir="predictions",history_path="data/external_signals/history.jsonl",
         results_path="reports/intl_real_validation/oos_raw.csv",
-        reports_dir="reports/external_learning", now=None, session=None):
+        reports_dir="reports/external_learning", now=None, session=None, resolve_live=None):
     now=utc(now or pd.Timestamp.now(tz="UTC"))
     all_parts=[];warn=[]
-    for sport,filename in [("intl","intl_registry.csv"),("nfl","nfl_registry.csv"),("nba","nba_registry.csv")]:
+    for sport,filename in [("intl","intl_registry.csv"),("club","intl_registry.csv"),
+                           ("nfl","nfl_registry.csv"),("nba","nba_registry.csv")]:
         path=Path(registry_dir)/filename
         if not path.exists():
             warn.append(f"No local {sport} prediction registry")
@@ -99,6 +100,14 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
     fetched.extend(r);warn.extend(errors)
     history,added=append_history(history_path,fetched)
     outcomes=load_completed_intl(results_path)
+    # V9: resultados reales de todos los deportes registrados (antes solo se leía un archivo inexistente aquí).
+    if resolve_live is None:
+        resolve_live=os.environ.get("KALSHI_RESOLVE_LIVE","")=="1"
+    if resolve_live:
+        from .outcomes import live_outcomes
+        live,errors=live_outcomes(reg)
+        warn.extend(errors)
+        outcomes=pd.concat([outcomes,live],ignore_index=True).drop_duplicates(["sport","event_id"])
     scored=historical_scores(history,outcomes,min_cases=30)
     dest=Path(reports_dir);dest.mkdir(parents=True,exist_ok=True)
     scored.to_csv(dest/"source_performance.csv",index=False)
@@ -112,11 +121,13 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
         "new_records":added,
         "observations_in_private_cache":len(history),
         "new_by_source":sport_counts,
+        "resolved_outcomes_available":int(len(outcomes)),
+        "resolved_cases_by_source":{f"{r.source_id}|{r.sport}":int(r.n) for r in scored.itertuples()} if len(scored) else {},
         "sources_with_30_plus_resolved_cases":int(scored.eligible_for_review.sum()) if len(scored) else 0,
         "status":"RESEARCH_ONLY_NOT_USED_TO_MODIFY_PRODUCTION",
         "notes":[
             "Historical source data are kept in Actions cache only; cache is not durable storage.",
-            "Only finished 90-minute international OOS results are scored currently.",
+            "Scored sports: intl/club (regulation 90-minute result only), NBA and NFL (ties excluded).",
             "A source's predictive signal is not promoted without prospective paired validation.",
         ],
         "warnings":warn,

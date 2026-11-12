@@ -34,13 +34,34 @@ jobs:
           key: external-signals-v1-${{ github.run_id }}
           restore-keys: |
             external-signals-v1-
+      - name: Restore durable private archive (optional; needs DATA_REPO_TOKEN)
+        env:
+          DATA_REPO_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+        run: |
+          if [ -z "$DATA_REPO_TOKEN" ]; then echo "Sin DATA_REPO_TOKEN: solo caché temporal (no durable)."; exit 0; fi
+          git clone -q --depth 1 "https://x-access-token:${DATA_REPO_TOKEN}@github.com/${{ github.repository_owner }}/kalshi-ai-data.git" _archive
+          mkdir -p data/external_signals _archive/external_signals
+          python -m kalshi_external.archive merge data/external_signals/history.jsonl _archive/external_signals/history.jsonl data/external_signals/history.jsonl
       - name: Snapshot time-stamped external forecasts
         env:
+          KALSHI_RESOLVE_LIVE: "1"
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
           LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
         run: python -m kalshi_external.cli --output reports/external_learning
+      - name: Save durable private archive (optional)
+        if: always()
+        env:
+          DATA_REPO_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+        run: |
+          if [ -z "$DATA_REPO_TOKEN" ] || [ ! -d _archive ]; then exit 0; fi
+          python -m kalshi_external.archive merge data/external_signals/history.jsonl _archive/external_signals/history.jsonl _archive/external_signals/history.jsonl
+          cd _archive
+          git config user.name "kalshi-archive-bot"; git config user.email "kalshi-archive-bot@users.noreply.github.com"
+          git add external_signals/history.jsonl
+          git diff --cached --quiet || git commit -q -m "external signals $(date -u +%FT%H:%MZ)"
+          git push -q
       - name: Archive aggregate summaries only
         if: always()
         uses: actions/upload-artifact@v4
