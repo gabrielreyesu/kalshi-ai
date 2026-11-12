@@ -21,7 +21,7 @@ ODDS_BASE="https://api.the-odds-api.com/v4"
 FOOTBALL_BASE="https://v3.football.api-sports.io"
 DEFAULT_SPORTS=("americanfootball_nfl","basketball_nba","soccer_uefa_champs_league")
 SPORT_MAP={"americanfootball_nfl":"nfl","basketball_nba":"nba",
-           "soccer_uefa_champs_league":"intl"}
+           "soccer_uefa_champs_league":"club"}
 
 
 def _get(session, url, *, params=None, headers=None):
@@ -58,7 +58,7 @@ def odds_consensus(events, registry, observed_at, sports=None, min_books=2):
                     continue
             opts=market.get("outcomes",[])
             price={o.get("name"):o.get("price") for o in opts}
-            names=[event["home_team"]]+(["Draw"] if sport=="intl" else [])+[event["away_team"]]
+            names=[event["home_team"]]+(["Draw"] if sport in ("intl","club") else [])+[event["away_team"]]
             try:
                 x=np.array([float(price[n]) for n in names],dtype=float)
             except (ValueError,TypeError,KeyError):
@@ -103,9 +103,12 @@ def parse_football_forecast(fixture, forecast, registry, captured):
     if fixture.get("fixture",{}).get("status",{}).get("short")!="NS":
         return None
     f=fixture["fixture"]
-    found=future_match(registry,"intl",
-                       fixture["teams"]["home"]["name"],fixture["teams"]["away"]["name"],
-                       f["date"],captured)
+    found=None
+    for sport in ("intl", "club"):
+        found=future_match(registry,sport,
+                           fixture["teams"]["home"]["name"],fixture["teams"]["away"]["name"],
+                           f["date"],captured)
+        if found is not None:break
     if found is None:return None
     predictions=forecast.get("response",[])
     if not predictions:return None
@@ -133,8 +136,9 @@ def fetch_football(session,registry,captured,key,max_forecasts=12):
     for fixture in fixtures:
         try:
             if fixture.get("fixture",{}).get("status",{}).get("short")!="NS":continue
-            if future_match(registry,"intl",fixture["teams"]["home"]["name"],
-                            fixture["teams"]["away"]["name"],fixture["fixture"]["date"],captured) is not None:
+            if any(future_match(registry,sport,fixture["teams"]["home"]["name"],
+                                fixture["teams"]["away"]["name"],fixture["fixture"]["date"],captured) is not None
+                   for sport in ("intl","club")):
                 matched.append(fixture)
         except (KeyError,ValueError):
             continue
@@ -167,7 +171,7 @@ def parse_licensed_analysts(items,registry,captured):
             if utc(item["published_utc"])>=utc(found.kickoff_utc)-pd.Timedelta(minutes=15):
                 continue
             if utc(item["published_utc"])>utc(captured):continue
-            p=[item["p_H"]]+([item["p_D"]] if sport=="intl" else [])+[item["p_A"]]
+            p=[item["p_H"]]+([item["p_D"]] if sport in ("intl","club") else [])+[item["p_A"]]
             rec=make_record(found,item["source_id"],captured,p,item["published_utc"],source_kind="analyst")
             result.append(rec)
         except (ValueError,KeyError,TypeError):

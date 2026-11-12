@@ -15,6 +15,7 @@ import requests
 
 from .core import historical_scores, load_registry, utc
 from .providers import fetch_odds, fetch_football, fetch_licensed_analysts
+from .skorbot import fetch_skorbot
 
 
 def append_history(path, records, max_bytes=25_000_000):
@@ -91,6 +92,8 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
     ]:
         r,errors=function(s,reg,now,**kwargs)
         fetched.extend(r);warn.extend(errors)
+    r,errors=fetch_skorbot(s,reg,now)
+    fetched.extend(r);warn.extend(errors)
     r,errors=fetch_licensed_analysts(s,reg,now,os.environ.get("LICENSED_ANALYST_FEED_URL"),
                                     os.environ.get("LICENSED_ANALYST_FEED_HOST"))
     fetched.extend(r);warn.extend(errors)
@@ -105,7 +108,7 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
         sport_counts[key]=sport_counts.get(key,0)+1
     summary={
         "run_utc":now.isoformat(),
-        "sources_checked":3,
+        "sources_checked":4,
         "new_records":added,
         "observations_in_private_cache":len(history),
         "new_by_source":sport_counts,

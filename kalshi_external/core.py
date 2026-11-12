@@ -33,8 +33,9 @@ def load_registry(path, sport):
     required = {"event_id", "kickoff_utc", "home", "away", "created_utc"}
     if not required.issubset(d):
         raise ValueError(f"Missing registry columns: {sorted(required-set(d))}")
-    if sport == "intl":
-        d = d[d.get("grupo", pd.Series("",index=d.index)).eq("selecciones")]
+    if sport in ("intl", "club"):
+        expected = "selecciones" if sport == "intl" else "clubes"
+        d = d[d.get("grupo", pd.Series("",index=d.index)).eq(expected)]
     d = d.drop_duplicates("event_id", keep="first").copy()
     d["sport"] = sport
     return d
@@ -70,7 +71,7 @@ def make_record(registry_match, source_id, captured, probs, published=None, sour
     if utc(registry_match.created_utc) > capture:
         raise ValueError("Original model prediction was created after snapshot")
     p = np.asarray(probs, dtype=float)
-    n = 3 if registry_match.sport == "intl" else 2
+    n = 3 if registry_match.sport in ("intl", "club") else 2
     if p.shape != (n,) or not np.isfinite(p).all() or np.any(p < 0) or p.sum() <= 0:
         raise ValueError("Invalid probability vector")
     p = p / p.sum()
@@ -122,11 +123,11 @@ def historical_scores(rows: Iterable[dict], outcomes: pd.DataFrame, min_cases=30
     joined=f.merge(o,on=["event_id","sport"],how="inner",validate="many_to_one")
     metrics=[]
     for (source,sport),d in joined.groupby(["source_id","sport"]):
-        labels={"H":0,"D":1,"A":2} if sport=="intl" else {"H":0,"A":1}
+        labels={"H":0,"D":1,"A":2} if sport in ("intl", "club") else {"H":0,"A":1}
         idx=d.result.map(labels)
         if idx.isna().any(): continue
-        cols=["p_H","p_D","p_A"] if sport=="intl" else ["p_H","p_A"]
-        base=["model_p_H","model_p_D","model_p_A"] if sport=="intl" else ["model_p_H","model_p_A"]
+        cols=["p_H","p_D","p_A"] if sport in ("intl", "club") else ["p_H","p_A"]
+        base=["model_p_H","model_p_D","model_p_A"] if sport in ("intl", "club") else ["model_p_H","model_p_A"]
         p=d[cols].to_numpy(float); q=d[base].to_numpy(float)
         if not np.isfinite(p).all() or not np.isfinite(q).all():continue
         if (p<0).any() or (q<0).any() or (p.sum(axis=1)<=0).any() or (q.sum(axis=1)<=0).any():

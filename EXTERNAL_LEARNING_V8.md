@@ -9,6 +9,7 @@ Añadir señales externas al motor sin dejar que fuentes no validadas reescriban
 | --- | --- | --- |
 | The Odds API | Consenso de cuotas desmarjinadas por partido (NO es un analista individual) | Saltada |
 | API-Football | Pronósticos estadísticos 1X2 de otro proveedor | Saltada |
+| Skorbot (skorbot.live) | API pública de predicciones de fútbol; observación y evaluación con atribución (sin entrenamiento a partir de sus datos) | Activada sin clave |
 | Feed JSON autorizado de analistas | Pronósticos 1X2 o 2 vías con autor, fecha de publicación y permiso explícito | Saltado |
 
 No scrapeamos webs ni perfiles de personas. Metaculus y Football-Data no se integran porque sus condiciones actuales restringen este uso sin autorización. Respeta todas las cuotas, privacidad y licencias de proveedores.
@@ -55,3 +56,6 @@ Para NFL y NBA, `sport` es `nfl` o `nba` y no se usa `p_D`. La fecha de publicac
 - La V8 no puede demostrar todavía ninguna mejora de accuracy, Brier o log loss atribuible a terceros hasta acumular suficientes pronósticos reales prospectivos.
 - La ejecución no es continua literalmente: es programada, depende de disponibilidad de GitHub Actions, proveedores y cuota.
 - El workflow semanal solo vuelve a ajustar el candidato propio; el mezclador de pronósticos externos sigue en investigación hasta validación independiente.
+
+### Fuente abierta Skorbot
+El sistema consulta su API JSON pública de forma moderada con `User-Agent` identificable y atribución **Skorbot (skorbot.live)**. Descarta partidos ya finalizados, resultados presentes, predicciones posteriores al saque inicial y cualquier encuentro sin identificación inequívoca. Su calendario publicado puede estar desactualizado; la ausencia de nuevos pronósticos no se interpreta como error del modelo. En tanto no esté claro el permiso de entrenamiento, se limita al monitoreo y no se utiliza como señal para ajustar nuestros coeficientes.
