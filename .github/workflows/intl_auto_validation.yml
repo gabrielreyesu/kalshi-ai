@@ -54,6 +54,8 @@ jobs:
         run: python -m kalshi_intl.evaluate_history --cache data/intl --first-year 2016 --output reports/intl_real_validation
       - name: Compare original and challenger against historical outcomes
         run: python -m kalshi_intl.auto_validate --input reports/intl_real_validation/oos_paired.csv --output reports/intl_auto_validation
+      - name: Benchmark fixed candidate families on prior-season walk-forward data
+        run: python -m kalshi_intl.experiments --input reports/intl_real_validation/oos_raw.csv --output reports/intl_experiments
       - name: Retrain a JSON candidate only with completed prior-UTC-day matches
         run: python -m kalshi_intl.auto_train --input reports/intl_real_validation/oos_raw.csv --output reports/intl_training/calibrator_candidate.json
       - name: Archive validation and training artifacts
