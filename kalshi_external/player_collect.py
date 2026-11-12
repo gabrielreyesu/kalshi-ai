@@ -85,6 +85,66 @@ def _fetch_injuries(session, sport, observed_at):
     return parse_injury_feed(response, sport, observed_at)
 
 
+def cached_daily_injuries(sport, observed_at, folder="predictions"):
+    """Fail-safe research fallback to a previously saved same-UTC-day ESPN CSV.
+
+    Capture time means WHEN this preexisting snapshot was *read*, not when ESPN
+    published it. Names receive a namespace ID and are NOT falsely joined
+    against canonical ESPN athlete IDs. Never treat this as confirmed lineup.
+    """
+    now=timestamp(observed_at)
+    path=Path(folder)/f"{sport}_injuries.csv"
+    if not path.exists():
+        return None
+    d=pd.read_csv(path,dtype={"team_id":str})
+    required={"team_id","team","player","position","status","reported","day"}
+    if not required.issubset(d):
+        raise ValueError("Cached daily injuries schema is invalid")
+    today=now.strftime("%Y-%m-%d")
+    d=d[d.day.astype(str)==today]
+    if d.empty:
+        return None
+    players=[]
+    seen=set()
+    for x in d.to_dict("records"):
+        team_id=str(x.get("team_id") or "")
+        name=str(x.get("player") or "").strip()
+        status=str(x.get("status") or "").strip()
+        if not team_id or not name or not status:
+            continue
+        report=x.get("reported")
+        try:
+            reported=timestamp(report) if pd.notna(report) else None
+            if reported is not None and reported>now:
+                continue
+        except (ValueError,TypeError):
+            continue
+        ident=(team_id,name.casefold())
+        if ident in seen:
+            continue
+        seen.add(ident)
+        players.append({
+            "team_id":team_id,"team":str(x.get("team") or ""),
+            "player_id":"name:"+name.casefold(),"player":name,
+            "position":str(x.get("position") or ""),
+            "status":status,
+            "reported_utc":reported.isoformat() if reported is not None else None,
+            "id_is_canonical":False,
+        })
+    if not players:
+        return None
+    return {
+        "source_id":"espn_official_injury_feed",
+        "source_kind":"player_availability_research",
+        "sport":sport,"event_id":f"{sport}_league_injuries",
+        "captured_utc":now.isoformat(),
+        "feed_origin":"same_day_cached_espn_csv",
+        "report_day_utc":today,
+        "reported_athletes":players,
+        "note":"Stale risk: same-day CSV is not an up-to-the-minute injury report. Never infer active or merge with canonical athlete IDs.",
+    }
+
+
 def _recent_completed(session, sport, observed_at, history, days=3,
                       max_new_games=6, pause_seconds=0.1):
     """Bound request volume; do not try to invent retroactive as-of injuries."""
@@ -141,8 +201,17 @@ def run(injuries_path="data/external_signals/player_injuries.jsonl",
         try:
             injuries_new.append(_fetch_injuries(s,sport,now))
         except (requests.RequestException,ValueError,RuntimeError,KeyError,TypeError) as err:
-            msg=(str(err) if isinstance(err,RuntimeError) else type(err).__name__)
-            issues.append(f"{sport} injury report: {msg[:75]}")
+            msg=(str(err) if isinstance(err,(RuntimeError,ValueError)) else type(err).__name__)
+            issues.append(f"{sport} live injury report unavailable: {msg[:90]}")
+            # The sports_daily job has already archived same-day injuries
+            # independently. Preserve them as LOWER-confidence research.
+            try:
+                cached=cached_daily_injuries(sport,now,folder=registry_dir)
+                if cached:
+                    injuries_new.append(cached)
+                    issues.append(f"{sport}: using same-day cached injury CSV (not live verified)")
+            except (OSError,ValueError,TypeError) as fallback_error:
+                issues.append(f"{sport}: cached injury fallback unavailable: {type(fallback_error).__name__}")
         try:
             batch,warn,n = _recent_completed(s,sport,now,prior_games,days=days,
                                               max_new_games=max_new_games,

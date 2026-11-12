@@ -248,7 +248,25 @@ def player_matchup_context(event, boxscores, injuries, as_of, max_recent=20, shr
                 })
     rows = []
     for team_id, opponent_id in ((team_ids[0], team_ids[1]), (team_ids[1], team_ids[0])):
-        current = {str(x.get("player_id")): x for x in listed.get(team_id, []) if x.get("player_id")}
+        # Daily CSV fallback lacks canonical athlete IDs. Match by EXACT
+        # team+player name only when precisely one prior ID has that name.
+        # Otherwise retain a separate name: identifier and do not guess.
+        by_name = defaultdict(set)
+        for (t, historic_pid), games in history.items():
+            if t == team_id and games:
+                pname = str(games[-1].get("player") or "").casefold().strip()
+                if pname:
+                    by_name[pname].add(historic_pid)
+        current = {}
+        for item in listed.get(team_id, []):
+            pid = str(item.get("player_id") or "")
+            if not pid:
+                continue
+            if not item.get("id_is_canonical", True):
+                matches = by_name.get(str(item.get("player") or "").casefold().strip(), set())
+                if len(matches) == 1:
+                    pid = next(iter(matches))
+            current[pid] = item
         ids = {pid for t,pid in history if t == team_id} | set(current)
         for pid in ids:
             old = sorted(history.get((team_id, pid), []), key=lambda x:x["game_utc"])[-max_recent:]
