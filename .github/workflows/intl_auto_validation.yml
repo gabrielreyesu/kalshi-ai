@@ -74,6 +74,7 @@ jobs:
           git clone -q --depth 1 "https://x-access-token:${DATA_REPO_TOKEN}@github.com/${{ github.repository_owner }}/kalshi-ai-data.git" _historical_archive
           mkdir -p data/external_signals
           python -m kalshi_external.archive merge data/external_signals/history.jsonl _historical_archive/external_signals/history.jsonl data/external_signals/history.jsonl
+          python -m kalshi_external.archive merge data/external_signals/soccer_starter_impact.jsonl _historical_archive/external_signals/soccer_starter_impact.jsonl data/external_signals/soccer_starter_impact.jsonl
       - name: Measure external source skill on completed NFL, NBA and soccer fixtures
         env:
           KALSHI_RESOLVE_LIVE: "1"
@@ -84,11 +85,15 @@ jobs:
         run: python -m kalshi_external.cli --output reports/external_learning
       - name: Evaluate sport-specific research-only external blend weights
         run: python -m kalshi_external.learn --outcomes reports/external_learning/resolved_outcomes.csv --output reports/external_learning/candidate_weights.json
+      - name: Prospective soccer starter-absence shadow holdout (never promote)
+        run: python -m kalshi_external.soccer_impact_shadow --outcomes reports/external_learning/resolved_outcomes.csv --output reports/external_learning/soccer_impact/shadow_results.json
       - name: Archive validation and training artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: international-model-research-${{ github.run_number }}
-          path: reports/intl_*/
+          path: |
+            reports/intl_*/
+            reports/external_learning/soccer_impact/shadow_results.json
           if-no-files-found: warn
           retention-days: 30

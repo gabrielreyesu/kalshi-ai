@@ -50,6 +50,8 @@ jobs:
           python -m kalshi_external.archive merge data/external_signals/soccer_lineups.jsonl _archive/external_signals/soccer_lineups.jsonl data/external_signals/soccer_lineups.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_injuries.jsonl _archive/external_signals/soccer_injuries.jsonl data/external_signals/soccer_injuries.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_previews.jsonl _archive/external_signals/soccer_previews.jsonl data/external_signals/soccer_previews.jsonl
+          python -m kalshi_external.archive merge data/external_signals/soccer_confirmed_lineups.jsonl _archive/external_signals/soccer_confirmed_lineups.jsonl data/external_signals/soccer_confirmed_lineups.jsonl
+          python -m kalshi_external.archive merge data/external_signals/soccer_starter_impact.jsonl _archive/external_signals/soccer_starter_impact.jsonl data/external_signals/soccer_starter_impact.jsonl
       - name: Snapshot time-stamped external forecasts
         env:
           KALSHI_RESOLVE_LIVE: "1"
@@ -68,6 +70,8 @@ jobs:
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: python -m kalshi_external.soccer_player_collect --output reports/external_learning/soccer_players
+      - name: Quantify soccer starter relevance, absences and possible replacements (research)
+        run: python -m kalshi_external.soccer_impact_collect --output reports/external_learning/soccer_impact/coverage.json
       - name: Summarize trusted reference links and API coverage
         if: always()
         run: python -m kalshi_external.reference_report --output reports/external_learning/REFERENCIAS.md
@@ -77,6 +81,8 @@ jobs:
         run: python -m kalshi_external.player_audit --output reports/external_learning/player_context/audit.json
       - name: Validate soccer player archives before private storage
         run: python -m kalshi_external.soccer_player_audit --output reports/external_learning/soccer_players/audit.json
+      - name: Audit prospective soccer XI and starter importance before archival
+        run: python -m kalshi_external.soccer_impact_audit --output reports/external_learning/soccer_impact/audit.json
       - name: Save durable private archive (optional)
         if: success()
         env:
@@ -92,9 +98,11 @@ jobs:
           python -m kalshi_external.archive merge data/external_signals/soccer_lineups.jsonl _archive/external_signals/soccer_lineups.jsonl _archive/external_signals/soccer_lineups.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_injuries.jsonl _archive/external_signals/soccer_injuries.jsonl _archive/external_signals/soccer_injuries.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_previews.jsonl _archive/external_signals/soccer_previews.jsonl _archive/external_signals/soccer_previews.jsonl
+          python -m kalshi_external.archive merge data/external_signals/soccer_confirmed_lineups.jsonl _archive/external_signals/soccer_confirmed_lineups.jsonl _archive/external_signals/soccer_confirmed_lineups.jsonl
+          python -m kalshi_external.archive merge data/external_signals/soccer_starter_impact.jsonl _archive/external_signals/soccer_starter_impact.jsonl _archive/external_signals/soccer_starter_impact.jsonl
           cd _archive
           git config user.name "kalshi-archive-bot"; git config user.email "kalshi-archive-bot@users.noreply.github.com"
-          git add external_signals/history.jsonl external_signals/weather.jsonl external_signals/player_injuries.jsonl external_signals/player_boxscores.jsonl external_signals/player_previews.jsonl external_signals/soccer_player_games.jsonl external_signals/soccer_lineups.jsonl external_signals/soccer_injuries.jsonl external_signals/soccer_previews.jsonl
+          git add external_signals/history.jsonl external_signals/weather.jsonl external_signals/player_injuries.jsonl external_signals/player_boxscores.jsonl external_signals/player_previews.jsonl external_signals/soccer_player_games.jsonl external_signals/soccer_lineups.jsonl external_signals/soccer_injuries.jsonl external_signals/soccer_previews.jsonl external_signals/soccer_confirmed_lineups.jsonl external_signals/soccer_starter_impact.jsonl
           git diff --cached --quiet || git commit -q -m "external signals $(date -u +%FT%H:%MZ)"
           git push -q
       - name: Archive aggregate summaries only
