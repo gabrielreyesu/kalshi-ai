@@ -1,0 +1,46 @@
+name: External forecast research snapshots
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '35 1,13 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-forecast-archive
+  cancel-in-progress: false
+
+jobs:
+  gather:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore rolling research cache
+        uses: actions/cache@v4
+        with:
+          path: data/external_signals
+          key: external-signals-v1-${{ github.run_id }}
+          restore-keys: |
+            external-signals-v1-
+      - name: Snapshot time-stamped external forecasts
+        env:
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
+          LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
+        run: python -m kalshi_external.cli --output reports/external_learning
+      - name: Archive aggregate summaries only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-research-${{ github.run_number }}
+          path: reports/external_learning/
+          retention-days: 30
+          if-no-files-found: warn
