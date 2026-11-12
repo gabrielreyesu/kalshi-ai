@@ -16,6 +16,8 @@ from sklearn.preprocessing import StandardScaler
 
 from kalshi_soccer.engine import EngineConfig, derive_markets, score_matrix
 
+REGULATION_STATUSES = frozenset({"STATUS_FULL_TIME", "STATUS_FINAL"})  # 90-minute 1X2; exclude extra-time and penalties
+
 FEATS = ["elo_diff", "neutral", "gf_h", "ga_h", "gf_a", "ga_a", "friendly"]
 # Variables adicionales, probadas fuera de muestra (reports/variables_extra_futbol.txt)
 EXTRA = ["rest_diff", "g21_diff", "h2h_gd", "split_gd", "pts5_diff"]
@@ -135,7 +137,10 @@ class IntlModel:
         self.features = list(features or FEATS)
 
     def fit(self, f: pd.DataFrame):
-        d = f[f["final"]]
+        # Never train Poisson 90-minute goals on scores that include extra time.
+        d = f[f["final"] & f["status"].isin(REGULATION_STATUSES)]
+        if d.empty:
+            raise ValueError("No completed regulation-time matches for training")
         X = d[self.features].to_numpy(float)
         mk = lambda: make_pipeline(StandardScaler(), PoissonRegressor(alpha=1e-3, max_iter=500))
         self.mh, self.ma = mk().fit(X, d["hs"]), mk().fit(X, d["as_"])
@@ -153,10 +158,10 @@ class IntlModel:
 def walk_forward(f: pd.DataFrame, first_year: int = 2020, min_train: int = 1500, features=None, eval_col: str = "target") -> pd.DataFrame:
     """Entrena con todo lo anterior al 1 de julio del año y evalúa la temporada siguiente, solo en competiciones objetivo."""
     out = []
-    regular = f["status"].isin({"STATUS_FULL_TIME", "STATUS_FINAL"})      # sin prórroga: el mercado 1X2 es a 90 min
+    regular = f["status"].isin(REGULATION_STATUSES)       # 1X2 a 90 minutos
     for y in range(first_year, int(f["date"].dt.year.max()) + 1):
         a, b = pd.Timestamp(f"{y}-07-01"), pd.Timestamp(f"{y + 1}-07-01")
-        tr = f[f["final"] & (f["date"] < a)]
+        tr = f[f["final"] & regular & (f["date"] < a)]
         te = f[f["final"] & regular & f[eval_col] & (f["date"] >= a) & (f["date"] < b)]
         if len(tr) < min_train or te.empty:
             continue
