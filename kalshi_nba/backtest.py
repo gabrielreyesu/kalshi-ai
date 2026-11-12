@@ -45,14 +45,14 @@ def paired_bootstrap(a, b, dates, B=2000, seed=42):
             "excluye_0": bool(lo > 0 or hi < 0)}
 
 
-def walk_forward(feats: pd.DataFrame, first_test: int = 2019, min_train: int = 2000) -> pd.DataFrame:
+def walk_forward(feats: pd.DataFrame, first_test: int = 2019, min_train: int = 2000, features=None) -> pd.DataFrame:
     done = feats[feats["margin"].notna()].copy()
     out = []
     for s in [x for x in sorted(done["season_year"].unique()) if x >= first_test]:
         tr, te = done[done["season_year"] < s], done[done["season_year"] == s]
         if len(tr) < min_train or te.empty:
             continue
-        m = NBAModels().fit(tr)
+        m = NBAModels(features=features).fit(tr)
         pr = m.predict(te)
         rec = pd.concat([te, pr], axis=1)
         rec["sig_m"], rec["sig_t"], rec["base_win"] = m.sig_m, m.sig_t, m.base_win

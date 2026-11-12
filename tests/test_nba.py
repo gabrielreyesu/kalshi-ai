@@ -172,6 +172,31 @@ class TestResumen(unittest.TestCase):
                 txt = resumen.build(now=pd.Timestamp("2030-01-01", tz=resumen.TZ))
             finally:
                 resumen.P = old
-        self.assertIn("| Orlando Magic en Utah Jazz | Orlando Magic | 70% | 75% | 72% | 5.2 pts | 228 pts |", txt)
-        self.assertIn("50% / 25% / 25% | 50% / — / 22% | 55%", txt)
+        self.assertIn("| Orlando Magic en Utah Jazz | Orlando Magic | 70% | 75% | — | 72% | 5.2 pts | 228 pts | — |", txt)
+        self.assertIn("50% / 25% / 25% | 50% / — / 22% | — / 55% / — | — | — / — |", txt)
         self.assertIn("## NFL\n_Aún no hay registro._", txt)
+
+
+class TestPolymarket(unittest.TestCase):
+    def test_attach_orients_and_rejects_unclear(self):
+        from kalshi_nba.polymarket import attach
+        pm = [{"slug": "nba-dal-min-2026-11-12", "start": pd.Timestamp("2026-11-13T01:00Z"), "bid": 0.33, "ask": 0.35,
+               "outcomes": [{"name": "Mavericks", "price": 0.34}, {"name": "Timberwolves", "price": 0.66}]}]
+        g = pd.DataFrame([dict(event_id="1", kickoff_utc="2026-11-13T01:00Z", home="Minnesota Timberwolves", away="Dallas Mavericks"),
+                          dict(event_id="2", kickoff_utc="2026-11-13T01:00Z", home="Phoenix Suns", away="Dallas Mavericks"),
+                          dict(event_id="3", kickoff_utc="2026-11-15T01:00Z", home="Minnesota Timberwolves", away="Dallas Mavericks")])
+        a = attach(g, pm)
+        self.assertEqual(list(a.event_id), ["1"])
+        self.assertAlmostEqual(a.pm_home.iloc[0], 0.66); self.assertAlmostEqual(a.pm_bid_home.iloc[0], 0.65); self.assertAlmostEqual(a.pm_ask_home.iloc[0], 0.67)
+
+
+class TestInjuries(unittest.TestCase):
+    def test_out_counts_use_latest_day_and_ignore_questionable(self):
+        import tempfile
+        from kalshi_nba.injuries import out_counts
+        with tempfile.TemporaryDirectory() as tmp:
+            pd.DataFrame([dict(team_id="1", status="Out", day="2026-11-11"), dict(team_id="1", status="Out", day="2026-11-12"),
+                          dict(team_id="1", status="Doubtful", day="2026-11-12"), dict(team_id="1", status="Questionable", day="2026-11-12"),
+                          dict(team_id="2", status="Day-To-Day", day="2026-11-12")]).to_csv(f"{tmp}/nba_injuries.csv", index=False)
+            self.assertEqual(out_counts("nba", tmp), {"1": 2})
+            self.assertEqual(out_counts("nfl", tmp), {})

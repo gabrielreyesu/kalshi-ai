@@ -2,7 +2,7 @@ name: nba-nfl-daily
 
 on:
   schedule:
-    - cron: "0 15 * * *"     # todos los días 15:00 UTC (antes de los partidos)
+    - cron: "0 15,18,21,0,3 * * *"   # 5 fotos al día (9am, 12pm, 3pm, 6pm y 9pm hora Chicago)
   workflow_dispatch: {}
 
 permissions:
@@ -36,6 +36,7 @@ jobs:
           for lg in nba nfl; do
             python -m kalshi_nba.cli evaluate --league $lg
             python -m kalshi_nba.cli predict  --league $lg --days 7
+            python -m kalshi_nba.injuries $lg
           done
       - name: Guardar registro
         run: |

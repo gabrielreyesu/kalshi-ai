@@ -14,7 +14,7 @@ import pandas as pd
 from . import MODEL_VERSION
 from .backtest import blend_report, blend_walk_forward, logloss, paired_bootstrap, report, walk_forward
 from .data import fetch_live_line, load_league, load_nba
-from .engine import CONFIGS, NBAEngine
+from .engine import CONFIGS, LEAGUE_FEATURES, NBAEngine
 from .kalshi import LEAGUE_SERIES, attach_games, fetch_open, model_probability, parse_markets, settle
 from .models import NBAModels
 
@@ -61,7 +61,7 @@ def cmd_backtest(a):
     D = DEFAULTS[a.league]
     f = NBAEngine(CONFIGS[a.league]).process(load_league(a.league, first_season=a.first_season or D["first_season"]))
     ft = a.first_test or D["first_test"]
-    txt = f"LIGA: {a.league.upper()}\n" + report(walk_forward(f, first_test=ft, min_train=D["min_train"])) + "\n\n" + "=" * 70 + \
+    txt = f"LIGA: {a.league.upper()}\n" + report(walk_forward(f, first_test=ft, min_train=D["min_train"], features=LEAGUE_FEATURES[a.league])) + "\n\n" + "=" * 70 + \
         "\n¿APORTA EL MODELO SOBRE LA LÍNEA? (mezcla)\n" + "=" * 70 + "\n" + \
         blend_report(blend_walk_forward(f, first_test=ft, min_train=D["min_train"]))
     Path("reports").mkdir(exist_ok=True)
@@ -77,7 +77,7 @@ def cmd_predict(a):
     REG, SNAP = _paths(lg)
     g = load_league(lg, first_season=a.first_season or DEFAULTS[lg]["first_season"], with_odds=False)
     f = NBAEngine(CONFIGS[lg]).process(g)
-    models = NBAModels().fit(f)
+    models = NBAModels(features=LEAGUE_FEATURES[lg]).fit(f)
     kick = pd.to_datetime(f["kickoff_utc"], utc=True)
     up = f[(f["status"] != "STATUS_FINAL") & (kick > now) & (kick <= now + pd.Timedelta(days=a.days))].copy()
     if up.empty:
@@ -111,6 +111,14 @@ def cmd_predict(a):
         print(f"Kalshi: {len(mk)} mercados unidos ({mk['kind'].value_counts().to_dict() if len(mk) else {}})")
     except Exception as ex:  # noqa: BLE001
         print("AVISO: no se pudieron obtener precios de Kalshi:", ex)
+    try:
+        from .polymarket import attach as pm_attach, fetch_games
+        pm = pm_attach(up[["event_id", "kickoff_utc", "home", "away"]], fetch_games(lg))
+        if len(pm):
+            _append(pm.assign(snapshot_utc=now.isoformat()), Path(f"predictions/{lg}_polymarket_snapshots.csv"))
+        print(f"Polymarket: {len(pm)} partidos unidos")
+    except Exception as ex:  # noqa: BLE001
+        print("AVISO: no se pudieron obtener precios de Polymarket:", ex)
 
 
 def cmd_evaluate(a):

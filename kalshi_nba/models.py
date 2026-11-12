@@ -29,12 +29,13 @@ def total_matrix(df: pd.DataFrame) -> np.ndarray:
 
 
 class NBAModels:
-    def __init__(self, C: float = 1.0, alpha_m: float = 30.0, alpha_t: float = 30.0):
+    def __init__(self, C: float = 1.0, alpha_m: float = 30.0, alpha_t: float = 30.0, features=None):
         self.C, self.alpha_m, self.alpha_t = C, alpha_m, alpha_t
+        self.features = list(features or FEATURES)
 
     def fit(self, df: pd.DataFrame):
         d = df[df["margin"].notna()]
-        X, Xt = d[FEATURES].to_numpy(float), total_matrix(d)
+        X, Xt = d[self.features].to_numpy(float), total_matrix(d)
         self.win = make_pipeline(StandardScaler(), LogisticRegression(C=self.C, max_iter=2000)).fit(X, d["home_win"].astype(int))
         self.mar = make_pipeline(StandardScaler(), Ridge(alpha=self.alpha_m)).fit(X, d["margin"])
         self.tot = make_pipeline(StandardScaler(), Ridge(alpha=self.alpha_t)).fit(Xt, d["total_pts"])
@@ -44,7 +45,7 @@ class NBAModels:
         return self
 
     def predict(self, df: pd.DataFrame) -> pd.DataFrame:
-        X, Xt = df[FEATURES].to_numpy(float), total_matrix(df)
+        X, Xt = df[self.features].to_numpy(float), total_matrix(df)
         out = pd.DataFrame(index=df.index)
         out["p_home"] = self.win.predict_proba(X)[:, 1]
         out["mu_margin"] = self.mar.predict(X)

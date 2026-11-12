@@ -31,6 +31,15 @@ jobs:
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python -m kalshi_soccer.cli predict --days 14
+      - uses: actions/cache@v4
+        with:
+          path: data/intl
+          key: intl-data-${{ github.run_id }}
+          restore-keys: intl-data-
+      - name: Copas europeas y selecciones (evaluar y predecir)
+        run: |
+          python -m kalshi_intl.cli evaluate
+          python -m kalshi_intl.cli predict
       - name: Guardar registro (append-only, queda auditado en el historial de git)
         run: |
           git config user.name  "soccer-bot"

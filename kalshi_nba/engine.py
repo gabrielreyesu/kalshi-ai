@@ -38,6 +38,10 @@ CONFIGS = {
 
 
 FEATURES = ["elo_diff", "rest_diff", "b2b_h", "b2b_a", "g7_diff", "form_diff", "net15_diff", "playoff"]
+# Variables adicionales (se adoptan por liga solo si mejoran fuera de muestra; ver reports/variables_extra.txt)
+EXTRA = ["h2h_diff", "split_diff", "wl5_diff", "swp_diff", "g14_diff"]
+# Resultado de la prueba: solo en NCAA mejoran de forma significativa; en NBA y NFL no aportan (se dejan fuera).
+LEAGUE_FEATURES = {"nba": FEATURES, "nfl": FEATURES, "ncaab": FEATURES + EXTRA}
 
 
 def mov_multiplier(margin: float, elo_diff_winner: float, kind: str = "nba") -> float:
@@ -55,11 +59,27 @@ class NBAEngine:
         self.games = defaultdict(lambda: deque(maxlen=max(c.pace_window, c.form_window, 12)))  # (date, pf, pa)
         self.league = deque(maxlen=c.league_window)
         self.n_played = defaultdict(int)
+        self.h2h = defaultdict(lambda: deque(maxlen=6))          # margen visto desde el equipo "menor" del par
+        self.at_home = defaultdict(lambda: deque(maxlen=10))     # márgenes jugando en casa
+        self.on_road = defaultdict(lambda: deque(maxlen=10))     # márgenes jugando fuera
+        self.record = defaultdict(lambda: [0.0, 0])              # [victorias, partidos] de la temporada
 
     def _touch(self, team, season):
         if self.season_seen.get(team) != season:
             self.elo[team] = self.cfg.season_carry * self.elo[team] + (1 - self.cfg.season_carry) * self.cfg.elo_mean
             self.season_seen[team] = season
+            self.record[team] = [0.0, 0]
+
+    def _extra(self, date, home, away):
+        key, sign = ((home, away), 1.0) if home < away else ((away, home), -1.0)
+        m = self.h2h[key]
+        mean = lambda d: float(np.mean(d)) if len(d) else 0.0
+        gh, ga = list(self.games[home]), list(self.games[away])
+        wl = lambda g: float(np.mean([x[1] > x[2] for x in g[-5:]])) if g else 0.5
+        swp = lambda t: (self.record[t][0] + 2.0) / (self.record[t][1] + 4.0)
+        g14 = lambda g: sum(1 for x in g if 0 < (date - x[0]).days <= 14)
+        return {"h2h_diff": sign * mean(m), "split_diff": mean(self.at_home[home]) - mean(self.on_road[away]),
+                "wl5_diff": wl(gh) - wl(ga), "swp_diff": swp(home) - swp(away), "g14_diff": g14(gh) - g14(ga)}
 
     def _team_state(self, team, date):
         c = self.cfg
@@ -80,7 +100,7 @@ class NBAEngine:
         ra, g7a, fa, pfa, paa = self._team_state(away, date)
         lg = float(np.mean([x for x in self.league])) if self.league else c.default_total
         hfa = 0.0 if neutral else c.hfa
-        return {"elo_h": eh, "elo_a": ea, "elo_diff": eh - ea + hfa,
+        return {**self._extra(date, home, away), "elo_h": eh, "elo_a": ea, "elo_diff": eh - ea + hfa,
                 "rest_h": rh, "rest_a": ra, "rest_diff": rh - ra, "b2b_h": int(rh <= 1), "b2b_a": int(ra <= 1),
                 "g7_diff": g7h - g7a, "form_diff": fh - fa,
                 "pf_h": pfh, "pa_h": pah, "pf_a": pfa, "pa_a": paa,
@@ -100,6 +120,10 @@ class NBAEngine:
         self.games[home].append((date, hs, as_)); self.games[away].append((date, as_, hs))
         self.league.append(hs + as_)
         self.n_played[home] += 1; self.n_played[away] += 1
+        self.h2h[(home, away) if home < away else (away, home)].append(margin if home < away else -margin)
+        self.at_home[home].append(margin); self.on_road[away].append(-margin)
+        for t, w in ((home, res), (away, 1 - res)):
+            self.record[t][0] += w; self.record[t][1] += 1
 
     def process(self, games: pd.DataFrame) -> pd.DataFrame:
         """games: columnas date, season_year, season_type, home_id, away_id, hs, as_, (neutral). Orden por fecha."""

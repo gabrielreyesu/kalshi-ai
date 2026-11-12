@@ -108,3 +108,32 @@ la ventaja neta supera 2 y 5 centavos.
 Aviso: spreads y totales alternos se valoran con una curva normal. En NFL eso falla cerca de los márgenes típicos
 (3 y 7 puntos), así que las "ventajas" en spreads de NFL son en buena parte un artefacto, no dinero gratis.
 Para actualizar el repositorio: `%run kalshi_ai/push_to_github.py` (conserva el historial y la carpeta predictions/).
+
+---
+# Copas europeas y selecciones (`kalshi_intl`)
+Champions, Europa League y Conference; Mundial, eliminatorias UEFA/CONMEBOL, Nations League, Eurocopa, Copa América y amistosos.
+Datos de ESPN (58 mil partidos de clubes de 19 ligas + copas; 8 mil de selecciones). Rating Elo común con ajuste por
+fuerza de liga (aprendido solo en partidos entre ligas distintas), sede neutral y Poisson para 1X2 y goles.
+```
+python -m kalshi_intl.cli backtest | predict | evaluate
+```
+Backtest fuera de muestra (2020/21 -> hoy), 1X2:
+- Clubes: 2,770 partidos, modelo 56.2% / logloss 0.9529 (base 1.0424). Con cuotas (2,488): modelo 0.9473 vs mercado 0.9102.
+- Selecciones: 3,703 partidos, modelo 57.6% / 0.9254 (base 1.0504). Con cuotas (2,463): modelo 0.9006 vs mercado 0.8335.
+El mercado gana en ambos. En selecciones, el over 2.5 del modelo es peor que la línea base: no usarlo.
+No requiere clave. Corre dentro de `soccer-daily`; el registro queda en `predictions/intl_registry.csv`.
+
+---
+# Variables adicionales y Polymarket
+- Se probaron fuera de muestra: enfrentamientos directos, rendimiento en casa vs fuera, racha, récord de temporada y
+  carga de partidos (`reports/variables_extra.txt`). Solo en NCAA mejoran de forma significativa (logloss 0.5209 -> 0.5184)
+  y ahí quedaron activas. En NBA y NFL no aportan y se dejaron fuera para no añadir ruido.
+- Polymarket (ganador, NBA y NFL): `predictions/{liga}_polymarket_snapshots.csv` y columna nueva en PREDICCIONES.md.
+- El flujo `nba-nfl-daily` ahora toma 5 fotos de precios al día.
+- Fútbol (`reports/variables_extra_futbol.txt`): se probaron descanso, carga de partidos (21 días), enfrentamientos directos,
+  rendimiento casa/fuera y puntos recientes en copas europeas, las 5 grandes ligas y selecciones. Solo en selecciones
+  mejoran de forma clara (enfrentamientos directos y casa/fuera: logloss 0.9254 -> ~0.922) y ahí quedaron activas.
+- Copas europeas y selecciones tienen ahora los mismos mercados que las ligas: 1X2, más de 1.5/2.5/3.5, ambos anotan y
+  victoria por 2+ goles (columnas nuevas en `intl_registry.csv` y en PREDICCIONES.md).
+- Bajas de NBA y NFL: `python -m kalshi_nba.injuries nba|nfl` guarda una foto diaria en `predictions/{liga}_injuries.csv`
+  (fuente: ESPN). Aún no entran al modelo; el historial acumulado servirá para probar si ayudan.
