@@ -84,7 +84,7 @@ def fetch_odds(session, registry, captured, key, sports=DEFAULT_SPORTS):
             continue
         try:
             data=_get(session,f"{ODDS_BASE}/sports/{sport}/odds",
-                      params={"apiKey":key,"regions":"us,uk,eu","markets":"h2h","oddsFormat":"decimal"})
+                      params={"apiKey":key,"regions":"us","markets":"h2h","oddsFormat":"decimal"})
             if not isinstance(data,list):raise ValueError("Malformed odds response")
             results.extend(odds_consensus(data,registry,captured))
         except (requests.RequestException, ValueError,RuntimeError) as exc:

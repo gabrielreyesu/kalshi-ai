@@ -1,6 +1,11 @@
 name: External forecast research snapshots
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'kalshi_external/**'
+      - '.github/workflows/external_learning.yml'
   schedule:
     - cron: '35 1,13 * * *'
 
