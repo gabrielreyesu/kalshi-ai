@@ -10,7 +10,7 @@ import argparse
 import json
 import time
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 import pandas as pd
 import requests
@@ -23,20 +23,47 @@ PATHS = {"nba": "basketball/nba", "nfl": "football/nfl"}
 UA = {"User-Agent": "KalshiAI-player-research/1.0 (+https://github.com/gabrielreyesu/kalshi-ai)"}
 
 
-def _get(session, url, *, params=None):
-    p = urlparse(url)
-    if (p.scheme != "https" or p.hostname != "site.api.espn.com" or
-        not any(p.path == f"/apis/site/v2/sports/{sub}/{part}"
-                for sub in PATHS.values() for part in ("injuries","scoreboard","summary"))):
-        raise ValueError("Unexpected ESPN data endpoint")
-    r = session.get(url, params=params, timeout=18, headers=UA, allow_redirects=False)
-    if r.status_code != 200 or len(r.content) > 3_000_000:
-        raise RuntimeError(f"ESPN API response unavailable: HTTP {r.status_code}")
-    response = r.json()
-    if not isinstance(response, dict):
-        raise ValueError("ESPN response not an object")
-    return response
+def _valid_api(url):
+    p=urlparse(url)
+    if (p.scheme!="https" or p.hostname!="site.api.espn.com" or p.username or p.password):
+        raise ValueError("Unexpected ESPN data host")
+    valid={f"/apis/site/v2/sports/{sub}/{part}"
+           for sub in PATHS.values() for part in ("injuries","scoreboard","summary")}
+    if p.path.rstrip("/") not in valid:
+        raise ValueError("Unexpected ESPN data path")
 
+
+def _get(session, url, *, params=None):
+    """Retry short-lived rate limits and follow only strict ESPN redirects."""
+    _valid_api(url)
+    request_url=url
+    remaining_redirects=2
+    for attempt in range(4):
+        response=session.get(request_url, params=params, timeout=18,
+                             headers=UA, allow_redirects=False)
+        status=response.status_code
+        if status in (301,302,303,307,308):
+            redirect=(getattr(response,"headers",{}) or {}).get("Location")
+            if remaining_redirects < 1 or not redirect:
+                raise RuntimeError("ESPN_REDIRECT_NOT_APPROVED")
+            destination=urljoin(request_url,redirect)
+            _valid_api(destination)
+            request_url=destination
+            params=None
+            remaining_redirects-=1
+            continue
+        if status in (429,500,502,503,504) and attempt < 3:
+            time.sleep(0.4*(attempt+1))
+            continue
+        if status!=200:
+            raise RuntimeError(f"ESPN_HTTP_{status}")
+        if len(response.content)>3_000_000:
+            raise ValueError("ESPN data exceeded size limit")
+        data=response.json()
+        if not isinstance(data,dict):
+            raise ValueError("ESPN JSON response is not an object")
+        return data
+    raise RuntimeError("ESPN_RETRY_EXHAUSTED")
 
 def _load(path):
     p = Path(path)
@@ -114,7 +141,8 @@ def run(injuries_path="data/external_signals/player_injuries.jsonl",
         try:
             injuries_new.append(_fetch_injuries(s,sport,now))
         except (requests.RequestException,ValueError,RuntimeError,KeyError,TypeError) as err:
-            issues.append(f"{sport} injury report: {type(err).__name__}")
+            msg=(str(err) if isinstance(err,RuntimeError) else type(err).__name__)
+            issues.append(f"{sport} injury report: {msg[:75]}")
         try:
             batch,warn,n = _recent_completed(s,sport,now,prior_games,days=days,
                                               max_new_games=max_new_games,
