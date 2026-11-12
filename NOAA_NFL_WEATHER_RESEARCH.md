@@ -23,3 +23,10 @@ This is a new official, free, public-domain source: [National Weather Service](h
 ## Safety and limits
 
 All forecasts are collected prospectively and stored as environmental observations, **not as probability predictions**. They are not used by any production model or weighted by a trainer. The value of weather (wind/precipitation/temperature) must be established in prospective NFL logloss/accuracy experiments before even considering promotion. No paid services are enabled or requested.
+
+
+## Coverage-fallback amendment
+
+First real NOAA workflow found 3 eligible games and 0 matched forecasts without warning. The event summary may omit venue metadata. The adapter now checks the ESPN scoreboard for the same event id as a fallback, while still requiring the actual venue name to match a curated open-air stadium. No location is guessed.
+
+Every omitted candidate now reports whether it lacked a verified venue, had the wrong stadium, had no hourly link, or lacked a forecast period covering kickoff. This is an instrumentation improvement, not an accuracy improvement.
