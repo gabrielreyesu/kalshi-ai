@@ -56,8 +56,10 @@ jobs:
       - name: Summarize trusted reference links and API coverage
         if: always()
         run: python -m kalshi_external.reference_report --output reports/external_learning/REFERENCIAS.md
+      - name: Check research archive integrity before archival
+        run: python -m kalshi_external.archive_audit --output reports/external_learning/archive_health.json
       - name: Save durable private archive (optional)
-        if: always()
+        if: success()
         env:
           DATA_REPO_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
