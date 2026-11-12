@@ -1,0 +1,46 @@
+name: nba-nfl-daily
+
+on:
+  schedule:
+    - cron: "0 15 * * *"     # todos los días 15:00 UTC (antes de los partidos)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nba-nfl-daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: |
+            data/nba
+            data/nfl
+          key: espn-data-${{ github.run_id }}
+          restore-keys: espn-data-
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests
+      - name: Modelo vs Kalshi en mercados ya resueltos, y nuevas predicciones + precios
+        run: |
+          for lg in nba nfl; do
+            python -m kalshi_nba.cli evaluate --league $lg
+            python -m kalshi_nba.cli predict  --league $lg --days 7
+          done
+      - name: Guardar registro
+        run: |
+          git config user.name  "sports-bot"
+          git config user.email "sports-bot@users.noreply.github.com"
+          git add predictions/
+          git diff --cached --quiet || git commit -m "NBA/NFL $(date -u +%F)"
+          git pull --rebase -q && git push

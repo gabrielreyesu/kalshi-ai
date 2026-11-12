@@ -1,0 +1,41 @@
+name: soccer-daily
+
+on:
+  schedule:
+    - cron: "0 7 * * *"      # todos los días 07:00 UTC
+  workflow_dispatch: {}        # también se puede lanzar a mano
+
+permissions:
+  contents: write              # para guardar el registro de predicciones en el repo
+
+concurrency:
+  group: soccer-daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Tests (si fallan, no se publica nada)
+        run: python -m unittest discover -s tests
+      - name: Evaluar partidos ya jugados
+        run: python -m kalshi_soccer.cli evaluate
+      - name: Predecir próximos 14 días
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: python -m kalshi_soccer.cli predict --days 14
+      - name: Guardar registro (append-only, queda auditado en el historial de git)
+        run: |
+          git config user.name  "soccer-bot"
+          git config user.email "soccer-bot@users.noreply.github.com"
+          mkdir -p predictions
+          git add predictions/
+          git diff --cached --quiet || git commit -m "predicciones $(date -u +%F)"
+          git pull --rebase -q && git push
