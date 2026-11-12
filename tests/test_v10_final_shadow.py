@@ -32,3 +32,19 @@ def test_score_pairs_same_games_uses_last_pre_kickoff_snapshot_and_ignores_late_
     out = pd.DataFrame([dict(sport="nba", event_id=str(k), result="H" if k % 5 else "A") for k in range(200)])
     t = score(pd.DataFrame(rows), out, bootstrap=200).iloc[0]
     assert t.n == 200 and abs(t.acierto_final - 0.8) < 1e-9 and t.logloss_final < t.logloss_modelo and t.ic95_inf > 0
+
+
+def test_simple_picks_table_shows_only_near_games_with_confidence(tmp_path):
+    from kalshi_nba import resumen
+    old = resumen.P; resumen.P = tmp_path
+    try:
+        base = dict(snapshot_utc="2030-01-01T00:00:00+00:00", model_H=0.5, model_D=float("nan"), model_A=0.5, market_H=0.8, market_D=float("nan"),
+                    market_A=0.2, final_D=float("nan"), final_source="market_consensus")
+        pd.DataFrame([{**base, "sport": "nba", "event_id": "1", "kickoff_utc": "2030-01-01T20:00:00+00:00", "home": "Utah Jazz", "away": "Orlando Magic", "final_H": 0.8, "final_A": 0.2},
+                      {**base, "sport": "nfl", "event_id": "2", "kickoff_utc": "2030-01-09T20:00:00+00:00", "home": "Lions", "away": "Bears", "final_H": 0.6, "final_A": 0.4}]).to_csv(tmp_path / "final_shadow.csv", index=False)
+        txt = resumen.build(now=pd.Timestamp("2030-01-01T12:00:00", tz="UTC").tz_convert(resumen.TZ))
+    finally:
+        resumen.P = old
+    top = txt.split("# Detalle")[0]
+    assert "| NBA | Orlando Magic en Utah Jazz | Utah Jazz | 80% | Alta |" in top
+    assert "Lions" not in top and "Lions" in txt            # el partido lejano solo aparece en el detalle
