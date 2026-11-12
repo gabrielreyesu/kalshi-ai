@@ -1,4 +1,4 @@
-# Predicciones — actualizado 12 Nov 2026 12:50 (hora Chicago)
+# Predicciones — actualizado 12 Nov 2026 12:53 (hora Chicago)
 
 ## Picks de hoy y mañana
 Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
@@ -6,42 +6,42 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 
 | Hora (Chicago) | Competición | Partido | Pick | Probabilidad | Confianza |
 |---|---|---|---|---|---|
-| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 73% | Alta |
-| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 46% | Baja |
-| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 73% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 74% | Alta |
+| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 49% | Baja |
+| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 75% | Alta |
 | Thu 12 Nov 13:45 | Selecciones | San Marino vs Belarus | Belarus | 97% | Alta |
 | Thu 12 Nov 13:45 | Selecciones | Czechia vs Spain | Spain | 76% | Alta |
-| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 44% | Baja |
+| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 47% | Baja |
 | Thu 12 Nov 18:00 | NBA | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 70% | Alta |
 | Thu 12 Nov 18:00 | NBA | Detroit Pistons en Washington Wizards | Detroit Pistons | 79% | Alta |
 | Thu 12 Nov 19:00 | NBA | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 66% | Media |
 | Thu 12 Nov 19:15 | NFL | Washington Commanders en New York Giants | New York Giants | 55% | Media |
 | Thu 12 Nov 20:00 | NBA | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 68% | Media |
 | Fri 13 Nov 06:00 | Selecciones | Singapore vs Paraguay | Paraguay | 88% | Alta |
-| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 54% | Baja |
+| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 46% | Baja |
 | Fri 13 Nov 08:30 | Selecciones | Saudi Arabia vs South Korea | South Korea | 52% | Baja |
 | Fri 13 Nov 08:45 | Selecciones | Qatar vs Australia | Australia | 45% | Baja |
 | Fri 13 Nov 09:00 | Selecciones | Iraq vs Lebanon | Iraq | 49% | Baja |
-| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Kuwait | 45% | Baja |
+| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Syria | 43% | Baja |
 | Fri 13 Nov 11:00 | Selecciones | Moldova vs Kazakhstan | Moldova | 35% | Baja |
-| Fri 13 Nov 13:45 | Selecciones | Liechtenstein vs Azerbaijan | Azerbaijan | 73% | Alta |
-| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 43% | Baja |
 | Fri 13 Nov 13:45 | Selecciones | Andorra vs Gibraltar | Andorra | 53% | Baja |
 | Fri 13 Nov 13:45 | Selecciones | Slovenia vs Switzerland | Switzerland | 56% | Media |
 | Fri 13 Nov 13:45 | Selecciones | Bulgaria vs Iceland | Iceland | 51% | Baja |
 | Fri 13 Nov 13:45 | Selecciones | Serbia vs Germany | Germany | 73% | Alta |
-| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | Media |
-| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | Media |
 | Fri 13 Nov 13:45 | Selecciones | Scotland vs North Macedonia | Scotland | 79% | Alta |
+| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | Media |
+| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 42% | Baja |
+| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | Media |
+| Fri 13 Nov 13:45 | Selecciones | Liechtenstein vs Azerbaijan | Azerbaijan | 73% | Alta |
 | Fri 13 Nov 17:00 | Selecciones | Argentina vs Uruguay | Argentina | 60% | Media |
-| Fri 13 Nov 18:00 | Selecciones | Colombia vs Chile | Colombia | 66% | Media |
-| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | Alta |
 | Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Orlando Magic | 79% | Alta |
 | Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | New York Knicks | 80% | Alta |
-| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | Media |
+| Fri 13 Nov 18:00 | Selecciones | Colombia vs Chile | Colombia | 66% | Media |
+| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | Alta |
 | Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 56% | Media |
 | Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | Media |
 | Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 52% | Baja |
+| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | Media |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Houston Rockets | 90% | Alta |
 | Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 76% | Alta |
 | Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 74% | Alta |
@@ -56,39 +56,39 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 | Fecha (hora Chicago) | Deporte | Partido | Pick final | Probabilidad | Origen |
 |---|---|---|---|---|---|
 | Thu 12 Nov 13:45 | Selecciones | Czechia vs Spain | Spain | 76% | casas |
-| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 46% | casas |
-| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 44% | casas |
+| Thu 12 Nov 13:45 | Selecciones | Italy vs France | France | 49% | casas |
+| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 75% | casas |
+| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 74% | casas |
+| Thu 12 Nov 13:45 | Selecciones | Albania vs Finland | Albania | 47% | casas |
 | Thu 12 Nov 13:45 | Selecciones | San Marino vs Belarus | Belarus | 97% | modelo (sin cuotas aún) |
-| Thu 12 Nov 13:45 | Selecciones | Montenegro vs Latvia | Montenegro | 73% | casas |
-| Thu 12 Nov 13:45 | Selecciones | England vs Croatia | England | 73% | casas |
-| Thu 12 Nov 18:00 | NBA | Detroit Pistons en Washington Wizards | Detroit Pistons | 79% | casas |
 | Thu 12 Nov 18:00 | NBA | Toronto Raptors en Philadelphia 76ers | Philadelphia 76ers | 70% | casas |
+| Thu 12 Nov 18:00 | NBA | Detroit Pistons en Washington Wizards | Detroit Pistons | 79% | casas |
 | Thu 12 Nov 19:00 | NBA | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 66% | casas |
 | Thu 12 Nov 19:15 | NFL | Washington Commanders en New York Giants | New York Giants | 55% | casas |
 | Thu 12 Nov 20:00 | NBA | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 68% | casas |
 | Fri 13 Nov 06:00 | Selecciones | Singapore vs Paraguay | Paraguay | 88% | casas |
-| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 54% | modelo (sin cuotas aún) |
+| Fri 13 Nov 08:15 | Selecciones | United Arab Emirates vs Honduras | United Arab Emirates | 46% | casas |
 | Fri 13 Nov 08:30 | Selecciones | Saudi Arabia vs South Korea | South Korea | 52% | casas |
 | Fri 13 Nov 08:45 | Selecciones | Qatar vs Australia | Australia | 45% | casas |
 | Fri 13 Nov 09:00 | Selecciones | Iraq vs Lebanon | Iraq | 49% | modelo (sin cuotas aún) |
-| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Kuwait | 45% | modelo (sin cuotas aún) |
+| Fri 13 Nov 10:30 | Selecciones | Kuwait vs Syria | Syria | 43% | casas |
 | Fri 13 Nov 11:00 | Selecciones | Moldova vs Kazakhstan | Moldova | 35% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 43% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Scotland vs North Macedonia | Scotland | 79% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | casas |
 | Fri 13 Nov 13:45 | Selecciones | Liechtenstein vs Azerbaijan | Azerbaijan | 73% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Bulgaria vs Iceland | Iceland | 51% | casas |
-| Fri 13 Nov 13:45 | Selecciones | Slovenia vs Switzerland | Switzerland | 56% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Luxembourg vs Estonia | Luxembourg | 42% | casas |
 | Fri 13 Nov 13:45 | Selecciones | Andorra vs Gibraltar | Andorra | 53% | casas |
 | Fri 13 Nov 13:45 | Selecciones | Serbia vs Germany | Germany | 73% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Bulgaria vs Iceland | Iceland | 51% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Netherlands vs Greece | Netherlands | 60% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Slovakia vs Faroe Islands | Slovakia | 68% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Scotland vs North Macedonia | Scotland | 79% | casas |
+| Fri 13 Nov 13:45 | Selecciones | Slovenia vs Switzerland | Switzerland | 56% | casas |
 | Fri 13 Nov 17:00 | Selecciones | Argentina vs Uruguay | Argentina | 60% | casas |
 | Fri 13 Nov 18:00 | Selecciones | Colombia vs Chile | Colombia | 66% | casas |
-| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | casas |
 | Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Orlando Magic | 79% | modelo (sin cuotas aún) |
 | Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | New York Knicks | 80% | modelo (sin cuotas aún) |
-| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | casas |
+| Fri 13 Nov 18:00 | Selecciones | Ecuador vs Costa Rica | Ecuador | 75% | casas |
 | Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Memphis Grizzlies | 56% | modelo (sin cuotas aún) |
+| Fri 13 Nov 19:00 | Selecciones | Peru vs Bolivia | Peru | 60% | casas |
 | Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 52% | modelo (sin cuotas aún) |
 | Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | modelo (sin cuotas aún) |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Houston Rockets | 90% | modelo (sin cuotas aún) |
@@ -102,40 +102,40 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 | Sat 14 Nov 06:00 | Selecciones | Chinese Taipei vs Kyrgyz Republic | Kyrgyz Republic | 62% | modelo (sin cuotas aún) |
 | Sat 14 Nov 08:00 | Selecciones | Kosovo vs Israel | Kosovo | 52% | casas |
 | Sat 14 Nov 09:00 | Selecciones | Palestine vs Iran | Iran | 53% | modelo (sin cuotas aún) |
-| Sat 14 Nov 11:00 | Selecciones | Norway vs Wales | Norway | 77% | casas |
 | Sat 14 Nov 11:00 | Selecciones | Georgia vs Hungary | Hungary | 38% | casas |
+| Sat 14 Nov 11:00 | Selecciones | Norway vs Wales | Norway | 77% | casas |
 | Sat 14 Nov 13:45 | Selecciones | Romania vs Poland | Poland | 52% | casas |
-| Sat 14 Nov 13:45 | Selecciones | Sweden vs Bosnia-Herzegovina | Sweden | 61% | casas |
-| Sat 14 Nov 13:45 | Selecciones | Austria vs Republic of Ireland | Austria | 59% | casas |
-| Sat 14 Nov 13:45 | Selecciones | Portugal vs Denmark | Portugal | 62% | casas |
 | Sat 14 Nov 13:45 | Selecciones | Northern Ireland vs Ukraine | Northern Ireland | 38% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Austria vs Republic of Ireland | Austria | 59% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Sweden vs Bosnia-Herzegovina | Sweden | 61% | casas |
+| Sat 14 Nov 13:45 | Selecciones | Portugal vs Denmark | Portugal | 62% | casas |
 | Sat 14 Nov 18:00 | NBA | Denver Nuggets en New Orleans Pelicans | Denver Nuggets | 70% | modelo (sin cuotas aún) |
 | Sat 14 Nov 18:30 | NBA | Dallas Mavericks en Cleveland Cavaliers | Cleveland Cavaliers | 69% | modelo (sin cuotas aún) |
 | Sat 14 Nov 19:00 | NBA | Detroit Pistons en Miami Heat | Detroit Pistons | 64% | modelo (sin cuotas aún) |
-| Sat 14 Nov 19:00 | NBA | Chicago Bulls en Minnesota Timberwolves | Minnesota Timberwolves | 87% | modelo (sin cuotas aún) |
 | Sat 14 Nov 19:00 | NBA | Brooklyn Nets en Memphis Grizzlies | Memphis Grizzlies | 69% | modelo (sin cuotas aún) |
+| Sat 14 Nov 19:00 | NBA | Chicago Bulls en Minnesota Timberwolves | Minnesota Timberwolves | 87% | modelo (sin cuotas aún) |
 | Sat 14 Nov 21:00 | Selecciones | New Zealand vs India | New Zealand | 71% | modelo (sin cuotas aún) |
-| Sun 15 Nov 08:00 | Selecciones | Latvia vs Armenia | Latvia | 40% | modelo (sin cuotas aún) |
-| Sun 15 Nov 08:00 | Selecciones | Cyprus vs Montenegro | Montenegro | 47% | modelo (sin cuotas aún) |
+| Sun 15 Nov 08:00 | Selecciones | Latvia vs Armenia | Latvia | 41% | modelo (sin cuotas aún) |
+| Sun 15 Nov 08:00 | Selecciones | Cyprus vs Montenegro | Montenegro | 45% | modelo (sin cuotas aún) |
 | Sun 15 Nov 08:30 | NFL | New England Patriots en Detroit Lions | Detroit Lions | 58% | casas |
 | Sun 15 Nov 11:00 | Selecciones | Finland vs San Marino | Finland | 98% | modelo (sin cuotas aún) |
-| Sun 15 Nov 11:00 | Selecciones | Suriname vs Eswatini | Suriname | 71% | modelo (sin cuotas aún) |
 | Sun 15 Nov 11:00 | Selecciones | Belarus vs Albania | Albania | 47% | modelo (sin cuotas aún) |
-| Sun 15 Nov 12:00 | NBA | Indiana Pacers en Philadelphia 76ers | Philadelphia 76ers | 76% | modelo (sin cuotas aún) |
-| Sun 15 Nov 12:00 | NFL | Jacksonville Jaguars en Tennessee Titans | Jacksonville Jaguars | 82% | casas |
-| Sun 15 Nov 12:00 | NFL | Miami Dolphins en Indianapolis Colts | Indianapolis Colts | 64% | casas |
+| Sun 15 Nov 11:00 | Selecciones | Suriname vs Eswatini | Suriname | 71% | modelo (sin cuotas aún) |
 | Sun 15 Nov 12:00 | NFL | Buffalo Bills en New York Jets | Buffalo Bills | 78% | casas |
-| Sun 15 Nov 12:00 | NFL | Minnesota Vikings en Green Bay Packers | Green Bay Packers | 58% | casas |
 | Sun 15 Nov 12:00 | NFL | Kansas City Chiefs en Atlanta Falcons | Kansas City Chiefs | 62% | casas |
+| Sun 15 Nov 12:00 | NBA | Indiana Pacers en Philadelphia 76ers | Philadelphia 76ers | 76% | modelo (sin cuotas aún) |
+| Sun 15 Nov 12:00 | NFL | Minnesota Vikings en Green Bay Packers | Green Bay Packers | 58% | casas |
 | Sun 15 Nov 12:00 | NFL | Carolina Panthers en New Orleans Saints | New Orleans Saints | 54% | casas |
+| Sun 15 Nov 12:00 | NFL | Miami Dolphins en Indianapolis Colts | Indianapolis Colts | 64% | casas |
 | Sun 15 Nov 12:00 | NFL | Houston Texans en Cleveland Browns | Houston Texans | 66% | casas |
+| Sun 15 Nov 12:00 | NFL | Jacksonville Jaguars en Tennessee Titans | Jacksonville Jaguars | 82% | casas |
 | Sun 15 Nov 13:45 | Selecciones | Spain vs England | Spain | 54% | modelo (sin cuotas aún) |
 | Sun 15 Nov 13:45 | Selecciones | Belgium vs Italy | Belgium | 46% | modelo (sin cuotas aún) |
 | Sun 15 Nov 13:45 | Selecciones | France vs Türkiye | France | 76% | modelo (sin cuotas aún) |
 | Sun 15 Nov 13:45 | Selecciones | Croatia vs Czechia | Croatia | 64% | modelo (sin cuotas aún) |
 | Sun 15 Nov 15:00 | NBA | Los Angeles Lakers en Phoenix Suns | Los Angeles Lakers | 61% | modelo (sin cuotas aún) |
-| Sun 15 Nov 15:05 | NFL | Seattle Seahawks en Las Vegas Raiders | Seattle Seahawks | 72% | casas |
 | Sun 15 Nov 15:05 | NFL | Los Angeles Rams en Arizona Cardinals | Los Angeles Rams | 80% | casas |
+| Sun 15 Nov 15:05 | NFL | Seattle Seahawks en Las Vegas Raiders | Seattle Seahawks | 72% | casas |
 | Sun 15 Nov 15:25 | NFL | San Francisco 49ers en Dallas Cowboys | San Francisco 49ers | 64% | casas |
 | Sun 15 Nov 15:30 | NBA | Charlotte Hornets en LA Clippers | LA Clippers | 57% | modelo (sin cuotas aún) |
 | Sun 15 Nov 16:00 | NBA | San Antonio Spurs en Utah Jazz | San Antonio Spurs | 91% | modelo (sin cuotas aún) |
@@ -147,62 +147,80 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 | Sun 15 Nov 20:00 | NBA | Oklahoma City Thunder en Sacramento Kings | Oklahoma City Thunder | 82% | modelo (sin cuotas aún) |
 | Mon 16 Nov 09:00 | Selecciones | Faroe Islands vs Moldova | Faroe Islands | 65% | modelo (sin cuotas aún) |
 | Mon 16 Nov 09:00 | Selecciones | Kazakhstan vs Slovakia | Slovakia | 50% | modelo (sin cuotas aún) |
-| Mon 16 Nov 11:00 | Selecciones | Iceland vs Luxembourg | Iceland | 63% | modelo (sin cuotas aún) |
-| Mon 16 Nov 11:00 | Selecciones | Estonia vs Bulgaria | Bulgaria | 36% | modelo (sin cuotas aún) |
 | Mon 16 Nov 11:00 | Selecciones | Lithuania vs Liechtenstein | Lithuania | 84% | modelo (sin cuotas aún) |
+| Mon 16 Nov 11:00 | Selecciones | Estonia vs Bulgaria | Bulgaria | 36% | modelo (sin cuotas aún) |
+| Mon 16 Nov 11:00 | Selecciones | Iceland vs Luxembourg | Iceland | 63% | modelo (sin cuotas aún) |
 | Mon 16 Nov 12:00 | Selecciones | Andorra vs Azerbaijan | Azerbaijan | 43% | modelo (sin cuotas aún) |
+| Mon 16 Nov 13:45 | Selecciones | Gibraltar vs Malta | Malta | 41% | modelo (sin cuotas aún) |
 | Mon 16 Nov 13:45 | Selecciones | Germany vs Netherlands | Germany | 40% | modelo (sin cuotas aún) |
 | Mon 16 Nov 13:45 | Selecciones | Greece vs Serbia | Greece | 63% | modelo (sin cuotas aún) |
 | Mon 16 Nov 13:45 | Selecciones | North Macedonia vs Slovenia | Slovenia | 47% | modelo (sin cuotas aún) |
 | Mon 16 Nov 13:45 | Selecciones | Switzerland vs Scotland | Switzerland | 71% | modelo (sin cuotas aún) |
-| Mon 16 Nov 13:45 | Selecciones | Gibraltar vs Malta | Malta | 41% | modelo (sin cuotas aún) |
 | Mon 16 Nov 18:00 | NBA | Orlando Magic en Boston Celtics | Boston Celtics | 79% | modelo (sin cuotas aún) |
 | Mon 16 Nov 19:00 | NBA | Golden State Warriors en New Orleans Pelicans | Golden State Warriors | 69% | modelo (sin cuotas aún) |
 | Mon 16 Nov 19:15 | NFL | Los Angeles Chargers en Baltimore Ravens | Baltimore Ravens | 66% | casas |
 | Mon 16 Nov 23:30 | Selecciones | Tahiti vs Cook Islands | Tahiti | 91% | modelo (sin cuotas aún) |
 | Tue 17 Nov 00:00 | Selecciones | Malaysia vs Yemen | Malaysia | 54% | modelo (sin cuotas aún) |
 | Tue 17 Nov 04:00 | Selecciones | Singapore vs Brazil | Brazil | 93% | modelo (sin cuotas aún) |
-| Tue 17 Nov 06:00 | Selecciones | China vs Bahrain | China | 44% | modelo (sin cuotas aún) |
 | Tue 17 Nov 06:00 | Selecciones | Kyrgyz Republic vs Vietnam | Kyrgyz Republic | 58% | modelo (sin cuotas aún) |
+| Tue 17 Nov 06:00 | Selecciones | China vs Bahrain | China | 44% | modelo (sin cuotas aún) |
 | Tue 17 Nov 07:00 | Selecciones | Lebanon vs Palestine | Lebanon | 37% | modelo (sin cuotas aún) |
 | Tue 17 Nov 07:10 | Selecciones | Japan vs Paraguay | Japan | 72% | modelo (sin cuotas aún) |
 | Tue 17 Nov 08:00 | Selecciones | Qatar vs South Korea | South Korea | 54% | modelo (sin cuotas aún) |
 | Tue 17 Nov 08:10 | Selecciones | United Arab Emirates vs Syria | United Arab Emirates | 81% | modelo (sin cuotas aún) |
-| Tue 17 Nov 09:30 | Selecciones | Saudi Arabia vs Uzbekistan | Saudi Arabia | 49% | modelo (sin cuotas aún) |
+| Tue 17 Nov 09:30 | Selecciones | Saudi Arabia vs Uzbekistan | Saudi Arabia | 51% | modelo (sin cuotas aún) |
 | Tue 17 Nov 10:00 | Selecciones | Jordan vs Australia | Australia | 49% | modelo (sin cuotas aún) |
 | Tue 17 Nov 10:00 | Selecciones | Russia vs Venezuela | Russia | 68% | modelo (sin cuotas aún) |
 | Tue 17 Nov 10:15 | Selecciones | Iraq vs Iran | Iran | 45% | modelo (sin cuotas aún) |
 | Tue 17 Nov 13:45 | Selecciones | Hungary vs Northern Ireland | Hungary | 49% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Wales vs Portugal | Portugal | 75% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Ukraine vs Georgia | Ukraine | 48% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Bosnia-Herzegovina vs Romania | Bosnia-Herzegovina | 61% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Israel vs Austria | Austria | 62% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Poland vs Sweden | Poland | 38% | modelo (sin cuotas aún) |
-| Tue 17 Nov 13:45 | Selecciones | Denmark vs Norway | Denmark | 43% | modelo (sin cuotas aún) |
 | Tue 17 Nov 13:45 | Selecciones | Republic of Ireland vs Kosovo | Republic of Ireland | 42% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Israel vs Austria | Austria | 62% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Denmark vs Norway | Denmark | 43% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Poland vs Sweden | Poland | 38% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Bosnia-Herzegovina vs Romania | Bosnia-Herzegovina | 61% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Ukraine vs Georgia | Ukraine | 48% | modelo (sin cuotas aún) |
+| Tue 17 Nov 13:45 | Selecciones | Wales vs Portugal | Portugal | 75% | modelo (sin cuotas aún) |
 | Tue 17 Nov 14:00 | Selecciones | Kuwait vs Honduras | Honduras | 50% | modelo (sin cuotas aún) |
-| Tue 17 Nov 17:00 | Selecciones | Argentina vs Costa Rica | Argentina | 91% | modelo (sin cuotas aún) |
 | Tue 17 Nov 17:00 | Selecciones | Chile vs Colombia | Colombia | 61% | modelo (sin cuotas aún) |
+| Tue 17 Nov 17:00 | Selecciones | Argentina vs Costa Rica | Argentina | 91% | modelo (sin cuotas aún) |
 | Tue 17 Nov 17:30 | Selecciones | Ecuador vs Bolivia | Ecuador | 86% | modelo (sin cuotas aún) |
 | Tue 17 Nov 17:30 | Selecciones | Uruguay vs Dominican Republic | Uruguay | 69% | modelo (sin cuotas aún) |
 | Tue 24 Nov 11:45 | Copas europeas | Galatasaray vs Aston Villa | Aston Villa | 38% | casas |
 | Tue 24 Nov 11:45 | Copas europeas | Bodo/Glimt vs LASK Linz | Bodo/Glimt | 62% | casas |
-| Tue 24 Nov 14:00 | Copas europeas | RB Leipzig vs Lens | RB Leipzig | 66% | casas |
 | Tue 24 Nov 14:00 | Copas europeas | Feyenoord Rotterdam vs FC Porto | FC Porto | 41% | casas |
-| Tue 24 Nov 14:00 | Copas europeas | Como vs AEK Athens | Como | 71% | casas |
 | Tue 24 Nov 14:00 | Copas europeas | Arsenal vs Borussia Dortmund | Arsenal | 67% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Como vs AEK Athens | Como | 71% | casas |
 | Tue 24 Nov 14:00 | Copas europeas | Slovan Bratislava vs Real Betis | Real Betis | 73% | casas |
-| Tue 24 Nov 14:00 | Copas europeas | Manchester City vs Napoli | Manchester City | 76% | casas |
 | Tue 24 Nov 14:00 | Copas europeas | Real Madrid vs PSV Eindhoven | Real Madrid | 78% | casas |
-| Wed 25 Nov 11:45 | Copas europeas | Sabah FK vs Barcelona | Barcelona | 86% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | RB Leipzig vs Lens | RB Leipzig | 66% | casas |
+| Tue 24 Nov 14:00 | Copas europeas | Manchester City vs Napoli | Manchester City | 76% | casas |
 | Wed 25 Nov 11:45 | Copas europeas | Slavia Prague vs Villarreal | Villarreal | 44% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Shakhtar Donetsk vs Fenerbahce | Fenerbahce | 37% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Sporting CP vs Manchester United | Sporting CP | 37% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Club Brugge vs Liverpool | Liverpool | 56% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Atlético Madrid vs Viking FK | Atlético Madrid | 85% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Paris Saint-Germain vs AS Roma | Paris Saint-Germain | 70% | casas |
-| Wed 25 Nov 14:00 | Copas europeas | Internazionale vs VfB Stuttgart | Internazionale | 65% | casas |
+| Wed 25 Nov 11:45 | Copas europeas | Sabah FK vs Barcelona | Barcelona | 86% | casas |
 | Wed 25 Nov 14:00 | Copas europeas | Lille vs Bayern Munich | Bayern Munich | 70% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Internazionale vs VfB Stuttgart | Internazionale | 65% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Paris Saint-Germain vs AS Roma | Paris Saint-Germain | 70% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Sporting CP vs Manchester United | Sporting CP | 37% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Shakhtar Donetsk vs Fenerbahce | Fenerbahce | 37% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Atlético Madrid vs Viking FK | Atlético Madrid | 85% | casas |
+| Wed 25 Nov 14:00 | Copas europeas | Club Brugge vs Liverpool | Liverpool | 56% | casas |
+| Thu 26 Nov 09:30 | Copas europeas | Kairat Almaty vs Mjällby AIF | Kairat Almaty | 36% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Egnatia vs Lincoln Red Imps | Egnatia | 53% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Heart of Midlothian vs AS Monaco | AS Monaco | 56% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Jablonec vs FC Lugano | Jablonec | 42% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Iberia 1999 vs Getafe | Getafe | 41% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Brighton & Hove Albion vs CSU Craiova | Brighton & Hove Albion | 82% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Ajax Amsterdam vs FC Thun | Ajax Amsterdam | 73% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | RB Salzburg vs Ararat-Armenia | RB Salzburg | 79% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Viktoria Plzen vs Benfica | Benfica | 63% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Dinamo Zagreb vs Bayer Leverkusen | Bayer Leverkusen | 55% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Union St.-Gilloise vs Lech Poznan | Union St.-Gilloise | 67% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Marseille vs Levski Sofia | Marseille | 64% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Besiktas vs Hapoel Be'er | Besiktas | 76% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Olympiacos vs AC Milan | Olympiacos | 39% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | Kauno Zalgiris vs Riga FC | Riga FC | 39% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Pafos vs FC Midtjylland | FC Midtjylland | 41% | modelo (sin cuotas aún) |
+| Thu 26 Nov 11:45 | Copas europeas | Celta Vigo vs AFC Bournemouth | AFC Bournemouth | 48% | casas |
+| Thu 26 Nov 11:45 | Copas europeas | SK Brann vs AGF | SK Brann | 41% | modelo (sin cuotas aún) |
 
 **Cómo leer las tablas de detalle**
 - **Modelo**: probabilidad que da el modelo propio al favorito indicado.
@@ -341,63 +359,81 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 ## Fútbol: copas europeas (Champions, Europa League, Conference)
 | Fecha (hora Chicago) | Competición | Partido | Modelo: local / empate / visita | Kalshi | Casas | Goles: +1.5 / +2.5 / +3.5 | Ambos anotan | Gana por 2+: local / visita | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Tue 24 Nov 11:45 | Champions League | Galatasaray vs Aston Villa | 28% / 24% / 48% | 37% / 24% / 40% | 37% / 25% / 38% | 84% / 62% / 40% | 64% | 13% / 27% | — |
+| Tue 24 Nov 11:45 | Champions League | Galatasaray vs Aston Villa | 28% / 24% / 48% | 36% / 24% / 40% | 37% / 25% / 38% | 84% / 62% / 40% | 64% | 13% / 27% | — |
 | Tue 24 Nov 11:45 | Champions League | Bodo/Glimt vs LASK Linz | 65% / 20% / 15% | — / — / — | 62% / 19% / 19% | 86% / 66% / 44% | 60% | 43% / 6% | — |
-| Tue 24 Nov 14:00 | Champions League | RB Leipzig vs Lens | 57% / 22% / 21% | 68% / 16% / 16% | 66% / 18% / 16% | 85% / 64% / 42% | 62% | 35% / 8% | — |
-| Tue 24 Nov 14:00 | Champions League | Real Madrid vs PSV Eindhoven | 73% / 16% / 11% | 82% / 11% / 8% | 78% / 12% / 9% | 89% / 72% / 51% | 60% | 53% / 4% | — |
-| Tue 24 Nov 14:00 | Champions League | Slovan Bratislava vs Real Betis | 11% / 19% / 70% | 10% / 14% / 77% | 11% / 16% / 73% | 84% / 62% / 40% | 52% | 4% / 48% | — |
-| Tue 24 Nov 14:00 | Champions League | Manchester City vs Napoli | 73% / 17% / 10% | 77% / 14% / 10% | 76% / 14% / 10% | 87% / 67% / 46% | 55% | 52% / 3% | — |
-| Tue 24 Nov 14:00 | Champions League | Arsenal vs Borussia Dortmund | 67% / 21% / 12% | 70% / 18% / 11% | 67% / 20% / 13% | 80% / 56% / 34% | 50% | 43% / 4% | — |
 | Tue 24 Nov 14:00 | Champions League | Feyenoord Rotterdam vs FC Porto | 25% / 23% / 52% | 33% / 25% / 40% | 33% / 26% / 41% | 85% / 65% / 43% | 64% | 11% / 31% | — |
+| Tue 24 Nov 14:00 | Champions League | Arsenal vs Borussia Dortmund | 67% / 21% / 12% | 70% / 18% / 11% | 67% / 20% / 13% | 80% / 56% / 34% | 50% | 43% / 4% | — |
 | Tue 24 Nov 14:00 | Champions League | Como vs AEK Athens | 68% / 19% / 13% | 74% / 15% / 11% | 71% / 16% / 13% | 86% / 66% / 45% | 58% | 47% / 5% | — |
+| Tue 24 Nov 14:00 | Champions League | Slovan Bratislava vs Real Betis | 11% / 19% / 70% | 10% / 14% / 76% | 11% / 16% / 73% | 84% / 62% / 40% | 52% | 4% / 48% | — |
+| Tue 24 Nov 14:00 | Champions League | Real Madrid vs PSV Eindhoven | 73% / 16% / 11% | 82% / 11% / 8% | 78% / 12% / 9% | 89% / 72% / 51% | 60% | 53% / 4% | — |
+| Tue 24 Nov 14:00 | Champions League | RB Leipzig vs Lens | 57% / 22% / 21% | 68% / 16% / 16% | 66% / 18% / 16% | 85% / 64% / 42% | 62% | 35% / 8% | — |
+| Tue 24 Nov 14:00 | Champions League | Manchester City vs Napoli | 73% / 17% / 10% | 77% / 14% / 10% | 76% / 14% / 10% | 87% / 67% / 46% | 55% | 52% / 3% | — |
 | Wed 25 Nov 11:45 | Champions League | Slavia Prague vs Villarreal | 23% / 25% / 51% | 30% / 24% / 44% | 31% / 24% / 44% | 79% / 55% / 32% | 56% | 9% / 29% | — |
 | Wed 25 Nov 11:45 | Champions League | Sabah FK vs Barcelona | 3% / 8% / 89% | — / — / — | 6% / 8% / 86% | 95% / 84% / 67% | 53% | 1% / 76% | — |
-| Wed 25 Nov 14:00 | Champions League | Internazionale vs VfB Stuttgart | 63% / 21% / 16% | 68% / 16% / 15% | 65% / 18% / 17% | 84% / 62% / 40% | 57% | 41% / 6% | — |
-| Wed 25 Nov 14:00 | Champions League | Atlético Madrid vs Viking FK | 56% / 23% / 21% | 88% / 8% / 4% | 85% / 9% / 5% | 84% / 63% / 41% | 62% | 35% / 8% | — |
-| Wed 25 Nov 14:00 | Champions League | Club Brugge vs Liverpool | 37% / 25% / 37% | 22% / 20% / 58% | 23% / 21% / 56% | 83% / 61% / 39% | 64% | 19% / 19% | — |
-| Wed 25 Nov 14:00 | Champions League | Sporting CP vs Manchester United | 46% / 26% / 27% | 36% / 26% / 36% | 37% / 26% / 37% | 78% / 54% / 32% | 57% | 25% / 12% | — |
-| Wed 25 Nov 14:00 | Champions League | Paris Saint-Germain vs AS Roma | 68% / 18% / 15% | — / — / — | 70% / 17% / 13% | 90% / 73% / 52% | 64% | 47% / 6% | — |
+| Wed 25 Nov 14:00 | Champions League | Internazionale vs VfB Stuttgart | 63% / 21% / 16% | 68% / 16% / 16% | 65% / 18% / 17% | 84% / 62% / 40% | 57% | 41% / 6% | — |
 | Wed 25 Nov 14:00 | Champions League | Shakhtar Donetsk vs Fenerbahce | 33% / 26% / 41% | 36% / 26% / 36% | 36% / 27% / 37% | 79% / 55% / 33% | 59% | 15% / 21% | — |
+| Wed 25 Nov 14:00 | Champions League | Paris Saint-Germain vs AS Roma | 68% / 18% / 15% | — / — / — | 70% / 17% / 13% | 90% / 73% / 52% | 64% | 47% / 6% | — |
 | Wed 25 Nov 14:00 | Champions League | Lille vs Bayern Munich | 13% / 19% / 67% | 11% / 15% / 74% | 13% / 16% / 70% | 85% / 64% / 42% | 56% | 5% / 45% | — |
+| Wed 25 Nov 14:00 | Champions League | Club Brugge vs Liverpool | 37% / 25% / 37% | 22% / 20% / 58% | 23% / 21% / 56% | 83% / 61% / 39% | 64% | 19% / 19% | — |
+| Wed 25 Nov 14:00 | Champions League | Atlético Madrid vs Viking FK | 56% / 23% / 21% | 88% / 8% / 4% | 85% / 9% / 5% | 84% / 63% / 41% | 62% | 35% / 8% | — |
+| Wed 25 Nov 14:00 | Champions League | Sporting CP vs Manchester United | 46% / 26% / 27% | 36% / 26% / 36% | 37% / 26% / 37% | 78% / 54% / 32% | 57% | 25% / 12% | — |
+| Thu 26 Nov 09:30 | Conference League | Kairat Almaty vs Mjällby AIF | 36% / 29% / 35% | 40% / 26% / 32% | — / — / — | 72% / 45% / 24% | 51% | 16% / 15% | — |
+| Thu 26 Nov 11:45 | Conference League | Iberia 1999 vs Getafe | 30% / 29% / 41% | 11% / 18% / 71% | — / — / — | 72% / 46% / 24% | 52% | 13% / 20% | — |
+| Thu 26 Nov 11:45 | Conference League | Jablonec vs FC Lugano | 42% / 28% / 30% | 35% / 26% / 37% | — / — / — | 75% / 49% / 27% | 54% | 21% / 13% | — |
+| Thu 26 Nov 11:45 | Conference League | Heart of Midlothian vs AS Monaco | 20% / 24% / 56% | 16% / 18% / 62% | — / — / — | 81% / 58% / 35% | 57% | 8% / 34% | — |
+| Thu 26 Nov 11:45 | Conference League | Egnatia vs Lincoln Red Imps | 53% / 26% / 21% | 55% / 23% / 20% | — / — / — | 76% / 50% / 28% | 53% | 29% / 8% | — |
+| Thu 26 Nov 11:45 | Conference League | Pafos vs FC Midtjylland | 32% / 27% / 41% | 35% / 24% / 38% | — / — / — | 79% / 55% / 32% | 59% | 15% / 21% | — |
+| Thu 26 Nov 11:45 | Conference League | SK Brann vs AGF | 41% / 28% / 31% | — / — / — | — / — / — | 75% / 49% / 27% | 54% | 20% / 13% | — |
+| Thu 26 Nov 11:45 | Conference League | Kauno Zalgiris vs Riga FC | 33% / 29% / 39% | 32% / 26% / 40% | — / — / — | 73% / 47% / 25% | 53% | 14% / 18% | — |
+| Thu 26 Nov 11:45 | Europa League | RB Salzburg vs Ararat-Armenia | 61% / 22% / 17% | 81% / 12% / 6% | 79% / 13% / 8% | 83% / 61% / 39% | 58% | 38% / 7% | — |
+| Thu 26 Nov 11:45 | Europa League | Celta Vigo vs AFC Bournemouth | 17% / 24% / 59% | 24% / 26% / 48% | 25% / 26% / 48% | 78% / 53% / 31% | 52% | 6% / 35% | — |
+| Thu 26 Nov 11:45 | Europa League | Viktoria Plzen vs Benfica | 16% / 23% / 62% | 16% / 18% / 64% | 18% / 20% / 63% | 79% / 55% / 33% | 52% | 5% / 38% | — |
+| Thu 26 Nov 11:45 | Europa League | Dinamo Zagreb vs Bayer Leverkusen | 23% / 25% / 52% | 20% / 21% / 56% | 22% / 22% / 55% | 81% / 58% / 35% | 59% | 9% / 30% | — |
+| Thu 26 Nov 11:45 | Europa League | Union St.-Gilloise vs Lech Poznan | 75% / 16% / 9% | — / — / — | 67% / 19% / 14% | 86% / 66% / 44% | 52% | 54% / 3% | — |
+| Thu 26 Nov 11:45 | Europa League | Marseille vs Levski Sofia | 64% / 22% / 14% | 66% / 18% / 12% | 64% / 20% / 16% | 79% / 55% / 33% | 51% | 40% / 5% | — |
+| Thu 26 Nov 11:45 | Europa League | Besiktas vs Hapoel Be'er | 51% / 25% / 25% | — / — / — | 76% / 14% / 9% | 82% / 59% / 36% | 60% | 29% / 10% | — |
+| Thu 26 Nov 11:45 | Conference League | Brighton & Hove Albion vs CSU Craiova | 82% / 13% / 5% | — / — / — | — / — / — | 86% / 67% / 45% | 45% | 62% / 1% | — |
+| Thu 26 Nov 11:45 | Europa League | Olympiacos vs AC Milan | 41% / 28% / 32% | 39% / 26% / 32% | 39% / 28% / 33% | 75% / 50% / 28% | 55% | 20% / 14% | — |
+| Thu 26 Nov 11:45 | Conference League | Ajax Amsterdam vs FC Thun | 73% / 17% / 11% | 80% / 14% / 5% | — / — / — | 87% / 69% / 47% | 57% | 52% / 4% | — |
 
 ## Fútbol: selecciones (UEFA y CONMEBOL)
 En selecciones, las columnas de goles son poco fiables: en el backtest el "más de 2.5" fue peor que la línea base.
 
 | Fecha (hora Chicago) | Competición | Partido | Modelo: local / empate / visita | Kalshi | Casas | Goles: +1.5 / +2.5 / +3.5 | Ambos anotan | Gana por 2+: local / visita | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Thu 12 Nov 13:45 | Nations League | Albania vs Finland | 49% / 28% / 23% | 44% / 32% / 24% | 44% / 31% / 25% | 70% / 43% / 22% | 48% | 25% / 8% | — |
-| Thu 12 Nov 13:45 | Nations League | Czechia vs Spain | 1% / 5% / 93% | 8% / 12% / 80% | 9% / 15% / 76% | 94% / 81% / 64% | 37% | 0% / 83% | — |
-| Thu 12 Nov 13:45 | Nations League | San Marino vs Belarus | 0% / 2% / 97% | 4% / 10% / 86% | — / — / — | 97% / 90% / 78% | 33% | 0% / 92% | — |
-| Thu 12 Nov 13:45 | Nations League | England vs Croatia | 81% / 13% / 6% | 76% / 15% / 8% | 73% / 17% / 10% | 88% / 71% / 50% | 49% | 63% / 2% | — |
-| Thu 12 Nov 13:45 | Nations League | Italy vs France | 22% / 26% / 53% | 26% / 24% / 48% | 27% / 26% / 46% | 76% / 51% / 29% | 53% | 8% / 29% | — |
-| Thu 12 Nov 13:45 | Nations League | Montenegro vs Latvia | 63% / 23% / 13% | 76% / 16% / 8% | 73% / 18% / 10% | 74% / 48% / 27% | 45% | 38% / 4% | — |
-| Fri 13 Nov 06:00 | Amistoso | Singapore vs Paraguay | 9% / 17% / 74% | 4% / 6% / 90% | 4% / 8% / 88% | 82% / 60% / 38% | 48% | 3% / 51% | — |
-| Fri 13 Nov 08:15 | Amistoso | United Arab Emirates vs Honduras | 54% / 27% / 18% | — / — / — | — / — / — | 69% / 42% / 21% | 45% | 29% / 6% | — |
+| Thu 12 Nov 13:45 | Nations League | Albania vs Finland | 49% / 28% / 23% | 48% / 30% / 20% | 47% / 31% / 22% | 70% / 43% / 22% | 48% | 25% / 8% | — |
+| Thu 12 Nov 13:45 | Nations League | Czechia vs Spain | 1% / 5% / 93% | 8% / 12% / 80% | 8% / 15% / 76% | 94% / 81% / 64% | 37% | 0% / 83% | — |
+| Thu 12 Nov 13:45 | Nations League | San Marino vs Belarus | 0% / 2% / 97% | 4% / 8% / 88% | — / — / — | 97% / 90% / 78% | 33% | 0% / 92% | — |
+| Thu 12 Nov 13:45 | Nations League | England vs Croatia | 81% / 13% / 6% | 78% / 15% / 8% | 75% / 15% / 9% | 88% / 71% / 50% | 49% | 63% / 2% | — |
+| Thu 12 Nov 13:45 | Nations League | Italy vs France | 22% / 26% / 53% | 24% / 26% / 50% | 25% / 26% / 49% | 76% / 51% / 29% | 53% | 8% / 29% | — |
+| Thu 12 Nov 13:45 | Nations League | Montenegro vs Latvia | 63% / 23% / 13% | 78% / 16% / 8% | 74% / 18% / 9% | 74% / 48% / 27% | 45% | 38% / 4% | — |
+| Fri 13 Nov 06:00 | Amistoso | Singapore vs Paraguay | 9% / 17% / 74% | 4% / 6% / 90% | 4% / 8% / 88% | 83% / 60% / 38% | 48% | 3% / 51% | — |
+| Fri 13 Nov 08:15 | Amistoso | United Arab Emirates vs Honduras | 54% / 27% / 18% | — / — / — | 46% / 29% / 25% | 69% / 42% / 21% | 45% | 29% / 6% | — |
 | Fri 13 Nov 08:30 | Amistoso | Saudi Arabia vs South Korea | 27% / 30% / 43% | — / — / — | 22% / 27% / 52% | 67% / 39% / 19% | 46% | 10% / 20% | — |
-| Fri 13 Nov 08:45 | Amistoso | Qatar vs Australia | 23% / 28% / 49% | 24% / 28% / 46% | 27% / 28% / 45% | 71% / 43% / 22% | 48% | 8% / 25% | — |
-| Fri 13 Nov 09:00 | Amistoso | Iraq vs Lebanon | 49% / 29% / 22% | 52% / 38% / 26% | — / — / — | 68% / 40% / 20% | 45% | 25% / 7% | — |
-| Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | 45% / 27% / 28% | 26% / 30% / 44% | — / — / — | 77% / 51% / 29% | 55% | 23% / 12% | — |
+| Fri 13 Nov 08:45 | Amistoso | Qatar vs Australia | 23% / 28% / 49% | 24% / 28% / 46% | 27% / 28% / 45% | 71% / 43% / 23% | 48% | 8% / 25% | — |
+| Fri 13 Nov 09:00 | Amistoso | Iraq vs Lebanon | 49% / 29% / 22% | 70% / 22% / 8% | — / — / — | 68% / 40% / 20% | 45% | 25% / 7% | — |
+| Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | 45% / 27% / 28% | 26% / 30% / 43% | 28% / 29% / 43% | 77% / 51% / 29% | 55% | 23% / 12% | — |
 | Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | 27% / 28% / 45% | 36% / 32% / 32% | 35% / 32% / 33% | 72% / 46% / 24% | 51% | 11% / 22% | — |
 | Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 68% / 20% / 12% | 78% / 53% / 31% | 47% | 43% / 3% | — |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | 62% / 24% / 14% | 62% / 20% / 16% | 60% / 22% / 18% | 75% / 49% / 27% | 46% | 37% / 4% | — |
-| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | 14% / 22% / 64% | 10% / 14% / 78% | 11% / 16% / 73% | 79% / 55% / 33% | 51% | 5% / 40% | — |
+| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | 14% / 22% / 64% | 8% / 14% / 78% | 11% / 16% / 73% | 79% / 55% / 33% | 51% | 5% / 40% | — |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 22% / 27% / 51% | 76% / 51% / 29% | 51% | 6% / 33% | — |
 | Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 6% | 79% / 14% / 7% | 78% / 54% / 32% | 40% | 52% / 2% | — |
-| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | 40% / 31% / 29% | 55% / 30% / 16% | 53% / 29% / 18% | 66% / 39% / 19% | 46% | 18% / 11% | — |
-| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | 39% / 31% / 30% | 44% / 30% / 26% | 43% / 30% / 27% | 66% / 39% / 19% | 46% | 18% / 12% | — |
+| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | 40% / 31% / 29% | 55% / 30% / 16% | 53% / 30% / 18% | 66% / 39% / 19% | 46% | 18% / 11% | — |
+| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | 39% / 31% / 30% | 40% / 30% / 29% | 42% / 30% / 28% | 66% / 39% / 19% | 46% | 18% / 12% | — |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | 10% / 20% / 71% | 6% / 18% / 76% | 8% / 18% / 73% | 78% / 54% / 32% | 45% | 3% / 47% | — |
 | Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | 16% / 25% / 60% | 16% / 26% / 56% | 18% / 27% / 56% | 73% / 47% / 26% | 46% | 5% / 35% | — |
-| Fri 13 Nov 17:00 | Amistoso | Argentina vs Uruguay | 78% / 15% / 7% | 62% / 24% / 15% | 60% / 24% / 16% | 84% / 64% / 42% | 46% | 57% / 2% | — |
+| Fri 13 Nov 17:00 | Amistoso | Argentina vs Uruguay | 78% / 15% / 7% | 62% / 22% / 15% | 60% / 24% / 16% | 84% / 64% / 42% | 46% | 57% / 2% | — |
 | Fri 13 Nov 18:00 | Amistoso | Colombia vs Chile | 78% / 16% / 6% | 68% / 20% / 12% | 66% / 21% / 13% | 80% / 57% / 34% | 39% | 56% / 1% | — |
 | Fri 13 Nov 18:00 | Amistoso | Ecuador vs Costa Rica | 66% / 22% / 12% | 78% / 16% / 6% | 75% / 16% / 9% | 74% / 48% / 27% | 43% | 41% / 3% | — |
 | Fri 13 Nov 19:00 | Amistoso | Peru vs Bolivia | 62% / 24% / 14% | 62% / 24% / 15% | 60% / 24% / 16% | 74% / 48% / 27% | 46% | 37% / 4% | — |
-| Fri 13 Nov 23:30 | Amistoso | Tahiti vs Cook Islands | 91% / 7% / 2% | 68% / 28% / 30% | — / — / — | 93% / 80% / 61% | 41% | 79% / 0% | — |
+| Fri 13 Nov 23:30 | Amistoso | Tahiti vs Cook Islands | 91% / 7% / 2% | 68% / 28% / 29% | — / — / — | 93% / 80% / 61% | 41% | 79% / 0% | — |
 | Sat 14 Nov 00:00 | Amistoso | Bahrain vs Yemen | 53% / 29% / 18% | — / — / — | — / — / — | 66% / 38% / 19% | 42% | 28% / 6% | — |
 | Sat 14 Nov 04:15 | Amistoso | Japan vs Brazil | 43% / 28% / 30% | 24% / 24% / 52% | 25% / 25% / 51% | 75% / 49% / 27% | 54% | 21% / 13% | — |
 | Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | 15% / 22% / 62% | — / — / — | — / — / — | 79% / 56% / 33% | 52% | 5% / 39% | — |
-| Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | 38% / 30% / 31% | 60% / 15% / 20% | — / — / — | 68% / 40% / 20% | 48% | 17% / 13% | — |
+| Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | 38% / 30% / 31% | 56% / 20% / 20% | — / — / — | 68% / 40% / 20% | 48% | 17% / 13% | — |
 | Sat 14 Nov 08:00 | Nations League | Kosovo vs Israel | 62% / 23% / 14% | 54% / 26% / 22% | 52% / 26% / 22% | 75% / 50% / 28% | 47% | 38% / 4% | — |
-| Sat 14 Nov 09:00 | Amistoso | Palestine vs Iran | 20% / 27% / 53% | 34% / 34% / 76% | — / — / — | 71% / 44% / 23% | 47% | 7% / 29% | — |
+| Sat 14 Nov 09:00 | Amistoso | Palestine vs Iran | 20% / 27% / 53% | 35% / 39% / 78% | — / — / — | 71% / 44% / 23% | 47% | 7% / 29% | — |
 | Sat 14 Nov 11:00 | Nations League | Georgia vs Hungary | 28% / 31% / 41% | 30% / 32% / 38% | 31% / 31% / 38% | 67% / 39% / 19% | 46% | 11% / 19% | — |
 | Sat 14 Nov 11:00 | Nations League | Norway vs Wales | 60% / 23% / 16% | 80% / 12% / 8% | 77% / 14% / 9% | 78% / 54% / 31% | 52% | 37% / 6% | — |
 | Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | 52% / 26% / 22% | — / — / — | 61% / 22% / 16% | 75% / 49% / 27% | 52% | 28% / 8% | — |
@@ -406,50 +442,50 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | 46% / 30% / 24% | 38% / 32% / 30% | 38% / 32% / 30% | 67% / 40% / 20% | 46% | 22% / 9% | — |
 | Sat 14 Nov 13:45 | Nations League | Austria vs Republic of Ireland | 58% / 24% / 17% | 62% / 22% / 16% | 59% / 23% / 18% | 76% / 51% / 29% | 50% | 34% / 6% | — |
 | Sat 14 Nov 21:00 | Amistoso | New Zealand vs India | 71% / 18% / 10% | — / — / — | — / — / — | 83% / 61% / 38% | 50% | 49% / 3% | — |
-| Sun 15 Nov 08:00 | Nations League | Cyprus vs Montenegro | 26% / 27% / 47% | 30% / 28% / 29% | — / — / — | 75% / 49% / 27% | 53% | 10% / 24% | — |
-| Sun 15 Nov 08:00 | Nations League | Latvia vs Armenia | 40% / 30% / 29% | 32% / 32% / 39% | — / — / — | 68% / 40% / 20% | 47% | 18% / 12% | — |
+| Sun 15 Nov 08:00 | Nations League | Cyprus vs Montenegro | 26% / 27% / 47% | 28% / 38% / 28% | — / — / — | 74% / 49% / 26% | 53% | 11% / 23% | — |
+| Sun 15 Nov 08:00 | Nations League | Latvia vs Armenia | 40% / 30% / 29% | 19% / 42% / 35% | — / — / — | 68% / 40% / 20% | 47% | 19% / 11% | — |
 | Sun 15 Nov 11:00 | Amistoso | Suriname vs Eswatini | 71% / 20% / 9% | 34% / 28% / 37% | — / — / — | 74% / 48% / 27% | 39% | 46% / 2% | — |
-| Sun 15 Nov 11:00 | Nations League | Belarus vs Albania | 24% / 29% / 47% | 26% / 24% / 40% | — / — / — | 70% / 43% / 22% | 48% | 9% / 24% | — |
-| Sun 15 Nov 11:00 | Nations League | Finland vs San Marino | 98% / 2% / 0% | 92% / 6% / 4% | — / — / — | 97% / 90% / 77% | 24% | 93% / 0% | — |
+| Sun 15 Nov 11:00 | Nations League | Belarus vs Albania | 24% / 29% / 47% | 24% / 27% / 47% | — / — / — | 70% / 43% / 22% | 48% | 9% / 24% | — |
+| Sun 15 Nov 11:00 | Nations League | Finland vs San Marino | 98% / 2% / 0% | 92% / 6% / 2% | — / — / — | 97% / 90% / 77% | 24% | 93% / 0% | — |
 | Sun 15 Nov 13:45 | Nations League | Spain vs England | 54% / 25% / 21% | 62% / 20% / 20% | — / — / — | 78% / 54% / 32% | 55% | 31% / 8% | — |
-| Sun 15 Nov 13:45 | Nations League | Belgium vs Italy | 46% / 28% / 27% | 44% / 28% / 28% | — / — / — | 75% / 49% / 27% | 53% | 23% / 11% | — |
-| Sun 15 Nov 13:45 | Nations League | France vs Türkiye | 76% / 16% / 8% | 82% / 12% / 8% | — / — / — | 82% / 60% / 37% | 44% | 54% / 2% | — |
-| Sun 15 Nov 13:45 | Nations League | Croatia vs Czechia | 64% / 21% / 14% | 70% / 16% / 8% | — / — / — | 81% / 58% / 36% | 53% | 41% / 5% | — |
-| Mon 16 Nov 09:00 | Nations League | Faroe Islands vs Moldova | 65% / 22% / 13% | 54% / 27% / 18% | — / — / — | 76% / 51% / 29% | 46% | 40% / 4% | — |
-| Mon 16 Nov 09:00 | Nations League | Kazakhstan vs Slovakia | 23% / 27% / 50% | 12% / 28% / 58% | — / — / — | 75% / 49% / 27% | 52% | 9% / 27% | — |
-| Mon 16 Nov 11:00 | Nations League | Estonia vs Bulgaria | 35% / 29% / 36% | 36% / 30% / 29% | — / — / — | 73% / 46% / 25% | 53% | 16% / 16% | — |
-| Mon 16 Nov 11:00 | Nations League | Lithuania vs Liechtenstein | 84% / 12% / 4% | 86% / 9% / 8% | — / — / — | 83% / 62% / 39% | 36% | 64% / 1% | — |
-| Mon 16 Nov 11:00 | Nations League | Iceland vs Luxembourg | 63% / 24% / 13% | 66% / 26% / 7% | — / — / — | 72% / 46% / 24% | 42% | 38% / 4% | — |
-| Mon 16 Nov 12:00 | Amistoso | Andorra vs Azerbaijan | 27% / 30% / 43% | 30% / 26% / 45% | — / — / — | 68% / 40% / 20% | 47% | 10% / 20% | — |
-| Mon 16 Nov 13:45 | Nations League | Gibraltar vs Malta | 30% / 29% / 41% | 16% / 26% / 60% | — / — / — | 71% / 43% / 22% | 50% | 12% / 19% | — |
-| Mon 16 Nov 13:45 | Nations League | Germany vs Netherlands | 40% / 28% / 32% | 52% / 22% / 26% | — / — / — | 76% / 50% / 28% | 55% | 20% / 14% | — |
-| Mon 16 Nov 13:45 | Nations League | Switzerland vs Scotland | 71% / 20% / 10% | 65% / 18% / 12% | — / — / — | 78% / 54% / 32% | 45% | 47% / 3% | — |
-| Mon 16 Nov 13:45 | Nations League | North Macedonia vs Slovenia | 24% / 30% / 47% | 10% / 27% / 60% | — / — / — | 67% / 40% / 20% | 46% | 8% / 23% | — |
-| Mon 16 Nov 13:45 | Nations League | Greece vs Serbia | 63% / 23% / 14% | 68% / 17% / 12% | — / — / — | 75% / 49% / 27% | 46% | 38% / 4% | — |
-| Mon 16 Nov 23:30 | Amistoso | Tahiti vs Cook Islands | 91% / 7% / 2% | 59% / 38% / 37% | — / — / — | 93% / 80% / 61% | 41% | 79% / 0% | — |
+| Sun 15 Nov 13:45 | Nations League | Belgium vs Italy | 46% / 28% / 27% | 44% / 26% / 30% | — / — / — | 75% / 49% / 27% | 53% | 23% / 11% | — |
+| Sun 15 Nov 13:45 | Nations League | France vs Türkiye | 76% / 16% / 8% | 81% / 11% / 8% | — / — / — | 82% / 60% / 37% | 44% | 54% / 2% | — |
+| Sun 15 Nov 13:45 | Nations League | Croatia vs Czechia | 64% / 21% / 14% | 72% / 18% / 10% | — / — / — | 81% / 58% / 36% | 53% | 41% / 5% | — |
+| Mon 16 Nov 09:00 | Nations League | Faroe Islands vs Moldova | 65% / 22% / 13% | 54% / 27% / 16% | — / — / — | 76% / 51% / 29% | 46% | 40% / 4% | — |
+| Mon 16 Nov 09:00 | Nations League | Kazakhstan vs Slovakia | 23% / 27% / 50% | 10% / 29% / 61% | — / — / — | 75% / 49% / 27% | 52% | 9% / 27% | — |
+| Mon 16 Nov 11:00 | Nations League | Estonia vs Bulgaria | 35% / 29% / 36% | 36% / 30% / 23% | — / — / — | 73% / 46% / 25% | 53% | 16% / 16% | — |
+| Mon 16 Nov 11:00 | Nations League | Lithuania vs Liechtenstein | 84% / 12% / 4% | 78% / 10% / 8% | — / — / — | 83% / 62% / 39% | 36% | 64% / 1% | — |
+| Mon 16 Nov 11:00 | Nations League | Iceland vs Luxembourg | 63% / 24% / 13% | 68% / 24% / 7% | — / — / — | 72% / 46% / 24% | 42% | 38% / 4% | — |
+| Mon 16 Nov 12:00 | Amistoso | Andorra vs Azerbaijan | 27% / 30% / 43% | 30% / 33% / 46% | — / — / — | 68% / 40% / 20% | 47% | 10% / 20% | — |
+| Mon 16 Nov 13:45 | Nations League | Gibraltar vs Malta | 30% / 29% / 41% | 16% / 26% / 57% | — / — / — | 70% / 43% / 22% | 50% | 12% / 19% | — |
+| Mon 16 Nov 13:45 | Nations League | Germany vs Netherlands | 40% / 28% / 32% | 54% / 22% / 26% | — / — / — | 76% / 50% / 28% | 55% | 20% / 14% | — |
+| Mon 16 Nov 13:45 | Nations League | Switzerland vs Scotland | 71% / 20% / 10% | 68% / 20% / 12% | — / — / — | 78% / 54% / 32% | 45% | 47% / 3% | — |
+| Mon 16 Nov 13:45 | Nations League | North Macedonia vs Slovenia | 24% / 30% / 47% | 12% / 25% / 61% | — / — / — | 67% / 40% / 20% | 46% | 8% / 23% | — |
+| Mon 16 Nov 13:45 | Nations League | Greece vs Serbia | 63% / 23% / 14% | 70% / 17% / 12% | — / — / — | 75% / 49% / 27% | 46% | 38% / 4% | — |
+| Mon 16 Nov 23:30 | Amistoso | Tahiti vs Cook Islands | 91% / 7% / 2% | 54% / 37% / 37% | — / — / — | 93% / 80% / 61% | 41% | 79% / 0% | — |
 | Tue 17 Nov 00:00 | Amistoso | Malaysia vs Yemen | 54% / 27% / 19% | — / — / — | — / — / — | 70% / 43% / 22% | 45% | 29% / 6% | — |
-| Tue 17 Nov 04:00 | Amistoso | Singapore vs Brazil | 2% / 5% / 93% | 2% / 4% / 88% | — / — / — | 95% / 84% / 68% | 43% | 0% / 82% | — |
-| Tue 17 Nov 06:00 | Amistoso | China vs Bahrain | 44% / 31% / 25% | 38% / 38% / 38% | — / — / — | 65% / 37% / 17% | 44% | 21% / 9% | — |
+| Tue 17 Nov 04:00 | Amistoso | Singapore vs Brazil | 2% / 5% / 93% | 2% / 4% / 92% | — / — / — | 95% / 84% / 68% | 43% | 0% / 82% | — |
+| Tue 17 Nov 06:00 | Amistoso | China vs Bahrain | 44% / 31% / 25% | 39% / 38% / 38% | — / — / — | 65% / 37% / 17% | 44% | 21% / 9% | — |
 | Tue 17 Nov 06:00 | Amistoso | Kyrgyz Republic vs Vietnam | 58% / 25% / 17% | — / — / — | — / — / — | 76% / 50% / 28% | 50% | 34% / 6% | — |
-| Tue 17 Nov 07:00 | Amistoso | Lebanon vs Palestine | 37% / 30% / 33% | 38% / 38% / 38% | — / — / — | 70% / 42% / 22% | 49% | 16% / 14% | — |
-| Tue 17 Nov 07:10 | Amistoso | Japan vs Paraguay | 72% / 19% / 9% | 52% / 42% / 31% | — / — / — | 77% / 52% / 30% | 41% | 47% / 2% | — |
+| Tue 17 Nov 07:00 | Amistoso | Lebanon vs Palestine | 37% / 30% / 33% | 39% / 38% / 38% | — / — / — | 70% / 42% / 22% | 49% | 16% / 14% | — |
+| Tue 17 Nov 07:10 | Amistoso | Japan vs Paraguay | 72% / 19% / 9% | 46% / 42% / 31% | — / — / — | 77% / 52% / 30% | 41% | 47% / 2% | — |
 | Tue 17 Nov 08:00 | Amistoso | Qatar vs South Korea | 19% / 27% / 54% | — / — / — | — / — / — | 71% / 44% / 23% | 47% | 7% / 29% | — |
 | Tue 17 Nov 08:10 | Amistoso | United Arab Emirates vs Syria | 81% / 14% / 5% | — / — / — | — / — / — | 84% / 63% / 41% | 42% | 61% / 1% | — |
-| Tue 17 Nov 09:30 | Amistoso | Saudi Arabia vs Uzbekistan | 49% / 28% / 23% | 38% / 38% / 36% | — / — / — | 71% / 44% / 23% | 49% | 25% / 8% | — |
-| Tue 17 Nov 10:00 | Amistoso | Jordan vs Australia | 23% / 28% / 49% | 34% / 38% / 44% | — / — / — | 73% / 46% / 25% | 50% | 9% / 26% | — |
-| Tue 17 Nov 10:00 | Amistoso | Russia vs Venezuela | 68% / 21% / 11% | 55% / 27% / 23% | — / — / — | 76% / 51% / 29% | 44% | 43% / 3% | — |
-| Tue 17 Nov 10:15 | Amistoso | Iraq vs Iran | 25% / 30% / 45% | 35% / 38% / 42% | — / — / — | 66% / 39% / 19% | 45% | 9% / 22% | — |
+| Tue 17 Nov 09:30 | Amistoso | Saudi Arabia vs Uzbekistan | 49% / 28% / 23% | 40% / 42% / 38% | — / — / — | 73% / 44% / 25% | 49% | 28% / 8% | — |
+| Tue 17 Nov 10:00 | Amistoso | Jordan vs Australia | 23% / 28% / 49% | 30% / 40% / 45% | — / — / — | 73% / 46% / 25% | 50% | 9% / 26% | — |
+| Tue 17 Nov 10:00 | Amistoso | Russia vs Venezuela | 68% / 21% / 11% | 58% / 27% / 23% | — / — / — | 77% / 51% / 30% | 44% | 44% / 3% | — |
+| Tue 17 Nov 10:15 | Amistoso | Iraq vs Iran | 25% / 30% / 45% | 35% / 39% / 46% | — / — / — | 66% / 39% / 19% | 45% | 9% / 22% | — |
 | Tue 17 Nov 13:45 | Nations League | Bosnia-Herzegovina vs Romania | 61% / 24% / 15% | — / — / — | — / — / — | 76% / 50% / 28% | 48% | 37% / 5% | — |
-| Tue 17 Nov 13:45 | Nations League | Poland vs Sweden | 38% / 28% / 34% | 40% / 22% / 33% | — / — / — | 77% / 51% / 29% | 56% | 18% / 16% | — |
-| Tue 17 Nov 13:45 | Nations League | Denmark vs Norway | 43% / 26% / 31% | 36% / 21% / 37% | — / — / — | 80% / 56% / 34% | 60% | 23% / 14% | — |
-| Tue 17 Nov 13:45 | Nations League | Israel vs Austria | 16% / 22% / 62% | 14% / 20% / 62% | — / — / — | 81% / 57% / 35% | 54% | 5% / 39% | — |
-| Tue 17 Nov 13:45 | Nations League | Ukraine vs Georgia | 48% / 29% / 23% | 40% / 26% / 30% | — / — / — | 70% / 43% / 22% | 48% | 25% / 8% | — |
-| Tue 17 Nov 13:45 | Nations League | Hungary vs Northern Ireland | 49% / 30% / 21% | 49% / 26% / 16% | — / — / — | 65% / 37% / 17% | 42% | 24% / 7% | — |
+| Tue 17 Nov 13:45 | Nations League | Poland vs Sweden | 38% / 28% / 34% | 40% / 24% / 32% | — / — / — | 77% / 51% / 29% | 56% | 18% / 16% | — |
+| Tue 17 Nov 13:45 | Nations League | Denmark vs Norway | 43% / 26% / 31% | 36% / 23% / 36% | — / — / — | 80% / 56% / 34% | 60% | 23% / 14% | — |
+| Tue 17 Nov 13:45 | Nations League | Israel vs Austria | 16% / 22% / 62% | 15% / 20% / 62% | — / — / — | 81% / 57% / 35% | 54% | 5% / 39% | — |
+| Tue 17 Nov 13:45 | Nations League | Ukraine vs Georgia | 48% / 29% / 23% | 40% / 26% / 31% | — / — / — | 70% / 43% / 22% | 48% | 25% / 8% | — |
+| Tue 17 Nov 13:45 | Nations League | Hungary vs Northern Ireland | 49% / 30% / 21% | 51% / 27% / 19% | — / — / — | 65% / 37% / 17% | 42% | 24% / 7% | — |
 | Tue 17 Nov 13:45 | Nations League | Wales vs Portugal | 8% / 17% / 75% | 9% / 15% / 74% | — / — / — | 81% / 59% / 36% | 45% | 2% / 52% | — |
-| Tue 17 Nov 13:45 | Nations League | Republic of Ireland vs Kosovo | 42% / 30% / 28% | 53% / 25% / 16% | — / — / — | 68% / 41% / 20% | 47% | 20% / 11% | — |
+| Tue 17 Nov 13:45 | Nations League | Republic of Ireland vs Kosovo | 42% / 30% / 28% | 52% / 28% / 19% | — / — / — | 68% / 41% / 20% | 47% | 20% / 11% | — |
 | Tue 17 Nov 14:00 | Amistoso | Kuwait vs Honduras | 22% / 28% / 50% | — / — / — | — / — / — | 72% / 45% / 24% | 49% | 8% / 26% | — |
 | Tue 17 Nov 17:00 | Amistoso | Chile vs Colombia | 15% / 24% / 61% | — / — / — | — / — / — | 74% / 48% / 27% | 47% | 5% / 36% | — |
-| Tue 17 Nov 17:00 | Amistoso | Argentina vs Costa Rica | 91% / 7% / 2% | 84% / 19% / 36% | — / — / — | 91% / 77% / 57% | 39% | 77% / 0% | — |
-| Tue 17 Nov 17:30 | Amistoso | Ecuador vs Bolivia | 86% / 11% / 3% | 59% / 31% / 24% | — / — / — | 84% / 63% / 41% | 32% | 67% / 1% | — |
-| Tue 17 Nov 17:30 | Amistoso | Uruguay vs Dominican Republic | 69% / 20% / 10% | 77% / 36% / 24% | — / — / — | 78% / 54% / 31% | 45% | 46% / 3% | — |
+| Tue 17 Nov 17:00 | Amistoso | Argentina vs Costa Rica | 91% / 7% / 2% | 74% / 24% / 24% | — / — / — | 91% / 77% / 57% | 39% | 77% / 0% | — |
+| Tue 17 Nov 17:30 | Amistoso | Ecuador vs Bolivia | 86% / 11% / 3% | 78% / 31% / 24% | — / — / — | 84% / 63% / 41% | 32% | 67% / 1% | — |
+| Tue 17 Nov 17:30 | Amistoso | Uruguay vs Dominican Republic | 69% / 20% / 10% | 80% / 36% / 23% | — / — / — | 78% / 54% / 31% | 45% | 46% / 3% | — |
 
