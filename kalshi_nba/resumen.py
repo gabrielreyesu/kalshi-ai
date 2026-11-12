@@ -173,22 +173,16 @@ def build(now=None) -> str:
     now = now or pd.Timestamp.now(tz=TZ)
     return f"""# Predicciones — actualizado {now.strftime('%d %b %Y %H:%M')} (hora Chicago)
 
-## Picks de hoy y mañana
-Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
-El pick usa el consenso de las casas de apuestas cuando existe y el modelo propio como respaldo. No es una recomendación de apuesta.
+**Ir a:** [NBA](#nba) · [NFL](#nfl) · [Ligas de fútbol](#fútbol-ligas-premier-la-liga-serie-a-bundesliga-ligue-1) · [Copas europeas](#fútbol-copas-europeas-champions-europa-league-conference) · [Selecciones](#fútbol-selecciones-uefa-y-conmebol) · [Resumen de picks](#resumen-de-picks-de-hoy-y-mañana)
 
-{picks_hoy(now)}
----
-# Detalle (opcional)
-
-## Todos los próximos partidos (pick final, en prueba)
-{final_prueba(now)}
-**Cómo leer las tablas de detalle**
+**Cómo leer las tablas**
 - **Modelo**: probabilidad que da el modelo propio al favorito indicado.
 - **Kalshi** / **Polymarket**: probabilidad que implica el precio en cada mercado (62¢ ≈ 62%).
 - **Casas**: probabilidad según las casas de apuestas, sin su margen. Es la referencia más fiable.
+- Si **Kalshi** y **Polymarket** difieren más de 3 puntos, vale la pena mirar ese partido: uno de los dos está desfasado.
+- **Diferencia esperada** y **Total esperado**: por cuántos puntos ganaría el favorito y cuántos puntos habría en total.
 - **Bajas**: jugadores fuera o dudosos. Es informativo: el modelo todavía NO las usa.
-- En fútbol, **Goles** = probabilidad de más de 1.5, 2.5 y 3.5 goles; **Gana por 2+** = victoria por dos o más goles.
+- En fútbol, **Goles** = probabilidad de más de 1.5, 2.5 y 3.5 goles; **Ambos anotan**; **Gana por 2+** = victoria por dos o más goles.
 - Un "—" significa que aún no había precio o dato para ese partido.
 
 ## NBA
@@ -203,6 +197,11 @@ El pick usa el consenso de las casas de apuestas cuando existe y el modelo propi
 En selecciones, las columnas de goles son poco fiables: en el backtest el "más de 2.5" fue peor que la línea base.
 
 {internacional(now, 'selecciones')}
+## Resumen de picks de hoy y mañana
+Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
+Usa el consenso de las casas cuando existe y el modelo como respaldo (en prueba). No es una recomendación de apuesta.
+
+{picks_hoy(now)}
 """
 
 
