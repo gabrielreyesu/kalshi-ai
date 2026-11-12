@@ -1,12 +1,10 @@
-name: analistas-seguimiento
+name: analistas-seguimiento (opcional)
 
 on:
   push:
     branches: [main]
     paths:
       - 'analysts/mis_picks.csv'
-  schedule:
-    - cron: "20 14 * * *"      # una vez al día: liquida los picks de partidos ya jugados
   workflow_dispatch: {}
 
 permissions:
