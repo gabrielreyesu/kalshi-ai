@@ -67,8 +67,8 @@ def fit_blend_candidates(history,outcomes,min_train=60,min_test=25,seed=23,boots
         test=~train
         if sum(train)<min_train or sum(test)<min_test:
             continue
-        source_p=g[["p_H","p_D","p_A"]].to_numpy(float)
-        model_p=g[["model_p_H","model_p_D","model_p_A"]].to_numpy(float)
+        source_p=g[["p_H","p_D","p_A"]].to_numpy(dtype=float,copy=True)
+        model_p=g[["model_p_H","model_p_D","model_p_A"]].to_numpy(dtype=float,copy=True)
         if not np.isfinite(source_p).all() or not np.isfinite(model_p).all():
             continue
         if (source_p<0).any() or (model_p<0).any():
