@@ -35,7 +35,7 @@ def fit_blend_candidates(history,outcomes,min_train=60,min_test=25,seed=23,boots
             "model_p_H","model_p_D","model_p_A"}
     if not needed.issubset(d):
         raise ValueError("Invalid source history")
-    d=d[d.source_kind.isin(TRAINABLE_KINDS)&d.sport.eq("intl")].copy()
+    d=d[d.source_kind.isin(TRAINABLE_KINDS)&d.sport.isin(["intl","club","nfl","nba"])].copy()
     if d.empty:return result
     for c in ("kickoff_utc","captured_utc","published_utc"):
         d[c]=pd.to_datetime(d[c],utc=True,errors="coerce")
@@ -43,19 +43,20 @@ def fit_blend_candidates(history,outcomes,min_train=60,min_test=25,seed=23,boots
         raise ValueError("Invalid pre-match timestamps")
     d=d[(d.published_utc<=d.captured_utc)&
         (d.captured_utc < d.kickoff_utc-pd.Timedelta(minutes=15))]
-    d=d.sort_values("captured_utc").drop_duplicates(["source_id","event_id"],keep="last")
+    d=d.sort_values("captured_utc").drop_duplicates(["source_id","sport","event_id"],keep="last")
     o=outcomes.copy()
     if not {"event_id","sport","result"}.issubset(o):
         raise ValueError("Outcomes missing required columns")
-    o=o[o.sport=="intl"].copy()
-    if o.event_id.duplicated().any():
+    o=o[o.sport.isin(["intl","club","nfl","nba"])].copy()
+    if o.duplicated(["sport","event_id"]).any():
         raise ValueError("Duplicate completed events")
     d.event_id=d.event_id.astype(str)
     o.event_id=o.event_id.astype(str)
-    d=d.merge(o[["event_id","result"]],on="event_id",how="inner",validate="many_to_one")
-    for source, group in d.groupby("source_id"):
+    d=d.merge(o[["sport","event_id","result"]],on=["sport","event_id"],how="inner",validate="many_to_one")
+    for (source,sport), group in d.groupby(["source_id","sport"]):
         g=group.sort_values(["kickoff_utc","event_id"]).reset_index(drop=True)
-        labels=g.result.map({"H":0,"D":1,"A":2})
+        classes=("H","D","A") if sport in ("intl","club") else ("H","A")
+        labels=g.result.map({v:i for i,v in enumerate(classes)})
         if labels.isna().any():
             continue
         # All games on a day go into the SAME split to prevent contamination.
@@ -67,11 +68,11 @@ def fit_blend_candidates(history,outcomes,min_train=60,min_test=25,seed=23,boots
         test=~train
         if sum(train)<min_train or sum(test)<min_test:
             continue
-        source_p=g[["p_H","p_D","p_A"]].to_numpy(dtype=float,copy=True)
-        model_p=g[["model_p_H","model_p_D","model_p_A"]].to_numpy(dtype=float,copy=True)
+        source_p=g[["p_"+v for v in classes]].to_numpy(dtype=float,copy=True)
+        model_p=g[["model_p_"+v for v in classes]].to_numpy(dtype=float,copy=True)
         if not np.isfinite(source_p).all() or not np.isfinite(model_p).all():
             continue
-        if (source_p<0).any() or (model_p<0).any():
+        if (source_p<0).any() or (model_p<0).any() or (source_p.sum(axis=1)<=0).any() or (model_p.sum(axis=1)<=0).any():
             continue
         source_p/=source_p.sum(axis=1,keepdims=True)
         model_p/=model_p.sum(axis=1,keepdims=True)
@@ -98,7 +99,7 @@ def fit_blend_candidates(history,outcomes,min_train=60,min_test=25,seed=23,boots
         else:
             lo=hi=np.nan
         result.append({
-            "source_id":source,"candidate_weight":weight,
+            "source_id":source,"sport":sport,"candidate_weight":weight,
             "train_before_utc":pd.Timestamp(boundary).isoformat(),
             "n_train":int(sum(train)),"n_test":int(sum(test)),
             "test_baseline_logloss":_loss(base,yy),
@@ -114,6 +115,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--history",default="data/external_signals/history.jsonl")
     parser.add_argument("--results",default="reports/intl_real_validation/oos_raw.csv")
+    parser.add_argument("--outcomes",default="reports/external_learning/resolved_outcomes.csv")
     parser.add_argument("--output",default="reports/external_learning/candidate_weights.json")
     args=parser.parse_args()
     cache=Path(args.history)
@@ -121,7 +123,8 @@ def main():
     if cache.exists():
         with cache.open(encoding="utf8") as f:
             rows=[json.loads(line) for line in f if line.strip()]
-    outcomes=load_completed_intl(args.results)
+    outcomes=(pd.read_csv(args.outcomes,dtype={"event_id":str}) if Path(args.outcomes).exists()
+              else load_completed_intl(args.results))
     candidates=fit_blend_candidates(rows,outcomes)
     p=Path(args.output);p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps({"candidates":candidates,"production_changed":False,

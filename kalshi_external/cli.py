@@ -109,6 +109,8 @@ def run(registry_dir="predictions",history_path="data/external_signals/history.j
         live,errors=live_outcomes(reg)
         warn.extend(errors)
         outcomes=pd.concat([outcomes,live],ignore_index=True).drop_duplicates(["sport","event_id"])
+    dest=Path(reports_dir);dest.mkdir(parents=True,exist_ok=True)
+    outcomes[["sport","event_id","result"]].to_csv(dest/"resolved_outcomes.csv",index=False)
     scored=historical_scores(history,outcomes,min_cases=30)
     from .source_diagnostics import diagnostics
     source_metrics, market_movements = diagnostics(history, outcomes, min_resolved=100, bootstrap=300)

@@ -65,15 +65,24 @@ jobs:
           key: external-signals-v1-${{ github.run_id }}
           restore-keys: |
             external-signals-v1-
-      - name: Measure externally sourced forecast skill on completed international matches
+      - name: Restore full private odds history for weekly challenger training
         env:
+          DATA_REPO_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+        run: |
+          if [ -z "$DATA_REPO_TOKEN" ]; then echo "Missing DATA_REPO_TOKEN: cache-only, no long-term training history."; exit 0; fi
+          git clone -q --depth 1 "https://x-access-token:${DATA_REPO_TOKEN}@github.com/${{ github.repository_owner }}/kalshi-ai-data.git" _historical_archive
+          mkdir -p data/external_signals
+          python -m kalshi_external.archive merge data/external_signals/history.jsonl _historical_archive/external_signals/history.jsonl data/external_signals/history.jsonl
+      - name: Measure external source skill on completed NFL, NBA and soccer fixtures
+        env:
+          KALSHI_RESOLVE_LIVE: "1"
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           LICENSED_ANALYST_FEED_URL: ${{ secrets.LICENSED_ANALYST_FEED_URL }}
           LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
         run: python -m kalshi_external.cli --output reports/external_learning
-      - name: Evaluate research-only external-source blend weights on later matches
-        run: python -m kalshi_external.learn --output reports/external_learning/candidate_weights.json
+      - name: Evaluate sport-specific research-only external blend weights
+        run: python -m kalshi_external.learn --outcomes reports/external_learning/resolved_outcomes.csv --output reports/external_learning/candidate_weights.json
       - name: Archive validation and training artifacts
         uses: actions/upload-artifact@v4
         if: always()
