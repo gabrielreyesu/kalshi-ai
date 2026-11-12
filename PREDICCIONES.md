@@ -1,4 +1,4 @@
-# Predicciones — actualizado 12 Nov 2026 08:05 (hora Chicago)
+# Predicciones — actualizado 12 Nov 2026 08:19 (hora Chicago)
 
 **Cómo leer las tablas**
 - **Modelo**: probabilidad que da tu modelo a que gane el favorito indicado.
@@ -14,7 +14,7 @@
 | Thu 12 Nov 18:00 | Detroit Pistons en Washington Wizards | Detroit Pistons | 82% | 80% | 78% | 11.1 pts | 223 pts |
 | Thu 12 Nov 19:00 | Dallas Mavericks en Minnesota Timberwolves | Minnesota Timberwolves | 76% | 66% | 66% | 8.4 pts | 230 pts |
 | Thu 12 Nov 20:00 | Charlotte Hornets en Phoenix Suns | Phoenix Suns | 59% | 68% | 68% | 2.7 pts | 220 pts |
-| Fri 13 Nov 18:00 | New York Knicks en Indiana Pacers | New York Knicks | 83% | 73% | — | 11.3 pts | 219 pts |
+| Fri 13 Nov 18:00 | New York Knicks en Indiana Pacers | New York Knicks | 83% | 71% | — | 11.3 pts | 219 pts |
 | Fri 13 Nov 18:00 | Milwaukee Bucks en Orlando Magic | Orlando Magic | 78% | 76% | — | 9.2 pts | 220 pts |
 | Fri 13 Nov 19:00 | Atlanta Hawks en Chicago Bulls | Atlanta Hawks | 67% | 72% | — | 5.1 pts | 239 pts |
 | Fri 13 Nov 19:00 | Cleveland Cavaliers en Miami Heat | Cleveland Cavaliers | 50% | 48% | — | 0.2 pts | 236 pts |
@@ -22,7 +22,7 @@
 | Fri 13 Nov 19:30 | Utah Jazz en Houston Rockets | Houston Rockets | 89% | 90% | — | 15.7 pts | 225 pts |
 | Fri 13 Nov 20:30 | Golden State Warriors en San Antonio Spurs | San Antonio Spurs | 75% | 82% | — | 7.8 pts | 228 pts |
 | Fri 13 Nov 21:00 | Portland Trail Blazers en Sacramento Kings | Portland Trail Blazers | 75% | 76% | — | 8.1 pts | 229 pts |
-| Fri 13 Nov 21:30 | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 68% | 78% | — | 5.4 pts | 223 pts |
+| Fri 13 Nov 21:30 | Oklahoma City Thunder en LA Clippers | Oklahoma City Thunder | 68% | 82% | — | 5.4 pts | 223 pts |
 | Sat 14 Nov 18:00 | Denver Nuggets en New Orleans Pelicans | Denver Nuggets | 64% | 80% | — | 3.9 pts | 237 pts |
 | Sat 14 Nov 18:30 | Dallas Mavericks en Cleveland Cavaliers | Cleveland Cavaliers | 68% | 62% | — | 5.1 pts | 231 pts |
 | Sat 14 Nov 19:00 | Brooklyn Nets en Memphis Grizzlies | Memphis Grizzlies | 76% | 60% | — | 8.7 pts | 231 pts |
@@ -32,12 +32,12 @@
 | Sun 15 Nov 15:00 | Los Angeles Lakers en Phoenix Suns | Los Angeles Lakers | 61% | 60% | — | 3.6 pts | 235 pts |
 | Sun 15 Nov 15:30 | Charlotte Hornets en LA Clippers | LA Clippers | 57% | 62% | — | 2.4 pts | 222 pts |
 | Sun 15 Nov 16:00 | San Antonio Spurs en Utah Jazz | San Antonio Spurs | 90% | 90% | — | 15.9 pts | 230 pts |
-| Sun 15 Nov 17:00 | Dallas Mavericks en Boston Celtics | Boston Celtics | 81% | 84% | — | 10.3 pts | 225 pts |
+| Sun 15 Nov 17:00 | Dallas Mavericks en Boston Celtics | Boston Celtics | 81% | 82% | — | 10.3 pts | 225 pts |
 | Sun 15 Nov 17:00 | New York Knicks en Toronto Raptors | New York Knicks | 66% | 67% | — | 4.7 pts | 220 pts |
 | Sun 15 Nov 18:00 | Houston Rockets en Washington Wizards | Houston Rockets | 79% | 80% | — | 9.8 pts | 223 pts |
-| Sun 15 Nov 19:00 | Atlanta Hawks en Milwaukee Bucks | Atlanta Hawks | 73% | 70% | — | 7.2 pts | 231 pts |
+| Sun 15 Nov 19:00 | Atlanta Hawks en Milwaukee Bucks | Atlanta Hawks | 73% | 72% | — | 7.2 pts | 231 pts |
 | Sun 15 Nov 20:00 | Oklahoma City Thunder en Sacramento Kings | Oklahoma City Thunder | 84% | 82% | — | 12.0 pts | 225 pts |
-| Mon 16 Nov 18:00 | Orlando Magic en Boston Celtics | Boston Celtics | 80% | 71% | — | 10.4 pts | 217 pts |
+| Mon 16 Nov 18:00 | Orlando Magic en Boston Celtics | Boston Celtics | 80% | 70% | — | 10.4 pts | 217 pts |
 | Mon 16 Nov 18:00 | Chicago Bulls en Cleveland Cavaliers | Cleveland Cavaliers | 81% | — | — | 10.7 pts | 237 pts |
 | Mon 16 Nov 18:00 | Memphis Grizzlies en Washington Wizards | Memphis Grizzlies | 60% | — | — | 3.1 pts | 234 pts |
 | Mon 16 Nov 18:30 | Philadelphia 76ers en Brooklyn Nets | Philadelphia 76ers | 73% | — | — | 7.3 pts | 223 pts |
