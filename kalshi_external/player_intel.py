@@ -58,13 +58,14 @@ def parse_injury_feed(payload, sport, captured):
     athletes = []
     unique = set()
     for team in payload["injuries"]:
-        team_id = str(team.get("id") or "")
+        team_info = team.get("team") or team
+        team_id = str(team_info.get("id") or team.get("id") or "")
         if not team_id:
             continue
         for item in team.get("injuries") or []:
             athlete = item.get("athlete") or {}
             athlete_id = str(athlete.get("id") or "")
-            name = str(athlete.get("displayName") or "").strip()
+            name = str(athlete.get("displayName") or athlete.get("fullName") or "").strip()
             status = str(item.get("status") or "").strip()
             if not (athlete_id or name) or not status:
                 continue
@@ -84,7 +85,7 @@ def parse_injury_feed(payload, sport, captured):
                 continue
             unique.add(key)
             athletes.append({
-                "team_id": team_id, "team": str(team.get("displayName") or ""),
+                "team_id": team_id, "team": str(team_info.get("displayName") or team_info.get("name") or ""),
                 "player_id": athlete_id, "player": name,
                 "position": str((athlete.get("position") or {}).get("abbreviation") or ""),
                 "status": status,
