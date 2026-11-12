@@ -6,10 +6,12 @@ Requires historical ESPN cache or network connectivity. No synthetic matches.
 from __future__ import annotations
 import argparse
 from pathlib import Path
+import json
 import pandas as pd
 from .data import load_group
 from .model import IntlEngine, CONFIGS, GROUP_FEATURES, walk_forward
 from .validation import evaluate_oos
+from .data_quality import audit_history
 
 
 def main():
@@ -28,6 +30,10 @@ def main():
         if missing:
             raise SystemExit(f'Offline mode: missing {len(missing)} cache files. First missing: {missing[:3]}')
     games = load_group('selecciones', first_year=a.first_year, cache_dir=a.cache)
+    quality = audit_history(games)
+    (dest/'data_quality.json').write_text(json.dumps(quality, indent=2, ensure_ascii=False) + '\n')
+    for warning in quality['warnings']:
+        print('DATA QUALITY WARNING:', warning)
     features = IntlEngine(CONFIGS['selecciones']).process(games)
     raw = walk_forward(features, first_year=max(a.first_year+4, 2020), features=GROUP_FEATURES['selecciones'])
     if raw.empty:
