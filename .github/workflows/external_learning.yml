@@ -125,6 +125,9 @@ jobs:
           git add external_signals/history.jsonl external_signals/weather.jsonl external_signals/player_injuries.jsonl external_signals/player_boxscores.jsonl external_signals/player_previews.jsonl external_signals/soccer_player_games.jsonl external_signals/soccer_lineups.jsonl external_signals/soccer_injuries.jsonl external_signals/soccer_previews.jsonl external_signals/soccer_confirmed_lineups.jsonl external_signals/soccer_starter_impact.jsonl
           git diff --cached --quiet || git commit -q -m "external signals $(date -u +%FT%H:%MZ)"
           git push -q
+      - name: Source health (warn when a green run produced nothing useful)
+        if: always()
+        run: python -m kalshi_external.health --mode "${{ steps.cadence.outputs.mode }}" --reports reports/external_learning
       - name: Archive aggregate summaries only
         if: always()
         uses: actions/upload-artifact@v4
