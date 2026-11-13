@@ -39,6 +39,12 @@ BACKTESTS = [
     {"prueba": "NBA · Kalshi + modelo (mezcla)", "partidos": 1018, "acierto": "70,5% → 71,2%", "mejora": "−0,0004 [−0,0017; 0,0010]", "veredicto": "descartada"},
     {"prueba": "NFL · modelo+QB vs Kalshi (60 min antes)", "partidos": 410, "acierto": "Kalshi 65,6% · modelo 65,6%", "mejora": "−0,0020 [−0,0110; 0,0071]", "veredicto": "empate"},
     {"prueba": "NFL · Kalshi + modelo (mezcla)", "partidos": 245, "acierto": "64,5% → 64,1%", "mejora": "0,0027 [−0,0006; 0,0058]", "veredicto": "no concluyente"},
+    {"prueba": "NBA/NFL · viajes, husos y hora del partido", "partidos": 2817, "acierto": "67,0% → 67,3%", "mejora": "−0,0002 [−0,0010; 0,0006]", "veredicto": "descartada"},
+    {"prueba": "NBA/NFL · racha, forma, descanso, H2H, Elo vs mercado", "partidos": 2816, "acierto": "—", "mejora": "−0,0006 [−0,0017; 0,0006]", "veredicto": "descartada"},
+    {"prueba": "Fútbol · goles con casas + modelo", "partidos": 7769, "acierto": "—", "mejora": "+0,0113 vs modelo [0,0079; 0,0145]", "veredicto": "supera"},
+    {"prueba": "Fútbol · pick con Kalshi + casas + modelo", "partidos": 905, "acierto": "58,5% → 59,0%", "mejora": "+0,0106 [−0,0030; 0,0253]", "veredicto": "supera (no empeora)"},
+    {"prueba": "NBA · árbitros (totales)", "partidos": 2812, "acierto": "—", "mejora": "+0,50 pts² [−0,30; 1,31]", "veredicto": "no concluyente"},
+    {"prueba": "NFL · distribución real de márgenes", "partidos": 991, "acierto": "—", "mejora": "+0,0001 [−0,0010; 0,0012]", "veredicto": "descartada"},
     {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
 ]
 

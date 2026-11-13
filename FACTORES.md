@@ -37,6 +37,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Qué se juega cada equipo (clasificación) | ligas | ⚪ | +0,0003, no significativo; aviso informativo | `STAKES_RESEARCH.md` |
 | Qué se juega cada equipo | Nations League | ❌ | Sin efecto | `STAKES_RESEARCH.md` |
 | Racha / forma reciente | todos | ✅/❌ | En el modelo base; variantes extra solo ayudan en NCAA y selecciones | `reports/variables_extra*.txt` |
+| Todo el bloque del modelo (Elo, descanso, back-to-back, forma, racha, H2H, casa/fuera, carga) **frente al mercado** | NBA/NFL | ❌ | NBA −0,0006 [−0,0017; +0,0006] (2.816); NFL −0,0007 [−0,0059; +0,0046] (704): el mercado ya lo incorpora todo | `market_residual.py` |
 | Enfrentamientos directos | todos | ✅/❌ | Solo aporta en selecciones (activo) | `kalshi_intl/model.py` |
 | Clima (viento, lluvia, frío) | NFL | ⏳ | Protocolo listo (`WEATHER_RESEARCH.md`); descarga histórica Open-Meteo pausada hasta que se reinicie el cupo diario | `weather_nfl.py` |
 | Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
