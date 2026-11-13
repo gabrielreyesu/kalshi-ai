@@ -33,6 +33,8 @@ BACKTESTS = [
     {"prueba": "Copas europeas · once titular", "partidos": 1234, "acierto": "56,7% → 56,8%", "mejora": "0,0030 [0,0002; 0,0059]", "veredicto": "supera (débil)"},
     {"prueba": "Selecciones · once titular", "partidos": 1321, "acierto": "58,7% → 58,6%", "mejora": "0,0008 [−0,0001; 0,0017]", "veredicto": "descartada"},
     {"prueba": "Selecciones · sede neutral", "partidos": 3714, "acierto": "57,9% → 58,0%", "mejora": "0,0000 [−0,0019; 0,0019]", "veredicto": "no concluyente"},
+    {"prueba": "Ligas · qué se juega cada equipo", "partidos": 5437, "acierto": "52,6% → 52,6%", "mejora": "0,0003 [−0,0004; 0,0010]", "veredicto": "no concluyente"},
+    {"prueba": "Nations League · qué se juega cada selección", "partidos": 495, "acierto": "63,4% → 63,4%", "mejora": "−0,0015 [−0,0040; 0,0004]", "veredicto": "descartada"},
     {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
 ]
 
