@@ -4,6 +4,12 @@
 Una **página de predicciones fiable** (https://gabrielreyesu.github.io/mocha-picks/) que el dueño pueda usar con sus
 amigos, para NFL, NBA y fútbol (clubes y selecciones). Se juzga por la **probabilidad real de acertar**, no por pagos.
 
+**A futuro puede convertirse en una página de picks pública.** Por eso el estándar es el máximo: la mejor calidad de
+datos, predicciones, análisis y probabilidades posible, teniendo en cuenta hasta el detalle más pequeño (localía,
+clima, racha, enfrentamientos directos, hora del partido, contexto, alineaciones, lesiones, suspensiones, descanso,
+viajes, árbitros, motivación…). Seguir mejorando sin techo: cada factor se mide, y si aporta, se incorpora.
+El registro de factores y su estado está en `FACTORES.md`; mantenerlo al día en cada PR de investigación.
+
 ## Principio central: juntar TODA la información útil
 El pick final debe salir de combinar todas las fuentes disponibles, no de una sola:
 - **Mercados**: precio de Kalshi (lo más cerca posible del inicio), consenso de casas sin margen, Polymarket.
