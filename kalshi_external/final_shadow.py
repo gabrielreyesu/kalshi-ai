@@ -58,10 +58,10 @@ def rows_us(lg: str, folder: Path) -> list:
         return []
     s = s[(s["kind"] == "winner") & (s["side"] == "home")]
     pmf = folder / f"{lg}_polymarket_snapshots.csv"           # Polymarket: se guarda para entrenar el combinador más adelante
-    pm = {}
+    poly = {}
     if pmf.exists():
         q = pd.read_csv(pmf, dtype={"event_id": str}).sort_values("snapshot_utc").drop_duplicates("event_id", keep="last")
-        pm = dict(zip(q["event_id"], pd.to_numeric(q["pm_home"], errors="coerce")))
+        poly = dict(zip(q["event_id"], pd.to_numeric(q["pm_home"], errors="coerce")))
     last = s["snapshot_utc"].max()
     s = s[s["snapshot_utc"] == last].drop_duplicates("event_id")
     out = []
@@ -78,7 +78,7 @@ def rows_us(lg: str, folder: Path) -> list:
             f, src = _final([pm, 1 - pm], [pb, 1 - pb])
         out.append(dict(snapshot_utc=x.snapshot_utc, sport=lg, event_id=x.event_id, kickoff_utc=x.kickoff_utc, home=x.home, away=x.away,
                         model_H=pm, model_D=np.nan, model_A=1 - pm, market_H=pb, market_D=np.nan, market_A=1 - pb if np.isfinite(pb) else np.nan,
-                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src, kalshi_H=km, poly_H=pm.get(x.event_id, np.nan)))
+                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src, kalshi_H=km, poly_H=poly.get(x.event_id, np.nan)))
     return out
 
 
