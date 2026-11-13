@@ -142,31 +142,25 @@ def final_prueba(now) -> str:
 
 
 def picks_hoy(now, horas: int = 36) -> str:
-    """Vista simple: un pick por partido de las próximas horas, con nivel de confianza."""
+    """Todos los mercados de los partidos de las próximas horas (ganador, doble oportunidad, hándicap, totales, goles)."""
+    from .pagina import collect
     fin = now + pd.Timedelta(hours=horas)
     nivel = lambda v: "Alta" if v >= 0.70 else ("Media" if v >= 0.55 else "Baja")
     rows = []
-    f = P / "final_shadow.csv"
-    if f.exists():
-        d = pd.read_csv(f, dtype={"event_id": str})
-        d["t"] = pd.to_datetime(d["kickoff_utc"], utc=True, format="ISO8601").dt.tz_convert(TZ)
-        d = d[(d["t"] > now) & (d["t"] <= fin)].sort_values("snapshot_utc").drop_duplicates(["sport", "event_id"], keep="last")
-        names = {"nba": "NBA", "nfl": "NFL", "club": "Copa europea", "intl": "Selecciones"}
-        for x in d.itertuples():
-            pick, prob = max([(n, v) for n, v in ((x.home, x.final_H), ("Empate", x.final_D), (x.away, x.final_A)) if pd.notna(v)], key=lambda z: z[1])
-            rows.append((x.t, names.get(x.sport, x.sport), f"{x.away} en {x.home}" if x.sport in ("nba", "nfl") else f"{x.home} vs {x.away}", pick, prob))
-    reg = P / "registry.csv"
-    if reg.exists():                                   # ligas domésticas: aún sin cuotas de casas, pick del modelo
-        r = pd.read_csv(reg)
-        r["t"] = _when(r["kickoff_utc"])
-        for x in r[(r["t"] > now) & (r["t"] <= fin)].itertuples():
-            pick, prob = max(((x.home, x.p_H), ("Empate", x.p_D), (x.away, x.p_A)), key=lambda z: z[1])
-            rows.append((x.t, x.competition, f"{x.home} vs {x.away}", pick, prob))
+    for g in collect(now)["games"]:
+        t = pd.Timestamp(g["t"]).tz_convert(TZ)
+        if not (now < t <= fin):
+            continue
+        partido = f"{g['away']} en {g['home']}" if g["sport"] in ("nba", "nfl") else f"{g['home']} vs {g['away']}"
+        for p in g.get("picks") or []:
+            if p["prob"] is None:
+                continue
+            rows.append({"Hora (Chicago)": t.strftime("%a %d %b %H:%M"), "Competición": g["comp"], "Partido": partido,
+                         "Mercado": p["mercado"], "Pick": p["pick"], "Probabilidad": pct(p["prob"]), "Confianza": nivel(p["prob"]),
+                         "Fuente": p["fuente"], "Kalshi": "—" if p["precio"] is None else f"{100 * p['precio']:.0f}¢"})
     if not rows:
         return "_No hay partidos en las próximas horas._\n"
-    rows.sort(key=lambda z: z[0])
-    return _table(pd.DataFrame([{"Hora (Chicago)": t.strftime("%a %d %b %H:%M"), "Competición": c, "Partido": m, "Pick": k,
-                                 "Probabilidad": pct(v), "Confianza": nivel(v)} for t, c, m, k, v in rows]))
+    return _table(pd.DataFrame(rows))
 
 
 def build(now=None) -> str:
@@ -200,8 +194,10 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 
 {internacional(now, 'selecciones')}
 ## Resumen de picks de hoy y mañana
-Un pick por partido. **Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%.
-Usa el consenso de las casas cuando existe y el modelo como respaldo (en prueba). No es una recomendación de apuesta.
+Varios mercados por partido: ganador, doble oportunidad, hándicap, total de puntos/goles y ambos anotan.
+**Confianza**: Alta = 70% o más, Media = 55% a 69%, Baja = menos de 55%. **Kalshi** = precio del contrato (¢).
+Usa las casas (sin margen) cuando existen y el modelo como respaldo. En hándicap y totales el modelo no mostró ventaja
+frente a las casas, por eso ahí se usa su probabilidad. No es una recomendación de apuesta.
 
 {picks_hoy(now)}
 """

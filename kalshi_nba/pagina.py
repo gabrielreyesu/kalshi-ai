@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from .injuries import OUT
+from .picks import soccer_picks, us_picks, us_snapshot
 from .resumen import TZ, _bajas_fut, _lat, _when
 
 P = Path("predictions")
@@ -63,7 +64,7 @@ def games_us(lg: str, now, finals) -> list:
     if not reg.exists():
         return []
     r = pd.read_csv(reg, dtype={"event_id": str, "home_id": str, "away_id": str})
-    r = r.sort_values("created_utc").drop_duplicates("event_id", keep="last")
+    r = (r.sort_values("created_utc") if "created_utc" in r else r).drop_duplicates("event_id", keep="last")
     r["t"] = _when(r["kickoff_utc"])
     r = r[r["t"] > now].sort_values("t")
     s = pd.DataFrame()
@@ -73,6 +74,8 @@ def games_us(lg: str, now, finals) -> list:
         s = s[(s["kind"] == "winner") & (s["side"] == "home")].sort_values("snapshot_utc").drop_duplicates("event_id", keep="last").set_index("event_id")
     pm = _latest(P / f"{lg}_polymarket_snapshots.csv")
     inj = _injured(lg)
+    lines = us_snapshot(P, lg)
+    lines = {e: g for e, g in lines.groupby("event_id")} if len(lines) else {}
     out = []
     for x in r.itertuples():
         kh = _f(s["mid"].get(x.event_id)) if "mid" in s else None
@@ -85,14 +88,14 @@ def games_us(lg: str, now, finals) -> list:
         else:
             final, src = model, "modelo"
         pick, prob = _pick([x.home, x.away], final)
-        fav_home = x.p_home >= 0.5
         out.append({"sport": lg, "comp": SPORT[lg], "t": x.t.isoformat(), "home": x.home, "away": x.away, "three": False,
                     "pick": pick, "prob": prob, "src": src,
                     "rows": [["Modelo", model], ["Casas", [bh, None if bh is None else 1 - bh]],
                              ["Kalshi", [kh, None if kh is None else 1 - kh]], ["Polymarket", [ph, None if ph is None else 1 - ph]]],
                     "extra": [["Diferencia esperada", f"{x.home if x.mu_margin >= 0 else x.away} por {abs(x.mu_margin):.1f} pts"],
                               ["Total esperado", f"{x.mu_total:.0f} pts"]],
-                    "inj": {"home": inj.get(str(x.home_id), []), "away": inj.get(str(x.away_id), [])}})
+                    "inj": {"home": inj.get(str(getattr(x, "home_id", "")), []), "away": inj.get(str(getattr(x, "away_id", "")), [])},
+                    "picks": us_picks(lines.get(x.event_id), x.home, x.away, (pick, prob, src))})
     return out
 
 
@@ -127,7 +130,10 @@ def games_ligas(now) -> list:
         out.append({"sport": "liga", "comp": x.competition, "t": x.t.isoformat(), "home": x.home, "away": x.away, "three": True,
                     "pick": pick, "prob": prob, "src": "modelo",
                     "rows": [["Modelo", model], ["Kalshi", kal]],
-                    "extra": _soccer_extra(x, cal=True) + [["Bajas local / visita", _bajas_fut(x, lat)]], "inj": None})
+                    "extra": _soccer_extra(x, cal=True) + [["Bajas local / visita", _bajas_fut(x, lat)]], "inj": None,
+                    "picks": soccer_picks(x.home, x.away, model, "modelo",
+                                          {1.5: _f(getattr(x, "p_over_1_5_cal", None)), 2.5: _f(getattr(x, "p_over_2_5_cal", None))},
+                                          _f(getattr(x, "p_btts_cal", None)), kalshi3=kal)})
     return out
 
 
@@ -144,7 +150,8 @@ def games_intl(now, finals) -> list:
     reg = P / "intl_registry.csv"
     if not reg.exists():
         return []
-    r = pd.read_csv(reg, dtype={"event_id": str}).sort_values("created_utc").drop_duplicates("event_id", keep="last")
+    r = pd.read_csv(reg, dtype={"event_id": str})
+    r = (r.sort_values("created_utc") if "created_utc" in r else r).drop_duplicates("event_id", keep="last")
     snap = P / "intl_kalshi_snapshots.csv"
     if snap.exists():
         s = _latest(snap)
@@ -169,11 +176,18 @@ def games_intl(now, finals) -> list:
         out.append({"sport": sport, "comp": x.competicion + (" · sede neutral" if x.neutral else ""), "t": x.t.isoformat(),
                     "home": x.home, "away": x.away, "three": True, "pick": pick, "prob": prob, "src": src,
                     "rows": [["Modelo", model], ["Casas", books], ["Kalshi", _tri(x, ["k_mid_H", "k_mid_D", "k_mid_A"])]],
-                    "extra": extra, "inj": None})
+                    "extra": extra, "inj": None,
+                    "picks": soccer_picks(x.home, x.away, final, src,
+                                          {1.5: _f(getattr(x, "p_over_1_5", None)), 2.5: _f(getattr(x, "p_over_2_5", None))},
+                                          _f(getattr(x, "p_btts", None)), goals_ok=sport != "intl",
+                                          kalshi3=_tri(x, ["k_mid_H", "k_mid_D", "k_mid_A"]))})
     return out
 
 
 def collect(now=None) -> dict:
+    global P
+    from . import resumen as _r
+    P = _r.P                                   # misma carpeta que PREDICCIONES.md (las pruebas la cambian)
     now = now or pd.Timestamp.now(tz=TZ)
     finals = _final_picks()
     games = games_us("nba", now, finals) + games_us("nfl", now, finals) + games_ligas(now) + games_intl(now, finals)
@@ -224,7 +238,15 @@ details{margin-top:8px}summary{cursor:pointer;color:var(--accent);font-size:13px
 .h{background:var(--home)}.d{background:var(--draw)}.a{background:var(--away)}.na{color:var(--muted);font-size:12px}
 .legend{display:flex;gap:12px;font-size:11px;color:var(--muted);margin-top:4px}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
 dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13px;margin:8px 0 0}dt{color:var(--muted)}dd{margin:0;text-align:right}
-.inj{font-size:12px;color:var(--muted);margin-top:6px}.empty{color:var(--muted);text-align:center;padding:40px 0}
+.inj{font-size:12px;color:var(--muted);margin-top:6px}
+.mk{margin-top:8px;border-top:1px solid var(--line)}.mk>div{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:7px 0;border-bottom:1px solid var(--line)}
+.mk>div:last-child{border-bottom:0}.mk .r{text-align:right}.mk .lab{font-size:11px;color:var(--muted)}.mk .ch{font-size:14px;font-weight:600}
+.mk .pp{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}.mk .meta{text-align:right;font-size:11px;color:var(--muted)}
+.view{display:flex;background:var(--chip);border-radius:10px;padding:3px;margin-top:8px}
+.view button{flex:1;border:0;background:transparent;color:var(--ink);font:inherit;font-size:14px;padding:7px;border-radius:8px}
+.view button[aria-pressed=true]{background:var(--card);font-weight:650;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.pk{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center}.pk .big{font-size:20px;font-weight:750;font-variant-numeric:tabular-nums;text-align:center}
+.pk .t1{font-weight:650}.pk .t2{font-size:12px;color:var(--muted)}.empty{color:var(--muted);text-align:center;padding:40px 0}
 footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;margin:0 auto}
 </style>
 </head>
@@ -232,21 +254,28 @@ footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;mar
 <header>
   <h1>Predicciones</h1>
   <div class="sub">Actualizado __UPDATED__ (Chicago) · horas en tu zona horaria</div>
+  <div class="view" id="view"><button data-v="games">Partidos</button><button data-v="picks">Mejores picks</button></div>
   <input type="search" id="q" placeholder="Buscar equipo o competición" aria-label="Buscar">
 </header>
 <div class="sticky">
   <div class="bar" id="sports"></div>
   <div class="bar" id="when"></div>
+  <div class="bar" id="mkts"></div>
 </div>
 <main id="list"></main>
 <footer>
   <p><b>Pick</b>: resultado más probable. Usa el consenso de casas (sin margen) cuando existe y el modelo propio si no; está en prueba.
   <b>Confianza</b>: Alta ≥ 70%, Media 55–69%, Baja &lt; 55%. Kalshi y Polymarket: precio ≈ probabilidad (62¢ ≈ 62%).</p>
+  <p><b>Mercados</b>: Hándicap = ganar por más de X puntos (o "+X": ganar o perder por menos de X). Total = puntos o goles del partido.
+  "Línea segura" = la línea más exigente que aún tiene ≥ 70–75% de probabilidad. Doble oportunidad = uno de dos resultados.
+  En hándicap y totales la probabilidad viene de las casas: el modelo propio no mostró ventaja ahí.</p>
   <p>Bajas: informativas; el modelo de producción todavía no las usa. Esto no es una recomendación de apuesta.</p>
 </footer>
 <script>
 const DATA = __DATA__;
-const S = {sport: "all", when: "48h", q: "", hi: "0"};
+const S = {sport: "all", when: "48h", q: "", hi: "0", view: "games", mkt: "all"};
+const MKTS = [["all","Todos los mercados"],["Ganador","Ganador"],["Doble","Doble oportunidad"],["Hándicap","Hándicap"],["Total","Totales"],["Goles","Goles"],["Ambos","Ambos anotan"]];
+const mktOk = p => S.mkt === "all" || (S.mkt === "Total" ? /^(Total|Puntos)/.test(p.mercado) : p.mercado.startsWith(S.mkt));
 const SPORTS = [["all","Todo"],["nba","NBA"],["nfl","NFL"],["liga","Ligas"],["club","Copas"],["intl","Selecciones"]];
 const WHEN = [["24h","Hoy"],["48h","Hoy y mañana"],["7d","7 días"],["all","Todo"]];
 const HI = [["0","Toda confianza"],["1","Solo Alta"]];
@@ -258,7 +287,7 @@ function chips(id, items, key) {
   const el = document.getElementById(id);
   el.innerHTML = items.map(([v, l]) => `<button class="chip" data-v="${v}" aria-pressed="${S[key] === v}">${l}</button>`).join("");
   el.onclick = e => { const b = e.target.closest("button"); if (!b) return; S[key] = b.dataset.v;
-    try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi})); } catch (e) {}
+    try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi, view: S.view, mkt: S.mkt})); } catch (e) {}
     chips(id, items, key); draw(); };
 }
 function stack(v, three) {
@@ -280,10 +309,26 @@ function card(g) {
     <div class="pick"><div><div class="src">Pick (${esc(g.src)})</div><b>${esc(g.pick ?? "—")}</b></div>
       <div style="text-align:right"><div class="pct">${pc(g.prob)}</div><span class="conf c-${lv}">${lv}</span></div></div>
     ${gap(g)}
+    ${mk(g)}
     <details><summary>Ver comparación y detalles</summary>
       ${g.rows.map(([n, v]) => `<div class="row"><span>${esc(n)}</span>${stack(v, g.three)}</div>`).join("")}${legend}
       <dl>${g.extra.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>${inj}
     </details></article>`;
+}
+const money = v => v == null ? "" : ` · Kalshi ${Math.round(100 * v)}¢`;
+function mk(g) {
+  const extra = (g.picks || []).filter(p => p.mercado !== "Ganador");
+  if (!extra.length) return "";
+  return `<div class="mk">${extra.map(p => `<div><span><span class="lab">${esc(p.mercado)}</span><br><span class="ch">${esc(p.pick)}</span></span>
+    <span class="r"><span class="pp">${pc(p.prob)}</span><br><span class="meta">${level(p.prob ?? 0)} · ${esc(p.fuente)}${money(p.precio)}</span></span></div>`).join("")}</div>`;
+}
+function pickRow(g, p) {
+  const t = new Date(g.t), lv = level(p.prob ?? 0);
+  const when = t.toLocaleDateString("es", {weekday: "short", day: "numeric"}) + " " + t.toLocaleTimeString("es", {hour: "2-digit", minute: "2-digit"});
+  const vs = g.sport === "nba" || g.sport === "nfl" ? `${esc(g.away)} en ${esc(g.home)}` : `${esc(g.home)} vs ${esc(g.away)}`;
+  return `<article class="card pk"><div><div class="big">${pc(p.prob)}</div><div style="text-align:center"><span class="conf c-${lv}">${lv}</span></div></div>
+    <div><div class="t2">${esc(p.mercado)} · ${esc(g.comp)}</div><div class="t1">${esc(p.pick)}</div>
+    <div class="t2">${vs} · ${when}</div><div class="t2">Fuente: ${esc(p.fuente)}${money(p.precio)}</div></div></article>`;
 }
 function gap(g) {
   const m = g.rows.find(r => r[0] === "Modelo"), c = g.rows.find(r => r[0] === "Casas");
@@ -295,9 +340,16 @@ function draw() {
   const now = Date.now(), lim = {"24h": 24, "48h": 48, "7d": 168, "all": 1e9}[S.when] * 3600e3, q = S.q.trim().toLowerCase();
   const gs = DATA.games.filter(g => { const t = Date.parse(g.t);
     return t > now - 3 * 3600e3 && t - now <= lim && (S.sport === "all" || g.sport === S.sport)
-      && (S.hi !== "1" || (g.prob ?? 0) >= .70)
+      && (S.view === "picks" || S.hi !== "1" || (g.prob ?? 0) >= .70)
       && (!q || (g.home + " " + g.away + " " + g.comp).toLowerCase().includes(q)); });
   const el = document.getElementById("list");
+  if (S.view === "picks") {
+    const ps = gs.flatMap(g => (g.picks || []).map(p => [g, p])).filter(([g, p]) => p.prob != null && mktOk(p) && (S.hi !== "1" || p.prob >= .70))
+      .sort((a, b) => b[1].prob - a[1].prob);
+    el.innerHTML = ps.length ? `<p class="count">${ps.length} picks, de mayor a menor probabilidad</p>` + ps.map(([g, p]) => pickRow(g, p)).join("")
+      : `<p class="empty">No hay picks con estos filtros.</p>`;
+    return;
+  }
   if (!gs.length) { el.innerHTML = `<p class="empty">No hay partidos con estos filtros.</p>`; return; }
   let html = `<p class="count">${gs.length} partido${gs.length === 1 ? "" : "s"}</p>`, last = "";
   for (const g of gs) {
@@ -307,14 +359,23 @@ function draw() {
   }
   el.innerHTML = html;
 }
-chips("sports", SPORTS, "sport");
+const viewBar = document.getElementById("view");
+function drawView() {
+  for (const b of viewBar.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.v === S.view));
+  document.getElementById("mkts").style.display = S.view === "picks" ? "flex" : "none";
+}
+viewBar.onclick = e => { const b = e.target.closest("button"); if (!b) return; S.view = b.dataset.v;
+  try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi, view: S.view, mkt: S.mkt})); } catch (e) {}
+  drawView(); draw(); };
+chips("sports", SPORTS, "sport"); chips("mkts", MKTS, "mkt");
+drawView();
 const whenBar = document.getElementById("when");
 function chipsWhen() {
   whenBar.innerHTML = WHEN.map(([v, l]) => `<button class="chip" data-k="when" data-v="${v}" aria-pressed="${S.when === v}">${l}</button>`).join("")
     + HI.slice(1).map(([v, l]) => `<button class="chip" data-k="hi" data-v="${S.hi === "1" ? "0" : "1"}" aria-pressed="${S.hi === "1"}">${l}</button>`).join("");
 }
 whenBar.onclick = e => { const b = e.target.closest("button"); if (!b) return; S[b.dataset.k] = b.dataset.v;
-  try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi})); } catch (e) {}
+  try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi, view: S.view, mkt: S.mkt})); } catch (e) {}
   chipsWhen(); draw(); };
 chipsWhen();
 document.getElementById("q").oninput = e => { S.q = e.target.value; draw(); };

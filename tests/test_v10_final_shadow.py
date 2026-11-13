@@ -40,12 +40,16 @@ def test_simple_picks_table_shows_only_near_games_with_confidence(tmp_path):
     try:
         base = dict(snapshot_utc="2030-01-01T00:00:00+00:00", model_H=0.5, model_D=float("nan"), model_A=0.5, market_H=0.8, market_D=float("nan"),
                     market_A=0.2, final_D=float("nan"), final_source="market_consensus")
+        reg = dict(home_id="10", away_id="20", elo_diff=0, rest_h=1, rest_a=1, p_home=0.5, mu_margin=0.0, mu_total=220, p_home_normal=0.5,
+                   sig_m=13, sig_t=17, model_version="nba_v1", created_utc="2029-12-31T00:00:00Z")
+        pd.DataFrame([{**reg, "event_id": "1", "kickoff_utc": "2030-01-01T20:00:00+00:00", "home": "Utah Jazz", "away": "Orlando Magic"}]).to_csv(tmp_path / "nba_registry.csv", index=False)
+        pd.DataFrame([{**reg, "event_id": "2", "kickoff_utc": "2030-01-09T20:00:00+00:00", "home": "Lions", "away": "Bears"}]).to_csv(tmp_path / "nfl_registry.csv", index=False)
         pd.DataFrame([{**base, "sport": "nba", "event_id": "1", "kickoff_utc": "2030-01-01T20:00:00+00:00", "home": "Utah Jazz", "away": "Orlando Magic", "final_H": 0.8, "final_A": 0.2},
                       {**base, "sport": "nfl", "event_id": "2", "kickoff_utc": "2030-01-09T20:00:00+00:00", "home": "Lions", "away": "Bears", "final_H": 0.6, "final_A": 0.4}]).to_csv(tmp_path / "final_shadow.csv", index=False)
         txt = resumen.build(now=pd.Timestamp("2030-01-01T12:00:00", tz="UTC").tz_convert(resumen.TZ))
     finally:
         resumen.P = old
     resumen_picks = txt.split("## Resumen de picks de hoy y mañana")[1]
-    assert "| NBA | Orlando Magic en Utah Jazz | Utah Jazz | 80% | Alta |" in resumen_picks
+    assert "| NBA | Orlando Magic en Utah Jazz | Ganador | Utah Jazz | 80% | Alta | casas |" in resumen_picks
     assert "Lions" not in resumen_picks                     # el partido lejano no entra en el resumen
     assert txt.index("## NBA") < txt.index("## Resumen de picks")   # las tablas detalladas van primero
