@@ -106,3 +106,28 @@ final; en producción debe venir del depth chart/inactivos oficiales con hora de
 - Evaluación: `kalshi_intl.model.walk_forward` (1X2 a 90 min, competiciones objetivo). Desarrollo 2020/21–2023/24;
   confirmación ≥ 2024/25 una sola vez. Mismo criterio de éxito que NBA (logloss IC95% > 0, Brier multiclase no peor,
   ECE no peor en más de 0,005).
+
+## Resultado fútbol (ejecución 43435457688)
+### Clubes: copas europeas — SUPERA_CRITERIO_SOLO_SOMBRA
+Cobertura: 23.916 de 24.091 partidos con once válido (99,3%); 95,6% de los partidos evaluados con once utilizable.
+Desarrollo (2020/21–2023/24): A (continuidad) mejora 0,0029 [0,0012; 0,0045]; B 0,0023 [0,0006; 0,0041]. Elegida: A.
+
+| Confirmación (2024/25–2026/27, 1.234 partidos) | Acierto | Logloss | Brier (3 clases) | ECE |
+|---|---|---|---|---|
+| Motor actual | 56,65% | 0,94872 | 0,56072 | 0,0477 |
+| + continuidad del once | 56,81% | 0,94576 | 0,55842 | 0,0488 |
+| Mejora (IC95%) | | **0,0030 [0,0002; 0,0059]** | **0,0023 [0,0005; 0,0043]** | +0,0011 (límite 0,005) |
+
+Mejora en las 7 temporadas. Efecto pequeño (≈ un tercio del de NBA) y el IC inferior roza 0: tratarlo como señal débil pero real.
+
+### Selecciones — NO_SUPERA_CRITERIO (descartado)
+Cobertura 91%. Desarrollo: A −0,0006 [−0,0015; 0,0002]; B −0,0013 (empeora). Confirmación A: +0,0008 [−0,0001; 0,0017].
+Las convocatorias cambian demasiado para que la continuidad informe.
+
+### Selecciones: sede neutral inferida (rama research/intl-neutral-venues) — NO_SUPERA_CRITERIO
+818 partidos marcados; 256 en evaluación. Total: −0,00002 [−0,0019; 0,0019]. Afectados: +0,0021 [−0,021; 0,026],
+acierto 57,0% → 59,4%. Muestra insuficiente; repetir tras más torneos.
+
+### Siguiente paso para clubes
+Sombra prospectiva con el once oficial capturado antes del inicio (API-Football `fixtures/lineups` ya se recoge cada hora),
+comparando contra `intl_v1` en Champions/Europa/Conference.
