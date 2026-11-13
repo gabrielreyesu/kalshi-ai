@@ -39,3 +39,5 @@ No se incorpora al modelo. La página muestra un **aviso informativo** (⚑) cua
 grupo o tabla (`python -m kalshi_lineup.stakes_now`, en soccer-daily), sin cambiar la probabilidad. Repetir el
 backtest al final de cada temporada de ligas (más partidos con equipos sin nada en juego) y extenderlo a la fase de
 liga de Champions/Europa League y a NBA/NFL.
+
+Verificado el 13-nov-2026 con datos reales de ESPN: 14 grupos de la Nations League 2026 (12 de 4 equipos, 2 de 3); 4 partidos de la jornada del 15-nov con un equipo sin nada en juego (Letonia, Montenegro, San Marino, Turquía).
