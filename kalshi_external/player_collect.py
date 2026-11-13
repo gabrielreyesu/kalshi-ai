@@ -20,7 +20,7 @@ from .player_intel import parse_injury_feed, parse_completed_boxscore, player_ma
 
 API_ROOT = "https://site.api.espn.com/apis/site/v2/sports"
 PATHS = {"nba": "basketball/nba", "nfl": "football/nfl"}
-UA = {"User-Agent": "KalshiAI-player-research/1.0 (+https://github.com/gabrielreyesu/kalshi-ai)"}
+UA = {"User-Agent": "MochaPicks-player-research/1.0 (+https://github.com/gabrielreyesu/mocha-picks)"}
 
 
 def _valid_api(url):

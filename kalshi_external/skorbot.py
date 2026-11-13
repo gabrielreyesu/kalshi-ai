@@ -12,7 +12,7 @@ import requests
 from .core import future_match, make_record, utc
 
 ENDPOINT="https://skorbot.live/api/v1/matches.json"
-USER_AGENT="KalshiAI-Research/0.8 (+https://github.com/gabrielreyesu/kalshi-ai)"
+USER_AGENT="MochaPicks-Research/0.8 (+https://github.com/gabrielreyesu/mocha-picks)"
 CREDIT="Skorbot (skorbot.live)"
 
 

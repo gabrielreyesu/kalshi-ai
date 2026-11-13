@@ -1,4 +1,7 @@
-# Kalshi AI: fútbol, NBA, NCAA (baloncesto) y NFL
+# ☕ Mocha Picks (antes "Kalshi AI"): fútbol, NBA, NCAA (baloncesto) y NFL
+
+📱 **Página para el teléfono:** https://gabrielreyesu.github.io/mocha-picks/ · Tabla completa: [PREDICCIONES.md](PREDICCIONES.md)
+Los paquetes de Python conservan sus nombres (`kalshi_nba`, `kalshi_soccer`, `kalshi_intl`, `kalshi_external`, `kalshi_lineup`).
 
 Reemplaza las ~60 celdas del notebook de fútbol por un paquete reproducible. Mismo modelo (V4 híbrido:
 Elo + Poisson/Dixon-Coles + regresión logística por liga), sin variables globales de Colab, y con
