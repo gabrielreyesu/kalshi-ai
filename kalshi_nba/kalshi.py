@@ -12,7 +12,7 @@ from kalshi_soccer.kalshi import _f, _get
 SERIES = {"winner": "KXNBAGAME", "spread": "KXNBASPREAD", "total": "KXNBATOTAL"}
 LEAGUE_SERIES = {"nba": SERIES, "nfl": {"winner": "KXNFLGAME", "spread": "KXNFLSPREAD", "total": "KXNFLTOTAL"}}
 NFL_ABBR = {"1": "ATL", "2": "BUF", "3": "CHI", "4": "CIN", "5": "CLE", "6": "DAL", "7": "DEN", "8": "DET", "9": "GB",
-            "10": "TEN", "11": "IND", "12": "KC", "13": "LV", "14": "LAR", "15": "MIA", "16": "MIN", "17": "NE",
+            "10": "TEN", "11": "IND", "12": "KC", "13": "LV", "14": "LA", "15": "MIA", "16": "MIN", "17": "NE",
             "18": "NO", "19": "NYG", "20": "NYJ", "21": "PHI", "22": "ARI", "23": "PIT", "24": "LAC", "25": "SF",
             "26": "SEA", "27": "TB", "28": "WAS", "29": "CAR", "30": "JAC", "33": "BAL", "34": "HOU"}
 ABBR = {"1": "ATL", "2": "BOS", "3": "NOP", "4": "CHI", "5": "CLE", "6": "DAL", "7": "DEN", "8": "DET", "9": "GSW",

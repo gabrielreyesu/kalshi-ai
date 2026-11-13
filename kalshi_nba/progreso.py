@@ -33,13 +33,18 @@ BACKTESTS = [
     {"prueba": "Copas europeas · once titular", "partidos": 1234, "acierto": "56,7% → 56,8%", "mejora": "0,0030 [0,0002; 0,0059]", "veredicto": "supera (débil)"},
     {"prueba": "Selecciones · once titular", "partidos": 1321, "acierto": "58,7% → 58,6%", "mejora": "0,0008 [−0,0001; 0,0017]", "veredicto": "descartada"},
     {"prueba": "Selecciones · sede neutral", "partidos": 3714, "acierto": "57,9% → 58,0%", "mejora": "0,0000 [−0,0019; 0,0019]", "veredicto": "no concluyente"},
+    {"prueba": "NBA · modelo+alineación vs Kalshi (60 min antes)", "partidos": 1559, "acierto": "Kalshi 68,7% · modelo 67,0%", "mejora": "−0,0159 [−0,0235; −0,0085]", "veredicto": "Kalshi gana"},
+    {"prueba": "NBA · Kalshi + modelo (mezcla)", "partidos": 1018, "acierto": "70,5% → 71,2%", "mejora": "−0,0004 [−0,0017; 0,0010]", "veredicto": "descartada"},
+    {"prueba": "NFL · modelo+QB vs Kalshi (60 min antes)", "partidos": 410, "acierto": "Kalshi 65,6% · modelo 65,6%", "mejora": "−0,0020 [−0,0110; 0,0071]", "veredicto": "empate"},
+    {"prueba": "NFL · Kalshi + modelo (mezcla)", "partidos": 245, "acierto": "64,5% → 64,1%", "mejora": "0,0027 [−0,0006; 0,0058]", "veredicto": "no concluyente"},
     {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
 ]
 
 NEXT = [
     ("En curso", "Acumular 200 partidos por prueba en sombra (NBA ~2–3 semanas; copas ~2 meses; NFL varios meses)."),
     ("Siguiente", "Mostrar en la página de picks la probabilidad ajustada por bajas, marcada como «en prueba», cuando NBA llegue a 200 partidos con mejora."),
-    ("Siguiente", "Precios históricos de Kalshi antes del partido para medir si recalcular cerca del inicio gana al precio, no solo al modelo."),
+    ("Hecho", "Comparación con precios reales de Kalshi: el mercado 60 min antes acierta más que el modelo; la mezcla no aporta (NBA) o no es concluyente (NFL)."),
+    ("Siguiente", "Picks con el precio más reciente posible (Kalshi cerca del inicio), ya que el mercado mejora al acercarse el partido."),
     ("Siguiente", "NFL: distribución real de márgenes (números clave 3 y 7) para los hándicaps, en vez de la curva normal."),
     ("Pendiente", "Repetir la sede neutral de selecciones cuando haya más partidos de torneo."),
 ]
@@ -173,7 +178,7 @@ document.getElementById("picks").innerHTML = pk.length
   ? `<table><tr><th>Deporte</th><th>Partidos</th><th>Acierto</th><th>Log loss</th></tr>${pk.map(x => `<tr><td>${esc(x.deporte)}</td><td class="n">${x.n}</td><td class="n">${pc(x.acierto)}</td><td class="n">${f4(x.logloss)}</td></tr>`).join("")}</table>
      <p class="small">Pick de ganador publicado (casas si existen, modelo si no), última foto antes del inicio. Actualizado ${when(D.picks_updated)}. Con pocos partidos el acierto varía mucho.</p>`
   : `<p class="small">Aún no hay partidos resueltos.</p>`;
-const vcls = v => v.startsWith("supera") ? "good" : v === "descartada" ? "bad" : "mid";
+const vcls = v => v.startsWith("supera") ? "good" : (v === "descartada" || v === "Kalshi gana") ? "bad" : "mid";
 document.getElementById("bt").innerHTML = D.backtests.map(b => `<div class="bt"><div class="row"><span class="t">${esc(b.prueba)}</span>
   <span class="badge ${vcls(b.veredicto)}">${esc(b.veredicto)}</span></div>
   <div class="small">${b.partidos.toLocaleString("es")} partidos · acierto ${esc(b.acierto)} · mejora ${esc(b.mejora)}</div></div>`).join("");
