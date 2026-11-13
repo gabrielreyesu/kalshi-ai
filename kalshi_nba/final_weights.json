@@ -1,0 +1,158 @@
+{
+ "nba": {
+  "pesos": {
+   "k,c,m": [
+    -0.03100180733140113,
+    0.5527231670757001,
+    0.5475649396247793,
+    -0.04106280956393419
+   ],
+   "k,m": [
+    -0.03290365503623339,
+    1.06473277631659,
+    -0.03770145639524774
+   ],
+   "c,m": [
+    -0.031156466041366713,
+    1.0974649728574142,
+    -0.004949346792058572
+   ],
+   "m": [
+    -0.09726446493780833,
+    1.0632450833446954
+   ]
+  },
+  "entrenado_con": 1559,
+  "modelo": "p_base",
+  "validacion": {
+   "n": 1018,
+   "desde": "2025-12-27",
+   "hasta": "2026-11-12",
+   "pick_actual_casas_o_modelo": {
+    "n": 1018,
+    "accuracy": 0.7112,
+    "logloss": 0.5537,
+    "brier": 0.18716,
+    "ece": 0.0322
+   },
+   "kalshi_solo": {
+    "n": 1018,
+    "accuracy": 0.7073,
+    "logloss": 0.55346,
+    "brier": 0.18755,
+    "ece": 0.0328
+   },
+   "modelo_solo": {
+    "n": 1018,
+    "accuracy": 0.6935,
+    "logloss": 0.58611,
+    "brier": 0.20028,
+    "ece": 0.0294
+   },
+   "pick_final_combinado": {
+    "n": 1018,
+    "accuracy": 0.7102,
+    "logloss": 0.55537,
+    "brier": 0.18825,
+    "ece": 0.0305
+   },
+   "mejora_vs_pick_actual": {
+    "mejora": -0.00167,
+    "ic95_inf": -0.0047,
+    "ic95_sup": 0.00128,
+    "excluye_0": false
+   },
+   "mejora_vs_kalshi": {
+    "mejora": -0.00191,
+    "ic95_inf": -0.00524,
+    "ic95_sup": 0.00132,
+    "excluye_0": false
+   },
+   "mejora_brier_vs_pick_actual": {
+    "mejora": -0.00109,
+    "ic95_inf": -0.00225,
+    "ic95_sup": 0.00011,
+    "excluye_0": false
+   }
+  },
+  "nota": "Pesos sobre logit(prob. local): [intercepto, Kalshi, casas, modelo] según el subconjunto."
+ },
+ "nfl": {
+  "pesos": {
+   "k,c,m": [
+    -0.1326864484542217,
+    0.46848643526308703,
+    0.3557627936457153,
+    0.26658971552757277
+   ],
+   "k,m": [
+    -0.12864413479886588,
+    0.7897212153039995,
+    0.2874846376218519
+   ],
+   "c,m": [
+    -0.1316999734737913,
+    0.7866563697263765,
+    0.32298929915296126
+   ],
+   "m": [
+    -0.11569222939160966,
+    1.0564642300471891
+   ]
+  },
+  "entrenado_con": 411,
+  "modelo": "p_base",
+  "validacion": {
+   "n": 246,
+   "desde": "2025-11-23",
+   "hasta": "2026-11-12",
+   "pick_actual_casas_o_modelo": {
+    "n": 246,
+    "accuracy": 0.6382,
+    "logloss": 0.61252,
+    "brier": 0.21349,
+    "ece": 0.0683
+   },
+   "kalshi_solo": {
+    "n": 246,
+    "accuracy": 0.6423,
+    "logloss": 0.61312,
+    "brier": 0.21379,
+    "ece": 0.0528
+   },
+   "modelo_solo": {
+    "n": 246,
+    "accuracy": 0.6504,
+    "logloss": 0.62241,
+    "brier": 0.2177,
+    "ece": 0.0692
+   },
+   "pick_final_combinado": {
+    "n": 246,
+    "accuracy": 0.6545,
+    "logloss": 0.61278,
+    "brier": 0.21361,
+    "ece": 0.058
+   },
+   "mejora_vs_pick_actual": {
+    "mejora": -0.00026,
+    "ic95_inf": -0.00561,
+    "ic95_sup": 0.00462,
+    "excluye_0": false
+   },
+   "mejora_vs_kalshi": {
+    "mejora": 0.00034,
+    "ic95_inf": -0.00469,
+    "ic95_sup": 0.0053,
+    "excluye_0": false
+   },
+   "mejora_brier_vs_pick_actual": {
+    "mejora": -0.00012,
+    "ic95_inf": -0.00237,
+    "ic95_sup": 0.00191,
+    "excluye_0": false
+   }
+  },
+  "nota": "Pesos sobre logit(prob. local): [intercepto, Kalshi, casas, modelo] según el subconjunto."
+ }
+}

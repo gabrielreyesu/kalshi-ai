@@ -18,7 +18,9 @@ def test_build_only_uses_pre_kickoff_snapshots_and_is_idempotent(tmp_path):
                   dict(snapshot_utc="2030-01-01T00:00:00+00:00", event_id="2", kind="winner", side="home", p_model=0.6, p_book=0.7)]).to_csv(tmp_path / "nba_kalshi_snapshots.csv", index=False)
     assert build(tmp_path) == 1 and build(tmp_path) == 1
     d = pd.read_csv(tmp_path / "final_shadow.csv", dtype={"event_id": str})
-    assert list(d.event_id) == ["1"] and abs(d.final_H.iloc[0] - 0.7) < 1e-12 and d.final_source.iloc[0] == "market_consensus"
+    from kalshi_nba.final_pick import combine, load_weights
+    p, src = combine(float("nan"), 0.7, 0.6, load_weights("nba"))     # sin bid/ask de Kalshi: casas + modelo
+    assert list(d.event_id) == ["1"] and abs(d.final_H.iloc[0] - p) < 1e-9 and d.final_source.iloc[0] == src == "casas + modelo"
 
 
 def test_score_pairs_same_games_uses_last_pre_kickoff_snapshot_and_ignores_late_ones():

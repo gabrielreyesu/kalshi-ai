@@ -15,6 +15,7 @@ import pandas as pd
 
 from .injuries import OUT
 from .picks import soccer_picks, us_picks, us_snapshot
+from kalshi_external.final_shadow import source_label
 from .resumen import TZ, _bajas_fut, _lat, _when
 
 P = Path("predictions")
@@ -84,7 +85,7 @@ def games_us(lg: str, now, finals) -> list:
         model = [_f(x.p_home), _f(1 - x.p_home)]
         fin = finals.get((lg, x.event_id))
         if fin is not None and pd.notna(fin.final_H):
-            final, src = [_f(fin.final_H), _f(fin.final_A)], ("casas" if fin.final_source == "market_consensus" else "modelo")
+            final, src = [_f(fin.final_H), _f(fin.final_A)], source_label(fin.final_source)
         else:
             final, src = model, "modelo"
         pick, prob = _pick([x.home, x.away], final)
@@ -175,7 +176,7 @@ def games_intl(now, finals) -> list:
         model, books = _tri(x, ["p_H", "p_D", "p_A"]), _norm(_tri(x, ["mkt_H", "mkt_D", "mkt_A"]))
         fin = finals.get((sport, x.event_id))
         if fin is not None and pd.notna(fin.final_H):
-            final, src = [_f(fin.final_H), _f(fin.final_D), _f(fin.final_A)], ("casas" if fin.final_source == "market_consensus" else "modelo")
+            final, src = [_f(fin.final_H), _f(fin.final_D), _f(fin.final_A)], source_label(fin.final_source)
         else:
             final, src = model, "modelo"
         pick, prob = _pick([x.home, "Empate", x.away], final)

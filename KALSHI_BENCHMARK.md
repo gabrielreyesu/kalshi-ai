@@ -57,3 +57,23 @@ justa en el tiempo.
    continúan.
 4. Corrección encontrada: Kalshi usa `LA` para los Rams; el código esperaba `LAR` y sus partidos nunca recibían
    precio de Kalshi en producción. Corregido en `kalshi_nba/kalshi.py`.
+
+## Pick final combinado (Kalshi + casas + modelo) — en producción para NBA y NFL
+Por petición explícita del usuario, el pick final de NBA/NFL pasa a ser una combinación logística de logit(Kalshi),
+logit(casas) y logit(modelo) (`kalshi_nba/final_pick.py`, pesos en `kalshi_nba/final_weights.json`). Si falta una
+fuente se usa el submodelo con las disponibles: (Kalshi, casas, modelo) → (Kalshi, modelo) → (casas, modelo) → modelo.
+
+Validación fuera de muestra (pesos entrenados solo con fechas anteriores):
+| | Partidos | Pick anterior (casas o modelo) | Kalshi solo | Modelo solo | Combinado |
+|---|---|---|---|---|---|
+| NBA | 1.018 | 71,1% · 0,5537 | 70,7% · 0,5535 | 69,4% · 0,5861 | 71,0% · 0,5554 |
+| NFL | 246 | 63,8% · 0,6125 | 64,2% · 0,6131 | 65,0% · 0,6224 | 65,5% · 0,6128 |
+
+- Con línea de las casas, el combinado **empata** con el pick anterior (NBA −0,0017 [−0,0047; +0,0013]; NFL −0,0003
+  [−0,0056; +0,0046]). No es una mejora demostrada, pero tampoco empeora.
+- **Sin línea de las casas** (frecuente a más de 1–2 días), el pick anterior caía al modelo solo; el combinado usa
+  Kalshi + modelo, y Kalshi supera al modelo por 0,016 (NBA) en log loss.
+- Pesos aprendidos: NBA Kalshi 0,55 · casas 0,55 · modelo −0,04 (el modelo no aporta frente al mercado);
+  NFL Kalshi 0,47 · casas 0,36 · modelo 0,27.
+- Cautela: en el histórico, "casas" es la línea de cierre (posterior a T-60); en vivo es la foto del momento.
+  Kalshi solo se usa si su spread es ≤ 10¢. Reentrenar los pesos cada temporada con `python -m kalshi_nba.final_pick fit`.

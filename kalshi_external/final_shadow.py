@@ -17,10 +17,26 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from kalshi_nba.final_pick import combine, load_weights
+
 P = Path("predictions")
 SHADOW = "final_shadow.csv"
 COLS = ["snapshot_utc", "sport", "event_id", "kickoff_utc", "home", "away", "model_H", "model_D", "model_A",
-        "market_H", "market_D", "market_A", "final_H", "final_D", "final_A", "final_source"]
+        "market_H", "market_D", "market_A", "final_H", "final_D", "final_A", "final_source", "kalshi_H"]
+SOURCE_LABEL = {"market_consensus": "casas", "model_fallback": "modelo"}
+
+
+def source_label(src) -> str:
+    """Etiqueta legible del origen del pick (compatible con filas antiguas)."""
+    return SOURCE_LABEL.get(str(src), str(src))
+
+
+def _kalshi_mid(x) -> float:
+    """Mid de Kalshi del local solo si el mercado tiene un spread razonable (<= 10¢)."""
+    b, a = pd.to_numeric(getattr(x, "bid", np.nan), errors="coerce"), pd.to_numeric(getattr(x, "ask", np.nan), errors="coerce")
+    if np.isfinite(b) and np.isfinite(a) and 0 < a - b <= 0.10 and 0 < (a + b) / 2 < 1:
+        return float((a + b) / 2)
+    return np.nan
 
 
 def _final(model, market):
@@ -48,10 +64,16 @@ def rows_us(lg: str, folder: Path) -> list:
         pm, pb = pd.to_numeric(x.p_model, errors="coerce"), pd.to_numeric(x.p_book, errors="coerce")
         if not np.isfinite(pm) or not pd.Timestamp(x.snapshot_utc) < pd.Timestamp(x.kickoff_utc):
             continue
-        f, src = _final([pm, 1 - pm], [pb, 1 - pb])
+        km = _kalshi_mid(x)
+        w = load_weights(lg)
+        if w:                                     # pick final = Kalshi + casas + modelo (kalshi_nba/final_pick.py)
+            p, src = combine(km, pb, pm, w)
+            f = [p, 1 - p]
+        else:
+            f, src = _final([pm, 1 - pm], [pb, 1 - pb])
         out.append(dict(snapshot_utc=x.snapshot_utc, sport=lg, event_id=x.event_id, kickoff_utc=x.kickoff_utc, home=x.home, away=x.away,
                         model_H=pm, model_D=np.nan, model_A=1 - pm, market_H=pb, market_D=np.nan, market_A=1 - pb if np.isfinite(pb) else np.nan,
-                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src))
+                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src, kalshi_H=km))
     return out
 
 
@@ -82,7 +104,7 @@ def build(folder: Path = P) -> int:
     path = folder / SHADOW
     if path.exists():
         old = pd.read_csv(path, dtype={"event_id": str})
-        new = pd.concat([old, new], ignore_index=True).drop_duplicates(["sport", "event_id", "snapshot_utc"])
+        new = pd.concat([old, new], ignore_index=True).drop_duplicates(["sport", "event_id", "snapshot_utc"], keep="last")
     new.to_csv(path, index=False)
     return len(rows)
 
@@ -112,7 +134,7 @@ def score(shadow: pd.DataFrame, outcomes: pd.DataFrame, bootstrap: int = 2000, s
             rng = np.random.default_rng(seed)
             draws = [diff[np.concatenate([groups[j] for j in rng.integers(0, len(groups), len(groups))])].mean() for _ in range(bootstrap)]
             lo, hi = np.percentile(draws, [2.5, 97.5])
-        out.append(dict(sport=sport, n=len(y), con_mercado=int((g["final_source"] == "market_consensus").sum()),
+        out.append(dict(sport=sport, n=len(y), con_mercado=int((~g["final_source"].isin(["model_fallback", "modelo"])).sum()),
                         acierto_modelo=float((M.argmax(1) == y).mean()), acierto_final=float((F.argmax(1) == y).mean()),
                         logloss_modelo=float(lm.mean()), logloss_final=float(lf.mean()),
                         mejora_logloss=float(diff.mean()), ic95_inf=float(lo), ic95_sup=float(hi)))
