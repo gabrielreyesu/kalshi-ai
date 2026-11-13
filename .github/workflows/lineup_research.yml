@@ -69,3 +69,56 @@ jobs:
           path: reports/lineup/
           retention-days: 30
           if-no-files-found: warn
+
+  soccer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [clubes, selecciones]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Restore ESPN soccer results cache
+        uses: actions/cache/restore@v4
+        with:
+          path: data/intl
+          key: lineup-intl-v1-${{ matrix.group }}-${{ github.run_id }}
+          restore-keys: |
+            lineup-intl-v1-${{ matrix.group }}-
+            intl-data-
+            intl-espn-v2-
+      - name: Restore ESPN soccer lineup cache
+        uses: actions/cache/restore@v4
+        with:
+          path: data/intl_box
+          key: lineup-intlbox-v1-${{ matrix.group }}-${{ github.run_id }}
+          restore-keys: |
+            lineup-intlbox-v1-${{ matrix.group }}-
+      - name: Soccer — walk-forward intl model vs + starting XI (${{ matrix.group }})
+        run: python -m kalshi_lineup.soccer_eval --group ${{ matrix.group }} --output reports/lineup
+      - name: Save soccer caches even if the backtest failed
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/intl_box
+          key: lineup-intlbox-v1-${{ matrix.group }}-${{ github.run_id }}
+      - name: Save soccer results cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/intl
+          key: lineup-intl-v1-${{ matrix.group }}-${{ github.run_id }}
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: soccer-xi-${{ matrix.group }}-${{ github.run_number }}
+          path: reports/lineup/
+          retention-days: 30
+          if-no-files-found: warn
