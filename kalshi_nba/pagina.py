@@ -168,7 +168,7 @@ def games_intl(now, finals) -> list:
     snap = P / "intl_kalshi_snapshots.csv"
     if snap.exists():
         s = _latest(snap)
-        for c in [c for c in s.columns if c.startswith(("k_mid_", "mkt_", "p_over_1_5", "p_over_3_5", "p_home_m1_5", "p_away_m1_5"))]:
+        for c in [c for c in s.columns if c.startswith(("k_mid_", "k_bid_", "k_ask_", "mkt_", "p_over_1_5", "p_over_3_5", "p_home_m1_5", "p_away_m1_5"))]:
             r[c] = r["event_id"].map(s[c]).combine_first(r[c] if c in r else pd.Series(np.nan, index=r.index))
     r["t"] = _when(r["kickoff_utc"])
     r = r[r["t"] > now].sort_values("t")
@@ -194,6 +194,7 @@ def games_intl(now, finals) -> list:
                     "picks": soccer_picks(x.home, x.away, final, src,
                                           {1.5: _f(getattr(x, "p_over_1_5", None)), 2.5: _f(getattr(x, "p_over_2_5", None))},
                                           _f(getattr(x, "p_btts", None)), goals_ok=sport != "intl",
+                                          book_over=_f(getattr(x, "mkt_over", None)),
                                           kalshi3=_tri(x, ["k_mid_H", "k_mid_D", "k_mid_A"]))})
     return out
 

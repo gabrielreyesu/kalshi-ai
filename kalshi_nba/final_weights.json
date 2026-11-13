@@ -154,5 +154,19 @@
    }
   },
   "nota": "Pesos sobre logit(prob. local): [intercepto, Kalshi, casas, modelo] según el subconjunto."
+ },
+ "futbol_goles_2_5": {
+  "pesos": {
+   "intercepto": 0.0345,
+   "casas": 1.175,
+   "modelo": -0.2045
+  },
+  "entrenado_con": 7769,
+  "validacion": {
+   "n": 7769,
+   "mejora_vs_casas_recal": "+0,0001 [-0,0004; +0,0006]",
+   "mejora_vs_modelo": "+0,0113 [+0,0079; +0,0145]"
+  },
+  "nota": "Más de 2,5 goles: logística sobre logit(casas sin margen) y logit(modelo); ver kalshi_lineup/goals_bench.py."
  }
 }
