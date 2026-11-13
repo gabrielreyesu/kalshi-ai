@@ -6,6 +6,7 @@ on:
       - '.github/workflows/intl_auto_validation.yml'
       - 'kalshi_intl/**'
       - 'kalshi_external/**'
+      - 'kalshi_lineup/**'
       - 'tests/**'
       - 'requirements.txt'
   workflow_dispatch:
