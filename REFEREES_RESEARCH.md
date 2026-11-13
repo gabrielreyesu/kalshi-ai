@@ -1,0 +1,15 @@
+# Árbitros en la NBA — protocolo pre-registrado
+
+**Fijado el 13-nov-2026, antes de ver resultados.** Investigación: no cambia picks ni probabilidades.
+- Árbitros de cada partido: resumen de ESPN (`gameInfo.officials`). Se publican la mañana del partido.
+- Tendencia por árbitro con partidos **anteriores**: media encogida hacia 0 (k = 40 partidos) del residuo de totales
+  (total real − línea de cierre) y del residuo de margen (margen local + spread). Variable = media del trío.
+- **Totales:** residuo ~ tendencia del trío, walk-forward por temporada (≥ 2019). Confirmación: temporadas ≥ 2025.
+  Éxito: reducción del error cuadrático frente a la línea con IC95% > 0.
+- **Ganador:** logit(probabilidad de las casas) + tendencia de margen del trío. Confirmación ≥ 2025; éxito IC95% > 0.
+
+## Resultado (13-nov-2026)
+14.074 partidos con árbitros. **Totales — no concluyente (prometedor):** reducción del error cuadrático en desarrollo
++0,33 [−0,05; +0,72] y en confirmación ≥ 2025 (2.812 partidos) +0,50 [−0,30; +1,31] puntos²; misma dirección en
+ambos tramos pero IC incluye 0. **Ganador — sin efecto:** +0,0001 [−0,0001; +0,0003]. No entra aún al pick; repetir
+con más temporadas (y probar el efecto por árbitro principal en lugar de la media del trío).
