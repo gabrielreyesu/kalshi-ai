@@ -106,3 +106,16 @@ final; en producción debe venir del depth chart/inactivos oficiales con hora de
 - Evaluación: `kalshi_intl.model.walk_forward` (1X2 a 90 min, competiciones objetivo). Desarrollo 2020/21–2023/24;
   confirmación ≥ 2024/25 una sola vez. Mismo criterio de éxito que NBA (logloss IC95% > 0, Brier multiclase no peor,
   ECE no peor en más de 0,005).
+
+## Pruebas prospectivas en sombra (datos publicados ANTES del partido)
+| Deporte | Workflow | Dato previo al partido | Variante | Archivo |
+|---|---|---|---|---|
+| NBA | `nba-lineup-shadow` (9×/día) | Informe de lesiones ESPN (Out/Doubtful/IR fuera) sobre la rotación reciente | D | `predictions/nba_lineup_shadow*.{csv,json}` |
+| NFL | `nfl-qb-shadow` (6×/día) | Depth chart ESPN: primer QB no Out/Doubtful/IR | B | `predictions/nfl_qb_shadow*.{csv,json}` |
+| Copas europeas | `soccer-xi-shadow` (cada 15 min, mar–jue 15–20 UTC) | Once oficial ESPN, 5–80 min antes del inicio | A | `predictions/soccer_xi_shadow*.{csv,json}` |
+
+Cada uno puntúa con la última foto anterior al inicio (log loss y acierto, IC95% por fecha). Regla de activación común:
+n ≥ 200, IC95% de mejora > 0 y autorización explícita. Copas: la primera vez ejecutar `soccer-xi-shadow` a mano con
+`warm = true` para llenar la caché del historial de onces (~2 h); después cada ejecución sin partido dura segundos.
+Verificado con datos reales el 13-nov-2026: NFL detectó 13 partidos de la semana 11 y 5 cambios de QB; el lector de
+onces capturó onces oficiales 7 y 22 minutos antes de partidos en vivo.
