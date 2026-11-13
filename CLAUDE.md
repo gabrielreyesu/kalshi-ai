@@ -31,5 +31,13 @@ El pick final debe salir de combinar todas las fuentes disponibles, no de una so
 - `kalshi_nba/` NBA/NFL (motor, página `pagina.py`, progreso `progreso.py`, picks por mercado `picks.py`, pick final `final_pick.py`).
 - `kalshi_soccer/` ligas; `kalshi_intl/` copas y selecciones; `kalshi_external/` fuentes externas y pick final en sombra.
 - `kalshi_lineup/` investigación: alineaciones, QB, onces, sombras prospectivas, Kalshi histórico, clasificación.
-- Resultados de investigación: `LINEUP_RESEARCH.md`, `KALSHI_BENCHMARK.md`, `STAKES_RESEARCH.md`.
+- Pick final: NBA/NFL `kalshi_nba/final_pick.py` (`combine`), fútbol `combine3`; pesos en `kalshi_nba/final_weights.json`
+  (reentrenar: `python -m kalshi_nba.final_pick fit ...` y `python -m kalshi_lineup.soccer_kalshi_bench`).
+  Goles: `kalshi_nba/picks.py::over25`. Fiabilidad por tramos: `python -m kalshi_nba.fiabilidad`.
+- Históricos de Kalshi: `kalshi_lineup/kalshi_history.py` (NBA/NFL) y `kalshi_soccer_history.py` (fútbol); Kalshi
+  limita a ~1 petición/s sin clave (usar `prefetch_batch` para mercados recientes).
+- Resultados de investigación: `LINEUP_RESEARCH.md`, `KALSHI_BENCHMARK.md`, `STAKES_RESEARCH.md`, `TRAVEL_RESEARCH.md`,
+  `WEATHER_RESEARCH.md`, `REFEREES_RESEARCH.md`, `NFL_MARGINS.md`; resumen de todos en `FACTORES.md`.
+- Lección aprendida: el mercado (Kalshi + casas) ya incorpora casi todo lo que ven los modelos (racha, descanso, viajes,
+  H2H…); los factores nuevos deben probarse **frente al mercado**, no solo frente al modelo propio.
 - Datos privados: repositorio `gabrielreyesu/mocha-picks-data` (no publicar datos de terceros aquí).
