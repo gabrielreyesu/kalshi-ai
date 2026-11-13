@@ -37,7 +37,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Qué se juega cada equipo | Nations League | ❌ | Sin efecto | `STAKES_RESEARCH.md` |
 | Racha / forma reciente | todos | ✅/❌ | En el modelo base; variantes extra solo ayudan en NCAA y selecciones | `reports/variables_extra*.txt` |
 | Enfrentamientos directos | todos | ✅/❌ | Solo aporta en selecciones (activo) | `kalshi_intl/model.py` |
-| Clima (viento, lluvia, frío) | NFL | ⏳ | Se captura desde NOAA; falta probar | `nws_weather.py` |
+| Clima (viento, lluvia, frío) | NFL | ⏳ | Protocolo listo (`WEATHER_RESEARCH.md`); descarga histórica Open-Meteo pausada hasta que se reinicie el cupo diario | `weather_nfl.py` |
 | Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
 | Árbitro | fútbol/NFL | ⏳ | — | — |
 | Prórrogas en entrenamiento (90 min) | selecciones | ❌ | Empeora | PR #3 |
