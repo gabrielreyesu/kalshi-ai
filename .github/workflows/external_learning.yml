@@ -7,7 +7,7 @@ on:
       - 'kalshi_external/**'
       - '.github/workflows/external_learning.yml'
   schedule:
-    - cron: '35 1,13 * * *'
+    - cron: '35 1,9,17 * * *'
 
 permissions:
   contents: read
