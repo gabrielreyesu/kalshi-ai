@@ -35,8 +35,24 @@ def ll(d, pre):
     return -np.log(np.clip(P[np.arange(len(d)), d["y"].to_numpy(int)], 1e-12, 1))
 
 
+def load_prices() -> pd.DataFrame:
+    """Archivo final si existe; si no, el avance parcial (normalizado aquí a probabilidades sin margen)."""
+    from pathlib import Path
+    f = Path("data/kalshi/soccer_pregame.csv")
+    k = pd.read_csv(f if f.exists() else "data/kalshi/soccer_pregame_partial.csv", dtype={"event_id": str})
+    if not f.exists():
+        for L in (60, 1440):
+            cols = [f"k{L}_{c}" for c in "HDA"]
+            if not set(cols) <= set(k.columns):
+                continue
+            t = k[cols].sum(1)
+            bad = k[cols].isna().any(axis=1) | (t <= 0)
+            k.loc[~bad, cols] = k.loc[~bad, cols].div(t[~bad], axis=0); k.loc[bad, cols] = np.nan
+    return k
+
+
 def main():
-    k = pd.read_csv("data/kalshi/soccer_pregame.csv", dtype={"event_id": str})
+    k = load_prices()
     o = pd.concat([oos("clubes"), oos("selecciones")], ignore_index=True)
     d = k.merge(o, on="event_id")
     d = attach(d)                                                  # mkt_H/D/A (casas, sin margen)
