@@ -136,12 +136,15 @@ class HourlySoccerMonitorTests(unittest.TestCase):
             self.assertEqual(r2["api_football_requests_this_run"]["injuries"],0)
             self.assertEqual(r2["api_football_requests_this_run"]["fixture_index"],0)
             self.assertEqual(r2["new_api_football_injury_day_snapshots"],0)
-            self.assertEqual(r2["new_future_match_player_contexts"],1)
+            self.assertEqual(r2["new_future_match_player_contexts"],0)
+            self.assertEqual(r2["unchanged_contexts_not_rearchived"],1)
             third=SoccerProvider()
             r3=run(private,root/"status",observed_at="2026-11-12T16:01:00Z",
                    session=third,codes=CODES,api_key="demo",mode="hourly")
             self.assertEqual(r3["api_football_requests_this_run"]["injuries"],2)
             self.assertEqual(r3["api_football_requests_this_run"]["fixture_index"],1)
+            self.assertEqual(r3["new_future_match_player_contexts"],1)
+            self.assertEqual(r3["unchanged_contexts_not_rearchived"],0)
             # Same fixture IDs preserved; not falsely considered "unknown" just
             # because we did not call /fixtures a second time.
             latest=read_rows(private/"soccer_previews.jsonl")[-1]
@@ -164,11 +167,15 @@ class HourlySoccerMonitorTests(unittest.TestCase):
             records=read_rows(private/"soccer_confirmed_lineups.jsonl")
             self.assertEqual(len(records),1)
             self.assertTrue(records[0]["lineup_confirmed"])
+            preview=read_rows(private/"soccer_previews.jsonl")[-1]
+            self.assertEqual(preview["confirmed_XI_observed_utc"],
+                             records[0]["captured_utc"])
             later=SoccerProvider(kickoff=kick,lineups=True)
             r2=run(private,root/"status",observed_at="2026-11-12T13:30:00Z",
                    session=later,api_key="demo",mode="hourly")
             self.assertEqual(r2["api_football_requests_this_run"]["starting_XI"],0)
             self.assertEqual(r2["new_verified_pregame_starting_XI_snapshots"],0)
+            self.assertEqual(r2["new_future_match_player_contexts"],0)
             self.assertEqual(len(read_rows(private/"soccer_confirmed_lineups.jsonl")),1)
 
     def test_empty_hourly_scope_does_not_burn_provider_requests(self):

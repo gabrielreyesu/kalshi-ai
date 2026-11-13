@@ -7,7 +7,8 @@ on:
       - 'kalshi_external/**'
       - '.github/workflows/external_learning.yml'
   schedule:
-    - cron: '35 * * * *'
+    - cron: '35 1,13 * * *'                # Full profile, even if GitHub starts late
+    - cron: '35 0,2-12,14-23 * * *'       # Lightweight hourly soccer monitoring
 
 permissions:
   contents: read
@@ -30,14 +31,17 @@ jobs:
       - name: Choose lightweight hourly vs full research collection
         id: cadence
         shell: bash
+        env:
+          MATCHED_SCHEDULE: ${{ github.event.schedule }}
         run: |
-          utc_hour="$(date -u +%H)"
-          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$utc_hour" == "01" || "$utc_hour" == "13" ]]; then
+          # GitHub may delay a cron job by more than an hour. Select the
+          # intended schedule, never the wall-clock hour when it started.
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$MATCHED_SCHEDULE" == "35 1,13 * * *" ]]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
-            echo "Full historical/market collection: UTC $utc_hour"
+            echo "Full research: scheduled full window or explicit push/dispatch"
           else
             echo "mode=hourly" >> "$GITHUB_OUTPUT"
-            echo "Hour-ahead soccer and lineup monitoring only: UTC $utc_hour"
+            echo "Hourly pregame soccer monitor (no paid odds/NBA/NFL polling)"
           fi
       - name: Restore rolling research cache
         uses: actions/cache@v4

@@ -210,6 +210,32 @@ def _load(path):
     return result
 
 
+def _material_preview(preview):
+    """Strip observation time, not data provenance, for change-only archival."""
+    return json.dumps({key:value for key,value in preview.items()
+                       if key!="captured_utc"},sort_keys=True,separators=(",",":"),
+                      ensure_ascii=False)
+
+
+def _new_material_previews(previews, previously, now):
+    """Retain an hourly heartbeat only in aggregate coverage; store changed facts."""
+    previous={}
+    for row in previously:
+        try:
+            captured=utc(row["captured_utc"])
+            key=(str(row.get("competition_code")),str(row.get("event_id")))
+            if captured>now:
+                continue
+            if key not in previous or captured>utc(previous[key]["captured_utc"]):
+                previous[key]=row
+        except (TypeError,KeyError,ValueError):
+            continue
+    return [row for row in previews if
+            (str(row["competition_code"]),str(row["event_id"])) not in previous
+            or _material_preview(row)!=_material_preview(previous[
+                (str(row["competition_code"]),str(row["event_id"]))])]
+
+
 def _select_summary_matches(fixtures, history, now, max_finished=7, max_pregame=5):
     seen={(g.get("competition_code"),str(g.get("event_id"))) for g in history}
     finished=[g for g in fixtures if g["status"] in FINAL
@@ -443,8 +469,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
                     new_confirmed.append(lineup)
             except (ValueError,RuntimeError,requests.RequestException) as error:
                 issues.append(f"XI {game['event_id']}: {type(error).__name__}")
-    _,n_confirmed=append_history(cache/"soccer_confirmed_lineups.jsonl",
-                                  new_confirmed,max_bytes=50_000_000)
+    all_confirmed,n_confirmed=append_history(cache/"soccer_confirmed_lineups.jsonl",
+                                              new_confirmed,max_bytes=50_000_000)
     previews=[]
     for game in sorted(fixtures,key=lambda g:utc(g["kickoff_utc"])):
         kickoff=utc(game["kickoff_utc"])
@@ -454,6 +480,22 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             context=player_opponent_context(game,all_stats,matched.get(game["event_id"],[]),now)
             context["api_injury_coverage_confirmed"]=bool(
                 key and game["event_id"] in matched)
+            # These are provenance timestamps, not extra injury evidence.
+            # Save a new snapshot when a verified source refreshes, even if
+            # the actual injury statuses remain unchanged.
+            target_day=kickoff.strftime("%Y-%m-%d")
+            evidence=[r for r in current_reports
+                      if r.get("observed_day_utc")==target_day]
+            context["injury_report_observed_utc"]=(
+                max(evidence,key=lambda x:utc(x["captured_utc"]))["captured_utc"]
+                if evidence and game["event_id"] in matched else None)
+            confirmed=[r for r in all_confirmed
+                       if str(r.get("event_id"))==str(game["event_id"])
+                       and r.get("competition_code")==game["competition_code"]
+                       and utc(r["captured_utc"])<=now]
+            context["confirmed_XI_observed_utc"]=(
+                max(confirmed,key=lambda x:utc(x["captured_utc"]))["captured_utc"]
+                if confirmed else None)
             # Summary coverage only; unverified lineups not treated as starters
             roster=[r for r in all_lineups if r["event_id"]==game["event_id"]
                     and r.get("competition_code")==game["competition_code"]
@@ -475,7 +517,10 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             continue
         if len(previews)>=18:
             break
-    _,n_previews=append_history(cache/"soccer_previews.jsonl",previews,max_bytes=100_000_000)
+    previous_previews=_load(cache/"soccer_previews.jsonl")
+    changed_previews=_new_material_previews(previews,previous_previews,now)
+    _,n_previews=append_history(cache/"soccer_previews.jsonl",changed_previews,
+                                max_bytes=100_000_000)
     report={
         "observed_utc":now.isoformat(),
         "collection_mode":mode,
@@ -490,6 +535,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
         "new_verified_pregame_starting_XI_snapshots":n_confirmed,
         "new_api_football_injury_day_snapshots":n_injuries,
         "new_future_match_player_contexts":n_previews,
+        "future_contexts_examined":len(previews),
+        "unchanged_contexts_not_rearchived":len(previews)-len(changed_previews),
         "future_contexts_with_history":sum(bool(p["players"]) for p in previews),
         "api_football_configured":bool(key),
         "warnings":issues[:30],
