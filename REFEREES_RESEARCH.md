@@ -17,3 +17,9 @@ con más temporadas (y probar el efecto por árbitro principal en lugar de la me
 ## NFL (mismo protocolo; confirmación ≥ 2024) — no concluyente
 2.732 partidos con árbitros. Totales: desarrollo −0,22 [−0,61; +0,17], confirmación (682) +0,58 [−0,01; +1,16]
 puntos²: signo distinto entre tramos, no fiable. Ganador: −0,0001 [−0,0005; +0,0003]. No entra al pick.
+
+## Fútbol — protocolo (fijado antes de ver resultados)
+Árbitro principal (ESPN `gameInfo.officials`, orden 1). Tendencia con partidos anteriores, encogida (k = 25): exceso de
+"más de 2,5" sobre la probabilidad de las casas y exceso de victorias locales sobre las casas. Ligas grandes + copas
+europeas desde 2019/20. logit(casas) + tendencia, walk-forward por temporada (prueba ≥ 2021/22), confirmación ≥ 2024/25.
+Éxito: IC95% > 0 en confirmación.
