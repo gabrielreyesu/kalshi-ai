@@ -13,3 +13,7 @@
 +0,33 [−0,05; +0,72] y en confirmación ≥ 2025 (2.812 partidos) +0,50 [−0,30; +1,31] puntos²; misma dirección en
 ambos tramos pero IC incluye 0. **Ganador — sin efecto:** +0,0001 [−0,0001; +0,0003]. No entra aún al pick; repetir
 con más temporadas (y probar el efecto por árbitro principal en lugar de la media del trío).
+
+## NFL (mismo protocolo; confirmación ≥ 2024) — no concluyente
+2.732 partidos con árbitros. Totales: desarrollo −0,22 [−0,61; +0,17], confirmación (682) +0,58 [−0,01; +1,16]
+puntos²: signo distinto entre tramos, no fiable. Ganador: −0,0001 [−0,0005; +0,0003]. No entra al pick.
