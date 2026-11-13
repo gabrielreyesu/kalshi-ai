@@ -23,3 +23,7 @@ puntos²: signo distinto entre tramos, no fiable. Ganador: −0,0001 [−0,0005;
 "más de 2,5" sobre la probabilidad de las casas y exceso de victorias locales sobre las casas. Ligas grandes + copas
 europeas desde 2019/20. logit(casas) + tendencia, walk-forward por temporada (prueba ≥ 2021/22), confirmación ≥ 2024/25.
 Éxito: IC95% > 0 en confirmación.
+
+## Fútbol — resultado (13-nov-2026): NO_SUPERA_CRITERIO
+7.957 partidos, 340 árbitros. Más de 2,5: desarrollo −0,0001, confirmación (3.396) +0,0002 [−0,0001; +0,0005].
+Gana local: confirmación +0,0001 [−0,0003; +0,0004]. El mercado ya incorpora al árbitro. Descartado.

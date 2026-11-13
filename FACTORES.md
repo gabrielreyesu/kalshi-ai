@@ -43,6 +43,6 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
 | Árbitros (tendencia del trío) | NBA | ⚪ | Totales +0,50 [−0,30; +1,31] puntos² (misma dirección en desarrollo); ganador sin efecto. Repetir con más temporadas | `REFEREES_RESEARCH.md` |
 | Árbitros (tendencia del trío) | NFL | ⚪ | Totales: desarrollo −0,22, confirmación +0,58 (signo inestable); ganador sin efecto | `REFEREES_RESEARCH.md` |
-| Árbitro | fútbol | ⏳ | — | — |
+| Árbitro principal | fútbol | ❌ | Goles +0,0002 [−0,0001; +0,0005], local +0,0001 (3.396 partidos): el mercado ya lo incorpora | `REFEREES_RESEARCH.md` |
 | Prórrogas en entrenamiento (90 min) | selecciones | ❌ | Empeora | PR #3 |
 | Distribución real de márgenes (números clave 3/7) para hándicaps | NFL | ❌ | +0,0001 [−0,0010; +0,0012] frente a la normal: se mantiene la normal | `NFL_MARGINS.md` |
