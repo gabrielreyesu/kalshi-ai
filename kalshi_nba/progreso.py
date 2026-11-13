@@ -88,7 +88,9 @@ def collect(now=None) -> dict:
     names = {"nba": "NBA", "nfl": "NFL", "club": "Copas europeas", "intl": "Selecciones"}
     picks = [{"deporte": names.get(x.get("sport"), x.get("sport")), "n": x.get("n"), "acierto": x.get("acierto_final"),
               "logloss": x.get("logloss_final"), "con_mercado": x.get("con_mercado")} for x in fs.get("by_sport", [])]
-    return {"updated": now.isoformat(), "shadows": shadows, "picks": picks, "picks_updated": fs.get("updated_utc"),
+    fia = Path(__file__).with_name("fiabilidad.json")
+    fiab = json.loads(fia.read_text()).get("deportes", {}) if fia.exists() else {}
+    return {"updated": now.isoformat(), "shadows": shadows, "picks": picks, "picks_updated": fs.get("updated_utc"), "fiabilidad": fiab,
             "backtests": BACKTESTS, "next": NEXT}
 
 
@@ -134,6 +136,8 @@ footer{color:var(--muted);font-size:12px;padding-bottom:30px}
   <div class="sub"><a href="./">← Volver a los picks</a></div>
 </header>
 <main>
+  <h2>¿Se cumplen nuestras probabilidades?</h2>
+  <div class="card" id="fiab"></div>
   <h2>Pruebas en sombra</h2>
   <p class="small">Cada prueba calcula, antes de cada partido, la probabilidad del modelo actual y la del modelo mejorado,
   sin cambiar los picks publicados. Se activa solo con 200 partidos, mejora con IC 95% por encima de 0 y tu autorización.</p>
@@ -175,6 +179,14 @@ document.getElementById("shadows").innerHTML = D.shadows.map(s => {
       ${s.minutos_antes != null ? `<span>Minutos antes del inicio (mediana)</span><b>${Math.round(s.minutos_antes)}</b>` : ""}</div>` : ""}
   </div>`;
 }).join("");
+const F = D.fiabilidad || {};
+document.getElementById("fiab").innerHTML = Object.keys(F).length ? Object.entries(F).map(([dep, x]) => `
+  <div class="t" style="margin-top:6px">${esc(dep)} · ${x.n.toLocaleString("es")} partidos · acierto total ${pc(x.acierto_total)}</div>
+  ${x.tramos.map(t => `<div class="row small" style="margin-top:6px"><span>Pick con ${esc(t.tramo)} <span class="muted">(${t.n})</span></span>
+    <span>dijimos <b>${pc(t.prob_media)}</b> · acertó <b class="${Math.abs(t.acierto - t.prob_media) <= .05 ? "good" : "mid"}">${pc(t.acierto)}</b></span></div>
+    <div class="prog" style="margin:4px 0 0"><i style="width:${(100 * t.acierto).toFixed(1)}%"></i></div>`).join("")}`).join("<hr style='border:0;border-top:1px solid var(--line);margin:12px 0'>")
+  + `<p class="small">Validación fuera de muestra del pick final (Kalshi + casas + modelo), con pesos entrenados solo con partidos anteriores. Si "acertó" ≈ "dijimos", las probabilidades son fiables.</p>`
+  : `<p class="small">Aún sin datos.</p>`;
 const pk = D.picks.filter(x => x.n);
 document.getElementById("picks").innerHTML = pk.length
   ? `<table><tr><th>Deporte</th><th>Partidos</th><th>Acierto</th><th>Log loss</th></tr>${pk.map(x => `<tr><td>${esc(x.deporte)}</td><td class="n">${x.n}</td><td class="n">${pc(x.acierto)}</td><td class="n">${f4(x.logloss)}</td></tr>`).join("")}</table>
