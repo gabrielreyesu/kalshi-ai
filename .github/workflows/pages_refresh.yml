@@ -1,0 +1,58 @@
+name: pages-refresh
+
+# Regenera la página de picks, la de progreso y PREDICCIONES.md en cuanto se fusiona un cambio en su código.
+# Los PRs NO deben incluir estos archivos generados (los genera solo este bot y los diarios): así no hay conflictos.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kalshi_nba/pagina.py'
+      - 'kalshi_nba/progreso.py'
+      - 'kalshi_nba/picks.py'
+      - 'kalshi_nba/resumen.py'
+      - 'kalshi_lineup/stakes.py'
+      - 'kalshi_lineup/stakes_now.py'
+      - '.github/workflows/pages_refresh.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kalshi-escritura      # el mismo grupo que los workflows diarios: nunca escriben a la vez
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Restore ESPN soccer results cache (para el aviso de "nada en juego")
+        uses: actions/cache/restore@v4
+        with:
+          path: data/intl
+          key: intl-data-${{ github.run_id }}
+          restore-keys: intl-data-
+      - name: Aviso "nada en juego" (si falla, no detiene el resto)
+        continue-on-error: true
+        run: python -m kalshi_lineup.stakes_now
+      - name: Regenerar páginas y tabla
+        run: |
+          python -m kalshi_nba.resumen
+          python -m kalshi_nba.pagina
+          python -m kalshi_nba.progreso
+      - name: Guardar
+        run: |
+          git config user.name  "pages-bot"
+          git config user.email "pages-bot@users.noreply.github.com"
+          git add PREDICCIONES.md docs/ predictions/stakes_upcoming.csv 2>/dev/null || git add PREDICCIONES.md docs/
+          git diff --cached --quiet && exit 0
+          git commit -m "páginas $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i*15)); done
+          exit 1
