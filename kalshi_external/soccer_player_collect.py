@@ -227,22 +227,66 @@ def _select_summary_matches(fixtures, history, now, max_finished=7, max_pregame=
     return finished[:max_finished]+pregame[:max_pregame]
 
 
+def _hourly_competitions(archive, now, permitted_codes):
+    """Only rescan competitions with already discovered near-term fixtures.
+
+    Full twice-daily ingestion discovers new leagues/matches; hourly polling
+    focuses on their next 72h to avoid 30+ unnecessary ESPN calls/hour.
+    """
+    active=set()
+    for preview in _load(Path(archive)/"soccer_previews.jsonl"):
+        try:
+            captured=utc(preview["captured_utc"])
+            kickoff=utc(preview["kickoff_utc"])
+            code=str(preview["competition_code"])
+        except (ValueError,TypeError,KeyError):
+            continue
+        if (code in permitted_codes
+            and now-pd.Timedelta(days=3)<=captured<=now
+            and now+pd.Timedelta(minutes=15)<kickoff<=now+pd.Timedelta(days=3)):
+            active.add(code)
+    return tuple(sorted(active))
+
+
+def _injury_refresh_days(previous, now, days, refresh_hours=4):
+    """Refresh tomorrow/today only when a provider report is absent or stale.
+
+    Never mistake the *target match date* for the report's capture date.
+    """
+    due=[]
+    for day in sorted(days):
+        captured=[
+            utc(r["captured_utc"]) for r in previous
+            if r.get("source_id")=="api_football_soccer_injuries"
+            and r.get("observed_day_utc")==day
+            and utc(r["captured_utc"])<=now
+        ]
+        if not captured or now-max(captured)>=pd.Timedelta(hours=refresh_hours):
+            due.append(day)
+    return due
+
+
 def run(archive="data/external_signals", output="reports/external_learning/soccer_players",
         observed_at=None, session=None, codes=CODES, api_key=None,
-        max_summaries=12):
+        max_summaries=12, mode="full"):
+    if mode not in ("hourly","full"):
+        raise ValueError("Mode must be hourly or full")
     if not 1<=max_summaries<=30:
         raise ValueError("Invalid soccer summary request budget")
     now=utc(observed_at or pd.Timestamp.now(tz="UTC"))
     s=session or requests.Session()
     cache=Path(archive)
     issues=[]
+    hourly=mode=="hourly"
+    if hourly:
+        codes=_hourly_competitions(cache,now,set(codes))
     all_fixtures={}
     # Limit to pinned country/league paths. Scoreboard is official ESPN site
     # JSON rather than uncontrolled scraping or expensive site crawling.
     for code in codes:
         if code not in CODES:
             raise ValueError("Unsupported soccer competition")
-        for day_offset in (-1,0,1):
+        for day_offset in ((0,1,2) if hourly else (-1,0,1)):
             date=(now+pd.Timedelta(days=day_offset)).strftime("%Y%m%d")
             try:
                 feed=_get(s,f"{ROOT}/{code}/scoreboard",params={"dates":date,"limit":100})
@@ -264,7 +308,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     focus_codes=sorted(focus)
     backfill_queries=0
     backfill_found=0
-    if focus_codes:
+    if focus_codes and not hourly:
         shift=(now.day*2+now.hour//12)%len(focus_codes)
         chosen=(focus_codes[shift:]+focus_codes[:shift])[:4]
         months=sorted({now.strftime("%Y%m"),
@@ -289,7 +333,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     prior_stats=_load(cache/"soccer_player_games.jsonl")
     prior_lineups=_load(cache/"soccer_lineups.jsonl")
     prior_injuries=_load(cache/"soccer_injuries.jsonl")
-    matches=_select_summary_matches(fixtures,prior_stats,now)
+    matches=_select_summary_matches(fixtures,prior_stats,now) if not hourly else []
     summaries=0
     new_stats=[]
     new_lineups=[]
@@ -310,36 +354,45 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             issues.append(f"ESPN summary {game['event_id']}: {type(exc).__name__}")
     key=api_key if api_key is not None else os.getenv("API_FOOTBALL_KEY","")
     new_reports=[]
-    api_fixtures=[]
-    if key:
-        days={ (now+pd.Timedelta(days=i)).strftime("%Y-%m-%d") for i in (0,1)}
-        already={r.get("observed_day_utc") for r in prior_injuries
-                 if utc(r["captured_utc"]).strftime("%Y-%m-%d")==now.strftime("%Y-%m-%d")}
-        for day in sorted(days-already):
+    api_calls={"injuries":0,"fixture_index":0,"starting_XI":0}
+    if key and (fixtures or not hourly):
+        # Injuries update ~once per four hours, not every hour. A stored
+        # snapshot's UTC capture time is the only reliable refresh clock.
+        days={(now+pd.Timedelta(days=i)).strftime("%Y-%m-%d") for i in (0,1)}
+        due=_injury_refresh_days(prior_injuries,now,days,refresh_hours=4)
+        for day in due:
             try:
+                api_calls["injuries"]+=1
                 j=_get(s,FOOTBALL_ROOT+"/injuries",{"date":day},api_key=key)
                 injuries=parse_api_football_injuries(j,now,day)
-                try:
-                    f=_get(s,FOOTBALL_ROOT+"/fixtures",{"date":day},api_key=key)
-                    # API-Football's date endpoint also returns matches that
-                    # have already started or ended. Never archive those as
-                    # pre-match fixture mappings or let them enter future
-                    # availability context.
-                    injuries["provider_fixtures"]=[
-                        v for v in parse_api_fixtures(f)
-                        if utc(v["kickoff_utc"])>now+pd.Timedelta(minutes=5)
-                        and utc(v["kickoff_utc"]).strftime("%Y-%m-%d")==day
-                    ]
-                except (ValueError,RuntimeError,requests.RequestException) as error:
-                    issues.append(f"API-Football fixture index {day}: {type(error).__name__}")
-                    injuries["provider_fixtures"]=[]
+                old=[r for r in prior_injuries if r.get("observed_day_utc")==day
+                     and utc(r["captured_utc"])<=now]
+                last=max(old,key=lambda r:utc(r["captured_utc"])) if old else {}
+                # Provider fixture indexing is mostly static. Reuse a proven
+                # same-day match map, pruning games that have already kicked.
+                mapping=[
+                    v for v in (last.get("provider_fixtures") or [])
+                    if utc(v["kickoff_utc"])>now+pd.Timedelta(minutes=5)
+                    and utc(v["kickoff_utc"]).strftime("%Y-%m-%d")==day
+                ]
+                # Query fixture metadata if never stored; don't spend a
+                # per-hour request merely to reconstruct the same map.
+                if not mapping and not last.get("provider_fixtures"):
+                    try:
+                        api_calls["fixture_index"]+=1
+                        feed=_get(s,FOOTBALL_ROOT+"/fixtures",{"date":day},api_key=key)
+                        mapping=[
+                            v for v in parse_api_fixtures(feed)
+                            if utc(v["kickoff_utc"])>now+pd.Timedelta(minutes=5)
+                            and utc(v["kickoff_utc"]).strftime("%Y-%m-%d")==day
+                        ]
+                    except (ValueError,RuntimeError,requests.RequestException) as err:
+                        issues.append(f"API-Football fixture index {day}: {type(err).__name__}")
+                injuries["provider_fixtures"]=mapping
                 new_reports.append(injuries)
             except (ValueError,RuntimeError,requests.RequestException) as exc:
                 issues.append(f"API-Football {day}: {type(exc).__name__}")
-        # If a report was already captured today, keep it but matching the
-        # source-specific fixture requires a fresh fixture list; skipping a
-        # query is safer than pretending to have a verified cross-ID join.
-    else:
+    elif not key:
         issues.append("API_FOOTBALL_KEY not configured; no provider injury statuses")
     all_stats,n_stats=append_history(cache/"soccer_player_games.jsonl",new_stats,max_bytes=100_000_000)
     all_lineups,n_lineups=append_history(cache/"soccer_lineups.jsonl",new_lineups,max_bytes=100_000_000)
@@ -350,7 +403,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     for report in sorted(all_injuries,key=lambda x:utc(x["captured_utc"])):
         day=report.get("observed_day_utc")
         if day in {(now+pd.Timedelta(days=i)).strftime("%Y-%m-%d") for i in (0,1)} and (
-            pd.Timedelta(0)<=now-utc(report["captured_utc"])<=pd.Timedelta(hours=36)
+            pd.Timedelta(0)<=now-utc(report["captured_utc"])<=pd.Timedelta(hours=6)
         ):
             latest_by_day[day]=report
     current_reports=list(latest_by_day.values())
@@ -364,11 +417,15 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     # Budget <=4 optional requests, no extra schedule and no postgame lineup
     # retrieval disguised as a pregame observation.
     new_confirmed=[]
+    prior_confirmed=_load(cache/"soccer_confirmed_lineups.jsonl")
+    confirmed_ids={(str(r.get("competition_code")),str(r.get("event_id")))
+                   for r in prior_confirmed if r.get("lineup_confirmed") is True}
     if key:
         future=[g for g in fixtures if g["event_id"] in matched and
+                (g["competition_code"],g["event_id"]) not in confirmed_ids and
                 now+pd.Timedelta(minutes=15)<utc(g["kickoff_utc"])<=
-                    now+pd.Timedelta(hours=2)]
-        for game in sorted(future,key=lambda g:utc(g["kickoff_utc"]))[:4]:
+                    now+pd.Timedelta(minutes=75)]
+        for game in sorted(future,key=lambda g:utc(g["kickoff_utc"]))[:2]:
             matches=[
                 v for v in fixture_map.values()
                 if abs(utc(v["kickoff_utc"])-utc(game["kickoff_utc"]))<=pd.Timedelta(minutes=60)
@@ -378,6 +435,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
             if len(matches)!=1:
                 continue
             try:
+                api_calls["starting_XI"]+=1
                 response=_get(s,FOOTBALL_ROOT+"/fixtures/lineups",
                               {"fixture":matches[0]["fixture_id"]},api_key=key)
                 lineup=parse_confirmed_lineups(response,game,matches[0],now)
@@ -420,6 +478,8 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     _,n_previews=append_history(cache/"soccer_previews.jsonl",previews,max_bytes=100_000_000)
     report={
         "observed_utc":now.isoformat(),
+        "collection_mode":mode,
+        "api_football_requests_this_run":api_calls,
         "sports":["soccer_clubs","soccer_national_teams"],
         "fixtures_matched_by_espn":len(fixtures),
         "history_monthly_scoreboards_requested":backfill_queries,
@@ -447,8 +507,9 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--archive",default="data/external_signals")
     parser.add_argument("--output",default="reports/external_learning/soccer_players")
+    parser.add_argument("--mode",choices=("hourly","full"),default="full")
     args=parser.parse_args()
-    run(archive=args.archive,output=args.output)
+    run(archive=args.archive,output=args.output,mode=args.mode)
 
 
 if __name__=="__main__":
