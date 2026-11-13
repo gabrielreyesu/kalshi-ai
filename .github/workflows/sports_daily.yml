@@ -49,6 +49,7 @@ jobs:
           git pull --rebase -q
           python -m kalshi_nba.resumen
           python -m kalshi_nba.pagina
+          python -m kalshi_nba.progreso
           git add PREDICCIONES.md docs/
           git diff --cached --quiet || git commit -m "tabla $(date -u +%F)"
           git push

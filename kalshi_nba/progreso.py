@@ -1,0 +1,194 @@
+"""Mocha Picks — página de PROGRESO (docs/progreso.html): pruebas en sombra, acierto real y resultados de investigación.
+
+Separada de la página de picks. Solo lee predictions/*.json; no usa internet.   Uso:  python -m kalshi_nba.progreso
+"""
+from __future__ import annotations
+
+import html
+import json
+import math
+from pathlib import Path
+
+import pandas as pd
+
+P = Path("predictions")
+TARGET_N = 200
+
+SHADOWS = [
+    {"id": "nba", "titulo": "NBA · jugadores disponibles", "archivo": "nba_lineup_shadow_scoreboard.json",
+     "que": "Modelo NBA + fuerza de los jugadores disponibles según el informe de lesiones antes del partido.",
+     "base": "logloss_base", "nuevo": "logloss_lineup", "acc_b": "acierto_base", "acc_n": "acierto_lineup"},
+    {"id": "nfl", "titulo": "NFL · quarterback titular", "archivo": "nfl_qb_shadow_scoreboard.json",
+     "que": "Modelo NFL + nivel del QB titular previsto (depth chart y lesiones de ESPN).",
+     "base": "logloss_base", "nuevo": "logloss_lineup", "acc_b": "acierto_base", "acc_n": "acierto_lineup"},
+    {"id": "copas", "titulo": "Copas europeas · once titular", "archivo": "soccer_xi_shadow_scoreboard.json",
+     "que": "Motor de copas + continuidad del once oficial publicado antes del inicio.",
+     "base": "logloss_base", "nuevo": "logloss_xi", "acc_b": "acierto_base", "acc_n": "acierto_xi"},
+]
+
+# Resultados del backtest histórico pre-registrado (LINEUP_RESEARCH.md). Se actualizan a mano tras cada prueba nueva.
+BACKTESTS = [
+    {"prueba": "NBA · jugadores disponibles", "partidos": 2817, "acierto": "67,0% → 67,4%", "mejora": "0,0098 [0,0054; 0,0142]", "veredicto": "supera"},
+    {"prueba": "NFL · quarterback titular", "partidos": 707, "acierto": "65,9% → 66,9%", "mejora": "0,0133 [0,0037; 0,0237]", "veredicto": "supera"},
+    {"prueba": "Copas europeas · once titular", "partidos": 1234, "acierto": "56,7% → 56,8%", "mejora": "0,0030 [0,0002; 0,0059]", "veredicto": "supera (débil)"},
+    {"prueba": "Selecciones · once titular", "partidos": 1321, "acierto": "58,7% → 58,6%", "mejora": "0,0008 [−0,0001; 0,0017]", "veredicto": "descartada"},
+    {"prueba": "Selecciones · sede neutral", "partidos": 3714, "acierto": "57,9% → 58,0%", "mejora": "0,0000 [−0,0019; 0,0019]", "veredicto": "no concluyente"},
+    {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
+]
+
+NEXT = [
+    ("En curso", "Acumular 200 partidos por prueba en sombra (NBA ~2–3 semanas; copas ~2 meses; NFL varios meses)."),
+    ("Siguiente", "Mostrar en la página de picks la probabilidad ajustada por bajas, marcada como «en prueba», cuando NBA llegue a 200 partidos con mejora."),
+    ("Siguiente", "Precios históricos de Kalshi antes del partido para medir si recalcular cerca del inicio gana al precio, no solo al modelo."),
+    ("Siguiente", "NFL: distribución real de márgenes (números clave 3 y 7) para los hándicaps, en vez de la curva normal."),
+    ("Pendiente", "Repetir la sede neutral de selecciones cuando haya más partidos de torneo."),
+]
+
+
+def _clean(o):
+    if isinstance(o, float) and not math.isfinite(o):
+        return None
+    if isinstance(o, dict):
+        return {k: _clean(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [_clean(v) for v in o]
+    return o
+
+
+def _load(name):
+    p = P / name
+    if not p.exists():
+        return None
+    try:
+        return _clean(json.loads(p.read_text(encoding="utf8")))      # json de Python acepta NaN; lo limpiamos
+    except ValueError:
+        return None
+
+
+def collect(now=None) -> dict:
+    now = now or pd.Timestamp.now(tz="UTC")
+    shadows = []
+    for s in SHADOWS:
+        b = _load(s["archivo"]) or {}
+        r = b.get("resultado") or {}
+        ci = r.get("mejora_logloss") or {}
+        shadows.append({"id": s["id"], "titulo": s["titulo"], "que": s["que"], "n": int(r.get("n") or 0), "objetivo": TARGET_N,
+                        "actualizado": b.get("updated_utc"), "acc_base": r.get(s["acc_b"]), "acc_nuevo": r.get(s["acc_n"]),
+                        "ll_base": r.get(s["base"]), "ll_nuevo": r.get(s["nuevo"]),
+                        "mejora": ci.get("mejora"), "ic_inf": ci.get("ic95_inf"), "ic_sup": ci.get("ic95_sup"),
+                        "minutos_antes": r.get("minutos_antes_mediana")})
+    fs = _load("final_shadow_scoreboard.json") or {}
+    names = {"nba": "NBA", "nfl": "NFL", "club": "Copas europeas", "intl": "Selecciones"}
+    picks = [{"deporte": names.get(x.get("sport"), x.get("sport")), "n": x.get("n"), "acierto": x.get("acierto_final"),
+              "logloss": x.get("logloss_final"), "con_mercado": x.get("con_mercado")} for x in fs.get("by_sport", [])]
+    return {"updated": now.isoformat(), "shadows": shadows, "picks": picks, "picks_updated": fs.get("updated_utc"),
+            "backtests": BACKTESTS, "next": NEXT}
+
+
+def render(data: dict) -> str:
+    payload = json.dumps(data, ensure_ascii=False, allow_nan=False).replace("</", "<\\/")
+    return TEMPLATE.replace("__DATA__", payload)
+
+
+TEMPLATE = r"""<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#6f4e37">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+<title>Mocha Picks · Progreso</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#0f172a;--muted:#5b6474;--line:#e3e6eb;--accent:#2563eb;--good:#15803d;--bad:#b91c1c;--mid:#b45309;--chip:#eef1f5;--bar:#2563eb}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#141a2e;--ink:#e8ecf4;--muted:#9aa4b8;--line:#232b45;--accent:#60a5fa;--good:#4ade80;--bad:#f87171;--mid:#fbbf24;--chip:#1c2440;--bar:#60a5fa}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header,main,footer{max-width:720px;margin:0 auto;padding:0 16px}header{padding-top:14px}
+h1{font-size:20px;margin:0}h2{font-size:15px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:24px 2px 10px}
+.sub{color:var(--muted);font-size:12px;margin-top:2px}a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.t{font-weight:650}.small{font-size:12px;color:var(--muted)}
+.prog{height:10px;background:var(--chip);border-radius:6px;overflow:hidden;margin:10px 0 4px}.prog i{display:block;height:100%;background:var(--bar)}
+.badge{font-size:11px;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.good{color:var(--good)}.bad{color:var(--bad)}.mid{color:var(--mid)}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-top:10px;font-size:13px}.grid b{font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px}td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bt{padding:9px 0;border-bottom:1px solid var(--line)}.bt:last-child{border-bottom:0}
+.list{padding-left:18px;margin:0}.list li{margin:6px 0}.tag{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-right:6px}
+footer{color:var(--muted);font-size:12px;padding-bottom:30px}
+</style>
+</head>
+<body>
+<header>
+  <h1>☕ Mocha Picks · Progreso</h1>
+  <div class="sub" id="upd"></div>
+  <div class="sub"><a href="./">← Volver a los picks</a></div>
+</header>
+<main>
+  <h2>Pruebas en sombra</h2>
+  <p class="small">Cada prueba calcula, antes de cada partido, la probabilidad del modelo actual y la del modelo mejorado,
+  sin cambiar los picks publicados. Se activa solo con 200 partidos, mejora con IC 95% por encima de 0 y tu autorización.</p>
+  <div id="shadows"></div>
+  <h2>Acierto real de los picks publicados</h2>
+  <div class="card" id="picks"></div>
+  <h2>Investigación histórica (backtests)</h2>
+  <div class="card"><div id="bt"></div>
+  <p class="small">Mejora = reducción de log loss frente al modelo actual en temporadas no usadas para elegir la variante, con IC 95% por fecha.</p></div>
+  <h2>Qué sigue</h2>
+  <div class="card"><ul class="list" id="next"></ul></div>
+</main>
+<footer><p>No es una recomendación de apuesta. Mocha Picks no ejecuta apuestas.</p></footer>
+<script>
+const D = __DATA__;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pc = v => v == null ? "—" : (100 * v).toFixed(1) + "%";
+const f4 = v => v == null ? "—" : v.toFixed(4);
+const when = s => s ? new Date(s).toLocaleString("es", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "sin datos aún";
+document.getElementById("upd").textContent = "Actualizado " + when(D.updated);
+function status(s) {
+  if (!s.n) return ["Esperando partidos", "muted"];
+  if (s.ic_inf != null && s.ic_inf > 0 && s.n >= s.objetivo) return ["Lista para revisar", "good"];
+  if (s.ic_sup != null && s.ic_sup < 0) return ["Va empeorando", "bad"];
+  if (s.mejora != null && s.mejora > 0) return ["Va mejorando (sin confirmar)", "mid"];
+  if (s.mejora != null && s.mejora < 0) return ["Por ahora no mejora", "mid"];
+  return ["Acumulando partidos", "muted"];
+}
+document.getElementById("shadows").innerHTML = D.shadows.map(s => {
+  const [lab, cls] = status(s), p = Math.min(100, 100 * s.n / s.objetivo);
+  const ci = s.ic_inf == null ? "" : ` [${f4(s.ic_inf)}; ${f4(s.ic_sup)}]`;
+  return `<div class="card"><div class="row"><span class="t">${esc(s.titulo)}</span><span class="badge ${cls}">${lab}</span></div>
+    <div class="small">${esc(s.que)}</div>
+    <div class="prog" role="progressbar" aria-valuenow="${s.n}" aria-valuemax="${s.objetivo}"><i style="width:${p.toFixed(1)}%"></i></div>
+    <div class="row small"><span>${s.n} de ${s.objetivo} partidos</span><span>última foto: ${when(s.actualizado)}</span></div>
+    ${s.n ? `<div class="grid"><span>Acierto actual / mejorado</span><b>${pc(s.acc_base)} / ${pc(s.acc_nuevo)}</b>
+      <span>Log loss actual / mejorado</span><b>${f4(s.ll_base)} / ${f4(s.ll_nuevo)}</b>
+      <span>Mejora (más es mejor)</span><b class="${s.mejora > 0 ? "good" : s.mejora < 0 ? "bad" : ""}">${f4(s.mejora)}${ci}</b>
+      ${s.minutos_antes != null ? `<span>Minutos antes del inicio (mediana)</span><b>${Math.round(s.minutos_antes)}</b>` : ""}</div>` : ""}
+  </div>`;
+}).join("");
+const pk = D.picks.filter(x => x.n);
+document.getElementById("picks").innerHTML = pk.length
+  ? `<table><tr><th>Deporte</th><th>Partidos</th><th>Acierto</th><th>Log loss</th></tr>${pk.map(x => `<tr><td>${esc(x.deporte)}</td><td class="n">${x.n}</td><td class="n">${pc(x.acierto)}</td><td class="n">${f4(x.logloss)}</td></tr>`).join("")}</table>
+     <p class="small">Pick de ganador publicado (casas si existen, modelo si no), última foto antes del inicio. Actualizado ${when(D.picks_updated)}. Con pocos partidos el acierto varía mucho.</p>`
+  : `<p class="small">Aún no hay partidos resueltos.</p>`;
+const vcls = v => v.startsWith("supera") ? "good" : v === "descartada" ? "bad" : "mid";
+document.getElementById("bt").innerHTML = D.backtests.map(b => `<div class="bt"><div class="row"><span class="t">${esc(b.prueba)}</span>
+  <span class="badge ${vcls(b.veredicto)}">${esc(b.veredicto)}</span></div>
+  <div class="small">${b.partidos.toLocaleString("es")} partidos · acierto ${esc(b.acierto)} · mejora ${esc(b.mejora)}</div></div>`).join("");
+document.getElementById("next").innerHTML = D.next.map(([t, x]) => `<li><span class="tag">${esc(t)}</span>${esc(x)}</li>`).join("");
+</script>
+</body>
+</html>
+"""
+
+
+def main(out="docs/progreso.html"):
+    p = Path(out); p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(render(collect()), encoding="utf-8")
+    print(f"{out} generado")
+
+
+if __name__ == "__main__":
+    main()
