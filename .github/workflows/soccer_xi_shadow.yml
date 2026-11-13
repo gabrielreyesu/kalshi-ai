@@ -1,0 +1,67 @@
+name: soccer-xi-shadow
+
+# Prueba EN SOMBRA: motor de copas europeas + continuidad del once OFICIAL (ESPN lo publica ~25-60 min antes).
+# Corre cada 15 min en el horario de copas (mar-jue); si no hay partido en los próximos 80 min termina en segundos.
+# Solo escribe predictions/soccer_xi_shadow*.{csv,json}; no toca el registro ni las probabilidades publicadas.
+on:
+  schedule:
+    - cron: "5,20,35,50 15-20 * * 2,3,4"
+  workflow_dispatch:
+    inputs:
+      warm:
+        description: "Solo descargar el historial de onces a la caché (primera vez: ~2 h)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: soccer-xi-shadow
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Restore ESPN soccer caches
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/intl
+            data/intl_box
+          key: shadow-soccer-v1-${{ github.run_id }}
+          restore-keys: |
+            shadow-soccer-v1-
+      - name: Calentar caché del historial de onces
+        if: ${{ inputs.warm }}
+        run: python -m kalshi_lineup.soccer_shadow --warm
+      - name: Snapshot + evaluación en sombra
+        if: ${{ !inputs.warm }}
+        run: python -m kalshi_lineup.soccer_shadow
+      - name: Save caches
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/intl
+            data/intl_box
+          key: shadow-soccer-v1-${{ github.run_id }}
+      - name: Guardar (solo archivos de la prueba en sombra)
+        if: ${{ !inputs.warm }}
+        run: |
+          git config user.name  "soccer-shadow-bot"
+          git config user.email "soccer-shadow-bot@users.noreply.github.com"
+          git add predictions/soccer_xi_shadow_scoreboard.json
+          [ -f predictions/soccer_xi_shadow.csv ] && git add predictions/soccer_xi_shadow.csv
+          git diff --cached --quiet && exit 0
+          git commit -m "sombra once copas $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i*15)); done
+          exit 1
