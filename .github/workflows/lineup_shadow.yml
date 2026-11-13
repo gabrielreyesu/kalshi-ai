@@ -1,0 +1,51 @@
+name: nba-lineup-shadow
+
+# Prueba prospectiva EN SOMBRA: modelo NBA + alineación con el informe de lesiones real antes de cada partido.
+# Solo escribe predictions/nba_lineup_shadow*.{csv,json}; no toca el registro ni las probabilidades publicadas.
+on:
+  schedule:
+    - cron: "50 15,17,19,21,22,23,0,1,2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lineup-shadow
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Restore ESPN NBA cache (scoreboards + boxscores)
+        uses: actions/cache/restore@v4
+        with:
+          path: data/nba
+          key: shadow-nba-v1-${{ github.run_id }}
+          restore-keys: |
+            shadow-nba-v1-
+      - name: Snapshot + evaluación en sombra
+        run: python -m kalshi_lineup.shadow --hours 36
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/nba
+          key: shadow-nba-v1-${{ github.run_id }}
+      - name: Guardar (solo archivos de la prueba en sombra)
+        run: |
+          git config user.name  "lineup-shadow-bot"
+          git config user.email "lineup-shadow-bot@users.noreply.github.com"
+          git add predictions/nba_lineup_shadow.csv predictions/nba_lineup_shadow_scoreboard.json
+          git diff --cached --quiet && exit 0
+          git commit -m "sombra alineación NBA $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i*15)); done
+          exit 1

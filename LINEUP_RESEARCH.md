@@ -95,3 +95,14 @@ de logloss es 0,0295 [0,0156; 0,0435] (descriptivo).
 
 Cautela: la muestra de confirmación de NFL es pequeña (707 partidos, IC ancho). La regla del titular usa el boxscore
 final; en producción debe venir del depth chart/inactivos oficiales con hora de captura.
+
+## Fútbol: once titular (protocolo pre-registrado, antes de ver resultados)
+- Datos: resúmenes de ESPN (`rosters`, marca `starter`) desde 2018-07. Clubes: Champions, Europa League, Conference y
+  ligas de Inglaterra, España, Italia, Alemania, Francia, Portugal y Países Bajos. Selecciones: todas las competiciones del motor.
+- Solo se usa quién es titular (publicado ~60 min antes). Goles y asistencias del partido solo actualizan después.
+- Variantes: **A** continuidad del once (peso de titulares habituales con decaimiento 0,85 por partido);
+  **B** A + goles/asistencias por titularidad del once de hoy frente a sus últimos 10 onces.
+- Equipos con menos de 3 onces previos: variables en 0 (neutras).
+- Evaluación: `kalshi_intl.model.walk_forward` (1X2 a 90 min, competiciones objetivo). Desarrollo 2020/21–2023/24;
+  confirmación ≥ 2024/25 una sola vez. Mismo criterio de éxito que NBA (logloss IC95% > 0, Brier multiclase no peor,
+  ECE no peor en más de 0,005).
