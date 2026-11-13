@@ -74,3 +74,24 @@ mercado 67,7% / 0,5982. Cierra ~40% de la distancia, pero el mercado sigue mejor
 Lectura: la variable mejora de forma robusta el modelo propio, que es la probabilidad de respaldo cuando no hay
 mercado y la base para medir si recalculamos antes de que el precio se ajuste. No justifica por sí sola apostar contra
 el cierre. Siguiente paso: sombra prospectiva con el informe de lesiones real capturado a T-60 min (no el boxscore).
+
+## Resultado NFL: quarterback titular (ejecución 43433437322)
+Cobertura: 3.165 de 3.165 partidos finales con boxscore. Desarrollo 2019–2023; confirmación ≥ 2024 (una vez).
+
+**Desarrollo:** A (solo cambio de QB) mejora 0,0052 [0,0006; 0,0098]; **B (cambio + nivel del titular)** mejora 0,0103 [0,0039; 0,0165]. Elegida: B.
+
+**Confirmación (707 partidos, temporadas 2024–2026):**
+| | Acierto | Logloss | Brier | ECE |
+|---|---|---|---|---|
+| nfl_v1 | 65,91% | 0,62128 | 0,21620 | 0,0432 |
+| nfl_v1 + QB (B) | 66,90% | 0,60796 | 0,21007 | 0,0338 |
+| Mejora (IC95% por fecha) | | **0,0133 [0,0037; 0,0237]** | **0,0061 [0,0019; 0,0108]** | mejor |
+
+**Veredicto: SUPERA_CRITERIO_SOLO_SOMBRA.** B mejora en las 8 temporadas. En los 712 partidos con cambio de QB, la mejora
+de logloss es 0,0295 [0,0156; 0,0435] (descriptivo).
+
+**Frente al mercado de cierre** (2.096 partidos): modelo 0,6354 → con QB 0,6241; mercado 0,6093. Cierra ~43% de la distancia.
+**QB sobre el mercado:** sin aporte (−0,0005 [−0,0029; 0,0021]).
+
+Cautela: la muestra de confirmación de NFL es pequeña (707 partidos, IC ancho). La regla del titular usa el boxscore
+final; en producción debe venir del depth chart/inactivos oficiales con hora de captura.
