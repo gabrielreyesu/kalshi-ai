@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from kalshi_nba.final_pick import combine, load_weights
+from kalshi_nba.final_pick import combine, combine3, load_weights
 
 P = Path("predictions")
 SHADOW = "final_shadow.csv"
@@ -77,6 +77,19 @@ def rows_us(lg: str, folder: Path) -> list:
     return out
 
 
+def kalshi3(x) -> list | None:
+    """Precios Kalshi local/empate/visitante (mid) normalizados a 1; solo si los tres tienen spread <= 10¢."""
+    out = []
+    for c in "HDA":
+        b = pd.to_numeric(getattr(x, f"k_bid_{c}", np.nan), errors="coerce")
+        a = pd.to_numeric(getattr(x, f"k_ask_{c}", np.nan), errors="coerce")
+        if not (np.isfinite(b) and np.isfinite(a) and 0 < a - b <= 0.10):
+            return None
+        out.append((a + b) / 2)
+    t = sum(out)
+    return [v / t for v in out] if t > 0 else None
+
+
 def rows_intl(folder: Path) -> list:
     snap = folder / "intl_kalshi_snapshots.csv"
     if not snap.exists():
@@ -89,10 +102,17 @@ def rows_intl(folder: Path) -> list:
         market = [pd.to_numeric(getattr(x, c, np.nan), errors="coerce") for c in ("mkt_H", "mkt_D", "mkt_A")]
         if not np.isfinite(np.asarray(model, float)).all() or not pd.Timestamp(x.snapshot_utc) < pd.Timestamp(x.kickoff_utc):
             continue
-        f, src = _final(model, market)
+        k3 = kalshi3(x)
+        w = load_weights("futbol")
+        mk = market if np.isfinite(np.asarray(market, float)).all() else None
+        if w:                                     # pick final = Kalshi + casas + modelo (combine3)
+            f, src = combine3(k3, (np.asarray(mk) / np.sum(mk)).tolist() if mk else None, model, w)
+        else:
+            f, src = _final(model, market)
         out.append(dict(snapshot_utc=x.snapshot_utc, sport="intl" if x.grupo == "selecciones" else "club", event_id=x.event_id,
                         kickoff_utc=x.kickoff_utc, home=x.home, away=x.away, model_H=model[0], model_D=model[1], model_A=model[2],
-                        market_H=market[0], market_D=market[1], market_A=market[2], final_H=f[0], final_D=f[1], final_A=f[2], final_source=src))
+                        market_H=market[0], market_D=market[1], market_A=market[2], final_H=f[0], final_D=f[1], final_A=f[2], final_source=src,
+                        kalshi_H=k3[0] if k3 else np.nan))
     return out
 
 

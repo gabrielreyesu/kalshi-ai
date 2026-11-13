@@ -77,3 +77,14 @@ Validación fuera de muestra (pesos entrenados solo con fechas anteriores):
   NFL Kalshi 0,47 · casas 0,36 · modelo 0,27.
 - Cautela: en el histórico, "casas" es la línea de cierre (posterior a T-60); en vivo es la foto del momento.
   Kalshi solo se usa si su spread es ≤ 10¢. Reentrenar los pesos cada temporada con `python -m kalshi_nba.final_pick fit`.
+
+## Fútbol: pick final combinado (protocolo pre-registrado, 13-nov-2026, antes de ver resultados)
+- Datos: mercados liquidados de Kalshi (`KXEPLGAME`, `KXLALIGAGAME`, `KXSERIEAGAME`, `KXBUNDESLIGAGAME`, `KXLIGUE1GAME`,
+  `KXUCLGAME`, `KXUELGAME`, `KXUECLGAME`, `KXUEFANLGAME`, `KXFIFAGAME`, `KXWCGAME`, `KXINTLFRIENDLYGAME`), emparejados con
+  ESPN con la regla de producción (ambos nombres + hora ±36 h, único). Precio local/empate/visitante 60 min antes,
+  normalizado a 1 (sin margen). Casas: mediana de cuotas ESPN sin margen. Modelo: `kalshi_intl` fuera de muestra.
+- Combinador: agregación log-lineal con pesos por fuente (`combine3`), submodelos si falta una fuente.
+- Validación: ventana creciente por fecha (40% inicial de calentamiento). Se compara con el pick actual (casas si hay;
+  si no, modelo) y con Kalshi. **Criterio para producción** (pedido explícito del dueño de usar todas las fuentes): que
+  el combinado **no empeore** al pick actual (límite superior del IC95% de la diferencia de log loss ≥ 0, es decir,
+  que no sea significativamente peor). Se reporta por grupo: ligas, copas y selecciones.

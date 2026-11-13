@@ -15,7 +15,8 @@ import pandas as pd
 
 from .injuries import OUT
 from .picks import soccer_picks, us_picks, us_snapshot
-from kalshi_external.final_shadow import source_label
+from kalshi_external.final_shadow import kalshi3, source_label
+from .final_pick import combine3, load_weights
 from .resumen import TZ, _bajas_fut, _lat, _when
 
 P = Path("predictions")
@@ -127,12 +128,15 @@ def games_ligas(now) -> list:
         for s in "HDA":
             b, a = _f(getattr(x, f"k_bid_{s}", None)), _f(getattr(x, f"k_ask_{s}", None))
             kal.append(None if b is None or a is None else round((b + a) / 2, 4))
-        pick, prob = _pick([x.home, "Empate", x.away], model)
+        k3 = kalshi3(x)
+        final, src = combine3(k3, None, model, load_weights("futbol")) if all(v is not None for v in model) else (model, "modelo")
+        final = [round(v, 4) for v in final] if final else model
+        pick, prob = _pick([x.home, "Empate", x.away], final)
         out.append({"sport": "liga", "comp": x.competition, "t": x.t.isoformat(), "home": x.home, "away": x.away, "three": True,
-                    "pick": pick, "prob": prob, "src": "modelo",
+                    "pick": pick, "prob": prob, "src": src,
                     "rows": [["Modelo", model], ["Kalshi", kal]],
                     "extra": _soccer_extra(x, cal=True) + [["Bajas local / visita", _bajas_fut(x, lat)]], "inj": None,
-                    "picks": soccer_picks(x.home, x.away, model, "modelo",
+                    "picks": soccer_picks(x.home, x.away, final, src,
                                           {1.5: _f(getattr(x, "p_over_1_5_cal", None)), 2.5: _f(getattr(x, "p_over_2_5_cal", None))},
                                           _f(getattr(x, "p_btts_cal", None)), kalshi3=kal)})
     return out
