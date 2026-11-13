@@ -88,3 +88,7 @@ Validación fuera de muestra (pesos entrenados solo con fechas anteriores):
   si no, modelo) y con Kalshi. **Criterio para producción** (pedido explícito del dueño de usar todas las fuentes): que
   el combinado **no empeore** al pick actual (límite superior del IC95% de la diferencia de log loss ≥ 0, es decir,
   que no sea significativamente peor). Se reporta por grupo: ligas, copas y selecciones.
+
+**Aclaración antes del resultado final:** "pick actual" significa el pick que hoy usa la página en cada grupo. En las
+ligas la página no tiene línea de las casas en vivo (usa el modelo), así que en ligas se compara Kalshi + modelo frente
+al modelo, y el combinador se entrena sin casas para ligas. En copas y selecciones: frente a las casas.

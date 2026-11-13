@@ -60,10 +60,13 @@ def main():
     d = d.rename(columns={**{f"k60_{c}": f"k_{c}" for c in "HDA"}, **{f"mkt_{c}": f"c_{c}" for c in "HDA"},
                           **{f"p_{c}": f"m_{c}" for c in "HDA"}})
     d["date"] = pd.to_datetime(d["date"])
+    for c in "HDA":                                               # ligas: en producción no hay casas -> el combinador usa Kalshi + modelo
+        d.loc[d["code"].isin(BIG5), f"c_{c}"] = np.nan
     wf = walk_forward3(d).dropna(subset=["f_H"])
-    cur = wf.copy()                                               # pick actual: casas si existen; si no, modelo
-    for c in "HDA":
-        cur[f"a_{c}"] = cur[f"c_{c}"].where(cur["c_H"].notna(), cur[f"m_{c}"])
+    cur = wf.copy()                                               # pick actual DE PRODUCCIÓN por grupo:
+    liga = cur["code"].isin(BIG5)                                 #  ligas -> modelo (no hay línea de casas en vivo)
+    for c in "HDA":                                               #  copas/selecciones -> casas si existen; si no, modelo
+        cur[f"a_{c}"] = cur[f"m_{c}"].where(liga | cur["c_H"].isna(), cur[f"c_{c}"])
         cur[f"q_{c}"] = cur[f"k_{c}"].where(cur["k_H"].notna(), cur[f"a_{c}"])
     res = {"n": int(len(wf)), "desde": str(wf["date"].min())[:10], "hasta": str(wf["date"].max())[:10],
            "con_kalshi": int(wf["k_H"].notna().sum()), "con_casas": int(wf["c_H"].notna().sum()),
