@@ -48,6 +48,7 @@ jobs:
           git diff --cached --quiet || git commit -m "NBA/NFL $(date -u +%F)"
           git pull --rebase -q
           python -m kalshi_nba.resumen
-          git add PREDICCIONES.md
+          python -m kalshi_nba.pagina
+          git add PREDICCIONES.md docs/
           git diff --cached --quiet || git commit -m "tabla $(date -u +%F)"
           git push

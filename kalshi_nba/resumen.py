@@ -173,6 +173,8 @@ def build(now=None) -> str:
     now = now or pd.Timestamp.now(tz=TZ)
     return f"""# Predicciones — actualizado {now.strftime('%d %b %Y %H:%M')} (hora Chicago)
 
+📱 **Versión para el teléfono:** https://gabrielreyesu.github.io/kalshi-ai/ (tarjetas, filtros por deporte y día, buscador).
+
 **Ir a:** [NBA](#nba) · [NFL](#nfl) · [Ligas de fútbol](#fútbol-ligas-premier-la-liga-serie-a-bundesliga-ligue-1) · [Copas europeas](#fútbol-copas-europeas-champions-europa-league-conference) · [Selecciones](#fútbol-selecciones-uefa-y-conmebol) · [Resumen de picks](#resumen-de-picks-de-hoy-y-mañana)
 
 **Cómo leer las tablas**
