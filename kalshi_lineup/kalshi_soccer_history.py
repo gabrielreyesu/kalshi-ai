@@ -14,11 +14,15 @@ import pandas as pd
 
 from kalshi_intl.data import load_group
 
-from .kalshi_history import candles, list_markets, price_before
+from .kalshi_history import candles, list_markets, prefetch_batch, price_before
 
 SERIES = {"clubes": ["KXUCLGAME", "KXUELGAME", "KXUECLGAME", "KXEPLGAME", "KXLALIGAGAME", "KXSERIEAGAME",
                      "KXBUNDESLIGAGAME", "KXLIGUE1GAME"],
           "selecciones": ["KXUEFANLGAME", "KXFIFAGAME", "KXWCGAME", "KXINTLFRIENDLYGAME"]}
+ORDER = [("clubes", "KXUCLGAME"), ("clubes", "KXUELGAME"), ("clubes", "KXUECLGAME"), ("clubes", "KXEPLGAME"),
+         ("selecciones", "KXUEFANLGAME"), ("selecciones", "KXFIFAGAME"), ("selecciones", "KXWCGAME"),
+         ("selecciones", "KXINTLFRIENDLYGAME"), ("clubes", "KXLALIGAGAME"), ("clubes", "KXSERIEAGAME"),
+         ("clubes", "KXBUNDESLIGAGAME"), ("clubes", "KXLIGUE1GAME")]
 
 
 def settled_events(series: str, cache: Path) -> list:
@@ -58,11 +62,16 @@ def match(group_games: pd.DataFrame, events: list) -> list:
 def build(cache_dir="data/kalshi", limit=None) -> pd.DataFrame:
     cache = Path(cache_dir)
     rows = []
-    for grp, series in SERIES.items():
-        g = load_group(grp, verbose=False)
-        for s in series:
+    groups = {}
+    for grp, s in ORDER:
+        if grp not in groups:
+            groups[grp] = load_group(grp, verbose=False)
+        g = groups[grp]
+        if True:
             ms = match(g, settled_events(s, cache))
             print(f"{s}: {len(ms)} partidos emparejados", flush=True)
+            got = prefetch_batch([(mk[c]["ticker"], kick) for _, kick, mk, _ in ms[:limit] for c in "HDA" if mk[c].get("_src") == "live"], cache)
+            print(f"   velas descargadas por lotes: {got}", flush=True)
             for eid, kick, mk, ser in ms[:limit]:
                 row = {"event_id": eid, "group": grp, "series": ser}
                 ok = True
@@ -75,6 +84,7 @@ def build(cache_dir="data/kalshi", limit=None) -> pd.DataFrame:
                         row[f"k{L}_{c}"] = price_before(cs, kick, L)["mid"]
                 if ok:
                     rows.append(row)
+            pd.DataFrame(rows).to_csv(cache / "soccer_pregame_partial.csv", index=False)      # avance utilizable
     d = pd.DataFrame(rows)
     for L in (60, 1440):
         cols = [f"k{L}_{c}" for c in "HDA"]
