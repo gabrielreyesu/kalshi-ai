@@ -1,0 +1,15 @@
+snapshot_utc,event_id,kickoff_utc,home,away,p_base,p_lineup,lineup_gs,abs_gs,out_home,out_away,unmatched_out,minutes_to_tip
+2026-11-13T16:36:19.707700+00:00,401909296,2026-11-14T00:00Z,Indiana Pacers,New York Knicks,0.19984,0.25404,1.864,-1.201,Tyrese Haliburton,,2,444.0
+2026-11-13T16:36:19.707700+00:00,401909297,2026-11-14T00:00Z,Orlando Magic,Milwaukee Bucks,0.79434,0.75483,-1.36,0.046,Paolo Banchero; Jalen Suggs,,3,444.0
+2026-11-13T16:36:19.707700+00:00,401909299,2026-11-14T01:00Z,Chicago Bulls,Atlanta Hawks,0.3321,0.3328,-1.357,-4.998,Tobe Awaka; Caleb Wilson,Asa Newell,3,504.0
+2026-11-13T16:36:19.707700+00:00,401909298,2026-11-14T01:00Z,Miami Heat,Cleveland Cavaliers,0.47919,0.51741,1.874,0.765,,Evan Mobley; Sam Merrill,0,504.0
+2026-11-13T16:36:19.707700+00:00,401909300,2026-11-14T01:00Z,New Orleans Pelicans,Memphis Grizzlies,0.43855,0.47215,0.12,1.008,Trendon Watford,Zach Edey; Scotty Pippen Jr.; Quinten Post,2,504.0
+2026-11-13T16:36:19.707700+00:00,401909301,2026-11-14T01:30Z,Houston Rockets,Utah Jazz,0.90178,0.917,3.412,14.258,Clint Capela; Marcus Smart,Lauri Markkanen; Jaren Jackson Jr.,3,534.0
+2026-11-13T16:36:19.707700+00:00,401909302,2026-11-14T02:30Z,San Antonio Spurs,Golden State Warriors,0.76049,0.8102,4.001,11.154,,Stephen Curry; Brandon Williams,5,594.0
+2026-11-13T16:36:19.707700+00:00,401909303,2026-11-14T03:00Z,Sacramento Kings,Portland Trail Blazers,0.25677,0.2544,-0.43,-8.199,,Ja Morant; Chris Youngblood; Vit Krejci,3,624.0
+2026-11-13T16:36:19.707700+00:00,401909304,2026-11-14T03:30Z,LA Clippers,Oklahoma City Thunder,0.34503,0.3347,0.792,-7.845,,Chet Holmgren; Jalen Williams; Cason Wallace; Jaylin Williams,5,654.0
+2026-11-13T16:36:19.707700+00:00,401909980,2026-11-15T00:00Z,New Orleans Pelicans,Denver Nuggets,0.29745,0.32634,3.695,-5.321,Trendon Watford,,2,1884.0
+2026-11-13T16:36:19.707700+00:00,401909981,2026-11-15T00:30Z,Cleveland Cavaliers,Dallas Mavericks,0.7193,0.70178,-3.403,3.747,Evan Mobley; Sam Merrill,Sergio de Larrea,2,1914.0
+2026-11-13T16:36:19.707700+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69487,0.72689,2.013,6.412,Zach Edey; Scotty Pippen Jr.; Quinten Post,,1,1944.0
+2026-11-13T16:36:19.707700+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36551,0.43444,0.164,3.879,,Isaiah Joe; Jalen Duren,0,1944.0
+2026-11-13T16:36:19.707700+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87741,0.84644,-1.027,2.999,Anthony Edwards,Tobe Awaka; Caleb Wilson,1,1944.0

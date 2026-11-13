@@ -1,4 +1,4 @@
-# Mocha Picks — predicciones actualizadas 13 Nov 2026 09:36 (hora Chicago)
+# Mocha Picks — predicciones actualizadas 13 Nov 2026 10:37 (hora Chicago)
 
 📱 **Versión para el teléfono:** https://gabrielreyesu.github.io/mocha-picks/ (tarjetas, filtros por deporte y día, buscador).
 
@@ -208,13 +208,12 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 
 | Fecha (hora Chicago) | Competición | Partido | Modelo: local / empate / visita | Kalshi | Casas | Goles: +1.5 / +2.5 / +3.5 | Ambos anotan | Gana por 2+: local / visita | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | 45% / 27% / 28% | 28% / 29% / 44% | 29% / 28% / 43% | 77% / 51% / 29% | 55% | 23% / 12% | — |
 | Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | 27% / 28% / 45% | 36% / 32% / 32% | 36% / 31% / 33% | 72% / 46% / 24% | 51% | 11% / 22% | — |
 | Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 4% | 78% / 15% / 7% | 78% / 54% / 31% | 40% | 52% / 2% | — |
-| Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 69% / 20% / 11% | 78% / 53% / 31% | 47% | 43% / 3% | — |
+| Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | 62% / 24% / 14% | 62% / 22% / 16% | 59% / 22% / 18% | 75% / 49% / 27% | 46% | 37% / 4% | — |
 | Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | 14% / 22% / 64% | 8% / 14% / 78% | 11% / 16% / 73% | 79% / 55% / 33% | 51% | 5% / 40% | — |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 21% / 27% / 52% | 76% / 51% / 28% | 51% | 6% / 33% | — |
-| Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | 62% / 24% / 14% | 62% / 22% / 16% | 59% / 22% / 18% | 75% / 49% / 27% | 46% | 37% / 4% | — |
+| Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 69% / 20% / 11% | 78% / 53% / 31% | 47% | 43% / 3% | — |
 | Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | 40% / 31% / 29% | 57% / 30% / 14% | 56% / 29% / 15% | 67% / 39% / 19% | 46% | 18% / 11% | — |
 | Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | 39% / 31% / 30% | 40% / 32% / 29% | 39% / 31% / 30% | 66% / 39% / 19% | 46% | 18% / 12% | — |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | 10% / 20% / 71% | 6% / 16% / 78% | 8% / 18% / 75% | 78% / 54% / 32% | 45% | 3% / 47% | — |
@@ -226,27 +225,27 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Fri 13 Nov 23:30 | Amistoso | Tahiti vs Cook Islands | 91% / 7% / 2% | 71% / 22% / 19% | — / — / — | 93% / 80% / 61% | 41% | 78% / 0% | — |
 | Sat 14 Nov 00:00 | Amistoso | Bahrain vs Yemen | 53% / 29% / 18% | — / — / — | — / — / — | 66% / 38% / 19% | 42% | 28% / 6% | — |
 | Sat 14 Nov 04:15 | Amistoso | Japan vs Brazil | 43% / 28% / 30% | 24% / 24% / 52% | 25% / 25% / 51% | 75% / 49% / 28% | 54% | 21% / 13% | — |
-| Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | 38% / 30% / 31% | 58% / 22% / 20% | — / — / — | 68% / 40% / 20% | 48% | 17% / 13% | — |
 | Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | 15% / 22% / 62% | — / — / — | — / — / — | 79% / 56% / 33% | 52% | 5% / 39% | — |
+| Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | 38% / 30% / 31% | 58% / 22% / 20% | — / — / — | 68% / 40% / 20% | 48% | 17% / 13% | — |
 | Sat 14 Nov 08:00 | Nations League | Kosovo vs Israel | 62% / 23% / 14% | 53% / 26% / 22% | 52% / 26% / 22% | 75% / 50% / 28% | 47% | 38% / 4% | — |
 | Sat 14 Nov 09:00 | Amistoso | Palestine vs Iran | 20% / 27% / 53% | 8% / 14% / 78% | — / — / — | 71% / 44% / 23% | 47% | 7% / 29% | — |
 | Sat 14 Nov 11:00 | Nations League | Georgia vs Hungary | 28% / 31% / 41% | 31% / 30% / 38% | 31% / 31% / 38% | 67% / 39% / 19% | 46% | 11% / 19% | — |
 | Sat 14 Nov 11:00 | Nations League | Norway vs Wales | 60% / 23% / 16% | 80% / 12% / 8% | 76% / 14% / 9% | 78% / 54% / 31% | 52% | 37% / 6% | — |
-| Sat 14 Nov 13:45 | Nations League | Austria vs Republic of Ireland | 58% / 24% / 17% | 62% / 22% / 16% | 59% / 23% / 18% | 76% / 51% / 29% | 50% | 34% / 6% | — |
-| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | 46% / 30% / 24% | 38% / 32% / 30% | 38% / 32% / 30% | 67% / 40% / 20% | 46% | 22% / 9% | — |
-| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | 22% / 26% / 53% | 22% / 24% / 52% | 24% / 24% / 52% | 76% / 51% / 29% | 53% | 8% / 29% | — |
-| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | 68% / 20% / 12% | 64% / 20% / 16% | 62% / 21% / 18% | 81% / 57% / 35% | 50% | 44% / 4% | — |
 | Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | 52% / 26% / 22% | — / — / — | 61% / 22% / 16% | 75% / 49% / 27% | 52% | 28% / 8% | — |
+| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | 68% / 20% / 12% | 64% / 20% / 16% | 62% / 21% / 18% | 81% / 57% / 35% | 50% | 44% / 4% | — |
+| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | 22% / 26% / 53% | 22% / 24% / 52% | 24% / 24% / 52% | 76% / 51% / 29% | 53% | 8% / 29% | — |
+| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | 46% / 30% / 24% | 38% / 32% / 30% | 38% / 32% / 30% | 67% / 40% / 20% | 46% | 22% / 9% | — |
+| Sat 14 Nov 13:45 | Nations League | Austria vs Republic of Ireland | 58% / 24% / 17% | 62% / 22% / 16% | 59% / 23% / 18% | 76% / 51% / 29% | 50% | 34% / 6% | — |
 | Sat 14 Nov 21:00 | Amistoso | New Zealand vs India | 71% / 18% / 10% | — / — / — | — / — / — | 83% / 61% / 38% | 50% | 49% / 3% | — |
 | Sun 15 Nov 08:00 | Nations League | Latvia vs Armenia | 40% / 30% / 29% | 26% / 30% / 48% | — / — / — | 68% / 40% / 20% | 47% | 18% / 12% | — |
 | Sun 15 Nov 08:00 | Nations League | Cyprus vs Montenegro | 26% / 27% / 47% | 24% / 36% / 45% | — / — / — | 74% / 49% / 26% | 53% | 10% / 25% | — |
 | Sun 15 Nov 11:00 | Nations League | Belarus vs Albania | 24% / 29% / 47% | 24% / 28% / 48% | — / — / — | 69% / 43% / 21% | 48% | 10% / 22% | — |
 | Sun 15 Nov 11:00 | Nations League | Finland vs San Marino | 98% / 2% / 0% | 92% / 6% / 2% | — / — / — | 97% / 90% / 77% | 24% | 93% / 0% | — |
 | Sun 15 Nov 11:00 | Amistoso | Suriname vs Eswatini | 71% / 20% / 9% | 42% / 28% / 32% | — / — / — | 75% / 48% / 27% | 39% | 47% / 2% | — |
-| Sun 15 Nov 13:45 | Nations League | Croatia vs Czechia | 64% / 21% / 14% | 64% / 21% / 15% | 62% / 21% / 17% | 80% / 58% / 34% | 53% | 41% / 5% | — |
 | Sun 15 Nov 13:45 | Nations League | France vs Türkiye | 76% / 16% / 8% | 82% / 12% / 6% | 78% / 13% / 9% | 81% / 60% / 35% | 44% | 51% / 2% | — |
-| Sun 15 Nov 13:45 | Nations League | Belgium vs Italy | 46% / 28% / 27% | 44% / 26% / 30% | 44% / 26% / 30% | 75% / 49% / 27% | 53% | 22% / 12% | — |
+| Sun 15 Nov 13:45 | Nations League | Croatia vs Czechia | 64% / 21% / 14% | 64% / 21% / 15% | 62% / 21% / 17% | 80% / 58% / 34% | 53% | 41% / 5% | — |
 | Sun 15 Nov 13:45 | Nations League | Spain vs England | 54% / 25% / 21% | 56% / 22% / 20% | 56% / 23% / 21% | 78% / 54% / 31% | 55% | 30% / 8% | — |
+| Sun 15 Nov 13:45 | Nations League | Belgium vs Italy | 46% / 28% / 27% | 44% / 26% / 30% | 44% / 26% / 30% | 75% / 49% / 27% | 53% | 22% / 12% | — |
 | Mon 16 Nov 09:00 | Nations League | Faroe Islands vs Moldova | 65% / 22% / 13% | 55% / 27% / 13% | — / — / — | 76% / 51% / 29% | 46% | 40% / 4% | — |
 | Mon 16 Nov 09:00 | Nations League | Kazakhstan vs Slovakia | 23% / 27% / 50% | 11% / 27% / 64% | — / — / — | 75% / 49% / 27% | 52% | 9% / 27% | — |
 | Mon 16 Nov 11:00 | Nations League | Iceland vs Luxembourg | 63% / 24% / 13% | 70% / 18% / 7% | — / — / — | 72% / 46% / 24% | 42% | 38% / 4% | — |
@@ -275,10 +274,10 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 | Tue 17 Nov 13:45 | Nations League | Poland vs Sweden | 38% / 28% / 34% | 40% / 24% / 32% | — / — / — | 77% / 51% / 29% | 56% | 18% / 16% | — |
 | Tue 17 Nov 13:45 | Nations League | Denmark vs Norway | 43% / 26% / 31% | 36% / 23% / 36% | — / — / — | 80% / 56% / 34% | 60% | 23% / 14% | — |
 | Tue 17 Nov 13:45 | Nations League | Israel vs Austria | 16% / 22% / 62% | 15% / 20% / 62% | — / — / — | 81% / 57% / 35% | 54% | 5% / 39% | — |
+| Tue 17 Nov 13:45 | Nations League | Republic of Ireland vs Kosovo | 42% / 30% / 28% | 52% / 27% / 19% | — / — / — | 68% / 41% / 20% | 47% | 20% / 11% | — |
 | Tue 17 Nov 13:45 | Nations League | Hungary vs Northern Ireland | 49% / 30% / 21% | 51% / 28% / 19% | — / — / — | 65% / 37% / 17% | 42% | 24% / 7% | — |
 | Tue 17 Nov 13:45 | Nations League | Ukraine vs Georgia | 48% / 29% / 23% | 42% / 26% / 29% | — / — / — | 70% / 43% / 22% | 48% | 25% / 8% | — |
 | Tue 17 Nov 13:45 | Nations League | Wales vs Portugal | 8% / 17% / 75% | 11% / 15% / 73% | — / — / — | 81% / 59% / 36% | 45% | 2% / 52% | — |
-| Tue 17 Nov 13:45 | Nations League | Republic of Ireland vs Kosovo | 42% / 30% / 28% | 52% / 27% / 19% | — / — / — | 68% / 41% / 20% | 47% | 20% / 11% | — |
 | Tue 17 Nov 14:00 | Amistoso | Kuwait vs Honduras | 22% / 28% / 50% | — / — / — | — / — / — | 72% / 45% / 24% | 49% | 8% / 26% | — |
 | Tue 17 Nov 17:00 | Amistoso | Chile vs Colombia | 15% / 24% / 61% | — / — / — | — / — / — | 74% / 48% / 26% | 47% | 5% / 36% | — |
 | Tue 17 Nov 17:00 | Amistoso | Argentina vs Costa Rica | 91% / 7% / 2% | 76% / 31% / 24% | — / — / — | 91% / 77% / 57% | 39% | 77% / 0% | — |
@@ -293,10 +292,10 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 
 | Hora (Chicago) | Competición | Partido | Mercado | Pick | Probabilidad | Confianza | Fuente | Kalshi |
 |---|---|---|---|---|---|---|---|---|
-| Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | Ganador | Syria | 43% | Baja | casas | 44¢ |
-| Fri 13 Nov 10:30 | Amistoso | Kuwait vs Syria | Doble oportunidad | Kuwait o Syria (no empate) | 72% | Alta | casas | — |
 | Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | Ganador | Moldova | 36% | Baja | casas | 36¢ |
 | Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | Doble oportunidad | Moldova o Kazakhstan (no empate) | 69% | Media | casas | — |
+| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Ganador | Germany | 73% | Alta | casas | 78¢ |
+| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Doble oportunidad | Germany o empate | 89% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Ganador | Luxembourg | 39% | Baja | casas | 40¢ |
 | Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Doble oportunidad | Luxembourg o empate | 70% | Media | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | Ganador | Andorra | 56% | Media | casas | 57¢ |
@@ -305,8 +304,6 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 | Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | Doble oportunidad | Switzerland o empate | 82% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | Ganador | Azerbaijan | 75% | Alta | casas | 78¢ |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | Doble oportunidad | Azerbaijan o empate | 92% | Alta | casas | — |
-| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Ganador | Germany | 73% | Alta | casas | 78¢ |
-| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Doble oportunidad | Germany o empate | 89% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | Ganador | Iceland | 52% | Baja | casas | 54¢ |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | Doble oportunidad | Iceland o empate | 79% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | Ganador | Netherlands | 59% | Media | casas | 62¢ |
@@ -380,16 +377,16 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 | Sat 14 Nov 11:00 | Nations League | Georgia vs Hungary | Doble oportunidad | Georgia o Hungary (no empate) | 69% | Media | casas | — |
 | Sat 14 Nov 11:00 | Nations League | Norway vs Wales | Ganador | Norway | 76% | Alta | casas | 80¢ |
 | Sat 14 Nov 11:00 | Nations League | Norway vs Wales | Doble oportunidad | Norway o empate | 91% | Alta | casas | — |
-| Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Ganador | Sweden | 61% | Media | casas | — |
-| Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Doble oportunidad | Sweden o empate | 84% | Alta | casas | — |
-| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | Ganador | Portugal | 62% | Media | casas | 64¢ |
-| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | Doble oportunidad | Portugal o empate | 82% | Alta | casas | — |
-| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | Ganador | Poland | 52% | Baja | casas | 52¢ |
-| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | Doble oportunidad | Poland o empate | 76% | Alta | casas | — |
-| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | Ganador | Northern Ireland | 38% | Baja | casas | 38¢ |
-| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | Doble oportunidad | Northern Ireland o empate | 70% | Media | casas | — |
 | Sat 14 Nov 13:45 | Nations League | Austria vs Republic of Ireland | Ganador | Austria | 59% | Media | casas | 62¢ |
 | Sat 14 Nov 13:45 | Nations League | Austria vs Republic of Ireland | Doble oportunidad | Austria o empate | 82% | Alta | casas | — |
+| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | Ganador | Northern Ireland | 38% | Baja | casas | 38¢ |
+| Sat 14 Nov 13:45 | Nations League | Northern Ireland vs Ukraine | Doble oportunidad | Northern Ireland o empate | 70% | Media | casas | — |
+| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | Ganador | Poland | 52% | Baja | casas | 52¢ |
+| Sat 14 Nov 13:45 | Nations League | Romania vs Poland | Doble oportunidad | Poland o empate | 76% | Alta | casas | — |
+| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | Ganador | Portugal | 62% | Media | casas | 64¢ |
+| Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | Doble oportunidad | Portugal o empate | 82% | Alta | casas | — |
+| Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Ganador | Sweden | 61% | Media | casas | — |
+| Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Doble oportunidad | Sweden o empate | 84% | Alta | casas | — |
 | Sat 14 Nov 18:00 | NBA | Denver Nuggets en New Orleans Pelicans | Ganador | Denver Nuggets | 70% | Alta | modelo | 83¢ |
 | Sat 14 Nov 18:30 | NBA | Dallas Mavericks en Cleveland Cavaliers | Ganador | Cleveland Cavaliers | 72% | Alta | modelo | 58¢ |
 | Sat 14 Nov 19:00 | NBA | Brooklyn Nets en Memphis Grizzlies | Ganador | Memphis Grizzlies | 69% | Media | modelo | 63¢ |

@@ -146,6 +146,14 @@ def _soccer_extra(x, cal):
             ["Gana por 2+ local / visita", f"{pc(g(f'p_home_m1_5{sfx}'))} / {pc(g(f'p_away_m1_5{sfx}'))}"]]
 
 
+def _stakes() -> dict:
+    f = P / "stakes_upcoming.csv"
+    if not f.exists():
+        return {}
+    d = pd.read_csv(f, dtype={"event_id": str})
+    return {r.event_id: [t for t, flag in ((r.home, r.nostake_h), (r.away, r.nostake_a)) if flag == 1] for r in d.itertuples()}
+
+
 def games_intl(now, finals) -> list:
     reg = P / "intl_registry.csv"
     if not reg.exists():
@@ -160,6 +168,7 @@ def games_intl(now, finals) -> list:
     r["t"] = _when(r["kickoff_utc"])
     r = r[r["t"] > now].sort_values("t")
     lat = _lat()
+    stakes = _stakes()
     out = []
     for x in r.itertuples():
         sport = "intl" if x.grupo == "selecciones" else "club"
@@ -176,7 +185,7 @@ def games_intl(now, finals) -> list:
         out.append({"sport": sport, "comp": x.competicion + (" · sede neutral" if x.neutral else ""), "t": x.t.isoformat(),
                     "home": x.home, "away": x.away, "three": True, "pick": pick, "prob": prob, "src": src,
                     "rows": [["Modelo", model], ["Casas", books], ["Kalshi", _tri(x, ["k_mid_H", "k_mid_D", "k_mid_A"])]],
-                    "extra": extra, "inj": None,
+                    "extra": extra, "inj": None, "nostake": stakes.get(x.event_id, []),
                     "picks": soccer_picks(x.home, x.away, final, src,
                                           {1.5: _f(getattr(x, "p_over_1_5", None)), 2.5: _f(getattr(x, "p_over_2_5", None))},
                                           _f(getattr(x, "p_btts", None)), goals_ok=sport != "intl",
@@ -315,6 +324,7 @@ function card(g) {
     <div class="pick"><div><div class="src">Pick (${esc(g.src)})</div><b>${esc(g.pick ?? "—")}</b></div>
       <div style="text-align:right"><div class="pct">${pc(g.prob)}</div><span class="conf c-${lv}">${lv}</span></div></div>
     ${gap(g)}
+    ${(g.nostake || []).map(t => `<span class="warn">⚑ ${esc(t)} ya no se juega nada en el grupo/tabla (informativo; no cambia la probabilidad)</span>`).join("<br>")}
     ${mk(g)}
     <details><summary>Ver comparación y detalles</summary>
       ${g.rows.map(([n, v]) => `<div class="row"><span>${esc(n)}</span>${stack(v, g.three)}</div>`).join("")}${legend}

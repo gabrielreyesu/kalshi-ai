@@ -6,8 +6,14 @@ on:
   workflow_dispatch:
   push:
     branches: ['research/**']
-    paths:
-      - 'kalshi_lineup/**'
+    paths:                       # solo los módulos de ESTOS backtests (evita relanzarlos por cambios ajenos)
+      - 'kalshi_lineup/box.py'
+      - 'kalshi_lineup/ratings.py'
+      - 'kalshi_lineup/evaluate.py'
+      - 'kalshi_lineup/cli.py'
+      - 'kalshi_lineup/nfl_qb.py'
+      - 'kalshi_lineup/soccer_xi.py'
+      - 'kalshi_lineup/soccer_eval.py'
       - '.github/workflows/lineup_research.yml'
 
 permissions:
