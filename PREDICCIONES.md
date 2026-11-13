@@ -1,4 +1,4 @@
-# Mocha Picks — predicciones actualizadas 13 Nov 2026 10:37 (hora Chicago)
+# Mocha Picks — predicciones actualizadas 13 Nov 2026 12:20 (hora Chicago)
 
 📱 **Versión para el teléfono:** https://gabrielreyesu.github.io/mocha-picks/ (tarjetas, filtros por deporte y día, buscador).
 
@@ -208,16 +208,15 @@ En selecciones, las columnas de goles son poco fiables: en el backtest el "más 
 
 | Fecha (hora Chicago) | Competición | Partido | Modelo: local / empate / visita | Kalshi | Casas | Goles: +1.5 / +2.5 / +3.5 | Ambos anotan | Gana por 2+: local / visita | Bajas: local / visita |
 |---|---|---|---|---|---|---|---|---|---|
-| Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | 27% / 28% / 45% | 36% / 32% / 32% | 36% / 31% / 33% | 72% / 46% / 24% | 51% | 11% / 22% | — |
-| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 4% | 78% / 15% / 7% | 78% / 54% / 31% | 40% | 52% / 2% | — |
+| Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | 10% / 20% / 71% | 6% / 16% / 78% | 8% / 18% / 75% | 78% / 54% / 32% | 45% | 3% / 47% | — |
+| Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 69% / 20% / 11% | 78% / 53% / 31% | 47% | 43% / 3% | — |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | 62% / 24% / 14% | 62% / 22% / 16% | 59% / 22% / 18% | 75% / 49% / 27% | 46% | 37% / 4% | — |
 | Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | 14% / 22% / 64% | 8% / 14% / 78% | 11% / 16% / 73% | 79% / 55% / 33% | 51% | 5% / 40% | — |
-| Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 21% / 27% / 52% | 76% / 51% / 28% | 51% | 6% / 33% | — |
-| Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | 67% / 21% / 12% | 72% / 18% / 10% | 69% / 20% / 11% | 78% / 53% / 31% | 47% | 43% / 3% | — |
+| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | 75% / 18% / 7% | 82% / 12% / 4% | 78% / 15% / 7% | 78% / 54% / 31% | 40% | 52% / 2% | — |
+| Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | 16% / 25% / 60% | 16% / 29% / 56% | 18% / 28% / 55% | 73% / 47% / 26% | 46% | 5% / 35% | — |
 | Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | 40% / 31% / 29% | 57% / 30% / 14% | 56% / 29% / 15% | 67% / 39% / 19% | 46% | 18% / 11% | — |
 | Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | 39% / 31% / 30% | 40% / 32% / 29% | 39% / 31% / 30% | 66% / 39% / 19% | 46% | 18% / 12% | — |
-| Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | 10% / 20% / 71% | 6% / 16% / 78% | 8% / 18% / 75% | 78% / 54% / 32% | 45% | 3% / 47% | — |
-| Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | 16% / 25% / 60% | 16% / 29% / 56% | 18% / 28% / 55% | 73% / 47% / 26% | 46% | 5% / 35% | — |
+| Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | 18% / 25% / 57% | 20% / 26% / 54% | 21% / 27% / 52% | 76% / 51% / 28% | 51% | 6% / 33% | — |
 | Fri 13 Nov 17:00 | Amistoso | Argentina vs Uruguay | 78% / 15% / 7% | 62% / 24% / 16% | 59% / 24% / 17% | 84% / 64% / 42% | 46% | 57% / 2% | — |
 | Fri 13 Nov 18:00 | Amistoso | Colombia vs Chile | 78% / 16% / 6% | 68% / 20% / 12% | 67% / 21% / 13% | 80% / 57% / 34% | 39% | 56% / 1% | — |
 | Fri 13 Nov 18:00 | Amistoso | Ecuador vs Costa Rica | 66% / 22% / 12% | 78% / 16% / 6% | 76% / 16% / 9% | 74% / 48% / 27% | 43% | 41% / 3% | — |
@@ -292,33 +291,31 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 
 | Hora (Chicago) | Competición | Partido | Mercado | Pick | Probabilidad | Confianza | Fuente | Kalshi |
 |---|---|---|---|---|---|---|---|---|
-| Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | Ganador | Moldova | 36% | Baja | casas | 36¢ |
-| Fri 13 Nov 11:00 | Nations League | Moldova vs Kazakhstan | Doble oportunidad | Moldova o Kazakhstan (no empate) | 69% | Media | casas | — |
-| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Ganador | Germany | 73% | Alta | casas | 78¢ |
-| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Doble oportunidad | Germany o empate | 89% | Alta | casas | — |
-| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Ganador | Luxembourg | 39% | Baja | casas | 40¢ |
-| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Doble oportunidad | Luxembourg o empate | 70% | Media | casas | — |
-| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | Ganador | Andorra | 56% | Media | casas | 57¢ |
-| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | Doble oportunidad | Andorra o empate | 85% | Alta | casas | — |
+| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | Ganador | Scotland | 78% | Alta | casas | 82¢ |
+| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | Doble oportunidad | Scotland o empate | 93% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | Ganador | Switzerland | 55% | Baja | casas | 56¢ |
 | Fri 13 Nov 13:45 | Nations League | Slovenia vs Switzerland | Doble oportunidad | Switzerland o empate | 82% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | Ganador | Azerbaijan | 75% | Alta | casas | 78¢ |
 | Fri 13 Nov 13:45 | Nations League | Liechtenstein vs Azerbaijan | Doble oportunidad | Azerbaijan o empate | 92% | Alta | casas | — |
+| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Ganador | Germany | 73% | Alta | casas | 78¢ |
+| Fri 13 Nov 13:45 | Nations League | Serbia vs Germany | Doble oportunidad | Germany o empate | 89% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | Ganador | Iceland | 52% | Baja | casas | 54¢ |
 | Fri 13 Nov 13:45 | Nations League | Bulgaria vs Iceland | Doble oportunidad | Iceland o empate | 79% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | Ganador | Netherlands | 59% | Media | casas | 62¢ |
 | Fri 13 Nov 13:45 | Nations League | Netherlands vs Greece | Doble oportunidad | Netherlands o empate | 82% | Alta | casas | — |
 | Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | Ganador | Slovakia | 69% | Media | casas | 72¢ |
 | Fri 13 Nov 13:45 | Nations League | Slovakia vs Faroe Islands | Doble oportunidad | Slovakia o empate | 89% | Alta | casas | — |
-| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | Ganador | Scotland | 78% | Alta | casas | 82¢ |
-| Fri 13 Nov 13:45 | Nations League | Scotland vs North Macedonia | Doble oportunidad | Scotland o empate | 93% | Alta | casas | — |
+| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | Ganador | Andorra | 56% | Media | casas | 57¢ |
+| Fri 13 Nov 13:45 | Nations League | Andorra vs Gibraltar | Doble oportunidad | Andorra o empate | 85% | Alta | casas | — |
+| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Ganador | Luxembourg | 39% | Baja | casas | 40¢ |
+| Fri 13 Nov 13:45 | Nations League | Luxembourg vs Estonia | Doble oportunidad | Luxembourg o empate | 70% | Media | casas | — |
 | Fri 13 Nov 17:00 | Amistoso | Argentina vs Uruguay | Ganador | Argentina | 59% | Media | casas | 62¢ |
 | Fri 13 Nov 17:00 | Amistoso | Argentina vs Uruguay | Doble oportunidad | Argentina o empate | 83% | Alta | casas | — |
-| Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | Ganador | New York Knicks | 73% | Alta | casas | 74¢ |
+| Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | Ganador | New York Knicks | 75% | Alta | Kalshi + casas + modelo | 74¢ |
 | Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | Hándicap | New York Knicks gana por más de 8.5 | 50% | Baja | casas | 49¢ |
 | Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | Total de puntos | Más de 219.5 | 50% | Baja | casas | 48¢ |
 | Fri 13 Nov 18:00 | NBA | New York Knicks en Indiana Pacers | Puntos (línea segura) | Más de 205.5 | 78% | Alta | casas | 80¢ |
-| Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Ganador | Orlando Magic | 75% | Alta | casas | 78¢ |
+| Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Ganador | Orlando Magic | 77% | Alta | Kalshi + casas + modelo | 78¢ |
 | Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Hándicap | Orlando Magic gana por más de 8.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Total de puntos | Más de 224.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 18:00 | NBA | Milwaukee Bucks en Orlando Magic | Puntos (línea segura) | Más de 210.5 | 78% | Alta | casas | 80¢ |
@@ -326,36 +323,36 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 | Fri 13 Nov 18:00 | Amistoso | Colombia vs Chile | Doble oportunidad | Colombia o empate | 87% | Alta | casas | — |
 | Fri 13 Nov 18:00 | Amistoso | Ecuador vs Costa Rica | Ganador | Ecuador | 76% | Alta | casas | 78¢ |
 | Fri 13 Nov 18:00 | Amistoso | Ecuador vs Costa Rica | Doble oportunidad | Ecuador o empate | 91% | Alta | casas | — |
-| Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Ganador | Atlanta Hawks | 70% | Media | casas | 70¢ |
+| Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Ganador | Atlanta Hawks | 71% | Alta | Kalshi + casas + modelo | 70¢ |
 | Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Hándicap | Atlanta Hawks gana por más de 6.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Total de puntos | Más de 246.5 | 50% | Baja | casas | 48¢ |
 | Fri 13 Nov 19:00 | NBA | Atlanta Hawks en Chicago Bulls | Puntos (línea segura) | Más de 232.5 | 78% | Alta | casas | 79¢ |
-| Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Ganador | Miami Heat | 55% | Media | casas | 56¢ |
+| Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Ganador | Miami Heat | 55% | Media | Kalshi + casas + modelo | 56¢ |
 | Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Hándicap | Miami Heat gana por más de 2.5 | 50% | Baja | casas | 50¢ |
 | Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Total de puntos | Menos de 236.5 | 52% | Baja | casas | 54¢ |
 | Fri 13 Nov 19:00 | NBA | Cleveland Cavaliers en Miami Heat | Puntos (línea segura) | Más de 222.5 | 77% | Alta | casas | 76¢ |
-| Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Ganador | Memphis Grizzlies | 55% | Media | casas | 56¢ |
+| Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Ganador | Memphis Grizzlies | 56% | Media | Kalshi + casas + modelo | 56¢ |
 | Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Hándicap | Memphis Grizzlies gana por más de 2.5 | 50% | Baja | casas | 48¢ |
 | Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Total de puntos | Menos de 237.5 | 52% | Baja | casas | 50¢ |
 | Fri 13 Nov 19:00 | NBA | Memphis Grizzlies en New Orleans Pelicans | Puntos (línea segura) | Más de 223.5 | 77% | Alta | casas | 78¢ |
 | Fri 13 Nov 19:00 | Amistoso | Peru vs Bolivia | Ganador | Peru | 60% | Media | casas | 62¢ |
 | Fri 13 Nov 19:00 | Amistoso | Peru vs Bolivia | Doble oportunidad | Peru o empate | 84% | Alta | casas | — |
-| Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Ganador | Houston Rockets | 89% | Alta | casas | 92¢ |
+| Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Ganador | Houston Rockets | 91% | Alta | Kalshi + casas + modelo | 92¢ |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Hándicap | Houston Rockets gana por más de 15.5 | 50% | Baja | casas | 50¢ |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Hándicap seguro | Houston Rockets gana por más de 7.5 | 72% | Alta | casas | 76¢ |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Total de puntos | Menos de 220.5 | 52% | Baja | casas | 50¢ |
 | Fri 13 Nov 19:30 | NBA | Utah Jazz en Houston Rockets | Puntos (línea segura) | Más de 206.5 | 77% | Alta | casas | 78¢ |
-| Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Ganador | San Antonio Spurs | 84% | Alta | casas | 84¢ |
+| Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Ganador | San Antonio Spurs | 85% | Alta | Kalshi + casas + modelo | 84¢ |
 | Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Hándicap | San Antonio Spurs gana por más de 11.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Hándicap seguro | San Antonio Spurs gana por más de 2.5 | 75% | Alta | casas | 79¢ |
 | Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Total de puntos | Más de 217.5 | 50% | Baja | casas | 50¢ |
 | Fri 13 Nov 20:30 | NBA | Golden State Warriors en San Antonio Spurs | Puntos (línea segura) | Más de 203.5 | 78% | Alta | casas | 80¢ |
-| Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Ganador | Portland Trail Blazers | 79% | Alta | casas | 82¢ |
+| Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Ganador | Portland Trail Blazers | 82% | Alta | Kalshi + casas + modelo | 82¢ |
 | Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Hándicap | Portland Trail Blazers gana por más de 9.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Hándicap seguro | Portland Trail Blazers gana por más de 1.5 | 72% | Alta | casas | 78¢ |
 | Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Total de puntos | Más de 228.5 | 50% | Baja | casas | 50¢ |
 | Fri 13 Nov 21:00 | NBA | Portland Trail Blazers en Sacramento Kings | Puntos (línea segura) | Más de 214.5 | 78% | Alta | casas | 80¢ |
-| Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Ganador | Oklahoma City Thunder | 70% | Alta | casas | 72¢ |
+| Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Ganador | Oklahoma City Thunder | 73% | Alta | Kalshi + casas + modelo | 72¢ |
 | Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Hándicap | Oklahoma City Thunder gana por más de 6.5 | 50% | Baja | casas | 52¢ |
 | Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Total de puntos | Más de 222.5 | 50% | Baja | casas | 50¢ |
 | Fri 13 Nov 21:30 | NBA | Oklahoma City Thunder en LA Clippers | Puntos (línea segura) | Más de 208.5 | 78% | Alta | casas | 80¢ |
@@ -365,10 +362,10 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 | Sat 14 Nov 00:00 | Amistoso | Bahrain vs Yemen | Doble oportunidad | Bahrain o empate | 81% | Alta | modelo | — |
 | Sat 14 Nov 04:15 | Amistoso | Japan vs Brazil | Ganador | Brazil | 51% | Baja | casas | 52¢ |
 | Sat 14 Nov 04:15 | Amistoso | Japan vs Brazil | Doble oportunidad | Brazil o empate | 75% | Alta | casas | — |
-| Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | Ganador | Kyrgyz Republic | 62% | Media | modelo | — |
-| Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | Doble oportunidad | Kyrgyz Republic o empate | 85% | Alta | modelo | — |
 | Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | Ganador | China | 38% | Baja | modelo | 58¢ |
 | Sat 14 Nov 06:00 | Amistoso | China vs Malaysia | Doble oportunidad | China o Malaysia (no empate) | 70% | Media | modelo | — |
+| Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | Ganador | Kyrgyz Republic | 62% | Media | modelo | — |
+| Sat 14 Nov 06:00 | Amistoso | Chinese Taipei vs Kyrgyz Republic | Doble oportunidad | Kyrgyz Republic o empate | 85% | Alta | modelo | — |
 | Sat 14 Nov 08:00 | Nations League | Kosovo vs Israel | Ganador | Kosovo | 52% | Baja | casas | 53¢ |
 | Sat 14 Nov 08:00 | Nations League | Kosovo vs Israel | Doble oportunidad | Kosovo o empate | 78% | Alta | casas | — |
 | Sat 14 Nov 09:00 | Amistoso | Palestine vs Iran | Ganador | Iran | 53% | Baja | modelo | 78¢ |
@@ -387,11 +384,11 @@ frente a las casas, por eso ahí se usa su probabilidad. No es una recomendació
 | Sat 14 Nov 13:45 | Nations League | Portugal vs Denmark | Doble oportunidad | Portugal o empate | 82% | Alta | casas | — |
 | Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Ganador | Sweden | 61% | Media | casas | — |
 | Sat 14 Nov 13:45 | Nations League | Sweden vs Bosnia-Herzegovina | Doble oportunidad | Sweden o empate | 84% | Alta | casas | — |
-| Sat 14 Nov 18:00 | NBA | Denver Nuggets en New Orleans Pelicans | Ganador | Denver Nuggets | 70% | Alta | modelo | 83¢ |
-| Sat 14 Nov 18:30 | NBA | Dallas Mavericks en Cleveland Cavaliers | Ganador | Cleveland Cavaliers | 72% | Alta | modelo | 58¢ |
-| Sat 14 Nov 19:00 | NBA | Brooklyn Nets en Memphis Grizzlies | Ganador | Memphis Grizzlies | 69% | Media | modelo | 63¢ |
-| Sat 14 Nov 19:00 | NBA | Chicago Bulls en Minnesota Timberwolves | Ganador | Minnesota Timberwolves | 88% | Alta | modelo | 89¢ |
-| Sat 14 Nov 19:00 | NBA | Detroit Pistons en Miami Heat | Ganador | Detroit Pistons | 63% | Media | modelo | 62¢ |
+| Sat 14 Nov 18:00 | NBA | Denver Nuggets en New Orleans Pelicans | Ganador | Denver Nuggets | 84% | Alta | Kalshi + modelo | 83¢ |
+| Sat 14 Nov 18:30 | NBA | Dallas Mavericks en Cleveland Cavaliers | Ganador | Cleveland Cavaliers | 57% | Media | Kalshi + modelo | 58¢ |
+| Sat 14 Nov 19:00 | NBA | Brooklyn Nets en Memphis Grizzlies | Ganador | Memphis Grizzlies | 62% | Media | Kalshi + modelo | 63¢ |
+| Sat 14 Nov 19:00 | NBA | Chicago Bulls en Minnesota Timberwolves | Ganador | Minnesota Timberwolves | 89% | Alta | Kalshi + modelo | 89¢ |
+| Sat 14 Nov 19:00 | NBA | Detroit Pistons en Miami Heat | Ganador | Detroit Pistons | 64% | Media | Kalshi + modelo | 62¢ |
 | Sat 14 Nov 21:00 | Amistoso | New Zealand vs India | Ganador | New Zealand | 71% | Alta | modelo | — |
 | Sat 14 Nov 21:00 | Amistoso | New Zealand vs India | Doble oportunidad | New Zealand o empate | 90% | Alta | modelo | — |
 
