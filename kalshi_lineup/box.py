@@ -98,7 +98,7 @@ def parse_summary(payload: dict, event_id: str) -> dict | None:
     return {"event_id": str(event_id), "players": players}
 
 
-def fetch_box(event_id: str, cache: Path, getter=None) -> dict | None:
+def fetch_box(event_id: str, cache: Path, getter=None, url: str = SUMMARY, parser=None) -> dict | None:
     """Lee de caché o descarga. Se guarda en caché el resultado de un partido final, incluso vacío (ok=False)."""
     p = cache / f"{event_id}.json"
     if p.exists():
@@ -107,10 +107,10 @@ def fetch_box(event_id: str, cache: Path, getter=None) -> dict | None:
     if getter is None:
         from kalshi_nba.data import _json as getter
     try:
-        payload = getter(SUMMARY, {"event": str(event_id)})
+        payload = getter(url, {"event": str(event_id)})
     except RuntimeError:
         return None                                  # fallo transitorio: no se guarda
-    parsed = parse_summary(payload, event_id) if payload else None
+    parsed = (parser or parse_summary)(payload, event_id) if payload else None
     final = bool(payload) and ((((payload.get("header") or {}).get("competitions") or [{}])[0].get("status") or {})
                                .get("type") or {}).get("name") == "STATUS_FINAL"
     if parsed is None and not final:
@@ -121,9 +121,9 @@ def fetch_box(event_id: str, cache: Path, getter=None) -> dict | None:
     return out if out["ok"] else None
 
 
-def load_boxes(event_ids, cache_dir="data/nba/box", workers=8, getter=None) -> dict:
+def load_boxes(event_ids, cache_dir="data/nba/box", workers=8, getter=None, url: str = SUMMARY, parser=None) -> dict:
     cache = Path(cache_dir)
     ids = [str(e) for e in event_ids]
     with ThreadPoolExecutor(workers) as ex:
-        res = list(ex.map(lambda e: fetch_box(e, cache, getter), ids))
+        res = list(ex.map(lambda e: fetch_box(e, cache, getter, url, parser), ids))
     return {e: r for e, r in zip(ids, res) if r}

@@ -1,4 +1,4 @@
-name: NBA lineup-adjusted ratings research
+name: NBA/NFL lineup-adjusted ratings research
 
 # Solo investigación: descarga boxscores históricos de ESPN, construye variables de alineación sin fugas y compara
 # contra nba_v1 en los mismos partidos fuera de muestra. No escribe en predictions/ ni toca producción.
@@ -30,15 +30,28 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - name: Tests (si fallan, no se evalúa)
         run: python -m pytest -q tests
-      - name: Restore ESPN NBA cache (scoreboards, odds, boxscores)
-        uses: actions/cache@v4
+      - name: Restore ESPN cache (scoreboards, odds, boxscores)
+        uses: actions/cache/restore@v4
         with:
-          path: data/nba
-          key: lineup-nba-v1-${{ github.run_id }}
+          path: |
+            data/nba
+            data/nfl
+          key: lineup-espn-v2-${{ github.run_id }}
           restore-keys: |
-            lineup-nba-v1-
-      - name: Walk-forward backtest nba_v1 vs nba_v1 + lineup variables
+            lineup-espn-v2-
+      - name: NBA — walk-forward nba_v1 vs nba_v1 + lineup variables
         run: python -m kalshi_lineup.cli backtest --output reports/lineup
+      - name: NFL — walk-forward nfl_v1 vs nfl_v1 + starting quarterback
+        if: always()
+        run: python -m kalshi_lineup.cli backtest-nfl --output reports/lineup
+      - name: Save ESPN cache even if a backtest failed (downloads are expensive)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/nba
+            data/nfl
+          key: lineup-espn-v2-${{ github.run_id }}
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

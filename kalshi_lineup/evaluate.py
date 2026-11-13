@@ -38,12 +38,12 @@ def metrics(p, y) -> dict:
             "ece": round(ece(p, y), 4)}
 
 
-def run_variants(feats: pd.DataFrame, base_features: list, first_test=2019, min_train=2000) -> pd.DataFrame:
+def run_variants(feats: pd.DataFrame, base_features: list, first_test=2019, min_train=2000, variants=None) -> pd.DataFrame:
     """Una fila por partido OOS con p_base y p_<variante>."""
     base = walk_forward(feats, first_test=first_test, min_train=min_train, features=base_features)
     out = base[["event_id", "date", "season_year", "home_win", "p_home", "line_p_home", "line_spread"]].rename(columns={"p_home": "p_base"})
     out = pd.concat([out, market_win_prob(out)[["p_mkt"]]], axis=1)
-    for name, extra in VARIANTS.items():
+    for name, extra in (variants or VARIANTS).items():
         r = walk_forward(feats, first_test=first_test, min_train=min_train, features=base_features + extra)
         out = out.merge(r[["event_id", "p_home"]].rename(columns={"p_home": f"p_{name}"}), on="event_id", how="inner")
     return out
@@ -75,11 +75,12 @@ def compare(oos: pd.DataFrame, col: str) -> dict:
             "mejora_brier": paired_bootstrap(brier(oos["p_base"], y), brier(oos[col], y), oos["date"])}
 
 
-def decide(oos: pd.DataFrame, feats: pd.DataFrame | None = None) -> dict:
-    dev, hold = oos[oos["season_year"] <= DEV_LAST], oos[oos["season_year"] > DEV_LAST]
-    dev_res = {n: compare(dev, f"p_{n}") for n in VARIANTS} if len(dev) else {}
-    chosen = max(dev_res, key=lambda n: dev_res[n]["mejora_logloss"]["mejora"]) if dev_res else "A_disponibles_gs"
-    out = {"protocolo": "dev<=2024 elige variante; confirmación >=2025 una sola vez", "desarrollo": dev_res,
+def decide(oos: pd.DataFrame, feats: pd.DataFrame | None = None, variants=None, dev_last=DEV_LAST) -> dict:
+    variants = variants or VARIANTS
+    dev, hold = oos[oos["season_year"] <= dev_last], oos[oos["season_year"] > dev_last]
+    dev_res = {n: compare(dev, f"p_{n}") for n in variants} if len(dev) else {}
+    chosen = max(dev_res, key=lambda n: dev_res[n]["mejora_logloss"]["mejora"]) if dev_res else next(iter(variants))
+    out = {"protocolo": f"dev<={dev_last} elige variante; confirmación >={dev_last + 1} una sola vez", "desarrollo": dev_res,
            "variante_elegida": chosen}
     if len(hold):
         h = compare(hold, f"p_{chosen}")
@@ -93,7 +94,7 @@ def decide(oos: pd.DataFrame, feats: pd.DataFrame | None = None) -> dict:
     for s, g in oos.groupby("season_year"):
         y = g["home_win"].to_numpy()
         row = {"temporada": int(s), "n": len(g), "logloss_base": round(float(logloss(g["p_base"], y).mean()), 5)}
-        row.update({f"ll_{n}": round(float(logloss(g[f"p_{n}"], y).mean()), 5) for n in VARIANTS})
+        row.update({f"ll_{n}": round(float(logloss(g[f"p_{n}"], y).mean()), 5) for n in variants})
         gm = g[g["p_mkt"].notna()]
         if len(gm):
             row["ll_mercado_subconj"] = round(float(logloss(gm["p_mkt"], gm["home_win"]).mean()), 5)
@@ -105,7 +106,7 @@ def decide(oos: pd.DataFrame, feats: pd.DataFrame | None = None) -> dict:
         out["vs_mercado_mismo_subconjunto"] = {"base": metrics(m["p_base"], y), "variante": metrics(m[f"p_{chosen}"], y),
                                                "mercado": metrics(m["p_mkt"], y)}
     if feats is not None and len(m):
-        mp = market_plus_lineup(oos, feats, VARIANTS[chosen])
+        mp = market_plus_lineup(oos, feats, variants[chosen])
         if len(mp):
             y = mp["home_win"].to_numpy()
             out["mercado_mas_alineacion"] = {
@@ -115,17 +116,17 @@ def decide(oos: pd.DataFrame, feats: pd.DataFrame | None = None) -> dict:
     return out
 
 
-def render(res: dict, coverage: dict) -> str:
-    L = ["NBA — RATINGS AJUSTADOS POR ALINEACIÓN (investigación, producción sin cambios)", "=" * 72,
+def render(res: dict, coverage: dict, title="NBA — RATINGS AJUSTADOS POR ALINEACIÓN") -> str:
+    L = [title + " (investigación, producción sin cambios)", "=" * 72,
          "Cobertura de boxscores: " + json.dumps(coverage, ensure_ascii=False), "",
-         "Protocolo: " + res["protocolo"], "", "--- DESARROLLO (temporadas <= 2024) ---"]
+         "Protocolo: " + res["protocolo"], "", "--- DESARROLLO ---"]
     for n, r in res["desarrollo"].items():
         L.append(f"{n:24s} base ll={r['base']['logloss']:.5f} acc={r['base']['accuracy']:.4f} | variante ll={r['variante']['logloss']:.5f} "
                  f"acc={r['variante']['accuracy']:.4f} ece={r['variante']['ece']:.4f} | mejora ll {r['mejora_logloss']}")
     L.append(f"\nVariante elegida en desarrollo: {res['variante_elegida']}")
     if "confirmacion" in res:
         c = res["confirmacion"]
-        L += ["\n--- CONFIRMACIÓN (temporadas >= 2025, una sola vez) ---",
+        L += ["\n--- CONFIRMACIÓN (una sola vez) ---",
               "base:     " + json.dumps(c["base"]), "variante: " + json.dumps(c["variante"]),
               "mejora logloss: " + json.dumps(c["mejora_logloss"]), "mejora brier:   " + json.dumps(c["mejora_brier"])]
     L.append(f"\nVEREDICTO: {res['veredicto']}")
