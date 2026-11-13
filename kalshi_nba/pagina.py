@@ -249,7 +249,7 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13px;margi
 .view button[aria-pressed=true]{background:var(--card);font-weight:650;box-shadow:0 1px 2px rgba(0,0,0,.15)}
 .pk{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center}.pk .big{font-size:20px;font-weight:750;font-variant-numeric:tabular-nums;text-align:center}
 .pk .t1{font-weight:650}.pk .t2{font-size:12px;color:var(--muted)}.empty{color:var(--muted);text-align:center;padding:40px 0}
-footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;margin:0 auto}
+footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;margin:0 auto}footer a{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -272,6 +272,7 @@ footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;mar
   "Línea segura" = la línea más exigente que aún tiene ≥ 70–75% de probabilidad. Doble oportunidad = uno de dos resultados.
   En hándicap y totales la probabilidad viene de las casas: el modelo propio no mostró ventaja ahí.</p>
   <p>Bajas: informativas; el modelo de producción todavía no las usa. Esto no es una recomendación de apuesta.</p>
+  <p><a href="progreso.html">Progreso del modelo y pruebas en curso →</a></p>
 </footer>
 <script>
 const DATA = __DATA__;
