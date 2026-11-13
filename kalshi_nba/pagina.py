@@ -278,7 +278,10 @@ footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;mar
 const DATA = __DATA__;
 const S = {sport: "all", when: "48h", q: "", hi: "0", view: "games", mkt: "all"};
 const MKTS = [["all","Todos los mercados"],["Ganador","Ganador"],["Doble","Doble oportunidad"],["Hándicap","Hándicap"],["Total","Totales"],["Goles","Goles"],["Ambos","Ambos anotan"]];
-const mktOk = p => S.mkt === "all" || (S.mkt === "Total" ? /^(Total|Puntos)/.test(p.mercado) : p.mercado.startsWith(S.mkt));
+const isMkt = (m, p) => m === "all" || (m === "Total" ? /^(Total|Puntos)/.test(p.mercado) : p.mercado.startsWith(m));
+const mktOk = p => isMkt(S.mkt, p);
+const SPORT_NAME = {nba: "NBA", nfl: "NFL", liga: "Ligas", club: "Copas", intl: "Selecciones"};
+const save = () => { try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi, view: S.view, mkt: S.mkt})); } catch (e) {} };
 const SPORTS = [["all","Todo"],["nba","NBA"],["nfl","NFL"],["liga","Ligas"],["club","Copas"],["intl","Selecciones"]];
 const WHEN = [["24h","Hoy"],["48h","Hoy y mañana"],["7d","7 días"],["all","Todo"]];
 const HI = [["0","Toda confianza"],["1","Solo Alta"]];
@@ -339,6 +342,29 @@ function gap(g) {
   const d = Math.max(...m[1].map((v, i) => Math.abs(v - c[1][i])));
   return d >= 0.10 ? `<span class="warn">⚠ El modelo difiere ${Math.round(100 * d)} pts de las casas (posible baja o noticia no incorporada)</span>` : "";
 }
+function emptyPicks(now, lim) {
+  const label = (MKTS.find(m => m[0] === S.mkt) || ["", "este mercado"])[1];
+  const all = DATA.games.filter(g => Date.parse(g.t) > now - 3 * 3600e3).flatMap(g => (g.picks || []).filter(p => p.prob != null && mktOk(p)).map(p => [g, p]));
+  const fix = (k, v, t) => `<button class="chip" data-fix="${k}" data-v="${v}">${t}</button>`;
+  let why = "No hay picks con estos filtros.", btn = "";
+  if (!all.length) why = `${esc(label)}: no hay picks publicados por ahora.`;
+  else {
+    const sports = [...new Set(all.map(([g]) => g.sport))];
+    const inSport = all.filter(([g]) => S.sport === "all" || g.sport === S.sport);
+    if (!inSport.length) { why = `${esc(label)} solo existe en: ${sports.map(x => SPORT_NAME[x] || x).join(", ")}.`; btn = fix("sport", "all", "Ver todos los deportes"); }
+    else {
+      const inTime = inSport.filter(([g]) => Date.parse(g.t) - now <= lim);
+      if (!inTime.length) {
+        const next = new Date(Math.min(...inSport.map(([g]) => Date.parse(g.t))));
+        why = `No hay partidos con ${esc(label)} en este periodo. El próximo es el ${next.toLocaleDateString("es", {weekday: "long", day: "numeric", month: "short"})}.`;
+        btn = fix("when", "all", "Ver todas las fechas");
+      } else if (S.hi === "1" && !inTime.some(([g, p]) => p.prob >= .70)) {
+        why = `Ningún pick de ${esc(label)} llega a confianza Alta (70%) en este periodo.`; btn = fix("hi", "0", "Mostrar toda confianza");
+      } else if (S.q) { why = "Ningún equipo o competición coincide con la búsqueda."; }
+    }
+  }
+  return `<div class="empty"><p>${why}</p>${btn}</div>`;
+}
 function draw() {
   const now = Date.now(), lim = {"24h": 24, "48h": 48, "7d": 168, "all": 1e9}[S.when] * 3600e3, q = S.q.trim().toLowerCase();
   const gs = DATA.games.filter(g => { const t = Date.parse(g.t);
@@ -347,10 +373,12 @@ function draw() {
       && (!q || (g.home + " " + g.away + " " + g.comp).toLowerCase().includes(q)); });
   const el = document.getElementById("list");
   if (S.view === "picks") {
-    const ps = gs.flatMap(g => (g.picks || []).map(p => [g, p])).filter(([g, p]) => p.prob != null && mktOk(p) && (S.hi !== "1" || p.prob >= .70))
-      .sort((a, b) => b[1].prob - a[1].prob);
+    const base = gs.flatMap(g => (g.picks || []).map(p => [g, p])).filter(([g, p]) => p.prob != null && (S.hi !== "1" || p.prob >= .70));
+    document.getElementById("mkts").innerHTML = MKTS.map(([v, l]) =>
+      `<button class="chip" data-v="${v}" aria-pressed="${S.mkt === v}">${l} (${base.filter(([g, p]) => isMkt(v, p)).length})</button>`).join("");
+    const ps = base.filter(([g, p]) => mktOk(p)).sort((a, b) => b[1].prob - a[1].prob);
     el.innerHTML = ps.length ? `<p class="count">${ps.length} picks, de mayor a menor probabilidad</p>` + ps.map(([g, p]) => pickRow(g, p)).join("")
-      : `<p class="empty">No hay picks con estos filtros.</p>`;
+      : emptyPicks(now, lim);
     return;
   }
   if (!gs.length) { el.innerHTML = `<p class="empty">No hay partidos con estos filtros.</p>`; return; }
@@ -370,7 +398,10 @@ function drawView() {
 viewBar.onclick = e => { const b = e.target.closest("button"); if (!b) return; S.view = b.dataset.v;
   try { localStorage.setItem("kai-filters", JSON.stringify({sport: S.sport, when: S.when, hi: S.hi, view: S.view, mkt: S.mkt})); } catch (e) {}
   drawView(); draw(); };
-chips("sports", SPORTS, "sport"); chips("mkts", MKTS, "mkt");
+chips("sports", SPORTS, "sport");
+document.getElementById("mkts").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.mkt = b.dataset.v; save(); draw(); };
+document.getElementById("list").onclick = e => { const b = e.target.closest("button[data-fix]"); if (!b) return;
+  S[b.dataset.fix] = b.dataset.v; save(); chips("sports", SPORTS, "sport"); chipsWhen(); draw(); };
 drawView();
 const whenBar = document.getElementById("when");
 function chipsWhen() {
