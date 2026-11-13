@@ -1,4 +1,4 @@
-"""Página web de predicciones pensada para el teléfono: docs/index.html (un solo archivo, sin dependencias).
+"""Mocha Picks: página web de predicciones pensada para el teléfono: docs/index.html (un solo archivo, sin dependencias).
 
 Lee los mismos CSV de predictions/ que PREDICCIONES.md y no usa internet. Se publica con GitHub Pages
 (Settings → Pages → rama main, carpeta /docs).   Uso:  python -m kalshi_nba.pagina
@@ -206,8 +206,10 @@ TEMPLATE = r"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0f172a">
-<title>Kalshi AI · Predicciones</title>
+<meta name="theme-color" content="#6f4e37">
+<meta name="apple-mobile-web-app-title" content="Mocha Picks">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+<title>Mocha Picks</title>
 <style>
 :root{--bg:#f6f7f9;--card:#fff;--ink:#0f172a;--muted:#5b6474;--line:#e3e6eb;--accent:#2563eb;--home:#2563eb;--draw:#9aa3af;--away:#e11d48;
 --hi:#15803d;--mid:#b45309;--lo:#6b7280;--chip:#eef1f5;--onaccent:#fff}
@@ -252,7 +254,7 @@ footer{color:var(--muted);font-size:12px;padding:0 16px 30px;max-width:720px;mar
 </head>
 <body>
 <header>
-  <h1>Predicciones</h1>
+  <h1>☕ Mocha Picks</h1>
   <div class="sub">Actualizado __UPDATED__ (Chicago) · horas en tu zona horaria</div>
   <div class="view" id="view"><button data-v="games">Partidos</button><button data-v="picks">Mejores picks</button></div>
   <input type="search" id="q" placeholder="Buscar equipo o competición" aria-label="Buscar">

@@ -66,7 +66,7 @@ def report(watchlist, status, max_per_sport=5):
     if max_per_sport < 1:
         raise ValueError("max_per_sport must be positive")
     lines = [
-        "# Referencias externas — Kalshi AI (solo consulta)",
+        "# Referencias externas — Mocha Picks (solo consulta)",
         "",
         "Actualizado: " + datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "",
@@ -97,7 +97,7 @@ def report(watchlist, status, max_per_sport=5):
         "",
         "## Directorio público de analistas — solo referencia",
         "",
-        "Las tasas son registros históricos declarados por sus plataformas, no picks verificados por Kalshi AI. "
+        "Las tasas son registros históricos declarados por sus plataformas, no picks verificados por Mocha Picks. "
         "No se usan para entrenar ni como señales automatizadas.",
         "",
     ])

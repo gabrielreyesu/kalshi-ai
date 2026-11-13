@@ -30,7 +30,7 @@ CODES=(
     "eng.1","esp.1","ita.1","ger.1","fra.1",
     "uefa.nations","fifa.worldq.uefa",
 )
-HEADERS={"User-Agent":"KalshiAI-soccer-research/1.0 (+https://github.com/gabrielreyesu/kalshi-ai)"}
+HEADERS={"User-Agent":"MochaPicks-soccer-research/1.0 (+https://github.com/gabrielreyesu/mocha-picks)"}
 
 
 def _get(session, url, params=None, api_key=None):

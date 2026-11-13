@@ -55,7 +55,7 @@ jobs:
           DATA_REPO_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
           if [ -z "$DATA_REPO_TOKEN" ]; then echo "Sin DATA_REPO_TOKEN: solo caché temporal (no durable)."; exit 0; fi
-          git clone -q --depth 1 "https://x-access-token:${DATA_REPO_TOKEN}@github.com/${{ github.repository_owner }}/kalshi-ai-data.git" _archive
+          for r in mocha-picks-data kalshi-ai-data; do git clone -q --depth 1 "https://x-access-token:${DATA_REPO_TOKEN}@github.com/${{ github.repository_owner }}/$r.git" _archive && break; done; test -d _archive
           mkdir -p data/external_signals _archive/external_signals
           python -m kalshi_external.archive merge data/external_signals/history.jsonl _archive/external_signals/history.jsonl data/external_signals/history.jsonl
           python -m kalshi_external.archive merge data/external_signals/weather.jsonl _archive/external_signals/weather.jsonl data/external_signals/weather.jsonl

@@ -34,7 +34,7 @@ STADIUMS = {
 ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary"
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
 NWS = "https://api.weather.gov"
-HEADERS = {"User-Agent": "KalshiAI-weather-research (https://github.com/gabrielreyesu/kalshi-ai)",
+HEADERS = {"User-Agent": "MochaPicks-weather-research (https://github.com/gabrielreyesu/mocha-picks)",
            "Accept": "application/geo+json, application/json"}
 
 

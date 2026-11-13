@@ -1,7 +1,7 @@
 # Kalshi AI — Estado verificado y próximos pasos
 **Actualizado:** 12 de noviembre de 2026.
-**Repositorio de código:** https://github.com/gabrielreyesu/kalshi-ai
-**Archivo privado:** `gabrielreyesu/kalshi-ai-data` (PRIVADO; no publicar históricos ni tokens).
+**Repositorio de código:** https://github.com/gabrielreyesu/mocha-picks (antes `kalshi-ai`; GitHub redirige el nombre antiguo)
+**Archivo privado:** `gabrielreyesu/mocha-picks-data` (antes `kalshi-ai-data`; los workflows prueban ambos nombres) (PRIVADO; no publicar históricos ni tokens).
 
 ## Preferencia y restricciones del usuario
 El objetivo es maximizar la probabilidad de predicción correcta, con probabilidades bien calibradas, en NFL, NBA, fútbol internacional y de clubes. Reunir fuentes externas legales y reproducibles de modo automático, sin copiar picks de X/Discord, sin gastos adicionales no autorizados y sin falsas afirmaciones de mejora. No apostar automáticamente ni modificar champion/producción por mejoras retrospectivas. El usuario quiere que el asistente opere en GitHub con ramas, PRs, tests, backtests e informes, sin instrucciones manuales de Colab.
