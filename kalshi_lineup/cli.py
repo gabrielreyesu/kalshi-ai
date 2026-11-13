@@ -1,4 +1,4 @@
-"""python -m kalshi_lineup.cli backtest [--first-season 2016] [--output reports/lineup]
+"""python -m kalshi_lineup.cli backtest | backtest-nfl [--output reports/lineup]
 
 Descarga (con caché) resultados, líneas y boxscores de NBA desde ESPN, construye las variables de alineación y
 ejecuta la comparación pre-registrada. Solo escribe informes; no toca predictions/ ni el modelo de producción.

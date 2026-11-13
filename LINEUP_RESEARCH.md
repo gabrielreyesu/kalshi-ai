@@ -51,3 +51,26 @@ y la activación requiere autorización explícita.
 no guardados en caché, ausencia de fugas (cambiar estadísticas desde una fecha no altera variables de esa fecha ni de
 fechas anteriores), partido sin boxscore = variables neutras, recuperación de señal sintética y control nulo (sin señal
 real, no aparece una mejora espuria).
+
+## Resultado NBA (ejecución 43432220478, 13-nov-2026)
+Cobertura: 14.163 de 14.167 partidos finales con boxscore (99,97%).
+
+**Desarrollo (2019–2024, 7.413 partidos):** las 4 variantes mejoran con IC95% > 0. Elegida: **D (disponibles + fuerza absoluta)**,
+mejora de logloss 0,0089 [0,0064; 0,0114].
+
+**Confirmación (temporadas ≥ 2025, 2.817 partidos, evaluada una vez):**
+| | Acierto | Logloss | Brier | ECE |
+|---|---|---|---|---|
+| nba_v1 | 67,02% | 0,60295 | 0,20818 | 0,0201 |
+| nba_v1 + alineación (D) | 67,41% | 0,59319 | 0,20417 | 0,0215 |
+| Mejora (IC95% por fecha) | | **0,0098 [0,0054; 0,0142]** | **0,0040 [0,0021; 0,0060]** | +0,0014 (límite 0,005) |
+
+**Veredicto: SUPERA_CRITERIO_SOLO_SOMBRA.** Mejora en las 9 temporadas, sin excepción.
+
+**Frente al mercado de cierre** (10.229 partidos con línea): modelo 65,1% / 0,6215 → con alineación 66,1% / 0,6123;
+mercado 67,7% / 0,5982. Cierra ~40% de la distancia, pero el mercado sigue mejor.
+**Alineación sobre el mercado:** sin aporte (−0,0004 [−0,0008; 0,0000]), como se esperaba: el cierre ya incorpora las bajas.
+
+Lectura: la variable mejora de forma robusta el modelo propio, que es la probabilidad de respaldo cuando no hay
+mercado y la base para medir si recalculamos antes de que el precio se ajuste. No justifica por sí sola apostar contra
+el cierre. Siguiente paso: sombra prospectiva con el informe de lesiones real capturado a T-60 min (no el boxscore).
