@@ -20,17 +20,18 @@ import requests
 BASE = "https://api.elections.kalshi.com/trade-api/v2"
 _S = requests.Session()
 _S.headers["User-Agent"] = "MochaPicks-research/1.0 (+https://github.com/gabrielreyesu/mocha-picks)"
-PAUSE = 0.35
+PAUSE = 1.0          # Kalshi tolera ~1 petición/s sin clave; más rápido solo genera 429 y esperas
 
 
-def get(path, params=None, retries=6):
+def get(path, params=None, retries=8):
     for i in range(retries):
         try:
             r = _S.get(BASE + path, params=params, timeout=30)
         except requests.RequestException:
             time.sleep(2 * (i + 1)); continue
         if r.status_code == 429 or r.status_code >= 500:
-            time.sleep(2 * (i + 1)); continue
+            wait = r.headers.get("Retry-After")
+            time.sleep(float(wait) if wait and wait.replace(".", "").isdigit() else 3 * (i + 1)); continue
         time.sleep(PAUSE)
         if r.status_code == 404:
             return None

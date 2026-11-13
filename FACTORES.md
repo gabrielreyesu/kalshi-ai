@@ -14,7 +14,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Pick final combinado Kalshi + casas + modelo | NBA/NFL | ✅ | Empata con casas; mejora mucho sin casas | `final_pick.py` |
 | Pick final combinado | fútbol | ⏳ | Validación en curso (3.120 partidos) | `soccer_kalshi_bench.py` |
 | Polymarket | NBA/NFL | ⏳ | Se captura; falta añadirlo al combinador | `polymarket.py` |
-| Movimiento de línea (apertura → cierre) | todos | ⏳ | — | — |
+| Movimiento del precio de Kalshi (T-24 h → T-60 min) | NBA/NFL | ❌ | NBA −0,0001 [−0,0020; +0,0021]; NFL −0,0012: el precio final ya lo incluye | `KALSHI_BENCHMARK.md` |
 
 ## Jugadores
 | Factor | Deporte | Estado | Resultado | Dónde |
@@ -26,7 +26,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Suspensiones (tarjetas) | fútbol | ⏳ | — | — |
 | Valor individual de jugador (no solo presencia) | fútbol | ⏳ | — | — |
 | Descanso / back-to-back | NBA | ✅ | En el modelo base | `engine.py` |
-| Carga de partidos / viajes | todos | ⏳ | — | — |
+| Viajes, husos horarios y reloj del visitante | NBA/NFL | ❌ | NBA −0,0002 (vs mercado −0,0004); NFL −0,0005: el descanso ya está en el modelo y el mercado lo incorpora | `TRAVEL_RESEARCH.md` |
 
 ## Contexto del partido
 | Factor | Deporte | Estado | Resultado | Dónde |
@@ -38,6 +38,6 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Racha / forma reciente | todos | ✅/❌ | En el modelo base; variantes extra solo ayudan en NCAA y selecciones | `reports/variables_extra*.txt` |
 | Enfrentamientos directos | todos | ✅/❌ | Solo aporta en selecciones (activo) | `kalshi_intl/model.py` |
 | Clima (viento, lluvia, frío) | NFL | ⏳ | Se captura desde NOAA; falta probar | `nws_weather.py` |
-| Hora del partido / zona horaria | todos | ⏳ | — | — |
+| Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
 | Árbitro | fútbol/NFL | ⏳ | — | — |
 | Prórrogas en entrenamiento (90 min) | selecciones | ❌ | Empeora | PR #3 |
