@@ -1,0 +1,51 @@
+name: nfl-qb-shadow
+
+# Prueba EN SOMBRA: nfl_v1 + quarterback titular previsto (depth chart + informe de lesiones de ESPN).
+# Solo escribe predictions/nfl_qb_shadow*.{csv,json}; no toca el registro ni las probabilidades publicadas.
+on:
+  schedule:
+    - cron: "40 0,15,16,18,19,23 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-qb-shadow
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Restore ESPN NFL cache (scoreboards + boxscores)
+        uses: actions/cache/restore@v4
+        with:
+          path: data/nfl
+          key: shadow-nfl-v1-${{ github.run_id }}
+          restore-keys: |
+            shadow-nfl-v1-
+      - name: Snapshot + evaluación en sombra
+        run: python -m kalshi_lineup.nfl_shadow --hours 96
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/nfl
+          key: shadow-nfl-v1-${{ github.run_id }}
+      - name: Guardar (solo archivos de la prueba en sombra)
+        run: |
+          git config user.name  "nfl-shadow-bot"
+          git config user.email "nfl-shadow-bot@users.noreply.github.com"
+          git add predictions/nfl_qb_shadow.csv predictions/nfl_qb_shadow_scoreboard.json
+          git diff --cached --quiet && exit 0
+          git commit -m "sombra QB NFL $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i*15)); done
+          exit 1

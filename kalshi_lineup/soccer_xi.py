@@ -29,13 +29,17 @@ def _stat(entry, *names):
     return 0.0
 
 
-def parse_soccer_summary(payload: dict, event_id: str) -> dict | None:
-    """-> {'event_id', 'players': [{pid, team_id, starter, ga}]} solo si ambos equipos tienen exactamente 11 titulares."""
+def parse_soccer_summary(payload: dict, event_id: str, pregame: bool = False) -> dict | None:
+    """-> {'event_id', 'players': [{pid, team_id, starter, ga}]} solo si ambos equipos tienen exactamente 11 titulares.
+    pregame=True: solo acepta partidos AÚN NO iniciados (STATUS_SCHEDULED), para capturar el once oficial."""
     if not isinstance(payload, dict):
         return None
     comp = ((payload.get("header") or {}).get("competitions") or [{}])[0]
     status = ((comp.get("status") or {}).get("type") or {})
-    if status.get("completed") is False:
+    if pregame:
+        if status.get("name") != "STATUS_SCHEDULED" or status.get("completed"):
+            return None
+    elif status.get("completed") is False:
         return None
     players, starters = [], defaultdict(int)
     for block in payload.get("rosters") or []:
