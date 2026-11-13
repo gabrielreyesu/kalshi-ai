@@ -1,7 +1,7 @@
 # Kalshi AI: hourly football research monitoring
 
 ## New GitHub Actions cadence
-The external research workflow now runs at `35 * * * *` (UTC), **every hour**. At approximately 01:35 and 13:35 UTC it selects the historical/full ingestion profile; other scheduled hours use `--mode hourly`. Manual dispatch and pushes to the core research modules still select the full profile. GitHub schedule delivery can be delayed or occasionally skipped; hourly is a *target cadence*, not a guarantee of execution at exactly minute 35.
+The external research workflow uses **two complementary GitHub cron expressions**, together covering every hour at minute 35 UTC. The intended 01:35 and 13:35 UTC schedules always select the historical/full profile, while the other 22 scheduled hours use `--mode hourly`. Profile selection uses the matched GitHub cron expression rather than the runner's start clock: GitHub has delayed real scheduled runs, and using wall-clock time could accidentally skip full research. Push/manual dispatch stays full. GitHub's scheduled delivery is best effort; the hourly cadence is a target, not a guarantee at exactly minute 35.
 
 ## Fast hourly profile
 - Only rescan ESPN football competitions with previously detected fixtures due in the next 72 hours. The two full scans discover new competitions and keep the upcoming window populated. Unlike full mode, hourly never requests monthly historical scoreboards and never requests completed match summary details.
@@ -20,3 +20,5 @@ The football **data freshness** improves to hourly, especially for pregame XI co
 - API-Football: https://www.api-football.com/documentation-v3 (lineups often published 20–40 minutes before kickoff; injuries updated ~4h).
 - Pricing: https://www.api-football.com/pricing/ (free tier and request quotas).
 - GitHub Actions scheduled workflows: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+## Archive growth controls
+The collector compares each upcoming match's *material player research* with the most recent privately saved snapshot, ignoring only the timestamp of the check itself. If all player facts, source injury timestamp and official XI timestamp are unchanged, it reports a successful hourly inspection but does **not** rearchive another full player-by-player blob. A refreshed report (even with unchanged injury statuses) or newly confirmed XI **is** recorded with a new observation timestamp. This retains a trustworthy pre-kickoff audit trail without filling the 100 MB JSONL safety caps in weeks of idle hourly monitoring.
