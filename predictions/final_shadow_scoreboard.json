@@ -1,18 +1,18 @@
 {
   "status": "SHADOW_ONLY_PRODUCTION_UNCHANGED",
-  "updated_utc": "2026-11-12T21:35:27.025813+00:00",
+  "updated_utc": "2026-11-13T00:37:28.728811+00:00",
   "promotion_rule": "Por deporte: n >= 200 partidos resueltos con mercado e IC95% de mejora_logloss completamente > 0; la activación requiere autorización explícita.",
   "warnings": [],
   "by_sport": [
     {
       "sport": "intl",
-      "n": 1,
-      "con_mercado": 1,
-      "acierto_modelo": 1.0,
-      "acierto_final": 1.0,
-      "logloss_modelo": 0.71715,
-      "logloss_final": 0.77278,
-      "mejora_logloss": -0.05563,
+      "n": 6,
+      "con_mercado": 5,
+      "acierto_modelo": 0.83333,
+      "acierto_final": 0.83333,
+      "logloss_modelo": 0.5013,
+      "logloss_final": 0.50376,
+      "mejora_logloss": -0.00246,
       "ic95_inf": NaN,
       "ic95_sup": NaN
     }
