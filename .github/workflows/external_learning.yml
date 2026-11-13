@@ -7,7 +7,7 @@ on:
       - 'kalshi_external/**'
       - '.github/workflows/external_learning.yml'
   schedule:
-    - cron: '35 1,13 * * *'
+    - cron: '35 * * * *'
 
 permissions:
   contents: read
@@ -52,7 +52,17 @@ jobs:
           python -m kalshi_external.archive merge data/external_signals/soccer_previews.jsonl _archive/external_signals/soccer_previews.jsonl data/external_signals/soccer_previews.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_confirmed_lineups.jsonl _archive/external_signals/soccer_confirmed_lineups.jsonl data/external_signals/soccer_confirmed_lineups.jsonl
           python -m kalshi_external.archive merge data/external_signals/soccer_starter_impact.jsonl _archive/external_signals/soccer_starter_impact.jsonl data/external_signals/soccer_starter_impact.jsonl
+      - name: Determine full-refresh hours
+        id: cadence
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "$HOUR" = "01" ] || [ "$HOUR" = "13" ]; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "full=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Snapshot time-stamped external forecasts
+        if: steps.cadence.outputs.full == 'true'
         env:
           KALSHI_RESOLVE_LIVE: "1"
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
@@ -61,14 +71,18 @@ jobs:
           LICENSED_ANALYST_FEED_HOST: ${{ secrets.LICENSED_ANALYST_FEED_HOST }}
         run: python -m kalshi_external.cli --output reports/external_learning
       - name: Capture NOAA weather at verified outdoor NFL venues (no API key)
+        if: steps.cadence.outputs.full == 'true'
         run: python -m kalshi_external.nws_weather --output reports/external_learning/weather_status.json
       - name: Capture NBA NFL player injuries and completed player boxscores
+        if: steps.cadence.outputs.full == 'true'
         run: python -m kalshi_external.player_collect --output reports/external_learning/player_context
       - name: Generate pregame player availability and opponent context
+        if: steps.cadence.outputs.full == 'true'
         run: python -m kalshi_external.player_previews --output reports/external_learning/player_context/preview_coverage.json
       - name: Capture club and national soccer player statistics and available injury reports
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          KALSHI_SOCCER_FAST_ONLY: ${{ steps.cadence.outputs.full != 'true' && '1' || '0' }}
         run: python -m kalshi_external.soccer_player_collect --output reports/external_learning/soccer_players
       - name: Quantify soccer starter relevance, absences and possible replacements (research)
         run: python -m kalshi_external.soccer_impact_collect --output reports/external_learning/soccer_impact/coverage.json

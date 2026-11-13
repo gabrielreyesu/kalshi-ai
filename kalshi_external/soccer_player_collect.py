@@ -233,6 +233,9 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     if not 1<=max_summaries<=30:
         raise ValueError("Invalid soccer summary request budget")
     now=utc(observed_at or pd.Timestamp.now(tz="UTC"))
+    fast_only=os.getenv("KALSHI_SOCCER_FAST_ONLY","0")=="1"
+    if fast_only:
+        max_summaries=min(max_summaries,2)
     s=session or requests.Session()
     cache=Path(archive)
     issues=[]
@@ -264,7 +267,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     focus_codes=sorted(focus)
     backfill_queries=0
     backfill_found=0
-    if focus_codes:
+    if focus_codes and not fast_only:
         shift=(now.day*2+now.hour//12)%len(focus_codes)
         chosen=(focus_codes[shift:]+focus_codes[:shift])[:4]
         months=sorted({now.strftime("%Y%m"),
@@ -313,9 +316,24 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
     api_fixtures=[]
     if key:
         days={ (now+pd.Timedelta(days=i)).strftime("%Y-%m-%d") for i in (0,1)}
-        already={r.get("observed_day_utc") for r in prior_injuries
-                 if utc(r["captured_utc"]).strftime("%Y-%m-%d")==now.strftime("%Y-%m-%d")}
-        for day in sorted(days-already):
+        # Hourly jobs should not rely on yesterday's injury statuses.
+        # Refresh at most every 3h, or during the 2h pre-kickoff window.
+        latest_by_day={}
+        for report in prior_injuries:
+            day=report.get("observed_day_utc")
+            if day in days and utc(report["captured_utc"])<=now:
+                prev=latest_by_day.get(day)
+                if prev is None or utc(report["captured_utc"])>utc(prev["captured_utc"]):
+                    latest_by_day[day]=report
+        imminent=any(now+pd.Timedelta(minutes=15)<utc(g["kickoff_utc"])
+                     <=now+pd.Timedelta(hours=2) for g in fixtures)
+        refresh_days={
+            day for day in days
+            if day not in latest_by_day
+            or now-utc(latest_by_day[day]["captured_utc"])>=pd.Timedelta(hours=3)
+            or (imminent and now-utc(latest_by_day[day]["captured_utc"])>=pd.Timedelta(minutes=45))
+        }
+        for day in sorted(refresh_days):
             try:
                 j=_get(s,FOOTBALL_ROOT+"/injuries",{"date":day},api_key=key)
                 injuries=parse_api_football_injuries(j,now,day)
@@ -432,6 +450,7 @@ def run(archive="data/external_signals", output="reports/external_learning/socce
         "new_future_match_player_contexts":n_previews,
         "future_contexts_with_history":sum(bool(p["players"]) for p in previews),
         "api_football_configured":bool(key),
+        "hourly_lightweight_refresh":fast_only,
         "warnings":issues[:30],
         "production_changed":False,
         "status":"SOCCER_PLAYER_RESEARCH_ONLY",
