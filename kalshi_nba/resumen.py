@@ -129,6 +129,7 @@ def final_prueba(now) -> str:
     d = pd.read_csv(f, dtype={"event_id": str})
     d["t"] = pd.to_datetime(d["kickoff_utc"], utc=True, format="ISO8601").dt.tz_convert(TZ)
     d = d[d["t"] > now].sort_values("snapshot_utc").drop_duplicates(["sport", "event_id"], keep="last").sort_values("t")
+    from kalshi_external.final_shadow import source_label
     names = {"nba": "NBA", "nfl": "NFL", "club": "Copas europeas", "intl": "Selecciones"}
     rows = []
     for x in d.itertuples():
@@ -137,7 +138,7 @@ def final_prueba(now) -> str:
         rows.append({"Fecha (hora Chicago)": x.t.strftime("%a %d %b %H:%M"), "Deporte": names.get(x.sport, x.sport),
                      "Partido": f"{x.away} en {x.home}" if x.sport in ("nba", "nfl") else f"{x.home} vs {x.away}",
                      "Pick final": pick, "Probabilidad": pct(prob),
-                     "Origen": "casas" if x.final_source == "market_consensus" else "modelo (sin cuotas aún)"})
+                     "Origen": source_label(x.final_source)})
     return _table(pd.DataFrame(rows))
 
 

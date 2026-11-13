@@ -12,6 +12,9 @@ on:
       - 'kalshi_nba/resumen.py'
       - 'kalshi_lineup/stakes.py'
       - 'kalshi_lineup/stakes_now.py'
+      - 'kalshi_nba/final_pick.py'
+      - 'kalshi_nba/final_weights.json'
+      - 'kalshi_external/final_shadow.py'
       - '.github/workflows/pages_refresh.yml'
   workflow_dispatch: {}
 
@@ -44,6 +47,7 @@ jobs:
         run: python -m kalshi_lineup.stakes_now
       - name: Regenerar páginas y tabla
         run: |
+          python -m kalshi_external.final_shadow build
           python -m kalshi_nba.resumen
           python -m kalshi_nba.pagina
           python -m kalshi_nba.progreso
@@ -51,7 +55,7 @@ jobs:
         run: |
           git config user.name  "pages-bot"
           git config user.email "pages-bot@users.noreply.github.com"
-          git add PREDICCIONES.md docs/ predictions/stakes_upcoming.csv 2>/dev/null || git add PREDICCIONES.md docs/
+          git add PREDICCIONES.md docs/ predictions/final_shadow.csv; git add predictions/stakes_upcoming.csv 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "páginas $(date -u +%FT%H:%MZ)"
           for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i*15)); done
