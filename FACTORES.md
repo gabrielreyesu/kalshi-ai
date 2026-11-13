@@ -12,7 +12,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Consenso de casas sin margen | todos | ✅ | Referencia más fiable junto con Kalshi | `final_shadow.py` |
 | Precio de Kalshi antes del inicio | NBA/NFL | ✅ | Kalshi T-60 ≈ casas; mejora al acercarse el partido | `KALSHI_BENCHMARK.md` |
 | Pick final combinado Kalshi + casas + modelo | NBA/NFL | ✅ | Empata con casas; mejora mucho sin casas | `final_pick.py` |
-| Pick final combinado | fútbol | ⏳ | Validación en curso (3.120 partidos) | `soccer_kalshi_bench.py` |
+| Pick final combinado Kalshi + casas + modelo | fútbol | ✅ | +0,0106 en total (905 partidos); ligas +0,010 vs modelo, selecciones +0,020, copas empata | `KALSHI_BENCHMARK.md` |
 | Polymarket | NBA/NFL | ⏳ | Se guarda junto a cada pick final (`poly_H` en final_shadow.csv) para entrenar el combinador cuando haya ~200 partidos | `final_shadow.py` |
 | Línea de goles de las casas (más/menos de 2,5) + modelo | fútbol | ✅ | Empata con las casas (+0,0001); mejora al modelo solo +0,0113 [0,0079; 0,0145] en 7.769 partidos; picks de goles en copas y selecciones | `goals_bench.py` |
 | Movimiento del precio de Kalshi (T-24 h → T-60 min) | NBA/NFL | ❌ | NBA −0,0001 [−0,0020; +0,0021]; NFL −0,0012: el precio final ya lo incluye | `KALSHI_BENCHMARK.md` |

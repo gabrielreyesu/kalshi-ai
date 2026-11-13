@@ -168,5 +168,117 @@
    "mejora_vs_modelo": "+0,0113 [+0,0079; +0,0145]"
   },
   "nota": "Más de 2,5 goles: logística sobre logit(casas sin margen) y logit(modelo); ver kalshi_lineup/goals_bench.py."
+ },
+ "futbol": {
+  "pesos": {
+   "k,c,m": [
+    -0.06192326570141234,
+    0.028008359671756484,
+    0.5599034663704409,
+    0.4871076007195089,
+    0.15270556217803338
+   ],
+   "k,m": [
+    -0.05931934394829871,
+    -0.035200373756367136,
+    0.9778687457475328,
+    0.10485844794728623
+   ],
+   "c,m": [
+    -0.0781180880450686,
+    0.013060890572165501,
+    1.0007761399084272,
+    0.24910135388074076
+   ],
+   "m": [
+    0.06277676327067032,
+    0.07071889112798004,
+    0.9998018127218594
+   ]
+  },
+  "entrenado_con": 1483,
+  "validacion": {
+   "n": 905,
+   "desde": "2026-02-17",
+   "hasta": "2026-11-13",
+   "con_kalshi": 899,
+   "con_casas": 616,
+   "pick_actual": {
+    "n": 905,
+    "accuracy": 0.5845,
+    "logloss": 0.91339,
+    "brier": 0.5398,
+    "ece": 0.0349
+   },
+   "kalshi_o_actual": {
+    "n": 905,
+    "accuracy": 0.5878,
+    "logloss": 0.89805,
+    "brier": 0.52948,
+    "ece": 0.0255
+   },
+   "modelo": {
+    "n": 905,
+    "accuracy": 0.5635,
+    "logloss": 0.9416,
+    "brier": 0.55919,
+    "ece": 0.032
+   },
+   "combinado": {
+    "n": 905,
+    "accuracy": 0.5901,
+    "logloss": 0.90278,
+    "brier": 0.5324,
+    "ece": 0.0204
+   },
+   "mejora_vs_pick_actual": {
+    "mejora": 0.01061,
+    "ic95_inf": -0.00297,
+    "ic95_sup": 0.02528,
+    "excluye_0": false
+   },
+   "mejora_vs_kalshi": {
+    "mejora": -0.00473,
+    "ic95_inf": -0.01023,
+    "ic95_sup": 0.00082,
+    "excluye_0": false
+   },
+   "por_grupo": {
+    "ligas": {
+     "n": 219,
+     "actual": 1.0361,
+     "combinado": 1.0262,
+     "mejora": {
+      "mejora": 0.00994,
+      "ic95_inf": -0.01812,
+      "ic95_sup": 0.03874,
+      "excluye_0": false
+     }
+    },
+    "copas": {
+     "n": 256,
+     "actual": 0.9124,
+     "combinado": 0.9164,
+     "mejora": {
+      "mejora": -0.00397,
+      "ic95_inf": -0.02097,
+      "ic95_sup": 0.01455,
+      "excluye_0": false
+     }
+    },
+    "selecciones": {
+     "n": 430,
+     "actual": 0.8515,
+     "combinado": 0.8318,
+     "mejora": {
+      "mejora": 0.01963,
+      "ic95_inf": -0.00312,
+      "ic95_sup": 0.04524,
+      "excluye_0": false
+     }
+    }
+   }
+  },
+  "nota": "Agregación log-lineal: [b_local, b_visitante, w_fuente...] según el subconjunto."
  }
 }
