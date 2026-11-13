@@ -40,6 +40,9 @@ jobs:
         run: |
           python -m kalshi_intl.cli evaluate
           python -m kalshi_intl.cli predict
+      - name: Qué se juega cada equipo (aviso informativo; si falla no detiene el resto)
+        continue-on-error: true
+        run: python -m kalshi_lineup.stakes_now
       - name: Bajas de fútbol (API-Football; si falla no detiene el resto)
         continue-on-error: true
         env:
