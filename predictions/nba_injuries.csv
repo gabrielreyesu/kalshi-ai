@@ -199,3 +199,102 @@ team_id,team,player,position,status,type,reported,day
 27,Washington Wizards,Reece Beekman,G,Out,Shoulder,2026-11-02T18:22Z,2026-11-13
 27,Washington Wizards,Justin Champagnie,F,Out,Foot,2026-10-28T18:38Z,2026-11-13
 27,Washington Wizards,Jamir Watkins,G,Out,Knee,2026-07-30T20:11Z,2026-11-13
+1,Atlanta Hawks,Mouhamed Gueye,F,Out,Foot,2026-11-13T00:06Z,2026-11-14
+1,Atlanta Hawks,Keshon Gilbert,G,Out,Knee,2026-11-12T23:10Z,2026-11-14
+1,Atlanta Hawks,Asa Newell,F,Out,Toe,2026-11-12T23:08Z,2026-11-14
+1,Atlanta Hawks,Henri Veesaar,C,Out,Knee,2026-09-21T19:50Z,2026-11-14
+2,Boston Celtics,Paul George,F,Day-To-Day,Illness,2026-11-12T03:01Z,2026-11-14
+17,Brooklyn Nets,Mikel Brown Jr.,G,Day-To-Day,Illness,2026-11-13T22:08Z,2026-11-14
+17,Brooklyn Nets,Nolan Traore,G,Day-To-Day,Calf,2026-11-13T22:07Z,2026-11-14
+30,Charlotte Hornets,Brandon Miller,F,Day-To-Day,Groin,2026-11-13T04:46Z,2026-11-14
+30,Charlotte Hornets,Kon Knueppel,G,Out,Hamstring,2026-11-08T22:31Z,2026-11-14
+30,Charlotte Hornets,Dennis Schroder,G,Out,Hamstring,2026-11-08T22:26Z,2026-11-14
+4,Chicago Bulls,Dailyn Swain,G,Out,Back,2026-11-14T00:17Z,2026-11-14
+4,Chicago Bulls,Tobe Awaka,F,Out,Back,2026-11-12T21:40Z,2026-11-14
+4,Chicago Bulls,Caleb Wilson,F,Out,Hand,2026-11-12T21:35Z,2026-11-14
+5,Cleveland Cavaliers,Evan Mobley,C,Out,Toe,2026-11-12T22:08Z,2026-11-14
+5,Cleveland Cavaliers,Sam Merrill,G,Out,Elbow,2026-11-10T22:12Z,2026-11-14
+5,Cleveland Cavaliers,Nae'Qwan Tomlin,F,Out,Back,2026-10-20T15:11Z,2026-11-14
+6,Dallas Mavericks,Max Christie,G,Day-To-Day,Ankle,2026-11-13T22:06Z,2026-11-14
+6,Dallas Mavericks,Morez Johnson Jr.,F,Day-To-Day,Lower Leg,2026-11-13T22:05Z,2026-11-14
+6,Dallas Mavericks,Dereck Lively II,C,Out,Foot,2026-11-11T22:13Z,2026-11-14
+6,Dallas Mavericks,Tarik Biberovic,F,Out,Heel,2026-11-11T22:12Z,2026-11-14
+6,Dallas Mavericks,Sergio de Larrea,F,Out,Knee,2026-11-11T22:10Z,2026-11-14
+7,Denver Nuggets,Julian Strawther,G,Out,Knee,2026-10-17T00:52Z,2026-11-14
+8,Detroit Pistons,Ugonna Onyenso,C,Day-To-Day,Foot,2026-11-11T15:16Z,2026-11-14
+8,Detroit Pistons,Isaiah Joe,G,Out,Hip,2026-11-09T18:54Z,2026-11-14
+8,Detroit Pistons,Jalen Duren,C,Out,Hamstring,2026-11-08T16:05Z,2026-11-14
+9,Golden State Warriors,Charles Bassey,C,Day-To-Day,Toe,2026-11-12T22:18Z,2026-11-14
+9,Golden State Warriors,Stephen Curry,G,Out,Abdomen,2026-11-12T17:03Z,2026-11-14
+9,Golden State Warriors,Brandon Williams,G,Out,Hamstring,2026-11-10T21:24Z,2026-11-14
+9,Golden State Warriors,Kristaps Porzingis,C,Out,Illness,2026-11-06T21:26Z,2026-11-14
+9,Golden State Warriors,Moses Moody,G,Out,Knee,2026-10-16T16:14Z,2026-11-14
+9,Golden State Warriors,Jimmy Butler III,F,Out,Knee,2026-10-16T16:11Z,2026-11-14
+10,Houston Rockets,Marcus Smart,G,Suspension,Suspension,2026-11-12T22:45Z,2026-11-14
+10,Houston Rockets,Clint Capela,C,Out,Ankle,2026-11-09T23:56Z,2026-11-14
+10,Houston Rockets,Steven Adams,C,Out,Calf,2026-11-09T23:55Z,2026-11-14
+11,Indiana Pacers,Tyrese Haliburton,G,Out,Hamstring,2026-11-11T22:29Z,2026-11-14
+11,Indiana Pacers,Johnny Furphy,G,Out,Knee,2026-10-30T19:06Z,2026-11-14
+11,Indiana Pacers,Ben Sheppard,G,Out,Knee,2026-10-28T21:41Z,2026-11-14
+12,LA Clippers,Brandon Ingram,F,Out,Achilles,2026-11-12T21:05Z,2026-11-14
+12,LA Clippers,Yanic Konan Niederhauser,C,Out,Foot,2026-11-10T00:05Z,2026-11-14
+12,LA Clippers,Bradley Beal,G,Out,Knee,2026-10-15T01:03Z,2026-11-14
+12,LA Clippers,Jordan Miller,G,Out,Shoulder,2026-08-26T20:04Z,2026-11-14
+13,Los Angeles Lakers,Quentin Grimes,G,Day-To-Day,Finger,2026-11-13T21:26Z,2026-11-14
+13,Los Angeles Lakers,Austin Reaves,G,Day-To-Day,Heel,2026-11-13T20:40Z,2026-11-14
+13,Los Angeles Lakers,Luka Doncic,G,Day-To-Day,Ankle,2026-11-13T20:40Z,2026-11-14
+13,Los Angeles Lakers,Collin Sexton,G,Day-To-Day,Head,2026-11-12T04:40Z,2026-11-14
+29,Memphis Grizzlies,Quinten Post,C,Out,Concussion,2026-11-12T23:17Z,2026-11-14
+29,Memphis Grizzlies,Zach Edey,C,Out,Ankle,2026-11-12T23:16Z,2026-11-14
+29,Memphis Grizzlies,Scotty Pippen Jr.,G,Out,Back,2026-11-10T23:09Z,2026-11-14
+29,Memphis Grizzlies,Richie Saunders,G,Out,Knee,2026-11-07T17:24Z,2026-11-14
+14,Miami Heat,Klay Thompson,G,Out,Ankle,2026-11-13T23:21Z,2026-11-14
+14,Miami Heat,Pelle Larsson,G,Out,Illness,2026-11-13T23:04Z,2026-11-14
+16,Minnesota Timberwolves,Anthony Edwards,G,Out,Knee,2026-10-29T18:33Z,2026-11-14
+16,Minnesota Timberwolves,Donte DiVincenzo,G,Out,Achilles,2026-10-05T20:53Z,2026-11-14
+3,New Orleans Pelicans,Dejounte Murray,G,Out,Ankle,2026-11-13T20:19Z,2026-11-14
+3,New Orleans Pelicans,Bryce McGowens,G,Out,Elbow,2026-11-13T18:12Z,2026-11-14
+3,New Orleans Pelicans,Yves Missi,C,Out,Knee,2026-11-13T18:11Z,2026-11-14
+3,New Orleans Pelicans,Trey Murphy III,F,Out,Knee,2026-11-13T18:07Z,2026-11-14
+3,New Orleans Pelicans,Trendon Watford,F,Out,Ankle,2026-11-12T20:53Z,2026-11-14
+25,Oklahoma City Thunder,Thomas Sorber,C,Out,Knee,2026-11-13T01:07Z,2026-11-14
+25,Oklahoma City Thunder,Ajay Mitchell,G,Day-To-Day,Ankle,2026-11-13T01:03Z,2026-11-14
+25,Oklahoma City Thunder,Jaylin Williams,F,Out,Back,2026-11-11T21:19Z,2026-11-14
+25,Oklahoma City Thunder,Cason Wallace,G,Out,Shoulder,2026-10-31T01:16Z,2026-11-14
+25,Oklahoma City Thunder,Chet Holmgren,C,Out,Knee,2026-10-31T01:02Z,2026-11-14
+25,Oklahoma City Thunder,Jalen Williams,G,Out,Leg,2026-10-28T23:41Z,2026-11-14
+19,Orlando Magic,Jonathan Isaac,F,Out,Knee,2026-11-09T23:10Z,2026-11-14
+19,Orlando Magic,Paolo Banchero,F,Out,Ankle,2026-10-24T16:47Z,2026-11-14
+19,Orlando Magic,Noah Penda,F,Out,Hamstring,2026-10-17T22:19Z,2026-11-14
+19,Orlando Magic,Izaiyah Nelson,F,Out,Ankle,2026-09-28T21:33Z,2026-11-14
+20,Philadelphia 76ers,LeBron James,F,Day-To-Day,Back,2026-11-13T03:28Z,2026-11-14
+20,Philadelphia 76ers,Dominick Barlow,F,Out,Back,2026-11-12T16:37Z,2026-11-14
+20,Philadelphia 76ers,Adem Bona,C,Out,Back,2026-11-12T16:36Z,2026-11-14
+20,Philadelphia 76ers,Ariel Hukporti,C,Out,Achilles,2026-10-06T19:17Z,2026-11-14
+21,Phoenix Suns,Drew Timme,F,Day-To-Day,Hand,2026-11-13T16:22Z,2026-11-14
+21,Phoenix Suns,Mark Williams,C,Out,Shoulder,2026-09-11T16:03Z,2026-11-14
+22,Portland Trail Blazers,Chris Youngblood,G,Out,Foot,2026-11-13T01:06Z,2026-11-14
+22,Portland Trail Blazers,Vit Krejci,G,Out,Ankle,2026-11-11T19:56Z,2026-11-14
+22,Portland Trail Blazers,Ja Morant,G,Out,Hamstring,2026-11-08T02:18Z,2026-11-14
+22,Portland Trail Blazers,Shaedon Sharpe,G,Out,Knee,2026-08-24T20:23Z,2026-11-14
+23,Sacramento Kings,Precious Achiuwa,F,Out,Ankle,2026-11-13T21:20Z,2026-11-14
+23,Sacramento Kings,Maxime Raynaud,C,Out,Knee,2026-11-10T00:37Z,2026-11-14
+23,Sacramento Kings,Ben Simmons,G,Out,Achilles,2026-10-21T04:22Z,2026-11-14
+24,San Antonio Spurs,Devin Vassell,G,Day-To-Day,Groin,2026-11-12T23:07Z,2026-11-14
+24,San Antonio Spurs,De'Aaron Fox,G,Day-To-Day,Hip,2026-11-12T23:05Z,2026-11-14
+24,San Antonio Spurs,Tobias Harris,F,Out,Calf,2026-11-10T22:46Z,2026-11-14
+24,San Antonio Spurs,Jayden Quaintance,F,Out,Knee,2026-10-05T21:43Z,2026-11-14
+28,Toronto Raptors,Kevin McCullar Jr.,G,Day-To-Day,Illness,2026-11-13T15:37Z,2026-11-14
+28,Toronto Raptors,Trayce Jackson-Davis,F,Day-To-Day,Illness,2026-11-13T03:27Z,2026-11-14
+28,Toronto Raptors,Scottie Barnes,F,Out,Groin,2026-11-12T18:05Z,2026-11-14
+28,Toronto Raptors,Kawhi Leonard,F,Out,Knee,2026-11-11T22:33Z,2026-11-14
+28,Toronto Raptors,Nate Bittle,C,Out,Foot,2026-11-08T21:20Z,2026-11-14
+26,Utah Jazz,Trey Alexander,G,Out,Ankle,2026-11-12T15:42Z,2026-11-14
+26,Utah Jazz,Lauri Markkanen,F,Out,Hand,2026-11-11T18:22Z,2026-11-14
+26,Utah Jazz,Jusuf Nurkic,C,Out,Foot,2026-11-06T18:20Z,2026-11-14
+26,Utah Jazz,Jaren Jackson Jr.,F,Out,Knee,2026-10-27T19:25Z,2026-11-14
+27,Washington Wizards,Bub Carrington,G,Day-To-Day,Chest,2026-11-13T03:26Z,2026-11-14
+27,Washington Wizards,Tristan Vukcevic,F,Out,Hip,2026-11-08T22:17Z,2026-11-14
+27,Washington Wizards,Reece Beekman,G,Out,Shoulder,2026-11-02T18:22Z,2026-11-14
+27,Washington Wizards,Justin Champagnie,F,Out,Foot,2026-10-28T18:38Z,2026-11-14
+27,Washington Wizards,Jamir Watkins,G,Out,Knee,2026-07-30T20:11Z,2026-11-14
