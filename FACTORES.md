@@ -1,0 +1,49 @@
+# Registro de factores — Mocha Picks
+
+Cada factor se prueba con el mismo protocolo: datos conocidos antes del inicio, validación fuera de muestra, criterio
+fijado antes de ver resultados. **Aporta** = mejora con IC95% > 0. Dos niveles: frente al **modelo propio** (útil donde
+no hay mercado) y frente al **mercado** (Kalshi/casas: la vara más alta, porque el mercado ya incorpora casi todo).
+
+Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concluyente · ❌ descartado · ⏳ pendiente.
+
+## Mercados y combinación
+| Factor | Deporte | Estado | Resultado | Dónde |
+|---|---|---|---|---|
+| Consenso de casas sin margen | todos | ✅ | Referencia más fiable junto con Kalshi | `final_shadow.py` |
+| Precio de Kalshi antes del inicio | NBA/NFL | ✅ | Kalshi T-60 ≈ casas; mejora al acercarse el partido | `KALSHI_BENCHMARK.md` |
+| Pick final combinado Kalshi + casas + modelo | NBA/NFL | ✅ | Empata con casas; mejora mucho sin casas | `final_pick.py` |
+| Pick final combinado Kalshi + casas + modelo | fútbol | ✅ | +0,0147 [+0,0054; +0,0240] en 1.794 partidos (acierto 55,5% → 57,1%); ligas +0,0168 vs modelo; selecciones +0,0205; copas empata | `KALSHI_BENCHMARK.md` |
+| Polymarket | NBA/NFL | ⏳ | Se guarda junto a cada pick final (`poly_H` en final_shadow.csv) para entrenar el combinador cuando haya ~200 partidos | `final_shadow.py` |
+| Línea de goles de las casas (más/menos de 2,5) + modelo | fútbol | ✅ | Empata con las casas (+0,0001); mejora al modelo solo +0,0113 [0,0079; 0,0145] en 7.769 partidos; picks de goles en copas y selecciones | `goals_bench.py` |
+| Movimiento del precio de Kalshi (T-24 h → T-60 min) | NBA/NFL | ❌ | NBA −0,0001 [−0,0020; +0,0021]; NFL −0,0012: el precio final ya lo incluye | `KALSHI_BENCHMARK.md` |
+
+## Jugadores
+| Factor | Deporte | Estado | Resultado | Dónde |
+|---|---|---|---|---|
+| Jugadores disponibles (lesiones) | NBA | 🟡 | Backtest −0,0098 log loss; sombra en curso; no supera a Kalshi ni aporta en el combinador (peso −0,15) | `LINEUP_RESEARCH.md` |
+| Quarterback titular | NFL | 🟡 | Backtest −0,0133; sombra en curso; ≈ Kalshi. En el combinador sube el peso del modelo a 0,44 y mejora el pick +0,0014 [−0,0035; +0,0062] (no significativo, 246 partidos): activar si la sombra lo confirma | `LINEUP_RESEARCH.md` |
+| Once titular (continuidad) | copas | 🟡 | Backtest −0,0030 (débil); sombra en curso | `LINEUP_RESEARCH.md` |
+| Once titular | selecciones | ❌ | Sin efecto | `LINEUP_RESEARCH.md` |
+| Suspensiones (tarjetas) | fútbol | ⏳ | — | — |
+| Valor individual de jugador (no solo presencia) | fútbol | ⏳ | — | — |
+| Descanso / back-to-back | NBA | ✅ | En el modelo base | `engine.py` |
+| Viajes, husos horarios y reloj del visitante | NBA/NFL | ❌ | NBA −0,0002 (vs mercado −0,0004); NFL −0,0005: el descanso ya está en el modelo y el mercado lo incorpora | `TRAVEL_RESEARCH.md` |
+
+## Contexto del partido
+| Factor | Deporte | Estado | Resultado | Dónde |
+|---|---|---|---|---|
+| Localía | todos | ✅ | En los modelos base | motores |
+| Sede neutral inferida | selecciones | ⚪ | Pocos partidos; repetir tras torneos | `research/intl-neutral-venues` |
+| Qué se juega cada equipo (clasificación) | ligas | ⚪ | +0,0003, no significativo; aviso informativo | `STAKES_RESEARCH.md` |
+| Qué se juega cada equipo | Nations League | ❌ | Sin efecto | `STAKES_RESEARCH.md` |
+| Racha / forma reciente | todos | ✅/❌ | En el modelo base; variantes extra solo ayudan en NCAA y selecciones | `reports/variables_extra*.txt` |
+| Bloque del modelo de fútbol (Elo, goles, descanso, carga 21 días, H2H, casa/fuera, puntos últimos 5) **frente a las casas 1X2** | fútbol | ❌ | −0,0012 [−0,0023; −0,0001] en 5.200 partidos: empeora; el mercado ya lo incorpora | `market_residual_soccer.py` |
+| Todo el bloque del modelo (Elo, descanso, back-to-back, forma, racha, H2H, casa/fuera, carga) **frente al mercado** | NBA/NFL | ❌ | NBA −0,0006 [−0,0017; +0,0006] (2.816); NFL −0,0007 [−0,0059; +0,0046] (704): el mercado ya lo incorpora todo | `market_residual.py` |
+| Enfrentamientos directos | todos | ✅/❌ | Solo aporta en selecciones (activo) | `kalshi_intl/model.py` |
+| Clima (viento, lluvia, frío) | NFL | ⚪ | Totales +1,47 [−0,13; +3,14] puntos² frente a solo corregir el sesgo (no significativo); con viento fuerte la línea ya se ajusta; ganador empeora. Probar frente a la línea de apertura | `WEATHER_RESEARCH.md` |
+| Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
+| Árbitros (tendencia del trío) | NBA | ⚪ | Totales +0,50 [−0,30; +1,31] puntos² (misma dirección en desarrollo); ganador sin efecto. Repetir con más temporadas | `REFEREES_RESEARCH.md` |
+| Árbitros (tendencia del trío) | NFL | ⚪ | Totales: desarrollo −0,22, confirmación +0,58 (signo inestable); ganador sin efecto | `REFEREES_RESEARCH.md` |
+| Árbitro principal | fútbol | ❌ | Goles +0,0002 [−0,0001; +0,0005], local +0,0001 (3.396 partidos): el mercado ya lo incorpora | `REFEREES_RESEARCH.md` |
+| Prórrogas en entrenamiento (90 min) | selecciones | ❌ | Empeora | PR #3 |
+| Distribución real de márgenes (números clave 3/7) para hándicaps | NFL | ❌ | +0,0001 [−0,0010; +0,0012] frente a la normal: se mantiene la normal | `NFL_MARGINS.md` |

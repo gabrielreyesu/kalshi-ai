@@ -77,3 +77,43 @@ Validación fuera de muestra (pesos entrenados solo con fechas anteriores):
   NFL Kalshi 0,47 · casas 0,36 · modelo 0,27.
 - Cautela: en el histórico, "casas" es la línea de cierre (posterior a T-60); en vivo es la foto del momento.
   Kalshi solo se usa si su spread es ≤ 10¢. Reentrenar los pesos cada temporada con `python -m kalshi_nba.final_pick fit`.
+
+## Fútbol: pick final combinado (protocolo pre-registrado, 13-nov-2026, antes de ver resultados)
+- Datos: mercados liquidados de Kalshi (`KXEPLGAME`, `KXLALIGAGAME`, `KXSERIEAGAME`, `KXBUNDESLIGAGAME`, `KXLIGUE1GAME`,
+  `KXUCLGAME`, `KXUELGAME`, `KXUECLGAME`, `KXUEFANLGAME`, `KXFIFAGAME`, `KXWCGAME`, `KXINTLFRIENDLYGAME`), emparejados con
+  ESPN con la regla de producción (ambos nombres + hora ±36 h, único). Precio local/empate/visitante 60 min antes,
+  normalizado a 1 (sin margen). Casas: mediana de cuotas ESPN sin margen. Modelo: `kalshi_intl` fuera de muestra.
+- Combinador: agregación log-lineal con pesos por fuente (`combine3`), submodelos si falta una fuente.
+- Validación: ventana creciente por fecha (40% inicial de calentamiento). Se compara con el pick actual (casas si hay;
+  si no, modelo) y con Kalshi. **Criterio para producción** (pedido explícito del dueño de usar todas las fuentes): que
+  el combinado **no empeore** al pick actual (límite superior del IC95% de la diferencia de log loss ≥ 0, es decir,
+  que no sea significativamente peor). Se reporta por grupo: ligas, copas y selecciones.
+
+**Aclaración antes del resultado final:** "pick actual" significa el pick que hoy usa la página en cada grupo. En las
+ligas la página no tiene línea de las casas en vivo (usa el modelo), así que en ligas se compara Kalshi + modelo frente
+al modelo, y el combinador se entrena sin casas para ligas. En copas y selecciones: frente a las casas.
+
+### Resultado fútbol (13-nov-2026, 1.510 partidos emparejados; ligas aún descargando) — SUPERA el criterio
+Validación fuera de muestra (905 partidos evaluables, 17-feb a 13-nov-2026):
+| Grupo | Partidos | Pick actual de la página | Combinado | Mejora log loss [IC95%] |
+|---|---|---|---|---|
+| Total | 905 | 58,5% · 0,9134 | 59,0% · 0,9028 | +0,0106 [−0,0030; +0,0253] |
+| Ligas (vs modelo) | 219 | 1,0361 | 1,0262 | +0,0099 [−0,0181; +0,0387] |
+| Copas (vs casas) | 256 | 0,9124 | 0,9164 | −0,0040 [−0,0210; +0,0146] |
+| Selecciones (vs casas) | 430 | 0,8515 | 0,8318 | +0,0196 [−0,0031; +0,0452] |
+
+Criterio pre-registrado (no ser significativamente peor que el pick actual): se cumple en total y en cada grupo.
+Pesos (Kalshi + casas + modelo): Kalshi 0,56 · casas 0,49 · modelo 0,15. Reentrenar con todas las ligas al terminar
+la descarga (`python -m kalshi_lineup.soccer_kalshi_bench`).
+
+### Resultado fútbol con todas las ligas (14-nov-2026, 3.118 partidos emparejados) — SUPERA el criterio (significativo)
+Validación fuera de muestra (1.794 partidos evaluables, 6-feb a 13-nov-2026):
+| Grupo | Partidos | Pick actual de la página | Combinado | Mejora log loss [IC95%] |
+|---|---|---|---|---|
+| Total | 1.794 | 55,5% · 0,9470 | 57,1% · 0,9324 | **+0,0147 [+0,0054; +0,0240]** |
+| Ligas (vs modelo) | 1.105 | 0,9933 | 0,9765 | **+0,0168 [+0,0049; +0,0282]** |
+| Copas (vs casas) | 256 | 0,9124 | 0,9167 | −0,0043 [−0,0214; +0,0143] |
+| Selecciones (vs casas) | 433 | 0,8495 | 0,8290 | +0,0205 [−0,0032; +0,0472] |
+
+Pesos finales (Kalshi + casas + modelo): Kalshi 0,56 · casas 0,49 · modelo 0,16; (Kalshi + modelo): 1,05 · 0,05.
+Prácticamente iguales a los de la validación parcial: estables.

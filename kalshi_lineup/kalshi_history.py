@@ -20,17 +20,18 @@ import requests
 BASE = "https://api.elections.kalshi.com/trade-api/v2"
 _S = requests.Session()
 _S.headers["User-Agent"] = "MochaPicks-research/1.0 (+https://github.com/gabrielreyesu/mocha-picks)"
-PAUSE = 0.35
+PAUSE = 1.0          # Kalshi tolera ~1 petición/s sin clave; más rápido solo genera 429 y esperas
 
 
-def get(path, params=None, retries=6):
+def get(path, params=None, retries=8):
     for i in range(retries):
         try:
             r = _S.get(BASE + path, params=params, timeout=30)
         except requests.RequestException:
             time.sleep(2 * (i + 1)); continue
         if r.status_code == 429 or r.status_code >= 500:
-            time.sleep(2 * (i + 1)); continue
+            wait = r.headers.get("Retry-After")
+            time.sleep(float(wait) if wait and wait.replace(".", "").isdigit() else 3 * (i + 1)); continue
         time.sleep(PAUSE)
         if r.status_code == 404:
             return None
@@ -120,3 +121,28 @@ def pregame_prices(series: str, league: str, games: pd.DataFrame, cache_dir="dat
             row.update({f"k{L}_{n}": v for n, v in pr.items()})
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+def prefetch_batch(items: list, cache: Path, chunk=30) -> int:
+    """items: [(ticker, kickoff)] — descarga por lotes (/markets/candlesticks) las velas que falten en caché.
+    Agrupa por fecha de inicio para que una sola petición cubra todos los mercados de la jornada."""
+    todo = [(t, k) for t, k in items if not (cache / "candles" / f"{t}.json").exists()]
+    # el endpoint por lotes solo sirve mercados recientes y limita el total de velas (mercados x horas)
+    todo.sort(key=lambda x: x[1])
+    n = 0
+    i = 0
+    while i < len(todo):
+        grp = [todo[i]]
+        while (i + len(grp) < len(todo) and len(grp) < chunk and todo[i + len(grp)][1] - grp[0][1] <= pd.Timedelta(days=1)
+               and (len(grp) + 1) * 24 * (4 + (todo[i + len(grp)][1] - grp[0][1]).days) <= 5000):
+            grp.append(todo[i + len(grp)])
+        i += len(grp)
+        start, end = grp[0][1] - pd.Timedelta(days=3), grp[-1][1]
+        j = get("/markets/candlesticks", {"market_tickers": ",".join(t for t, _ in grp), "start_ts": int(start.timestamp()),
+                                          "end_ts": int(end.timestamp()), "period_interval": 60}) or {}
+        got = {m.get("market_ticker"): m.get("candlesticks", []) for m in j.get("markets", [])}
+        (cache / "candles").mkdir(parents=True, exist_ok=True)
+        for t, _ in grp:
+            if t in got:                                 # sin datos: no se guarda; el método individual lo reintenta
+                (cache / "candles" / f"{t}.json").write_text(json.dumps(got[t])); n += 1
+    return n

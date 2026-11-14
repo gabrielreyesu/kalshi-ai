@@ -104,3 +104,65 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main()
+
+
+# ---- Fútbol (local / empate / visitante) ----------------------------------------------------------------------
+# Agregación log-lineal: p_c ∝ exp(b_c + Σ_s w_s · log p_{s,c}), con b_D = 0. Pesos por fuente aprendidos minimizando
+# la log loss en partidos históricos con precio de Kalshi antes del inicio, cuotas de las casas y modelo fuera de muestra.
+
+def _logp3(p):
+    p = np.clip(np.asarray(p, float), 1e-3, 1)
+    return np.log(p / p.sum(axis=-1, keepdims=True))
+
+
+def _pool3(params, L: list) -> np.ndarray:
+    b = np.array([params[0], 0.0, params[1]])
+    z = b + sum(w * l for w, l in zip(params[2:], L))
+    z = z - z.max(axis=-1, keepdims=True)
+    e = np.exp(z)
+    return e / e.sum(axis=-1, keepdims=True)
+
+
+def fit_sets3(d: pd.DataFrame, l2=1e-3) -> dict:
+    """d: columnas k_H.., c_H.., m_H.. (pueden faltar con NaN) e y en {0,1,2}."""
+    from scipy.optimize import minimize
+    out = {}
+    for s in SETS:
+        cols = [[f"{x}_{c}" for c in "HDA"] for x in s]
+        x = d.dropna(subset=[c for cs in cols for c in cs])
+        if len(x) < 150:
+            continue
+        L = [_logp3(x[cs].to_numpy()) for cs in cols]
+        y = x["y"].to_numpy(int)
+        f = lambda p: -np.log(np.clip(_pool3(p, L)[np.arange(len(y)), y], 1e-12, 1)).mean() + l2 * np.sum(np.square(p[2:]))
+        r = minimize(f, np.r_[0.0, 0.0, np.full(len(s), 1.0 / len(s))], method="L-BFGS-B")
+        out[",".join(s)] = [float(v) for v in r.x]
+    return out
+
+
+def combine3(k, c, m, w: dict) -> tuple[list | None, str]:
+    vals = {"k": k, "c": c, "m": m}
+    ok = lambda v: v is not None and len(v) == 3 and all(x is not None and np.isfinite(x) and x >= 0 for x in v) and sum(v) > 0
+    for s in SETS:
+        key = ",".join(s)
+        if key in w and all(ok(vals[x]) for x in s):
+            p = _pool3(np.array(w[key]), [_logp3(np.array(vals[x], float)) for x in s])
+            return [float(v) for v in p], LABEL[s]
+    if ok(m):
+        q = np.array(m, float); return [float(v) for v in q / q.sum()], "modelo"
+    return None, "sin dato"
+
+
+def walk_forward3(d: pd.DataFrame, warm=0.4) -> pd.DataFrame:
+    d = d.sort_values("date").reset_index(drop=True)
+    days = np.sort(d["date"].unique())
+    P = np.full((len(d), 3), np.nan)
+    for day in days[int(len(days) * warm):]:
+        tr, te = d[d["date"] < day], d[d["date"] == day]
+        w = fit_sets3(tr)
+        for i, r in te.iterrows():
+            g = lambda x: [r.get(f"{x}_{c}") for c in "HDA"]
+            p, _ = combine3(g("k"), g("c"), g("m"), w)
+            if p:
+                P[i] = p
+    return d.assign(f_H=P[:, 0], f_D=P[:, 1], f_A=P[:, 2])

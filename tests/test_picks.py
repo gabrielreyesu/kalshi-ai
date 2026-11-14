@@ -48,3 +48,15 @@ class TestPicks(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestOver25(unittest.TestCase):
+    def test_books_drive_goals_pick(self):
+        from kalshi_nba.picks import over25
+        p, src = over25(0.40, 0.62)
+        self.assertEqual(src, "casas + modelo"); self.assertGreater(p, 0.6)
+        self.assertEqual(over25(0.55, None), (0.55, "modelo"))
+        ps = soccer_picks("A", "B", [.5, .3, .2], "casas", {2.5: .4}, .5, goals_ok=False, book_over=.6)
+        self.assertIn("Goles", [x["mercado"] for x in ps])                 # selecciones: con casas sí hay pick de goles
+        ps = soccer_picks("A", "B", [.5, .3, .2], "casas", {2.5: .4}, .5, goals_ok=False)
+        self.assertNotIn("Goles", [x["mercado"] for x in ps])

@@ -95,8 +95,25 @@ def us_picks(rows: pd.DataFrame, home: str, away: str, winner: tuple | None) -> 
     return out
 
 
-def soccer_picks(home, away, probs3, src3, over: dict, btts, goals_ok=True, kalshi3=None) -> list:
-    """probs3 = [H, D, A] (casas o modelo); over = {1.5: p, 2.5: p}; btts = p (modelo); kalshi3 = precios 1X2."""
+def over25(model_p, book_p):
+    """Más de 2,5 goles: casas + modelo si hay línea de las casas (pesos validados en goals_bench), si no el modelo."""
+    import json
+    from pathlib import Path
+    f = Path(__file__).with_name("final_weights.json")
+    w = json.loads(f.read_text()).get("futbol_goles_2_5", {}).get("pesos") if f.exists() else None
+    ok = lambda v: v is not None and math.isfinite(v) and 0 < v < 1
+    if w and ok(book_p) and ok(model_p):
+        lg = lambda v: math.log(v / (1 - v))
+        z = w["intercepto"] + w["casas"] * lg(book_p) + w["modelo"] * lg(model_p)
+        return 1 / (1 + math.exp(-z)), "casas + modelo"
+    if ok(book_p):
+        return book_p, "casas"
+    return (model_p, "modelo") if ok(model_p) else (None, None)
+
+
+def soccer_picks(home, away, probs3, src3, over: dict, btts, goals_ok=True, kalshi3=None, book_over=None) -> list:
+    """probs3 = [H, D, A] (casas o modelo); over = {1.5: p, 2.5: p}; btts = p (modelo); kalshi3 = precios 1X2;
+    book_over = probabilidad de las casas de más de 2,5 goles (sin margen)."""
     out = []
     if all(v is not None for v in probs3):
         h, d, a = probs3
@@ -105,10 +122,10 @@ def soccer_picks(home, away, probs3, src3, over: dict, btts, goals_ok=True, kals
         out.append(pick("Ganador", best[0], best[1], src3, price))
         dc = max(((f"{home} o empate", h + d), (f"{away} o empate", a + d), (f"{home} o {away} (no empate)", h + a)), key=lambda z: z[1])
         out.append(pick("Doble oportunidad", dc[0], dc[1], src3))
+    p25, src25 = over25(over.get(2.5), book_over)
+    if p25 is not None and (goals_ok or src25 != "modelo"):          # con línea de las casas también en selecciones
+        out.append(pick("Goles", "Más de 2.5" if p25 >= 0.5 else "Menos de 2.5", max(p25, 1 - p25), src25))
     if goals_ok:
-        p25 = over.get(2.5)
-        if p25 is not None:
-            out.append(pick("Goles", "Más de 2.5" if p25 >= 0.5 else "Menos de 2.5", max(p25, 1 - p25), "modelo"))
         p15 = over.get(1.5)
         if p15 is not None and p15 >= 0.5:
             out.append(pick("Goles (línea segura)", "Más de 1.5", p15, "modelo"))

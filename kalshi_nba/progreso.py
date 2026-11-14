@@ -39,6 +39,12 @@ BACKTESTS = [
     {"prueba": "NBA · Kalshi + modelo (mezcla)", "partidos": 1018, "acierto": "70,5% → 71,2%", "mejora": "−0,0004 [−0,0017; 0,0010]", "veredicto": "descartada"},
     {"prueba": "NFL · modelo+QB vs Kalshi (60 min antes)", "partidos": 410, "acierto": "Kalshi 65,6% · modelo 65,6%", "mejora": "−0,0020 [−0,0110; 0,0071]", "veredicto": "empate"},
     {"prueba": "NFL · Kalshi + modelo (mezcla)", "partidos": 245, "acierto": "64,5% → 64,1%", "mejora": "0,0027 [−0,0006; 0,0058]", "veredicto": "no concluyente"},
+    {"prueba": "NBA/NFL · viajes, husos y hora del partido", "partidos": 2817, "acierto": "67,0% → 67,3%", "mejora": "−0,0002 [−0,0010; 0,0006]", "veredicto": "descartada"},
+    {"prueba": "NBA/NFL · racha, forma, descanso, H2H, Elo vs mercado", "partidos": 2816, "acierto": "—", "mejora": "−0,0006 [−0,0017; 0,0006]", "veredicto": "descartada"},
+    {"prueba": "Fútbol · goles con casas + modelo", "partidos": 7769, "acierto": "—", "mejora": "+0,0113 vs modelo [0,0079; 0,0145]", "veredicto": "supera"},
+    {"prueba": "Fútbol · pick con Kalshi + casas + modelo", "partidos": 1794, "acierto": "55,5% → 57,1%", "mejora": "+0,0147 [0,0054; 0,0240]", "veredicto": "supera"},
+    {"prueba": "NBA · árbitros (totales)", "partidos": 2812, "acierto": "—", "mejora": "+0,50 pts² [−0,30; 1,31]", "veredicto": "no concluyente"},
+    {"prueba": "NFL · distribución real de márgenes", "partidos": 991, "acierto": "—", "mejora": "+0,0001 [−0,0010; 0,0012]", "veredicto": "descartada"},
     {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
 ]
 
@@ -47,7 +53,7 @@ NEXT = [
     ("Siguiente", "Mostrar en la página de picks la probabilidad ajustada por bajas, marcada como «en prueba», cuando NBA llegue a 200 partidos con mejora."),
     ("Hecho", "Comparación con precios reales de Kalshi: el mercado 60 min antes acierta más que el modelo; la mezcla no aporta (NBA) o no es concluyente (NFL)."),
     ("Siguiente", "Picks con el precio más reciente posible (Kalshi cerca del inicio), ya que el mercado mejora al acercarse el partido."),
-    ("Siguiente", "NFL: distribución real de márgenes (números clave 3 y 7) para los hándicaps, en vez de la curva normal."),
+    ("Siguiente", "Repetir con más partidos: árbitros (NBA/NFL), clima NFL frente a la línea de apertura y modelo de QB dentro del combinador."),
     ("Pendiente", "Repetir la sede neutral de selecciones cuando haya más partidos de torneo."),
 ]
 
@@ -88,7 +94,9 @@ def collect(now=None) -> dict:
     names = {"nba": "NBA", "nfl": "NFL", "club": "Copas europeas", "intl": "Selecciones"}
     picks = [{"deporte": names.get(x.get("sport"), x.get("sport")), "n": x.get("n"), "acierto": x.get("acierto_final"),
               "logloss": x.get("logloss_final"), "con_mercado": x.get("con_mercado")} for x in fs.get("by_sport", [])]
-    return {"updated": now.isoformat(), "shadows": shadows, "picks": picks, "picks_updated": fs.get("updated_utc"),
+    fia = Path(__file__).with_name("fiabilidad.json")
+    fiab = json.loads(fia.read_text()).get("deportes", {}) if fia.exists() else {}
+    return {"updated": now.isoformat(), "shadows": shadows, "picks": picks, "picks_updated": fs.get("updated_utc"), "fiabilidad": fiab,
             "backtests": BACKTESTS, "next": NEXT}
 
 
@@ -134,6 +142,8 @@ footer{color:var(--muted);font-size:12px;padding-bottom:30px}
   <div class="sub"><a href="./">← Volver a los picks</a></div>
 </header>
 <main>
+  <h2>¿Se cumplen nuestras probabilidades?</h2>
+  <div class="card" id="fiab"></div>
   <h2>Pruebas en sombra</h2>
   <p class="small">Cada prueba calcula, antes de cada partido, la probabilidad del modelo actual y la del modelo mejorado,
   sin cambiar los picks publicados. Se activa solo con 200 partidos, mejora con IC 95% por encima de 0 y tu autorización.</p>
@@ -175,6 +185,14 @@ document.getElementById("shadows").innerHTML = D.shadows.map(s => {
       ${s.minutos_antes != null ? `<span>Minutos antes del inicio (mediana)</span><b>${Math.round(s.minutos_antes)}</b>` : ""}</div>` : ""}
   </div>`;
 }).join("");
+const F = D.fiabilidad || {};
+document.getElementById("fiab").innerHTML = Object.keys(F).length ? Object.entries(F).map(([dep, x]) => `
+  <div class="t" style="margin-top:6px">${esc(dep)} · ${x.n.toLocaleString("es")} partidos · acierto total ${pc(x.acierto_total)}</div>
+  ${x.tramos.map(t => `<div class="row small" style="margin-top:6px"><span>Pick con ${esc(t.tramo)} <span class="muted">(${t.n})</span></span>
+    <span>dijimos <b>${pc(t.prob_media)}</b> · acertó <b class="${Math.abs(t.acierto - t.prob_media) <= .05 ? "good" : "mid"}">${pc(t.acierto)}</b></span></div>
+    <div class="prog" style="margin:4px 0 0"><i style="width:${(100 * t.acierto).toFixed(1)}%"></i></div>`).join("")}`).join("<hr style='border:0;border-top:1px solid var(--line);margin:12px 0'>")
+  + `<p class="small">Validación fuera de muestra del pick final (Kalshi + casas + modelo), con pesos entrenados solo con partidos anteriores. Si "acertó" ≈ "dijimos", las probabilidades son fiables.</p>`
+  : `<p class="small">Aún sin datos.</p>`;
 const pk = D.picks.filter(x => x.n);
 document.getElementById("picks").innerHTML = pk.length
   ? `<table><tr><th>Deporte</th><th>Partidos</th><th>Acierto</th><th>Log loss</th></tr>${pk.map(x => `<tr><td>${esc(x.deporte)}</td><td class="n">${x.n}</td><td class="n">${pc(x.acierto)}</td><td class="n">${f4(x.logloss)}</td></tr>`).join("")}</table>

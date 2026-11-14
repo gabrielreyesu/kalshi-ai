@@ -17,12 +17,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from kalshi_nba.final_pick import combine, load_weights
+from kalshi_nba.final_pick import combine, combine3, load_weights
 
 P = Path("predictions")
 SHADOW = "final_shadow.csv"
 COLS = ["snapshot_utc", "sport", "event_id", "kickoff_utc", "home", "away", "model_H", "model_D", "model_A",
-        "market_H", "market_D", "market_A", "final_H", "final_D", "final_A", "final_source", "kalshi_H"]
+        "market_H", "market_D", "market_A", "final_H", "final_D", "final_A", "final_source", "kalshi_H", "poly_H"]
 SOURCE_LABEL = {"market_consensus": "casas", "model_fallback": "modelo"}
 
 
@@ -57,6 +57,11 @@ def rows_us(lg: str, folder: Path) -> list:
     if "p_book" not in s:
         return []
     s = s[(s["kind"] == "winner") & (s["side"] == "home")]
+    pmf = folder / f"{lg}_polymarket_snapshots.csv"           # Polymarket: se guarda para entrenar el combinador más adelante
+    poly = {}
+    if pmf.exists():
+        q = pd.read_csv(pmf, dtype={"event_id": str}).sort_values("snapshot_utc").drop_duplicates("event_id", keep="last")
+        poly = dict(zip(q["event_id"], pd.to_numeric(q["pm_home"], errors="coerce")))
     last = s["snapshot_utc"].max()
     s = s[s["snapshot_utc"] == last].drop_duplicates("event_id")
     out = []
@@ -73,8 +78,21 @@ def rows_us(lg: str, folder: Path) -> list:
             f, src = _final([pm, 1 - pm], [pb, 1 - pb])
         out.append(dict(snapshot_utc=x.snapshot_utc, sport=lg, event_id=x.event_id, kickoff_utc=x.kickoff_utc, home=x.home, away=x.away,
                         model_H=pm, model_D=np.nan, model_A=1 - pm, market_H=pb, market_D=np.nan, market_A=1 - pb if np.isfinite(pb) else np.nan,
-                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src, kalshi_H=km))
+                        final_H=f[0], final_D=np.nan, final_A=f[1], final_source=src, kalshi_H=km, poly_H=poly.get(x.event_id, np.nan)))
     return out
+
+
+def kalshi3(x) -> list | None:
+    """Precios Kalshi local/empate/visitante (mid) normalizados a 1; solo si los tres tienen spread <= 10¢."""
+    out = []
+    for c in "HDA":
+        b = pd.to_numeric(getattr(x, f"k_bid_{c}", np.nan), errors="coerce")
+        a = pd.to_numeric(getattr(x, f"k_ask_{c}", np.nan), errors="coerce")
+        if not (np.isfinite(b) and np.isfinite(a) and 0 < a - b <= 0.10):
+            return None
+        out.append((a + b) / 2)
+    t = sum(out)
+    return [v / t for v in out] if t > 0 else None
 
 
 def rows_intl(folder: Path) -> list:
@@ -89,10 +107,17 @@ def rows_intl(folder: Path) -> list:
         market = [pd.to_numeric(getattr(x, c, np.nan), errors="coerce") for c in ("mkt_H", "mkt_D", "mkt_A")]
         if not np.isfinite(np.asarray(model, float)).all() or not pd.Timestamp(x.snapshot_utc) < pd.Timestamp(x.kickoff_utc):
             continue
-        f, src = _final(model, market)
+        k3 = kalshi3(x)
+        w = load_weights("futbol")
+        mk = market if np.isfinite(np.asarray(market, float)).all() else None
+        if w:                                     # pick final = Kalshi + casas + modelo (combine3)
+            f, src = combine3(k3, (np.asarray(mk) / np.sum(mk)).tolist() if mk else None, model, w)
+        else:
+            f, src = _final(model, market)
         out.append(dict(snapshot_utc=x.snapshot_utc, sport="intl" if x.grupo == "selecciones" else "club", event_id=x.event_id,
                         kickoff_utc=x.kickoff_utc, home=x.home, away=x.away, model_H=model[0], model_D=model[1], model_A=model[2],
-                        market_H=market[0], market_D=market[1], market_A=market[2], final_H=f[0], final_D=f[1], final_A=f[2], final_source=src))
+                        market_H=market[0], market_D=market[1], market_A=market[2], final_H=f[0], final_D=f[1], final_A=f[2], final_source=src,
+                        kalshi_H=k3[0] if k3 else np.nan))
     return out
 
 
