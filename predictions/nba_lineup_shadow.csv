@@ -96,3 +96,8 @@ snapshot_utc,event_id,kickoff_utc,home,away,p_base,p_lineup,lineup_gs,abs_gs,out
 2026-11-14T02:31:19.062298+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69495,0.72706,2.002,6.435,Quinten Post; Zach Edey; Scotty Pippen Jr.,,1,1349.0
 2026-11-14T02:31:19.062298+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36549,0.46935,2.598,6.304,Pelle Larsson; Klay Thompson,Jalen Duren; Isaiah Joe,0,1349.0
 2026-11-14T02:31:19.062298+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87746,0.84179,-1.538,2.312,Anthony Edwards,Tobe Awaka; Dailyn Swain; Caleb Wilson,1,1349.0
+2026-11-14T03:30:37.157245+00:00,401909980,2026-11-15T00:00Z,New Orleans Pelicans,Denver Nuggets,0.29791,0.32218,3.33,-5.678,Bryce McGowens; Trey Murphy III; Trendon Watford; Dejounte Murray,,2,1229.0
+2026-11-14T03:30:37.157245+00:00,401909981,2026-11-15T00:30Z,Cleveland Cavaliers,Dallas Mavericks,0.71896,0.70019,-3.393,3.536,Evan Mobley; Sam Merrill,Sergio de Larrea,3,1259.0
+2026-11-14T03:30:37.157245+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69495,0.7271,2.002,6.435,Scotty Pippen Jr.; Quinten Post; Zach Edey,,1,1289.0
+2026-11-14T03:30:37.157245+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36587,0.4699,2.597,6.303,Pelle Larsson; Klay Thompson,Jalen Duren; Isaiah Joe,0,1289.0
+2026-11-14T03:30:37.157245+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87737,0.84162,-1.539,2.313,Anthony Edwards,Tobe Awaka; Caleb Wilson; Dailyn Swain,1,1289.0
