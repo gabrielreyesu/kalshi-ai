@@ -42,7 +42,7 @@ BACKTESTS = [
     {"prueba": "NBA/NFL · viajes, husos y hora del partido", "partidos": 2817, "acierto": "67,0% → 67,3%", "mejora": "−0,0002 [−0,0010; 0,0006]", "veredicto": "descartada"},
     {"prueba": "NBA/NFL · racha, forma, descanso, H2H, Elo vs mercado", "partidos": 2816, "acierto": "—", "mejora": "−0,0006 [−0,0017; 0,0006]", "veredicto": "descartada"},
     {"prueba": "Fútbol · goles con casas + modelo", "partidos": 7769, "acierto": "—", "mejora": "+0,0113 vs modelo [0,0079; 0,0145]", "veredicto": "supera"},
-    {"prueba": "Fútbol · pick con Kalshi + casas + modelo", "partidos": 905, "acierto": "58,5% → 59,0%", "mejora": "+0,0106 [−0,0030; 0,0253]", "veredicto": "supera (no empeora)"},
+    {"prueba": "Fútbol · pick con Kalshi + casas + modelo", "partidos": 1794, "acierto": "55,5% → 57,1%", "mejora": "+0,0147 [0,0054; 0,0240]", "veredicto": "supera"},
     {"prueba": "NBA · árbitros (totales)", "partidos": 2812, "acierto": "—", "mejora": "+0,50 pts² [−0,30; 1,31]", "veredicto": "no concluyente"},
     {"prueba": "NFL · distribución real de márgenes", "partidos": 991, "acierto": "—", "mejora": "+0,0001 [−0,0010; 0,0012]", "veredicto": "descartada"},
     {"prueba": "Selecciones · excluir prórrogas (V7)", "partidos": 3703, "acierto": "57,9% → 58,0%", "mejora": "−0,0003 [−0,0005; −0,0002]", "veredicto": "descartada"},
@@ -53,7 +53,7 @@ NEXT = [
     ("Siguiente", "Mostrar en la página de picks la probabilidad ajustada por bajas, marcada como «en prueba», cuando NBA llegue a 200 partidos con mejora."),
     ("Hecho", "Comparación con precios reales de Kalshi: el mercado 60 min antes acierta más que el modelo; la mezcla no aporta (NBA) o no es concluyente (NFL)."),
     ("Siguiente", "Picks con el precio más reciente posible (Kalshi cerca del inicio), ya que el mercado mejora al acercarse el partido."),
-    ("Siguiente", "NFL: distribución real de márgenes (números clave 3 y 7) para los hándicaps, en vez de la curva normal."),
+    ("Siguiente", "Repetir con más partidos: árbitros (NBA/NFL), clima NFL frente a la línea de apertura y modelo de QB dentro del combinador."),
     ("Pendiente", "Repetir la sede neutral de selecciones cuando haya más partidos de torneo."),
 ]
 
