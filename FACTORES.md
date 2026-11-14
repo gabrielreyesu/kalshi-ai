@@ -40,7 +40,7 @@ Estados: ✅ en producción · 🟡 aporta al modelo / en sombra · ⚪ no concl
 | Bloque del modelo de fútbol (Elo, goles, descanso, carga 21 días, H2H, casa/fuera, puntos últimos 5) **frente a las casas 1X2** | fútbol | ❌ | −0,0012 [−0,0023; −0,0001] en 5.200 partidos: empeora; el mercado ya lo incorpora | `market_residual_soccer.py` |
 | Todo el bloque del modelo (Elo, descanso, back-to-back, forma, racha, H2H, casa/fuera, carga) **frente al mercado** | NBA/NFL | ❌ | NBA −0,0006 [−0,0017; +0,0006] (2.816); NFL −0,0007 [−0,0059; +0,0046] (704): el mercado ya lo incorpora todo | `market_residual.py` |
 | Enfrentamientos directos | todos | ✅/❌ | Solo aporta en selecciones (activo) | `kalshi_intl/model.py` |
-| Clima (viento, lluvia, frío) | NFL | ⏳ | Protocolo listo (`WEATHER_RESEARCH.md`); descarga histórica Open-Meteo pausada hasta que se reinicie el cupo diario | `weather_nfl.py` |
+| Clima (viento, lluvia, frío) | NFL | ⚪ | Totales +1,47 [−0,13; +3,14] puntos² frente a solo corregir el sesgo (no significativo); con viento fuerte la línea ya se ajusta; ganador empeora. Probar frente a la línea de apertura | `WEATHER_RESEARCH.md` |
 | Hora del partido / zona horaria (reloj biológico del visitante) | NBA/NFL | ❌ | Incluido en la prueba de viajes (variante B) | `TRAVEL_RESEARCH.md` |
 | Árbitros (tendencia del trío) | NBA | ⚪ | Totales +0,50 [−0,30; +1,31] puntos² (misma dirección en desarrollo); ganador sin efecto. Repetir con más temporadas | `REFEREES_RESEARCH.md` |
 | Árbitros (tendencia del trío) | NFL | ⚪ | Totales: desarrollo −0,22, confirmación +0,58 (signo inestable); ganador sin efecto | `REFEREES_RESEARCH.md` |
