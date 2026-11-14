@@ -69,3 +69,15 @@ snapshot_utc,event_id,kickoff_utc,home,away,p_base,p_lineup,lineup_gs,abs_gs,out
 2026-11-13T23:24:06.554232+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69487,0.72712,2.005,6.455,Scotty Pippen Jr.; Zach Edey; Quinten Post,,1,1536.0
 2026-11-13T23:24:06.554232+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36551,0.4501,1.249,4.964,Pelle Larsson,Jalen Duren; Isaiah Joe,0,1536.0
 2026-11-13T23:24:06.554232+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87741,0.84541,-1.053,2.799,Anthony Edwards,Caleb Wilson; Tobe Awaka,1,1536.0
+2026-11-14T00:22:21.744610+00:00,401909299,2026-11-14T01:00Z,Chicago Bulls,Atlanta Hawks,0.3321,0.33469,-1.316,-4.775,Caleb Wilson; Tobe Awaka,Asa Newell,3,38.0
+2026-11-14T00:22:21.744610+00:00,401909298,2026-11-14T01:00Z,Miami Heat,Cleveland Cavaliers,0.47919,0.55395,4.302,3.394,Klay Thompson; Pelle Larsson,Evan Mobley; Sam Merrill,1,38.0
+2026-11-14T00:22:21.744610+00:00,401909300,2026-11-14T01:00Z,New Orleans Pelicans,Memphis Grizzlies,0.43855,0.4671,-0.241,0.653,Trendon Watford; Bryce McGowens; Dejounte Murray; Trey Murphy III,Quinten Post; Zach Edey; Scotty Pippen Jr.,2,38.0
+2026-11-14T00:22:21.744610+00:00,401909301,2026-11-14T01:30Z,Houston Rockets,Utah Jazz,0.90178,0.91689,3.407,14.221,Clint Capela; Marcus Smart,Lauri Markkanen; Jaren Jackson Jr.,3,68.0
+2026-11-14T00:22:21.744610+00:00,401909302,2026-11-14T02:30Z,San Antonio Spurs,Golden State Warriors,0.76049,0.81025,3.988,11.169,,Stephen Curry; Brandon Williams,5,128.0
+2026-11-14T00:22:21.744610+00:00,401909303,2026-11-14T03:00Z,Sacramento Kings,Portland Trail Blazers,0.25677,0.24789,-1.042,-8.796,Precious Achiuwa,Ja Morant; Vit Krejci; Chris Youngblood,3,158.0
+2026-11-14T00:22:21.744610+00:00,401909304,2026-11-14T03:30Z,LA Clippers,Oklahoma City Thunder,0.34503,0.33312,0.751,-8.03,,Jaylin Williams; Jalen Williams; Chet Holmgren; Cason Wallace,5,188.0
+2026-11-14T00:22:21.744610+00:00,401909980,2026-11-15T00:00Z,New Orleans Pelicans,Denver Nuggets,0.29745,0.32176,3.33,-5.678,Trendon Watford; Bryce McGowens; Dejounte Murray; Trey Murphy III,,2,1418.0
+2026-11-14T00:22:21.744610+00:00,401909981,2026-11-15T00:30Z,Cleveland Cavaliers,Dallas Mavericks,0.7193,0.7005,-3.392,3.537,Evan Mobley; Sam Merrill,Sergio de Larrea,3,1448.0
+2026-11-14T00:22:21.744610+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69487,0.72698,2.001,6.436,Quinten Post; Zach Edey; Scotty Pippen Jr.,,1,1478.0
+2026-11-14T00:22:21.744610+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36551,0.46942,2.598,6.305,Klay Thompson; Pelle Larsson,Jalen Duren; Isaiah Joe,0,1478.0
+2026-11-14T00:22:21.744610+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87741,0.8454,-1.052,2.797,Anthony Edwards,Caleb Wilson; Tobe Awaka,1,1478.0
