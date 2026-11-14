@@ -81,3 +81,11 @@ snapshot_utc,event_id,kickoff_utc,home,away,p_base,p_lineup,lineup_gs,abs_gs,out
 2026-11-14T00:22:21.744610+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69487,0.72698,2.001,6.436,Quinten Post; Zach Edey; Scotty Pippen Jr.,,1,1478.0
 2026-11-14T00:22:21.744610+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36551,0.46942,2.598,6.305,Klay Thompson; Pelle Larsson,Jalen Duren; Isaiah Joe,0,1478.0
 2026-11-14T00:22:21.744610+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87741,0.8454,-1.052,2.797,Anthony Edwards,Caleb Wilson; Tobe Awaka,1,1478.0
+2026-11-14T01:47:38.392115+00:00,401909302,2026-11-14T02:30Z,San Antonio Spurs,Golden State Warriors,0.76049,0.81025,3.988,11.169,,Stephen Curry; Brandon Williams,5,42.0
+2026-11-14T01:47:38.392115+00:00,401909303,2026-11-14T03:00Z,Sacramento Kings,Portland Trail Blazers,0.25677,0.24789,-1.042,-8.796,Precious Achiuwa,Chris Youngblood; Ja Morant; Vit Krejci,3,72.0
+2026-11-14T01:47:38.392115+00:00,401909304,2026-11-14T03:30Z,LA Clippers,Oklahoma City Thunder,0.34503,0.33312,0.751,-8.03,,Jalen Williams; Chet Holmgren; Jaylin Williams; Cason Wallace,5,102.0
+2026-11-14T01:47:38.392115+00:00,401909980,2026-11-15T00:00Z,New Orleans Pelicans,Denver Nuggets,0.29745,0.32176,3.33,-5.678,Dejounte Murray; Trendon Watford; Bryce McGowens; Trey Murphy III,,2,1332.0
+2026-11-14T01:47:38.392115+00:00,401909981,2026-11-15T00:30Z,Cleveland Cavaliers,Dallas Mavericks,0.7193,0.7005,-3.392,3.537,Sam Merrill; Evan Mobley,Sergio de Larrea,3,1362.0
+2026-11-14T01:47:38.392115+00:00,401909983,2026-11-15T01:00Z,Memphis Grizzlies,Brooklyn Nets,0.69487,0.72698,2.001,6.436,Scotty Pippen Jr.; Zach Edey; Quinten Post,,1,1392.0
+2026-11-14T01:47:38.392115+00:00,401909982,2026-11-15T01:00Z,Miami Heat,Detroit Pistons,0.36551,0.46942,2.598,6.305,Pelle Larsson; Klay Thompson,Jalen Duren; Isaiah Joe,0,1392.0
+2026-11-14T01:47:38.392115+00:00,401909984,2026-11-15T01:00Z,Minnesota Timberwolves,Chicago Bulls,0.87741,0.8417,-1.537,2.312,Anthony Edwards,Caleb Wilson; Dailyn Swain; Tobe Awaka,1,1392.0
